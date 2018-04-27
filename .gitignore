@@ -25,6 +25,7 @@ hs_err_pid*
 **/server/.settings/
 **/server/bin/
 **/server/build/
+**/server/gradle/
 
 **/client/e2e/
 **/client/node_modules/
