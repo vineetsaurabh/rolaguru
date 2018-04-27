@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { NgForm } from '@angular/forms';
 import { Error } from './error.model';
 import { ErrorService } from './error.service';
 
@@ -15,9 +15,10 @@ export class AddErrorComponent {
 
   }
 
-  createError(): void {
+  createError(errorForm: NgForm): void {
     this.errorService.createError(this.error)
         .subscribe( data => {
+          errorForm.reset();
           alert("Error added successfully.");
         });
 

@@ -1,2 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
+
+input.ng-invalid.ng-touched {
+    border: 1px solid red;
+}

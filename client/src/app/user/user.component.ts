@@ -13,6 +13,8 @@ export class UserComponent implements OnInit {
 
   users: User[];
 
+  noUserFound = 'There is not any user in the system!';
+
   constructor(private router: Router, private userService: UserService) {
 
   }

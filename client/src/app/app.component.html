@@ -1,14 +1,32 @@
 <div class="container-fluid">
-    <div class="col-md-offset-1">
+    <div class="col-md-offset-1 text-center" >
         <h1>
         {{title}}
         </h1>
     </div>
-    <a routerLink="/users">List Users</a>
-    <a style="margin-left:10px" routerLink="/addUser">Add User</a>
-    <a style="margin-left:10px" routerLink="/errors">List Errors</a>
-    <a style="margin-left:10px" routerLink="/addError">Add Error</a>
-    <br/>
+    <div class="navbar">
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/users" routerLinkActive="active current">
+                    {{tabs[0]}}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/addUser" routerLinkActive="active current">
+                    {{tabs[1]}}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/errors" routerLinkActive="active current">
+                    {{tabs[2]}}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/addError" routerLinkActive="active current">
+                    {{tabs[3]}}
+                </a>
+            </li>
+        </ul>
+    </div>
     <router-outlet></router-outlet>
 </div>
-

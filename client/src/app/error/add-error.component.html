@@ -1,26 +1,22 @@
 <div class="col-md-6">
   <h2 class="text-center">Add Error</h2>
-  <form>
+  <form #errorForm="ngForm" ngNativeValidate>
     <div class="form-group">
       <label for="errCode">Error Code:</label>
-      <input type="errCode" [(ngModel)]="error.errCode" placeholder="Error Code" name="errCode" class="form-control" id="errCode">
+      <input type="errCode" [(ngModel)]="error.errCode" name="errCode" class="form-control" id="errCode">
     </div>
-
     <div class="form-group">
       <label for="message">Message:</label>
-      <input [(ngModel)]="error.message" placeholder="Messasge" name="message" class="form-control" id="message">
+      <textarea [(ngModel)]="error.message" name="message"  rows="2" class="form-control" id="message"></textarea>
     </div>
-
     <div class="form-group">
       <label for="errorType">Error Type:</label>
-      <input [(ngModel)]="error.errorType" placeholder="Error Type" name="errorType" class="form-control" id="errorType">
+      <input [(ngModel)]="error.errorType" name="errorType" class="form-control" id="errorType">
     </div>
-
     <div class="form-group">
       <label for="batchType">Batch Type:</label>
-      <input [(ngModel)]="error.batchType" placeholder="Batch Type" name="batchType" class="form-control" id="batchType">
+      <input [(ngModel)]="error.batchType" name="batchType" class="form-control" id="batchType">
     </div>
-
-    <button class="btn btn-success" (click)="createError()">Add</button>
+    <button class="btn btn-success" (click)="createError(errorForm)">Add</button>
   </form>
 </div>

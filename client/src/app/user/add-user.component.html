@@ -1,21 +1,29 @@
 <div class="col-md-6">
   <h2 class="text-center">Add User</h2>
-  <form>
-    <div class="form-group">
-      <label for="email">Email address:</label>
-      <input type="email" [(ngModel)]="user.email" placeholder="Email" name="email" class="form-control" id="email">
-    </div>
+  <form #userForm="ngForm" (ngSubmit)="createUser(userForm)" ngNativeValidate>
 
     <div class="form-group">
       <label for="firstName">First Name:</label>
-      <input [(ngModel)]="user.firstName" placeholder="First Name" name="firstName" class="form-control" id="firstName">
+      <input required [(ngModel)]="user.firstName" name="firstName" 
+        class="form-control" id="firstName" #firstName="ngModel" >
+      <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
+        <div *ngIf="firstName.errors.required">
+          <em class="d-sm-block text-danger">{{firstNameRequired}}</em>
+        </div>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="lastName">Last Name:</label>
-      <input [(ngModel)]="user.lastName" placeholder="Last name" name="lastName" class="form-control" id="lastName">
+      <input [(ngModel)]="user.lastName" name="lastName" class="form-control" id="lastName">
     </div>
 
-    <button class="btn btn-success" (click)="createUser()">Create</button>
+    <div class="form-group">
+      <label for="email">Email address:</label>
+      <input email type="email" [(ngModel)]="user.email" name="email" class="form-control" id="email" [email]="validateEmail">
+    </div>
+
+    <!-- <button class="btn btn-success" (click)="createUser(userForm)">Create</button> -->
+    <button class="btn btn-success" [disabled]="!userForm.valid">Submit</button>
   </form>
 </div>

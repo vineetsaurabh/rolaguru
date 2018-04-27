@@ -9,7 +9,7 @@ import { ReactiveFormsModule,
   Validators,
   FormBuilder } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
@@ -18,12 +18,11 @@ import { AppRoutingModule } from './app.routing.module';
 import { AppComponent } from './app.component';
 
 import { UserComponent } from './user/user.component';
-import {AddUserComponent} from './user/add-user.component';
-import {UserService} from './user/user.service';
+import { AddUserComponent } from './user/add-user.component';
+import { UserService } from './user/user.service';
 import { ErrorComponent } from './error/error.component';
-import {AddErrorComponent} from './error/add-error.component';
+import { AddErrorComponent} from './error/add-error.component';
 import { ErrorService } from './error/error.service';
-
 
 
 @NgModule({
