@@ -1,0 +1,25 @@
+<div class="col-md-6">
+  <h2>User Details</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="hidden">Id</th>
+        <th>Error Code</th>
+        <th>Message</th>
+        <th>Type</th>
+        <th>Batch Type</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let error of errors">
+        <td class="hidden">{{error.id}}</td>
+        <td>{{error.errCode}}</td>
+        <td>{{error.message}}</td>
+        <td>{{error.errorType}}</td>
+        <td>{{error.batchType}}</td>
+        <td><button class="btn btn-danger" (click)="deleteError(error)"> Delete Error</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

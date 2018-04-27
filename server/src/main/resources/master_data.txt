@@ -1,0 +1,21 @@
+CL-AC-0001	Failed to Select Product/Account Details	E	E
+CL-AC-0002	Disbursement Mode is not Manual	E	E
+CL-AC-0003	Amount Disbursed is Greater Than the Taxation Amount	E	E
+CL-AC-0004	Amount Liquidated is Greater Than the Taxation Amount	E	E
+CL-AC-0006	Resolved value is $1 than the min and max limits maintained in the promotion	O	I
+CL-ACC-001	Value Date $1 cannot be later than Product End Date $2	E	E
+CL-ACC-002	Maturity Date $1 has to be after Value Date $2	E	E
+CL-ACC-003	Schedule Start Date $2 has to be after Value Date $1	E	E
+CL-ACC-004	Schedule End Date $2 should be before Maturity Date $1	E	E
+CL-ACC-005	Error while saving	E	E
+CL-ACC-006	Only future schedules can be waived	E	E
+CL-ACC-007	Auth Rekey fields do not match, Failed in authorize	E	E
+CL-ACC-008	Please try with another product code or customer id	E	E
+CL-ACC-009	Enter Product Code, Amount Financed, Currency, Customer Id, Value Date, Maturity Date and Branch	E	E
+CL-ACC-010	Cannot save. Account values not yet defaulted	E	E
+CL-ACC-011	Value cannot be negative	E	E
+CL-ACC-012	UDE effective date $2 cannot be before value date $1	E	E
+CL-ACC-013	Account number has to be manually input	E	E
+CL-ACC-014	Linked Reference $1 not valid for current linkage type $2	E	E
+CL-ACC-015	Retries for auto liquidation cannot be negative	E	E
+CL-ACC-016	A Line has not been linked to this Loan Account. Do you wish to continue ?	O	O
