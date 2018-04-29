@@ -9,10 +9,12 @@ import { ReactiveFormsModule,
   Validators,
   FormBuilder } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
+import { ToastrModule, ToastContainerModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app.routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +25,7 @@ import { UserService } from './user/user.service';
 import { ErrorComponent } from './error/error.component';
 import { AddErrorComponent} from './error/add-error.component';
 import { ErrorService } from './error/error.service';
+import { EditUserComponent } from './user/edit-user.component';
 
 
 @NgModule({
@@ -30,17 +33,24 @@ import { ErrorService } from './error/error.service';
     AppComponent,
     UserComponent,
     AddUserComponent,
+    EditUserComponent,
     ErrorComponent,
     AddErrorComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     CommonModule,
     HttpModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    }),
+    ToastContainerModule,
   ],
   providers: [
     UserService,

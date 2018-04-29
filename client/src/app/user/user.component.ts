@@ -26,6 +26,18 @@ export class UserComponent implements OnInit {
       });
   };
 
+  /* Moved to EditUserComponent
+  updateUser(user) {
+    this.userService.updateUser(user)
+      .subscribe(res => {
+          let id = res['id'];
+          this.router.navigate(id);
+        }, (error) => {
+          alert('UserComponent.updateUser --> ' + error);
+        }
+      );
+  } */
+
   deleteUser(user: User): void {
     this.userService.deleteUser(user)
       .subscribe( data => {

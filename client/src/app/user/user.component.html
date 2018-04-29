@@ -17,7 +17,10 @@
           <td>{{user.firstName}}</td>
           <td>{{user.lastName}}</td>
           <td>{{user.email}}</td>
-          <td><button class="btn btn-danger" (click)="deleteUser(user)"> Delete User</button></td>
+          <td>
+              <button class="btn btn-warning" [routerLink]="['/editUser/', user.id]">Edit User</button>
+              <button class="btn btn-danger" (click)="deleteUser(user)">Delete User</button>
+          </td>
         </tr>
       </tbody>
     </table>
