@@ -19,7 +19,7 @@ import { ToastrModule, ToastContainerModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app.routing.module';
 import { AppComponent } from './app.component';
 
-import { UserComponent } from './user/user.component';
+import { ListUserComponent } from './user/list-user.component';
 import { AddUserComponent } from './user/add-user.component';
 import { UserService } from './user/user.service';
 import { ErrorComponent } from './error/error.component';
@@ -31,7 +31,7 @@ import { EditUserComponent } from './user/edit-user.component';
 @NgModule({
   declarations: [
     AppComponent,
-    UserComponent,
+    ListUserComponent,
     AddUserComponent,
     EditUserComponent,
     ErrorComponent,

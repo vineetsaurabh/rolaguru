@@ -12,6 +12,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class EditUserComponent implements OnInit {
 
+  firstNameRequired = 'First Name is required.';
+
   public user: User = {
     id : '',
     firstName : '',
