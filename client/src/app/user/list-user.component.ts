@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 
 import { User } from './user.model';
 import { UserService } from './user.service';
@@ -24,6 +24,17 @@ export class ListUserComponent implements OnInit {
       .subscribe( data => {
         this.users = data;
       });
+
+    //Added below to Refresh the Existingtable (via route)
+    this.router.routeReuseStrategy.shouldReuseRoute = function(){
+        return false;
+    };
+    this.router.events.subscribe((evt) => {
+        if (evt instanceof NavigationEnd) {
+            this.router.navigated = false;
+            window.scrollTo(0, 0);
+        }
+    });
   };
 
   /* Moved to EditUserComponent

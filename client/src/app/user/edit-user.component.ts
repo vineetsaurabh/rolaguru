@@ -30,19 +30,26 @@ export class EditUserComponent implements OnInit {
     private userService: UserService,
     private fb: FormBuilder,
     private toastService: ToastrService ) {
-         
+  }
+
+  ngOnInit() {
+    this.route.paramMap
+      .subscribe(params => {
+        this.id = +params.get('id');
+      })
+    
+    /*
     if (this.route.snapshot.params["id"]) {  
         this.id = this.route.snapshot.params["id"];  
-    }
+    } */
+
     this.userForm = this.fb.group({  
         id: 0,  
         firstName: ['', [Validators.required]],  
         lastName: ['', [Validators.required]],  
         email: ['', [Validators.required]]
     })
-  }
 
-  ngOnInit() {
     this.userService.getUser(this.id).subscribe((user) => {
         this.user = user;
     })

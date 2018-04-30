@@ -9,11 +9,28 @@ import { ErrorComponent } from './error/error.component';
 import { AddErrorComponent } from './error/add-error.component';
 
 const routes: Routes = [
-  { path: 'users', component: ListUserComponent },
-  { path: 'addUser', component: AddUserComponent },
-  { path: 'editUser/:id', component: EditUserComponent },
-  { path: 'errors', component: ErrorComponent },
-  { path: 'addError', component: AddErrorComponent }
+  { 
+    path: 'users',
+    component: ListUserComponent,
+    children: [
+      { 
+        path: ':id',
+        component: EditUserComponent
+      }
+    ]
+  },
+  { 
+    path: 'addUser',
+    component: AddUserComponent
+  },
+  { 
+    path: 'errors',
+    component: ErrorComponent
+  },
+  {
+    path: 'addError',
+    component: AddErrorComponent
+  }
 ];
 
 @NgModule({
