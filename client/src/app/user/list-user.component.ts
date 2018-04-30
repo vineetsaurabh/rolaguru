@@ -3,6 +3,7 @@ import { Router, NavigationEnd } from '@angular/router';
 
 import { User } from './user.model';
 import { UserService } from './user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user',
@@ -15,7 +16,10 @@ export class ListUserComponent implements OnInit {
 
   noUserFound = 'There is not any user in the system!';
 
-  constructor(private router: Router, private userService: UserService) {
+  constructor(
+    private router: Router,
+    private userService: UserService,
+    private toastService: ToastrService ) {
 
   }
 
@@ -53,6 +57,7 @@ export class ListUserComponent implements OnInit {
     this.userService.deleteUser(user)
       .subscribe( data => {
         this.users = this.users.filter(u => u !== user);
+        this.toastService.success('User deleted successfully.');
       })
   };
 
