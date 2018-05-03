@@ -26,6 +26,44 @@ import { ErrorComponent } from './error/error.component';
 import { AddErrorComponent} from './error/add-error.component';
 import { ErrorService } from './error/error.service';
 import { EditUserComponent } from './user/edit-user.component';
+import { FindUserComponent } from './user/find-user.component';
+import { UserDetailComponent } from './user/user-detail.component';
+
+import {CdkTableModule} from '@angular/cdk/table';
+import {
+  MatAutocompleteModule,
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatDividerModule,
+  MatExpansionModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatPaginatorModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatSortModule,
+  MatStepperModule,
+  MatTableModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatTooltipModule,
+} from '@angular/material';
 
 
 @NgModule({
@@ -35,7 +73,9 @@ import { EditUserComponent } from './user/edit-user.component';
     AddUserComponent,
     EditUserComponent,
     ErrorComponent,
-    AddErrorComponent
+    AddErrorComponent,
+    FindUserComponent,
+    UserDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +91,40 @@ import { EditUserComponent } from './user/edit-user.component';
       preventDuplicates: true,
     }),
     ToastContainerModule,
+
+    CdkTableModule,
+    MatAutocompleteModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatStepperModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatExpansionModule,
+    MatGridListModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    MatSortModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
   ],
   providers: [
     UserService,

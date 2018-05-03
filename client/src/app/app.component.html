@@ -4,8 +4,8 @@
         {{title}}
         </h1>
     </div>
-    <div class="navbar">
-        <ul class="nav nav-pills">
+    <div class="navbar container">
+        <ul class="nav nav-pills mx-auto">
             <li class="nav-item">
                 <a class="nav-link" routerLink="/users" routerLinkActive="active current">
                     {{tabs[0]}}
@@ -17,13 +17,18 @@
                 </a>
             </li>
             <li class="nav-item">
+                    <a class="nav-link" routerLink="/findUser" routerLinkActive="active current">
+                        {{tabs[2]}}
+                    </a>
+                </li>
+            <li class="nav-item">
                 <a class="nav-link" routerLink="/errors" routerLinkActive="active current">
-                    {{tabs[2]}}
+                    {{tabs[3]}}
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" routerLink="/addError" routerLinkActive="active current">
-                    {{tabs[3]}}
+                    {{tabs[4]}}
                 </a>
             </li>
         </ul>

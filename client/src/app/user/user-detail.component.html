@@ -1,0 +1,10 @@
+<div class="container col-md-6 my-5">
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <tr *ngFor="let key of objectKeys(items)">
+                <td>{{ key }}</td>
+                <td>{{ items[key] }}</td>
+            </tr>
+        </table>
+    </div>
+</div>

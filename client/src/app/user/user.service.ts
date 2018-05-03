@@ -35,4 +35,8 @@ export class UserService {
     return this.http.put<User>(this.userUrl + "/", user);
   }
 
+  public findUserByEmail(email) {
+    return this.http.get<User>(this.userUrl + "/", email);
+  }
+
 }
