@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
 import { User } from './user.model';
 import { UserService } from './user.service';
 import { ToastrService } from 'ngx-toastr';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 @Component({
   selector: 'app-user',
@@ -13,20 +14,25 @@ import { ToastrService } from 'ngx-toastr';
 export class ListUserComponent implements OnInit {
 
   users: User[];
+  displayedColumns = ['firstName', 'lastName', 'email', 'actions'];
+  dataSource: MatTableDataSource<User>;
 
-  noUserFound = 'There is not any user in the system!';
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     private router: Router,
     private userService: UserService,
     private toastService: ToastrService ) {
-
   }
 
   ngOnInit() {
     this.userService.getUsers()
       .subscribe( data => {
         this.users = data;
+        this.dataSource = new MatTableDataSource(data);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       });
 
     //Added below to Refresh the Existingtable (via route)
@@ -40,6 +46,12 @@ export class ListUserComponent implements OnInit {
         }
     });
   };
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
+    this.dataSource.filter = filterValue;
+  }
 
   /* Moved to EditUserComponent
   updateUser(user) {

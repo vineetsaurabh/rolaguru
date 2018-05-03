@@ -1,0 +1,14 @@
+<div class="container col-md-3">
+    <h2 class="text-center">Find User</h2>
+    <div class="input-group">
+        <input class="form-control" type="search" placeholder="search id" id="id" [(ngModel)]="user.id">
+        <span class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" [routerLink]="[user.id]">
+                <i class="fa fa-search"></i>
+            </button>
+        </span>
+    </div>
+</div>
+
+<router-outlet></router-outlet>
+

@@ -1,29 +1,30 @@
-<div class="col-md-6">
+<div class="container col-md-5">
     <h2 class="text-center">Edit User</h2>
     <form #editUserForm="ngForm" (ngSubmit)="updateUser(editUserForm)" ngNativeValidate>
     
-      <div class="form-group">
-        <label for="firstName">First Name:</label>
-        <input required [(ngModel)]="user.firstName" name="firstName" 
-          class="form-control" id="firstName" #firstName="ngModel">
-        <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
-          <div *ngIf="firstName.errors.required">
-            <em class="d-sm-block text-danger">{{firstNameRequired}}</em>
-          </div>
-        </div>
-      </div>
+    <div class="form-group">
+        <mat-form-field>
+          <input matInput required [(ngModel)]="user.firstName" name="firstName" id="firstName" #firstName="ngModel" placeholder="First Name">
+        </mat-form-field>
+    </div>     
   
-      <div class="form-group">
-        <label for="lastName">Last Name:</label>
-        <input [(ngModel)]="user.lastName" name="lastName" class="form-control" id="lastName">
-      </div>
-  
-      <div class="form-group">
-        <label for="email">Email address:</label>
-        <input email type="email" [(ngModel)]="user.email" name="email" class="form-control" id="email" [email]="validateEmail">
-      </div>
-  
+    <div class="form-group">
+      <mat-form-field>
+        <input matInput [(ngModel)]="user.lastName" name="lastName" id="lastName" placeholder="Last Name">
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field>
+        <input matInput email type="email" [(ngModel)]="user.email" name="email" id="email" [email]="validateEmail" placeholder="Email">
+      </mat-form-field>
+    </div>
       <!-- <button class="btn btn-success" (click)="createUser(userForm)">Create</button> -->
-      <button class="btn btn-success" [disabled]="!editUserForm.valid">Save</button>
+      <div class="text-center mb-4">
+        <button mat-raised-button [disabled]="!editUserForm.valid">
+          <i class="fa fa-save"></i>
+           Save
+        </button>
+      </div>
     </form>
 </div>

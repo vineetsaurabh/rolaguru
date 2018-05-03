@@ -7,6 +7,8 @@ import { EditUserComponent } from './user/edit-user.component';
 
 import { ErrorComponent } from './error/error.component';
 import { AddErrorComponent } from './error/add-error.component';
+import { FindUserComponent } from './user/find-user.component';
+import { UserDetailComponent } from './user/user-detail.component';
 
 const routes: Routes = [
   { 
@@ -16,6 +18,16 @@ const routes: Routes = [
       { 
         path: ':id',
         component: EditUserComponent
+      }
+    ]
+  },
+  { 
+    path: 'findUser',
+    component: FindUserComponent,
+    children: [
+      { 
+        path: ':id',
+        component: UserDetailComponent
       }
     ]
   },
