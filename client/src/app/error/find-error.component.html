@@ -1,14 +1,18 @@
 <div class="container col-md-3">
     <h2 class="text-center">Find Error</h2>
-    <div class="input-group">
-        <input class="form-control" type="search" placeholder="search id" id="id" [(ngModel)]="error.errCode">
-        <span class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button" [routerLink]="[error.errCode]">
-                <i class="fa fa-search"></i>
-            </button>
-        </span>
-    </div>
+    <form (ngSubmit)="findErrorByCode()">
+		<div class="form-group">
+			<div class="input-group">
+				<input type="text" placeholder="Search Error Code" name="errCode"
+					class="form-control" id="errCode" required [(ngModel)]="error.errCode">
+				<span class="input-group-append">
+					<button type="submit" class="btn btn-outline-secondary">
+						<i class="fa fa-search"></i>
+					</button>
+				</span>
+			</div>
+		</div>
+	</form>
 </div>
 
 <router-outlet></router-outlet>
-

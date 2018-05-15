@@ -11,35 +11,40 @@ import com.rolaface.repositories.FlexErrorRepository;
 @Service
 public class FlexErrorServiceImpl implements FlexErrorService {
 
-    @Autowired
-    private FlexErrorRepository repository;
+	@Autowired
+	private FlexErrorRepository repository;
 
-    @Override
-    public FlexError create(FlexError flexError) {
-        return repository.save(flexError);
-    }
+	@Override
+	public FlexError create(FlexError flexError) {
+		return repository.save(flexError);
+	}
 
-    @Override
-    public FlexError delete(int id) {
-    	FlexError flexError = findById(id);
-        if(flexError != null){
-            repository.delete(flexError);
-        }
-        return flexError;
-    }
+	@Override
+	public FlexError delete(int id) {
+		FlexError flexError = findById(id);
+		if (flexError != null) {
+			repository.delete(flexError);
+		}
+		return flexError;
+	}
 
-    @Override
-    public List<FlexError> findAll() {
-        return repository.findAll();
-    }
+	@Override
+	public List<FlexError> findAll() {
+		return repository.findAll();
+	}
 
-    @Override
-    public FlexError findById(int id) {
-        return repository.findById(id);
-    }
+	@Override
+	public FlexError findById(int id) {
+		return repository.findById(id);
+	}
 
-    @Override
-    public FlexError update(FlexError flexError) {
-        return null;
-    }
+	@Override
+	public FlexError update(FlexError flexError) {
+		return null;
+	}
+
+	@Override
+	public FlexError findByErrorCode(String errCode) {
+		return repository.findByErrorCode(errCode);
+	}
 }

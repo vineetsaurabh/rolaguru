@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { Error } from './error.model';
 
@@ -19,8 +19,10 @@ export class ErrorService {
     return this.http.get<Error>(this.errorUrl + "/"+ id);
   }
 
-  public getErrorByCode(id: string) {
-    return this.http.get<Error>(this.errorUrl + "/"+ id);
+  public getErrorByCode(errCode: string) {
+    let params = new HttpParams();
+    params = params.append('code', errCode);
+    return this.http.get<Error>(this.errorUrl + '/findbyerrcode', {params: params});
   }
 
   public getErrors() {

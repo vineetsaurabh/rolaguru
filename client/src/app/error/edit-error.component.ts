@@ -14,6 +14,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 export class EditErrorComponent implements OnInit {
 
   public error: Error = {
+    id: '',
     errCode : '',
     message : '',
     errorType : '',
@@ -35,7 +36,8 @@ export class EditErrorComponent implements OnInit {
 
   ngOnInit() {
     this.errorForm = this.fb.group({  
-        errCode: '',  
+        id: '',
+        errCode: ['', [Validators.required]],  
         message: ['', [Validators.required]],  
         errorType: ['', [Validators.required]],  
         batchType: ['', [Validators.required]]

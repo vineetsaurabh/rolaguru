@@ -1,20 +1,26 @@
 package com.rolaface.repositories;
 
-import org.springframework.data.repository.Repository;
-
-import com.rolaface.entities.FlexError;
-import com.rolaface.entities.User;
-
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.rolaface.entities.FlexError;
+
 @org.springframework.stereotype.Repository
-public interface FlexErrorRepository extends Repository<FlexError, Long> {
+public interface FlexErrorRepository extends JpaRepository<FlexError, Long> {
 
-    void delete(FlexError flexError);
+	@Override
+	void delete(FlexError flexError);
 
-    List<FlexError> findAll();
+	@Override
+	List<FlexError> findAll();
 
-    FlexError findById(int id);
+	FlexError findById(int id);
 
-    FlexError save(FlexError flexError);
+	@Override
+	FlexError save(FlexError flexError);
+
+	@Query(value = "SELECT * FROM flexerror f WHERE f.err_code = ?1", nativeQuery = true)
+	FlexError findByErrorCode(String errCode);
 }

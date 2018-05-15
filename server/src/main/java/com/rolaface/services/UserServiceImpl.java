@@ -50,4 +50,9 @@ public class UserServiceImpl implements UserService {
 		System.out.println("\n\n\n Updated \n\n\n");
 		return user;
 	}
+
+	@Override
+	public User findByEmail(String email) {
+		return repository.findByEmail(email);
+	}
 }
