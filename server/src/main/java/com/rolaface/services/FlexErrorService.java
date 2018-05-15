@@ -9,13 +9,15 @@ import com.rolaface.entities.FlexError;
 @Service
 public interface FlexErrorService {
 
-    FlexError create(FlexError flexError);
+	FlexError create(FlexError flexError);
 
-    FlexError delete(int id);
+	FlexError delete(int id);
 
-    List<FlexError> findAll();
+	List<FlexError> findAll();
 
-    FlexError findById(int id);
+	FlexError findById(int id);
 
-    FlexError update(FlexError flexError);
+	FlexError update(FlexError flexError);
+
+	FlexError findByErrorCode(String errCode);
 }

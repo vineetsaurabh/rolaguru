@@ -8,6 +8,19 @@
             </button>
         </span>
     </div>
+    <form (ngSubmit)="findUserByEmail()">
+		<div class="form-group">
+			<div class="input-group">
+				<input type="text" placeholder="Search Error Code" name="email"
+					class="form-control" id="email" required [(ngModel)]="user.email">
+				<span class="input-group-append">
+					<button type="submit" class="btn btn-outline-secondary">
+						<i class="fa fa-search"></i>
+					</button>
+				</span>
+			</div>
+		</div>
+	</form>
 </div>
 
 <router-outlet></router-outlet>

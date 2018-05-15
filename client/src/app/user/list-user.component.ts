@@ -17,7 +17,7 @@ import { Observable } from 'rxjs/Observable';
 export class ListUserComponent implements OnInit {
 
   users: User[];
-  displayedColumns = ['firstName', 'lastName', 'email', 'actions'];
+  displayedColumns = ['id', 'firstName', 'lastName', 'email', 'actions'];
   dataSource: MatTableDataSource<User>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { User } from './user.model';
 
@@ -13,7 +13,7 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  private userUrl = 'http://localhost:8080/api';
+  private userUrl = 'http://localhost:8080/user';
 
   public getUsers() {
     return this.http.get<User[]>(this.userUrl);
@@ -21,6 +21,12 @@ export class UserService {
 
   public getUser(id) {
     return this.http.get<User>(this.userUrl + "/"+ id);
+  }
+
+  public getUserByEmail(email: string) {
+    let params = new HttpParams();
+    params = params.append('email', email);
+    return this.http.get<User>(this.userUrl + '/findbyemail', {params: params});
   }
 
   public deleteUser(user) {
@@ -33,10 +39,6 @@ export class UserService {
 
   public updateUser(user) {
     return this.http.put<User>(this.userUrl + "/", user);
-  }
-
-  public findUserByEmail(email) {
-    return this.http.get<User>(this.userUrl + "/", email);
   }
 
 }

@@ -27,7 +27,7 @@ export class AddUserComponent {
         .subscribe( data => {
           this.toastService.success('User created successfully.');
           userForm.reset();
-          this.router.navigate(['users']);
+          this.router.navigate(['listUsers']);
         });
 
   };

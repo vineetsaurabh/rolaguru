@@ -10,6 +10,11 @@
   <div class="mat-elevation-z8">
     <mat-table #table [dataSource]="dataSource" matSort>
 
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Id. </mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{error.id}} </mat-cell>
+      </ng-container>
+
       <ng-container matColumnDef="errCode">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Error Code </mat-header-cell>
         <mat-cell *matCellDef="let error"> {{error.errCode}} </mat-cell>

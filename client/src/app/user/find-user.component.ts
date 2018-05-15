@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from './user.service';
 import { User } from './user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'user-detail',
@@ -18,16 +19,17 @@ export class FindUserComponent {
   };
 
   constructor(
-    private http: HttpClient,
+    private router: Router,
     private userService: UserService) {
   }
 
 
-  findUserByEmail(email) {
-    this.userService.getUser(email).subscribe((user) => {
-      this.user = user;
-      console.log(user.firstName);
-    })
+  findUserByEmail() {
+    this.userService.getUserByEmail(this.user.email)
+      .subscribe( data => {
+        this.user = data;
+        this.router.navigate(['findUser/'+this.user.id]);
+    });
   }
 
 }

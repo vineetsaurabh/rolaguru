@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rolaface.entities.User;
@@ -18,7 +19,7 @@ import com.rolaface.services.UserService;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping({ "/api" })
+@RequestMapping({ "/user" })
 public class UserController {
 
 	@Autowired
@@ -47,5 +48,10 @@ public class UserController {
 	@GetMapping
 	public List<User> findAll() {
 		return userService.findAll();
+	}
+
+	@GetMapping(value = "/findbyemail", params = "email")
+	public User findByErrorCode(@RequestParam("email") String email) {
+		return userService.findByEmail(email);
 	}
 }
