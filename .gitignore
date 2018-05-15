@@ -31,3 +31,5 @@ hs_err_pid*
 **/client/node_modules/
 **/client/src/assets/
 **/client/src/environments/
+
+*.bat
