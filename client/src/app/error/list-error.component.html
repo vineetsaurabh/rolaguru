@@ -1,0 +1,47 @@
+
+<router-outlet></router-outlet>
+
+<div class="container col-lg-7">
+  <div>
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </div>
+  <div class="mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="errCode">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Error Code </mat-header-cell>
+        <mat-cell *matCellDef="let error"> {{error.errCode}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="message">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Message </mat-header-cell>
+        <mat-cell *matCellDef="let error"> {{error.message}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="errorType">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Error Type </mat-header-cell>
+        <mat-cell *matCellDef="let error"> {{error.errorType}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="batchType">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Batch Type </mat-header-cell>
+        <mat-cell *matCellDef="let error"> {{error.batchType}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+        <mat-cell *matCellDef="let error">
+          <button class="btn" (click)="editError(error)"><i class="fa fa-pencil fa-fw"></i></button>
+          <button class="btn" (click)="deleteError(error)"><i class="fa fa fa-trash-o fa-fw"></i></button>
+        </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]"></mat-paginator>
+  </div>
+</div>

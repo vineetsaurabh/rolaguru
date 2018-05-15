@@ -1,0 +1,43 @@
+<div class="container col-md-5">
+    <h2 class="text-center">Edit User</h2>
+    <form #editErrorForm="ngForm" (ngSubmit)="updateError(editErrorForm)" ngNativeValidate>
+    
+      <div class="form-group">
+          <mat-form-field>
+            <input matInput required [(ngModel)]="error.errCode" name="errCode" id="errCode" #errCode="ngModel" placeholder="Error Code">
+          </mat-form-field>
+      </div>     
+    
+      <div class="form-group">
+        <mat-form-field>
+          <input matInput [(ngModel)]="error.message" name="message" id="message" placeholder="Message">
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field>
+          <input matInput [(ngModel)]="error.errorType" name="errorType" id="errorType" placeholder="Error Type">
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field>
+          <input matInput [(ngModel)]="error.batchType" name="batchType" id="batchType" placeholder="Batch Type">
+        </mat-form-field>
+      </div>
+
+      <div class="text-center mb-4">
+        <button mat-raised-button [disabled]="!editErrorForm.valid">
+          <i class="fa fa-save"></i>
+           Save
+        </button>
+      </div>
+
+    </form>
+    <div class="text-center mb-4">
+      <button mat-button (click)="dialogRef.close()">
+        <i class="fa fa-close"></i>
+        Cancel
+      </button>
+    </div>
+</div>

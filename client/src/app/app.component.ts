@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Knolwedge Base';
-  tabs = ['List Users', 'Add User', 'Find User', 'List Errors', 'Add Error'];
+  tabs = ['List Users', 'Add User', 'Find User', 'List Errors', 'Add Error', 'Find Error'];
   tabId:string = 'users';
 }
