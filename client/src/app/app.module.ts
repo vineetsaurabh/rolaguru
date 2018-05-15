@@ -1,3 +1,4 @@
+
 import { NgModule,
   Component,
   Pipe,
@@ -22,8 +23,11 @@ import { AppComponent } from './app.component';
 import { ListUserComponent } from './user/list-user.component';
 import { AddUserComponent } from './user/add-user.component';
 import { UserService } from './user/user.service';
-import { ErrorComponent } from './error/error.component';
+import { ListErrorComponent } from './error/list-error.component';
 import { AddErrorComponent} from './error/add-error.component';
+import { EditErrorComponent } from './error/edit-error.component';
+import { FindErrorComponent } from './error/find-error.component';
+import { ErrorDetailComponent } from './error/error-detail.component';
 import { ErrorService } from './error/error.service';
 import { EditUserComponent } from './user/edit-user.component';
 import { FindUserComponent } from './user/find-user.component';
@@ -72,8 +76,11 @@ import {
     ListUserComponent,
     AddUserComponent,
     EditUserComponent,
-    ErrorComponent,
+    ListErrorComponent,
     AddErrorComponent,
+    EditErrorComponent,
+    FindErrorComponent,
+    ErrorDetailComponent,
     FindUserComponent,
     UserDetailComponent
   ],

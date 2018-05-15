@@ -7,7 +7,7 @@
     <div class="navbar container">
         <ul class="nav nav-pills mx-auto">
             <li class="nav-item">
-                <a class="nav-link" routerLink="/users" routerLinkActive="active current">
+                <a class="nav-link" routerLink="/listUsers" routerLinkActive="active current">
                     {{tabs[0]}}
                 </a>
             </li>
@@ -17,18 +17,23 @@
                 </a>
             </li>
             <li class="nav-item">
-                    <a class="nav-link" routerLink="/findUser" routerLinkActive="active current">
-                        {{tabs[2]}}
-                    </a>
-                </li>
+                <a class="nav-link" routerLink="/findUser" routerLinkActive="active current">
+                    {{tabs[2]}}
+                </a>
+            </li>
             <li class="nav-item">
-                <a class="nav-link" routerLink="/errors" routerLinkActive="active current">
+                <a class="nav-link" routerLink="/listErrors" routerLinkActive="active current">
                     {{tabs[3]}}
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" routerLink="/addError" routerLinkActive="active current">
                     {{tabs[4]}}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/findError" routerLinkActive="active current">
+                    {{tabs[5]}}
                 </a>
             </li>
         </ul>

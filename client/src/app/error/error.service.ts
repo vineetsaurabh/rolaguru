@@ -15,6 +15,14 @@ export class ErrorService {
 
   private errorUrl = 'http://localhost:8080/flex-error';
 
+  public getError(id: number) {
+    return this.http.get<Error>(this.errorUrl + "/"+ id);
+  }
+
+  public getErrorByCode(id: string) {
+    return this.http.get<Error>(this.errorUrl + "/"+ id);
+  }
+
   public getErrors() {
     return this.http.get<Error[]>(this.errorUrl);
   }

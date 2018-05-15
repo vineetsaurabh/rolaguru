@@ -5,14 +5,17 @@ import { ListUserComponent } from './user/list-user.component';
 import { AddUserComponent } from './user/add-user.component';
 import { EditUserComponent } from './user/edit-user.component';
 
-import { ErrorComponent } from './error/error.component';
+import { ListErrorComponent } from './error/list-error.component';
 import { AddErrorComponent } from './error/add-error.component';
 import { FindUserComponent } from './user/find-user.component';
 import { UserDetailComponent } from './user/user-detail.component';
+import { EditErrorComponent } from './error/edit-error.component';
+import { ErrorDetailComponent } from './error/error-detail.component';
+import { FindErrorComponent } from './error/find-error.component';
 
 const routes: Routes = [
   { 
-    path: 'users',
+    path: 'listUsers',
     component: ListUserComponent,
     children: [
       { 
@@ -36,12 +39,28 @@ const routes: Routes = [
     component: AddUserComponent
   },
   { 
-    path: 'errors',
-    component: ErrorComponent
+    path: 'listErrors',
+    component: ListErrorComponent,
+    children: [
+      { 
+        path: ':id',
+        component: EditErrorComponent
+      }
+    ]
   },
   {
     path: 'addError',
     component: AddErrorComponent
+  },
+  { 
+    path: 'findError',
+    component: FindErrorComponent,
+    children: [
+      { 
+        path: ':id',
+        component: ErrorDetailComponent
+      }
+    ]
   }
 ];
 
