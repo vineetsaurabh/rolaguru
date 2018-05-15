@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from './user.model';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from './user.service';
 import { NgForm, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'; 
 import { ToastrService } from 'ngx-toastr';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
-
+@Injectable()
 @Component({
   templateUrl: './edit-user.component.html'
 })
@@ -18,7 +19,7 @@ export class EditUserComponent implements OnInit {
     lastName : '',
     email : ''
   };
-  id: number;
+  id: string;
   userForm: FormGroup; 
 
   constructor(
@@ -27,14 +28,20 @@ export class EditUserComponent implements OnInit {
     private route: ActivatedRoute,
     private userService: UserService,
     private fb: FormBuilder,
-    private toastService: ToastrService ) {
+    private toastService: ToastrService,
+    public dialogRef: MatDialogRef<EditUserComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: User ) {
+    this.user = this.data;
   }
 
   ngOnInit() {
+    /*
     this.route.paramMap
       .subscribe(params => {
         this.id = +params.get('id');
-      })
+      }) */
+
+    
     
     /*
     if (this.route.snapshot.params["id"]) {  
@@ -47,10 +54,6 @@ export class EditUserComponent implements OnInit {
         lastName: ['', [Validators.required]],  
         email: ['', [Validators.required]]
     })
-
-    this.userService.getUser(this.id).subscribe((user) => {
-        this.user = user;
-    })
   }
 
   updateUser(userForm: NgForm) {
@@ -61,10 +64,11 @@ export class EditUserComponent implements OnInit {
           //let id = res['id'];
           //this.router.navigate(['/contact-detail', id]);
           this.toastService.success('User updated successfully.');
-          this.router.navigate(['users']);
+          this.dialogRef.close(false);
+          //this.router.navigate(['users']);
         } 
         /*, (error) => {
-            alert('EditUserComponent.updateUser --> ' + error);
+            console.log('EditUserComponent.updateUser --> ' + error);
         } */
       );
   }
