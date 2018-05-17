@@ -27,7 +27,6 @@ export class AddErrorComponent {
           errorForm.reset();
           this.router.navigate(['listErrors']);
         });
-
   };
 
 }

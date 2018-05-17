@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rolaface.entities.Cause;
+import com.rolaface.entities.FlexErrorCause;
 import com.rolaface.services.CauseService;
+import com.rolaface.services.FlexErrorCauseService;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -24,9 +26,17 @@ public class CauseController {
 	@Autowired
 	private CauseService causeService;
 
+	@Autowired
+	private FlexErrorCauseService errorCauseService;
+
 	@PostMapping
-	public Cause create(@RequestBody Cause cause) {
-		return causeService.create(cause);
+	public Cause create(@RequestBody CauseDTO causeDTO) {
+		Cause cause = causeService.create(causeDTO.getCause());
+		FlexErrorCause errorCause = new FlexErrorCause();
+		errorCause.setCauseid(cause.getCauseid());
+		errorCause.setErrid(causeDTO.getErrid());
+		errorCauseService.create(errorCause);
+		return cause;
 	}
 
 	@GetMapping(path = { "/{id}" })
@@ -49,4 +59,32 @@ public class CauseController {
 		return causeService.findAll();
 	}
 
+}
+
+class CauseDTO {
+
+	private Cause cause;
+
+	private int errid;
+
+	public Cause getCause() {
+		return cause;
+	}
+
+	public void setCause(Cause cause) {
+		this.cause = cause;
+	}
+
+	public int getErrid() {
+		return errid;
+	}
+
+	public void setErrid(int errid) {
+		this.errid = errid;
+	}
+
+	@Override
+	public String toString() {
+		return "CauseDTO [cause=" + cause + ", errid=" + errid + "]";
+	}
 }

@@ -1,4 +1,4 @@
-import { Cause } from "./cause.model";
+import { Cause } from "../cause/cause.model";
 
 export class Error {
   errid: string;

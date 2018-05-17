@@ -32,6 +32,8 @@ import { ErrorService } from './error/error.service';
 import { EditUserComponent } from './user/edit-user.component';
 import { FindUserComponent } from './user/find-user.component';
 import { UserDetailComponent } from './user/user-detail.component';
+import { AddCauseComponent } from './cause/add-cause.component';
+import { CauseService } from './cause/cause.service';
 
 import {CdkTableModule} from '@angular/cdk/table';
 import {
@@ -69,7 +71,6 @@ import {
   MatTooltipModule,
 } from '@angular/material';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,7 +83,8 @@ import {
     FindErrorComponent,
     ErrorDetailComponent,
     FindUserComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    AddCauseComponent
   ],
   imports: [
     BrowserModule,
@@ -135,7 +137,8 @@ import {
   ],
   providers: [
     UserService,
-    ErrorService
+    ErrorService,
+    CauseService
   ],
   bootstrap: [AppComponent]
 })
