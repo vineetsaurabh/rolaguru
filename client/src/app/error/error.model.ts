@@ -1,8 +1,10 @@
-export class Error {
+import { Cause } from "./cause.model";
 
-  id: string;
-  errCode: string;
+export class Error {
+  errid: string;
+  errcode: string;
   message: string;
-  errorType: string;
-  batchType: string;
+  errortype: string;
+  batchtype: string;
+  causes: Set<Cause>;
 }

@@ -15,9 +15,9 @@
         <mat-cell *matCellDef="let user"> {{error.id}} </mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="errCode">
+      <ng-container matColumnDef="errcode">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Error Code </mat-header-cell>
-        <mat-cell *matCellDef="let error"> {{error.errCode}} </mat-cell>
+        <mat-cell *matCellDef="let error"> {{error.errcode}} </mat-cell>
       </ng-container>
   
       <ng-container matColumnDef="message">
@@ -25,14 +25,14 @@
         <mat-cell *matCellDef="let error"> {{error.message}} </mat-cell>
       </ng-container>
   
-      <ng-container matColumnDef="errorType">
+      <ng-container matColumnDef="errortype">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Error Type </mat-header-cell>
-        <mat-cell *matCellDef="let error"> {{error.errorType}} </mat-cell>
+        <mat-cell *matCellDef="let error"> {{error.errortype}} </mat-cell>
       </ng-container>
   
-      <ng-container matColumnDef="batchType">
+      <ng-container matColumnDef="batchtype">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Batch Type </mat-header-cell>
-        <mat-cell *matCellDef="let error"> {{error.batchType}} </mat-cell>
+        <mat-cell *matCellDef="let error"> {{error.batchtype}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="actions">

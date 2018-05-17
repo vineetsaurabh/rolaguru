@@ -14,10 +14,13 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 export class EditUserComponent implements OnInit {
 
   public user: User = {
-    id : '',
+    userid : '',
+    username : '',
+    password : '',
     firstName : '',
     lastName : '',
-    email : ''
+    email : '',
+    active : false
   };
   id: string;
   userForm: FormGroup; 
@@ -63,7 +66,7 @@ export class EditUserComponent implements OnInit {
       .subscribe(res => {
           //let id = res['id'];
           //this.router.navigate(['/contact-detail', id]);
-          this.toastService.success('User updated successfully.');
+          this.toastService.success(`User ${this.user.username} updated`);
           this.dialogRef.close(false);
           //this.router.navigate(['users']);
         } 

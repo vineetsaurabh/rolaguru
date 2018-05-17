@@ -4,6 +4,18 @@
 
     <div class="form-group">
       <mat-form-field>
+        <input matInput required [(ngModel)]="user.username" name="username" id="username" #username="ngModel" placeholder="Username">
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field>
+        <input matInput type="password" required [(ngModel)]="user.password" name="password" id="password" #password="ngModel" placeholder="Password">
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field>
         <input matInput required [(ngModel)]="user.firstName" name="firstName" id="firstName" #firstName="ngModel" placeholder="First Name">
       </mat-form-field>
     </div>  

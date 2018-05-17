@@ -27,6 +27,7 @@ public class FlexErrorController {
 
 	@PostMapping
 	public FlexError create(@RequestBody FlexError flexError) {
+		System.out.println("\n\ncreating error - " + flexError + "\n\n");
 		return flexErrorService.create(flexError);
 	}
 

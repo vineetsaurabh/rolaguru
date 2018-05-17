@@ -20,8 +20,8 @@ public class FlexErrorServiceImpl implements FlexErrorService {
 	}
 
 	@Override
-	public FlexError delete(int id) {
-		FlexError flexError = findById(id);
+	public FlexError delete(int errid) {
+		FlexError flexError = findById(errid);
 		if (flexError != null) {
 			repository.delete(flexError);
 		}
@@ -34,8 +34,8 @@ public class FlexErrorServiceImpl implements FlexErrorService {
 	}
 
 	@Override
-	public FlexError findById(int id) {
-		return repository.findById(id);
+	public FlexError findById(int errid) {
+		return repository.findByErrid(errid);
 	}
 
 	@Override
@@ -45,6 +45,6 @@ public class FlexErrorServiceImpl implements FlexErrorService {
 
 	@Override
 	public FlexError findByErrorCode(String errCode) {
-		return repository.findByErrorCode(errCode);
+		return repository.findByErrcode(errCode);
 	}
 }

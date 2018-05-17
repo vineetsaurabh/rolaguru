@@ -33,9 +33,11 @@ export class UserDetailComponent implements OnInit {
 
     this.userService.getUser(this.id).subscribe((user) => {
         this.objectKeys = Object.keys;
-        this.items = { 
+        this.items = {
+          'Username' : user.username, 
           'First Name' : user.firstName,
           'Last Name' : user.lastName,
+          'Active' : user.active,
           'Email ID' : user.email
         };
     })

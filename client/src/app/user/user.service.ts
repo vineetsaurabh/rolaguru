@@ -19,8 +19,8 @@ export class UserService {
     return this.http.get<User[]>(this.userUrl);
   }
 
-  public getUser(id) {
-    return this.http.get<User>(this.userUrl + "/"+ id);
+  public getUser(userid) {
+    return this.http.get<User>(this.userUrl + "/"+ userid);
   }
 
   public getUserByEmail(email: string) {
@@ -30,7 +30,7 @@ export class UserService {
   }
 
   public deleteUser(user) {
-    return this.http.delete(this.userUrl + "/"+ user.id);
+    return this.http.delete(this.userUrl + "/"+ user.userid);
   }
 
   public createUser(user) {

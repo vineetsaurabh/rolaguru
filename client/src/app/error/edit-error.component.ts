@@ -6,6 +6,7 @@ import { ErrorService } from './error.service';
 import { NgForm, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'; 
 import { ToastrService } from 'ngx-toastr';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Cause } from './cause.model';
 
 @Injectable()
 @Component({
@@ -14,11 +15,12 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 export class EditErrorComponent implements OnInit {
 
   public error: Error = {
-    id: '',
-    errCode : '',
+    errid: '',
+    errcode : '',
     message : '',
-    errorType : '',
-    batchType : ''
+    errortype : '',
+    batchtype : '',
+    causes: new Set<Cause>()
   };
   errorForm: FormGroup; 
 
@@ -49,7 +51,7 @@ export class EditErrorComponent implements OnInit {
     this.errorService.createError(this.error)
     // Not Working --this.userService.updateUser(this.user)
       .subscribe(res => {
-          this.toastService.success('Error updated successfully.');
+          this.toastService.success(`Error ${this.error.errcode} updated`);
           this.dialogRef.close(false);
         } 
         , (error) => {
