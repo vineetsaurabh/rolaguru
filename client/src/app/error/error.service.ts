@@ -30,7 +30,7 @@ export class ErrorService {
   }
 
   public deleteError(error) {
-    return this.http.delete(this.errorUrl + "/"+ error.id);
+    return this.http.delete(this.errorUrl + "/"+ error.errid);
   }
 
   public createError(error) {

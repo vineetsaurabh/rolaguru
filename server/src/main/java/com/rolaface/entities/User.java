@@ -1,51 +1,99 @@
 package com.rolaface.entities;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
 
-    @Id
-    @Column
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @Column
-    private String firstName;
-    @Column
-    private String lastName;
-    @Column
-    private String email;
+	@Id
+	@Column
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int userid;
 
-    public int getId() {
-        return id;
-    }
+	@Column(unique = true, nullable = false)
+	private String username;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	@Column(nullable = false)
+	private String password;
 
-    public String getFirstName() {
-        return firstName;
-    }
+	@Column(nullable = false)
+	private String firstName;
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	@Column
+	private String lastName;
 
-    public String getLastName() {
-        return lastName;
-    }
+	@Column
+	private boolean active;
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	@Column(unique = true, nullable = false)
+	private String email;
 
-    public String getEmail() {
-        return email;
-    }
+	public int getUserid() {
+		return userid;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	@Override
+	public String toString() {
+		return "User [username=" + username + ", firstName=" + firstName + ", lastName=" + lastName + ", active="
+				+ active + ", email=" + email + "]";
+	}
+
 }

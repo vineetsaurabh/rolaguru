@@ -17,7 +17,7 @@ import { Observable } from 'rxjs/Observable';
 export class ListErrorComponent implements OnInit {
 
   errors: Error[];
-  displayedColumns = ['errCode', 'message', 'errorType', 'batchType', 'actions'];
+  displayedColumns = ['errcode', 'message', 'errortype', 'batchtype', 'actions'];
   dataSource: MatTableDataSource<Error>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -61,11 +61,11 @@ export class ListErrorComponent implements OnInit {
     return dialogRef.afterClosed();
   }
 
-  deleteUser(error: Error): void {
+  deleteError(error: Error): void {
     this.errorService.deleteError(error)
       .subscribe( data => {
         this.errors = this.errors.filter(u => u !== error);
-        this.toastService.success('Error deleted successfully.');
+        this.toastService.success(`Error ${error.errcode} delete`);
         this.getErrors();
       })
   };

@@ -35,19 +35,18 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User findById(int id) {
-		return repository.findById(id);
+		return repository.findByUserid(id);
 	}
 
 	@Override
 	public User update(User user) {
-		User userToUpdate = findById(user.getId());
+		User userToUpdate = findById(user.getUserid());
 		if (userToUpdate != null) {
 			userToUpdate.setFirstName(user.getFirstName());
 			userToUpdate.setLastName(user.getLastName());
 			userToUpdate.setEmail(user.getEmail());
 			user = repository.save(userToUpdate);
 		}
-		System.out.println("\n\n\n Updated \n\n\n");
 		return user;
 	}
 

@@ -1,9 +1,9 @@
 <div class="container col-md-3">
     <h2 class="text-center">Find User</h2>
     <div class="input-group">
-        <input class="form-control" type="search" placeholder="search id" id="id" [(ngModel)]="user.id">
+        <input class="form-control" type="search" placeholder="search userid" id="userid" [(ngModel)]="user.userid">
         <span class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button" [routerLink]="[user.id]">
+            <button class="btn btn-outline-secondary" type="button" [routerLink]="[user.userid]">
                 <i class="fa fa-search"></i>
             </button>
         </span>
@@ -11,7 +11,7 @@
     <form (ngSubmit)="findUserByEmail()">
 		<div class="form-group">
 			<div class="input-group">
-				<input type="text" placeholder="Search Error Code" name="email"
+				<input type="text" placeholder="Search Email" name="email"
 					class="form-control" id="email" required [(ngModel)]="user.email">
 				<span class="input-group-append">
 					<button type="submit" class="btn btn-outline-secondary">

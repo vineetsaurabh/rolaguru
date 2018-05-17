@@ -23,9 +23,9 @@ export class AddErrorComponent {
   createError(errorForm: NgForm): void {
     this.errorService.createError(this.error)
         .subscribe( data => {
-          this.toastService.success('Error added successfully.');
+          this.toastService.success(`Error ${this.error.errcode} added`);
           errorForm.reset();
-          this.router.navigate(['errors']);
+          this.router.navigate(['listErrors']);
         });
 
   };

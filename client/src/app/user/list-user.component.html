@@ -10,9 +10,9 @@
   <div class="mat-elevation-z8">
     <mat-table #table [dataSource]="dataSource" matSort>
 
-      <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Id. </mat-header-cell>
-        <mat-cell *matCellDef="let user"> {{user.id}} </mat-cell>
+      <ng-container matColumnDef="username">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Username </mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{user.username}} </mat-cell>
       </ng-container>
   
       <ng-container matColumnDef="firstName">
@@ -28,6 +28,11 @@
       <ng-container matColumnDef="email">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
         <mat-cell *matCellDef="let user"> {{user.email}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="active">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Active </mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{user.active}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="actions">

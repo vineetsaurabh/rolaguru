@@ -12,10 +12,13 @@ import { Router } from '@angular/router';
 export class FindUserComponent {
 
   public user: User = {
-    id : '',
+    userid : '',
+    username : '',
+    password : '',
     firstName : '',
     lastName : '',
-    email : ''
+    email : '',
+    active : false
   };
 
   constructor(
@@ -23,12 +26,17 @@ export class FindUserComponent {
     private userService: UserService) {
   }
 
+  ngOnInit(): void {
+    this.router.routeReuseStrategy.shouldReuseRoute = function() {
+      return false;
+    }
+  }
 
   findUserByEmail() {
     this.userService.getUserByEmail(this.user.email)
       .subscribe( data => {
         this.user = data;
-        this.router.navigate(['findUser/'+this.user.id]);
+        this.router.navigate(['findUser/'+this.user.userid]);
     });
   }
 

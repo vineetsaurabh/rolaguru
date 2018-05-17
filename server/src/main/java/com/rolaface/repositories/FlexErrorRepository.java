@@ -3,7 +3,6 @@ package com.rolaface.repositories;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 import com.rolaface.entities.FlexError;
 
@@ -16,11 +15,10 @@ public interface FlexErrorRepository extends JpaRepository<FlexError, Long> {
 	@Override
 	List<FlexError> findAll();
 
-	FlexError findById(int id);
+	FlexError findByErrid(int errid);
 
 	@Override
 	FlexError save(FlexError flexError);
 
-	@Query(value = "SELECT * FROM flexerror f WHERE f.err_code = ?1", nativeQuery = true)
-	FlexError findByErrorCode(String errCode);
+	FlexError findByErrcode(String errCode);
 }

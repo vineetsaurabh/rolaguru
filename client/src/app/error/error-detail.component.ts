@@ -29,10 +29,10 @@ export class ErrorDetailComponent implements OnInit {
     this.errorService.getError(this.id).subscribe((error) => {
         this.objectKeys = Object.keys;
         this.items = { 
-          'Error Code' : error.errCode,
+          'Error Code' : error.errcode,
           'Message' : error.message, 
-          'Error Type' : error.errorType,
-          'Batch Type' : error.batchType
+          'Error Type' : error.errortype,
+          'Batch Type' : error.batchtype
         };
     })
   }

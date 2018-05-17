@@ -17,7 +17,7 @@ import { Observable } from 'rxjs/Observable';
 export class ListUserComponent implements OnInit {
 
   users: User[];
-  displayedColumns = ['id', 'firstName', 'lastName', 'email', 'actions'];
+  displayedColumns = ['username', 'firstName', 'lastName', 'email', 'active', 'actions'];
   dataSource: MatTableDataSource<User>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -90,7 +90,7 @@ export class ListUserComponent implements OnInit {
     this.userService.deleteUser(user)
       .subscribe( data => {
         this.users = this.users.filter(u => u !== user);
-        this.toastService.success('User deleted successfully.');
+        this.toastService.success(`User ${user.username} deleted`);
         this.getUsers();
       })
   };
