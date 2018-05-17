@@ -26,7 +26,6 @@ export class EditUserComponent implements OnInit {
   userForm: FormGroup; 
 
   constructor(
-    private http: HttpClient,
     private router: Router, 
     private route: ActivatedRoute,
     private userService: UserService,

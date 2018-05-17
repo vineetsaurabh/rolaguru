@@ -6,7 +6,7 @@ import { ErrorService } from './error.service';
 import { NgForm, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'; 
 import { ToastrService } from 'ngx-toastr';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Cause } from './cause.model';
+import { Cause } from '../cause/cause.model';
 
 @Injectable()
 @Component({
@@ -25,9 +25,6 @@ export class EditErrorComponent implements OnInit {
   errorForm: FormGroup; 
 
   constructor(
-    private http: HttpClient,
-    private router: Router, 
-    private route: ActivatedRoute,
     private errorService: ErrorService,
     private fb: FormBuilder,
     private toastService: ToastrService,

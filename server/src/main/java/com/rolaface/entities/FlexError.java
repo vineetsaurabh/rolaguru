@@ -89,8 +89,8 @@ public class FlexError {
 
 	@Override
 	public String toString() {
-		return "FlexError [errcode=" + errcode + ", message=" + message + ", errortype=" + errortype + ", batchtype="
-				+ batchtype + "]";
+		return "FlexError [errid=" + errid + ", errcode=" + errcode + ", message=" + message + ", errortype="
+				+ errortype + ", batchtype=" + batchtype + ", causes=" + causes + "]";
 	}
 
 }

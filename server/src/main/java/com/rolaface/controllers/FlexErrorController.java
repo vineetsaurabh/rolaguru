@@ -27,13 +27,14 @@ public class FlexErrorController {
 
 	@PostMapping
 	public FlexError create(@RequestBody FlexError flexError) {
-		System.out.println("\n\ncreating error - " + flexError + "\n\n");
 		return flexErrorService.create(flexError);
 	}
 
 	@GetMapping(path = { "/{id}" })
 	public FlexError findOne(@PathVariable("id") int id) {
-		return flexErrorService.findById(id);
+		FlexError error = flexErrorService.findById(id);
+		System.out.println("\n\n\n" + error + "\n\n\n");
+		return error;
 	}
 
 	@PutMapping

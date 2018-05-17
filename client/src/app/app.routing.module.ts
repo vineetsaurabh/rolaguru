@@ -12,6 +12,7 @@ import { UserDetailComponent } from './user/user-detail.component';
 import { EditErrorComponent } from './error/edit-error.component';
 import { ErrorDetailComponent } from './error/error-detail.component';
 import { FindErrorComponent } from './error/find-error.component';
+import { AddCauseComponent } from './cause/add-cause.component';
 
 const routes: Routes = [
   { 
@@ -58,7 +59,13 @@ const routes: Routes = [
     children: [
       { 
         path: ':id',
-        component: ErrorDetailComponent
+        component: ErrorDetailComponent,
+        children: [
+          { 
+            path: ':id',
+            component: AddCauseComponent
+          }
+        ]
       }
     ]
   }

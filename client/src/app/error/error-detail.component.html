@@ -1,3 +1,5 @@
+<router-outlet></router-outlet>
+
 <div class="container col-md-6 my-5">
     <div class="table-responsive">
         <table class="table table-bordered table-hover">
@@ -5,6 +7,23 @@
                 <td>{{ key }}</td>
                 <td>{{ items[key] }}</td>
             </tr>
+            <tr>
+                <td colspan="2" class="text-center">
+                    Add Cause for this error.
+                    <button class="btn" (click)="addCause(errid, errcode)">
+                        <i class="fa fa-plus fa-fw"></i>
+                    </button>
+                </td>
+            </tr>
         </table>
+    </div>
+</div>
+
+<div *ngIf="causes && causes.length>0">
+    <div class="container col-md-6 my-5">
+        <div *ngFor="let cause of causes">
+            <div>{{ cause.description }}</div>
+            <div>{{ cause.solution }}</div>
+        </div>
     </div>
 </div>

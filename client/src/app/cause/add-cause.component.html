@@ -1,0 +1,23 @@
+<div class="col-md-5 container">
+    <h2 class="text-center">Add Cause for {{ errcode }}</h2>
+    <form #causeForm="ngForm" (ngSubmit)="createCause(causeForm)" ngNativeValidate>
+
+        <div class="form-group">
+            <mat-form-field>
+                <input matInput required [(ngModel)]="cause.description" name="description" id="description" #description="ngModel" placeholder="Description">
+            </mat-form-field>
+        </div>  
+
+        <div class="form-group">
+            <mat-form-field>
+                <input matInput required [(ngModel)]="cause.solution" name="solution" id="solution" placeholder="Solution">
+            </mat-form-field>
+        </div>
+
+        <div class="text-center">
+        <button mat-raised-button color="primary" [disabled]="!causeForm.valid">
+            Submit
+        </button>
+        </div>
+    </form>
+</div>
