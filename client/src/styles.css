@@ -9,3 +9,7 @@ mat-form-field {
 .global-toolbar-spacer {
     flex: 1 1 auto;
 }
+
+.inactive-user {
+    color: gray;
+}

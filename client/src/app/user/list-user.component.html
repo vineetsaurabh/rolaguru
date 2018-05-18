@@ -25,33 +25,26 @@
   
       <ng-container matColumnDef="firstName">
         <mat-header-cell *matHeaderCellDef mat-sort-header> First Name </mat-header-cell>
-        <mat-cell *matCellDef="let user"> {{user.firstName}} </mat-cell>
+        <mat-cell *matCellDef="let user" [ngClass]="{'inactive-user': !user.active}"> {{user.firstName}} </mat-cell>
       </ng-container>
   
       <ng-container matColumnDef="lastName">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </mat-header-cell>
-        <mat-cell *matCellDef="let user"> {{user.lastName}} </mat-cell>
+        <mat-cell *matCellDef="let user" [ngClass]="{'inactive-user': !user.active}"> {{user.lastName}} </mat-cell>
       </ng-container>
   
       <ng-container matColumnDef="email">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
-        <mat-cell *matCellDef="let user"> {{user.email}} </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="active">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Active </mat-header-cell>
-        <mat-cell *matCellDef="let user"> {{user.active}} </mat-cell>
+        <mat-cell *matCellDef="let user" [ngClass]="{'inactive-user': !user.active}"> {{user.email}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
         <mat-cell *matCellDef="let user">
           <!-- <button class="btn" [routerLink]="[user.id]"><i class="fa fa-pencil fa-fw"></i></button> -->
-          <div *ngIf="user.active==false; else inactive">
-            <button class="btn" (click)="activateUser(user)">
-                <i class="fa fa-check fa-fw" title="Activate User"></i>
-            </button>
-          </div>
+          <button class="btn" (click)="activateUser(user)" *ngIf="user.active==false; else inactive">
+              <i class="fa fa-check fa-fw" title="Activate User"></i>
+          </button>
           <ng-template #inactive>
               <button class="btn" (click)="deActivateUser(user)">
                 <i class="fa fa-times fa-fw" title="De-activate User"></i>
@@ -60,7 +53,7 @@
           <button class="btn" (click)="editUser(user)">
             <i class="fa fa-pencil fa-fw" title="Edit User"></i>
           </button>
-          <button class="btn" (click)="deleteUser(user)">
+          <button class="btn" (click)="deleteUser(user)" [disabled]="user.active">
             <i class="fa fa fa-trash-o fa-fw" title="Delete User"></i>
           </button>
         </mat-cell>
