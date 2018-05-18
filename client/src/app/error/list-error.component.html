@@ -1,10 +1,16 @@
 
 <router-outlet></router-outlet>
+<global-toolbar></global-toolbar>
 
-<div class="container col-lg-7">
+<div class="container col-lg-10">
   <div>
     <mat-form-field>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      <span class="input-group-append">
+        <button class="btn" (click)="addUser()">
+            <i class="fa fa-plus fa-fw" title="Ädd Error"></i>
+        </button>
+      </span>
     </mat-form-field>
   </div>
   <div class="mat-elevation-z8">

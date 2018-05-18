@@ -1,3 +1,4 @@
+import { HomepageComponent } from './login/homepage.component';
 
 import { NgModule,
   Component,
@@ -19,7 +20,7 @@ import { ToastrModule, ToastContainerModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app.routing.module';
 import { AppComponent } from './app.component';
-
+import { LoginComponent } from './login/login.component';
 import { ListUserComponent } from './user/list-user.component';
 import { AddUserComponent } from './user/add-user.component';
 import { UserService } from './user/user.service';
@@ -74,6 +75,8 @@ import {
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
+    HomepageComponent,
     ListUserComponent,
     AddUserComponent,
     EditUserComponent,

@@ -13,8 +13,22 @@ import { EditErrorComponent } from './error/edit-error.component';
 import { ErrorDetailComponent } from './error/error-detail.component';
 import { FindErrorComponent } from './error/find-error.component';
 import { AddCauseComponent } from './cause/add-cause.component';
+import { LoginComponent } from './login/login.component';
+import { HomepageComponent } from './login/homepage.component';
 
 const routes: Routes = [
+  {
+    path : '',
+    component : LoginComponent
+  },
+  { 
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path : 'homepage',
+    component : HomepageComponent
+  },
   { 
     path: 'listUsers',
     component: ListUserComponent,

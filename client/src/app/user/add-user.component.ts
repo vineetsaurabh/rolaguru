@@ -5,6 +5,7 @@ import { NgForm } from '@angular/forms';
 import { User } from './user.model';
 import { UserService } from './user.service';
 import { ToastrService } from 'ngx-toastr';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   templateUrl: './add-user.component.html'
@@ -18,7 +19,8 @@ export class AddUserComponent {
   constructor(
     private router: Router,
     private userService: UserService, 
-    private toastService: ToastrService) {
+    private toastService: ToastrService,
+    public dialogRef: MatDialogRef<AddUserComponent>) {
 
   }
 
@@ -27,10 +29,10 @@ export class AddUserComponent {
     this.userService.createUser(this.user)
         .subscribe( data => {
           this.toastService.success(`User ${this.user.username} added`);
-          userForm.reset();
-          this.router.navigate(['listUsers']);
+          /*userForm.reset();
+          this.router.navigate(['listUsers']); */
+          this.dialogRef.close(false);
         });
-
   };
 
 }
