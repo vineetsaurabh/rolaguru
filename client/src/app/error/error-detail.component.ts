@@ -35,20 +35,27 @@ export class ErrorDetailComponent implements OnInit {
       .subscribe(params => {
         this.errid = +params.get('id');
       })
-    
-    this.errorService.getError(this.errid).subscribe((error) => {
-        this.objectKeys = Object.keys;
-        this.items = { 
-          'Error Code' : error.errcode,
-          'Message' : error.message, 
-          'Error Type' : error.errortype,
-          'Batch Type' : error.batchtype
-        };
-        this.errcode = error.errcode;
-        this.causes = error.causes;
+    this.getError();
+    this.dialog.afterAllClosed.subscribe(() => {
+      this.getError();
     })
   }
 
+  private getError() {
+    this.errorService.getError(this.errid).subscribe((error) => {
+      this.objectKeys = Object.keys;
+      this.items = { 
+        'Error Code' : error.errcode,
+        'Message' : error.message, 
+        'Error Type' : error.errortype,
+        'Batch Type' : error.batchtype
+      };
+      this.errcode = error.errcode;
+      this.causes = error.causes;
+    })
+  }
+
+  //This is also used in ListErrorComponent
   public addCause(errid: string, errcode: string): Observable<boolean> {
     let dialogRef: MatDialogRef<AddCauseComponent>;
     dialogRef = this.dialog.open(AddCauseComponent, {

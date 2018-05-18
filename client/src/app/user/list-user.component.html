@@ -12,7 +12,9 @@
 
       <ng-container matColumnDef="username">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Username </mat-header-cell>
-        <mat-cell *matCellDef="let user"> {{user.username}} </mat-cell>
+        <mat-cell *matCellDef="let user">
+            <a [routerLink]="['../findUser', user.userid]"> {{user.username}} </a>
+        </mat-cell>
       </ng-container>
   
       <ng-container matColumnDef="firstName">
@@ -39,8 +41,22 @@
         <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
         <mat-cell *matCellDef="let user">
           <!-- <button class="btn" [routerLink]="[user.id]"><i class="fa fa-pencil fa-fw"></i></button> -->
-          <button class="btn" (click)="editUser(user)"><i class="fa fa-pencil fa-fw"></i></button>
-          <button class="btn" (click)="deleteUser(user)"><i class="fa fa fa-trash-o fa-fw"></i></button>
+          <div *ngIf="user.active==false; else inactive">
+            <button class="btn" (click)="activateUser(user)">
+                <i class="fa fa-check fa-fw" title="Activate User"></i>
+            </button>
+          </div>
+          <ng-template #inactive>
+              <button class="btn" (click)="deActivateUser(user)">
+                <i class="fa fa-times fa-fw" title="De-activate User"></i>
+              </button>
+          </ng-template>
+          <button class="btn" (click)="editUser(user)">
+            <i class="fa fa-pencil fa-fw" title="Edit User"></i>
+          </button>
+          <button class="btn" (click)="deleteUser(user)">
+            <i class="fa fa fa-trash-o fa-fw" title="Delete User"></i>
+          </button>
         </mat-cell>
       </ng-container>
   

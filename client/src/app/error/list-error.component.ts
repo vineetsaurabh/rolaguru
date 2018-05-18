@@ -8,6 +8,8 @@ import { EditErrorComponent } from './edit-error.component';
 import { ToastrService } from 'ngx-toastr';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialogRef, MatDialog, MatDialogConfig } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
+import { ErrorDetailComponent } from './error-detail.component';
+import { AddCauseComponent } from '../cause/add-cause.component';
 
 @Component({
   selector: 'app-user',
@@ -69,5 +71,15 @@ export class ListErrorComponent implements OnInit {
         this.getErrors();
       })
   };
+
+  //Repeated method in error-detail.component
+  public addCause(errid: string, errcode: string): Observable<boolean> {
+    let dialogRef: MatDialogRef<AddCauseComponent>;
+    dialogRef = this.dialog.open(AddCauseComponent, {
+      data: [errid, errcode],
+      width: '600px',
+    });
+    return dialogRef.afterClosed();
+  }
 
 }

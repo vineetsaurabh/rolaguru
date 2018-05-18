@@ -32,9 +32,7 @@ public class FlexErrorController {
 
 	@GetMapping(path = { "/{id}" })
 	public FlexError findOne(@PathVariable("id") int id) {
-		FlexError error = flexErrorService.findById(id);
-		System.out.println("\n\n\n" + error + "\n\n\n");
-		return error;
+		return flexErrorService.findById(id);
 	}
 
 	@PutMapping
