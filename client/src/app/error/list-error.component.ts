@@ -10,6 +10,7 @@ import { MatTableDataSource, MatPaginator, MatSort, MatDialogRef, MatDialog, Mat
 import { Observable } from 'rxjs/Observable';
 import { ErrorDetailComponent } from './error-detail.component';
 import { AddCauseComponent } from '../cause/add-cause.component';
+import { AddErrorComponent } from './add-error.component';
 
 @Component({
   selector: 'app-user',
@@ -52,6 +53,14 @@ export class ListErrorComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       });
+  }
+
+  public addUser(): Observable<boolean> {
+    let dialogRef: MatDialogRef<AddErrorComponent>;
+    dialogRef = this.dialog.open(AddErrorComponent, {
+      width: '600px',
+    });
+    return dialogRef.afterClosed();
   }
 
   public editError(id: string): Observable<boolean> {

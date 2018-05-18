@@ -8,11 +8,11 @@ import { UserService } from './user.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialogRef, MatDialog, MatDialogConfig } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
+import { AddUserComponent } from './add-user.component';
 
 @Component({
-  selector: 'app-user',
+  selector: 'app-comp',
   templateUrl: './list-user.component.html',
-  styles: []
 })
 export class ListUserComponent implements OnInit {
 
@@ -65,17 +65,13 @@ export class ListUserComponent implements OnInit {
       });
   }
 
-  /* Moved to EditUserComponent
-  updateUser(user) {
-    this.userService.updateUser(user)
-      .subscribe(res => {
-          let id = res['id'];
-          this.router.navigate(id);
-        }, (error) => {
-          alert('UserComponent.updateUser --> ' + error);
-        }
-      );
-  } */
+  public addUser(): Observable<boolean> {
+    let dialogRef: MatDialogRef<AddUserComponent>;
+    dialogRef = this.dialog.open(AddUserComponent, {
+      width: '600px',
+    });
+    return dialogRef.afterClosed();
+  }
 
   public editUser(id: string): Observable<boolean> {
     let dialogRef: MatDialogRef<EditUserComponent>;

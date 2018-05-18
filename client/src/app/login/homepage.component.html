@@ -1,0 +1,34 @@
+<div class="col-md-offset-1">
+    <mat-toolbar>
+        <mat-toolbar-row>
+            <span> {{title}} </span>
+            <span class="global-toolbar-spacer"></span>
+            <small> Logged in as &nbsp; </small>
+            <span> Admin </span>
+        </mat-toolbar-row>
+    </mat-toolbar>
+</div>
+<div class="navbar container">
+    <ul class="nav nav-pills mx-auto">
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/listUsers" routerLinkActive="active current">
+                {{tabs[0]}}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/findUser" routerLinkActive="active current">
+                {{tabs[1]}}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/listErrors" routerLinkActive="active current">
+                {{tabs[2]}}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/findError" routerLinkActive="active current">
+                {{tabs[3]}}
+            </a>
+        </li>
+    </ul>
+</div>
