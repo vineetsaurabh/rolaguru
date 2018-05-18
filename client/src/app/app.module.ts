@@ -36,6 +36,7 @@ import { UserDetailComponent } from './user/user-detail.component';
 import { AddCauseComponent } from './cause/add-cause.component';
 import { CauseService } from './cause/cause.service';
 
+import { FlexLayoutModule } from '@angular/flex-layout';
 import {CdkTableModule} from '@angular/cdk/table';
 import {
   MatAutocompleteModule,
@@ -103,6 +104,7 @@ import {
       preventDuplicates: true,
     }),
     ToastContainerModule,
+    FlexLayoutModule,
 
     CdkTableModule,
     MatAutocompleteModule,
