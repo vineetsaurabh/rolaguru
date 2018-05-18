@@ -22,6 +22,7 @@ export class ListErrorComponent implements OnInit {
   errors: Error[];
   displayedColumns = ['errcode', 'message', 'errortype', 'batchtype', 'actions'];
   dataSource: MatTableDataSource<Error>;
+  selectedRowIndex: number = -1;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -89,6 +90,10 @@ export class ListErrorComponent implements OnInit {
       width: '600px',
     });
     return dialogRef.afterClosed();
+  }
+
+  highlight(id) {
+    this.selectedRowIndex = id;
   }
 
 }

@@ -1,20 +1,13 @@
 <global-toolbar></global-toolbar>
 
 <div class="container col-md-3">
-    <h2 class="text-center">Find Error</h2>
-    <form (ngSubmit)="findErrorByCode()">
-		<div class="form-group">
-			<div class="input-group">
-				<input type="text" placeholder="Search Error Code" name="errCode"
-					class="form-control" id="errcode" required [(ngModel)]="error.errcode">
-				<span class="input-group-append">
-					<button type="submit" class="btn btn-outline-secondary">
-						<i class="fa fa-search"></i>
-					</button>
-				</span>
-			</div>
-		</div>
-	</form>
+    <h3 class="text-center">Find Error</h3>
+    <mat-form-field>
+		<input matInput type="text" placeholder="Search Error Code" [(ngModel)]="error.errcode"/>
+		<button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="findErrorByCode()">
+		  <mat-icon>search</mat-icon>
+		</button>
+	</mat-form-field>
 </div>
 
 <router-outlet></router-outlet>
