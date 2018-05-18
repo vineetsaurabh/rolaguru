@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import url( 'https://fonts.googleapis.com/css?family=Roboto:400,700|Material+Icons');
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
@@ -13,3 +14,13 @@ mat-form-field {
 .inactive-user {
     color: gray;
 }
+
+/* Add button on right side of table filter */
+.table-container {
+    display: flex;
+    flex-direction: column;
+}
+.mat-form-field {
+    width: 100%;
+}
+
