@@ -1,20 +1,13 @@
 <global-toolbar></global-toolbar>
+
 <div class="container col-md-3">
-    <h2 class="text-center">Find User</h2>
-    <form (ngSubmit)="findUserByEmail()">
-		<div class="form-group">
-			<div class="input-group">
-				<input type="text" placeholder="Search Email" name="email"
-					class="form-control" id="email" required [(ngModel)]="user.email">
-				<span class="input-group-append">
-					<button type="submit" class="btn btn-outline-secondary">
-						<i class="fa fa-search"></i>
-					</button>
-				</span>
-			</div>
-		</div>
-	</form>
+	<h3 class="text-center">Find User</h3>
+	<mat-form-field>
+		<input matInput type="text" placeholder="Search Email" [(ngModel)]="user.email"/>
+		<button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="findUserByEmail()">
+			<mat-icon>search</mat-icon>
+		</button>
+	</mat-form-field>
 </div>
 
 <router-outlet></router-outlet>
-

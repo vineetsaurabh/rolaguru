@@ -24,3 +24,7 @@ mat-form-field {
     width: 100%;
 }
 
+/* Highlight a clicked row */
+.highlight-row{
+    background: rgb(245, 250, 255); /* green */
+}
