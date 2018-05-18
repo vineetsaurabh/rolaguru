@@ -17,7 +17,7 @@ import { Observable } from 'rxjs/Observable';
 export class ListUserComponent implements OnInit {
 
   users: User[];
-  displayedColumns = ['username', 'firstName', 'lastName', 'email', 'active', 'actions'];
+  displayedColumns = ['username', 'firstName', 'lastName', 'email', 'actions'];
   dataSource: MatTableDataSource<User>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -94,5 +94,23 @@ export class ListUserComponent implements OnInit {
         this.getUsers();
       })
   };
+
+  activateUser(user) {
+    user.active = true;
+    this.userService.createUser(user)
+      .subscribe(res => {
+          this.toastService.success(`User ${user.username} activated`);
+        } 
+      );
+  }
+
+  deActivateUser(user) {
+    user.active = false;
+    this.userService.createUser(user)
+      .subscribe(res => {
+          this.toastService.success(`User ${user.username} deactivated`);
+        } 
+      );
+  }
 
 }

@@ -21,9 +21,24 @@
 
 <div *ngIf="causes && causes.length>0">
     <div class="container col-md-6 my-5">
-        <div *ngFor="let cause of causes">
-            <div>{{ cause.description }}</div>
-            <div>{{ cause.solution }}</div>
+        <h3 class="text-center">Cause & Solutions</h3>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Description</th>
+                        <th>Solution</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let cause of causes; let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ cause.description }}</td>
+                        <td>{{ cause.solution }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
