@@ -1,22 +1,51 @@
 package com.rolaface.services;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.rolaface.entities.User;
 import com.rolaface.repositories.UserRepository;
 
-@Service
-public class UserServiceImpl implements UserService {
+@Service(value = "userService")
+public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Autowired
 	private UserRepository repository;
 
+	@Autowired
+	private BCryptPasswordEncoder bcryptEncoder;
+
+	@Override
+	public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
+		User user = repository.findByUsername(userId);
+		if (user == null) {
+			throw new UsernameNotFoundException("Invalid username or password.");
+		}
+		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
+				getAuthority());
+	}
+
+	private List<SimpleGrantedAuthority> getAuthority() {
+		return Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
+	}
+
 	@Override
 	public User create(User user) {
-		return repository.save(user);
+		User newUser = new User();
+		newUser.setUsername(user.getUsername());
+		newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
+		newUser.setFirstName(user.getFirstName());
+		newUser.setLastName(user.getLastName());
+		newUser.setEmail(user.getEmail());
+		return repository.save(newUser);
 	}
 
 	@Override
@@ -36,6 +65,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User findById(int id) {
 		return repository.findByUserid(id);
+	}
+
+	@Override
+	public User findOne(String username) {
+		return repository.findByUsername(username);
 	}
 
 	@Override

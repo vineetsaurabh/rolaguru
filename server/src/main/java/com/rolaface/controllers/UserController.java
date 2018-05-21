@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.rolaface.entities.User;
 import com.rolaface.services.UserService;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
 @RequestMapping({ "/user" })
 public class UserController {
@@ -31,7 +31,7 @@ public class UserController {
 	}
 
 	@GetMapping(path = { "/{id}" })
-	public User findOne(@PathVariable("id") int id) {
+	public User findById(@PathVariable("id") int id) {
 		return userService.findById(id);
 	}
 
@@ -50,8 +50,13 @@ public class UserController {
 		return userService.findAll();
 	}
 
+	@GetMapping(value = "/findbyusername", params = "username")
+	public User findByUsername(@RequestParam("username") String username) {
+		return userService.findOne(username);
+	}
+
 	@GetMapping(value = "/findbyemail", params = "email")
-	public User findByErrorCode(@RequestParam("email") String email) {
+	public User findByEmail(@RequestParam("email") String email) {
 		return userService.findByEmail(email);
 	}
 }

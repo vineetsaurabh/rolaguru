@@ -13,7 +13,7 @@ import { ReactiveFormsModule,
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
 import { ToastrModule, ToastContainerModule } from 'ngx-toastr';
@@ -72,6 +72,9 @@ import {
   MatToolbarModule,
   MatTooltipModule,
 } from '@angular/material';
+import { AuthService } from './login/auth.service';
+import { TokenStorage } from './login/token.storage';
+import { AuthInterceptor } from './login/auth.inteceptor';
 
 @NgModule({
   declarations: [
@@ -143,7 +146,14 @@ import {
   providers: [
     UserService,
     ErrorService,
-    CauseService
+    CauseService,
+    AuthService,
+    TokenStorage,
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi   : true,
+    }
   ],
   bootstrap: [AppComponent]
 })

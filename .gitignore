@@ -23,10 +23,12 @@ hs_err_pid*
 
 **/server/.gradle/
 **/server/.settings/
+**/server/.classpath/
 **/server/bin/
 **/server/build/
 **/server/gradle/
 
+**/client/.gradle/
 **/client/e2e/
 **/client/node_modules/
 **/client/src/assets/

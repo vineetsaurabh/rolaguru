@@ -2,9 +2,11 @@
     <mat-toolbar>
         <mat-toolbar-row>
             <span> {{title}} </span>
-            <span class="global-toolbar-spacer"></span>
-            <small> Logged in as &nbsp; </small>
-            <span> Admin </span>
+            <span class="fill-remaining-space"></span>
+            <small> {{currentUser}} </small>
+            <button mat-button mat-icon-button matTooltip="Logout" *ngIf="authService.isAuthenticated()" (click)="logout()">
+                <mat-icon color="accent">exit_to_app</mat-icon>
+            </button>
         </mat-toolbar-row>
     </mat-toolbar>
 </div>
@@ -15,20 +17,20 @@
                 {{tabs[0]}}
             </a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link" routerLink="/findUser" routerLinkActive="active current">
                 {{tabs[1]}}
             </a>
-        </li>
+        </li> -->
         <li class="nav-item">
             <a class="nav-link" routerLink="/listErrors" routerLinkActive="active current">
                 {{tabs[2]}}
             </a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link" routerLink="/findError" routerLinkActive="active current">
                 {{tabs[3]}}
             </a>
-        </li>
+        </li> -->
     </ul>
 </div>
