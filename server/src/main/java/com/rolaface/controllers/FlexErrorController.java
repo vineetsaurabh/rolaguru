@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.rolaface.entities.FlexError;
 import com.rolaface.services.FlexErrorService;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
 @RequestMapping({ "/flex-error" })
 public class FlexErrorController {

@@ -18,7 +18,7 @@ import com.rolaface.entities.FlexErrorCause;
 import com.rolaface.services.CauseService;
 import com.rolaface.services.FlexErrorCauseService;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
 @RequestMapping({ "/cause" })
 public class CauseController {

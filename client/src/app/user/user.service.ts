@@ -23,6 +23,12 @@ export class UserService {
     return this.http.get<User>(this.userUrl + "/"+ userid);
   }
 
+  public getUserByUsername(username: string) {
+    let params = new HttpParams();
+    params = params.append('username', username);
+    return this.http.get<User>(this.userUrl + '/findbyusername', {params: params});
+  }
+
   public getUserByEmail(email: string) {
     let params = new HttpParams();
     params = params.append('email', email);

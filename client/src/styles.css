@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import url( 'https://fonts.googleapis.com/css?family=Roboto:400,700|Material+Icons');
+@import "~material-design-icons/iconfont/material-icons.css";
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
@@ -7,7 +7,7 @@ mat-form-field {
     width: 100%;
 }
 
-.global-toolbar-spacer {
+.fill-remaining-space {
     flex: 1 1 auto;
 }
 

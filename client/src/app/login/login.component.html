@@ -1,20 +1,22 @@
 <div class="container col-md-3 my-4">
     <mat-card class="text-center">
         <mat-card-header>
-            <mat-card-title></mat-card-title>
+            <mat-card-title>Login</mat-card-title>
         </mat-card-header>
         <mat-card-content>
             <form>
-                <div class="form-group">
-                    <mat-form-field class="example-full-width">
-                        <input matInput placeholder="Username" [(ngModel)]="username" name="username" required>
-                    </mat-form-field>
-                </div>
-                <div class="form-group">
-                    <mat-form-field class="example-full-width">
-                        <input matInput placeholder="Password" [(ngModel)]="password" type="password" name="password" required>
-                    </mat-form-field>
-                </div>
+                <mat-form-field>
+                    <input type="text" matInput placeholder="Username" [(ngModel)]="username" name="username" required>
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" tabindex="-1">
+                        <mat-icon>person</mat-icon>
+                    </button>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Password" [(ngModel)]="password" type="password" name="password" required>
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" tabindex="-1">
+                        <mat-icon>remove_red_eye</mat-icon>
+                    </button>
+                </mat-form-field>
             </form>
             <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
         </mat-card-content>
