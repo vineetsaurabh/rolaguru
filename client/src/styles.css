@@ -26,5 +26,23 @@ mat-form-field {
 
 /* Highlight a clicked row */
 .highlight-row{
-    background: rgb(245, 250, 255); /* green */
+    background: lightyellow;
+}
+
+/* Border with text on it, like fieldset*/
+div.border-text{
+    border: 1px dotted;
+    border-color: lightgrey;
+    padding: 0px 10px 2px 10px;
+}
+div.border-text h1{
+    text-align: center;
+    margin-top: -10px;
+    height: 12px;
+    line-height: 16px;
+    font-size: 10px;
+    color:lightgrey;
+}
+div.border-text h1 span{
+    background-color: white;
 }
