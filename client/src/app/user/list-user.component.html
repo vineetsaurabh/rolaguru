@@ -3,17 +3,55 @@
 <global-toolbar></global-toolbar>
 
 <div class="container col-lg-10">
-  <div fxLayoutGap="10px" fxLayoutAlign="start center"> 
+  <div>
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="4px">
+      <div class="border-text" fxLayoutGap="15px">
+        <h1><span data-toggle="tooltip" matTooltip="Please select row(s) to perform these actions" matTooltipPosition="right">
+          User Actions
+        </span></h1>
+        <button class="btn" matTooltip="Activate User">
+          <i class="fa fa-check"></i>
+        </button>
+        <button class="btn" matTooltip="De-activate User">
+          <i class="fa fa-times"></i>
+        </button>
+        <button class="btn" matTooltip="Edit Role">
+          <i class="fa fa-group"></i>
+        </button>
+        <button class="btn" matTooltip="Delete Users">
+          <i class="fa fa-trash"></i>
+        </button>
+      </div>
+      <span class="fill-remaining-space"></span>
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="4px">
+        <div class="border-text" fxLayoutGap="15px">
+          <h1><span>Table Actions</span></h1>
+          <button class="btn" matTooltip="Export as PDF">
+            <i class="fa fa-file-pdf-o"></i>
+          </button>
+          <button class="btn" matTooltip="Export as Excel">
+            <i class="fa fa-file-excel-o"></i>
+          </button>
+          <button class="btn" matTooltip="Print">
+            <i class="fa fa-print"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div fxLayoutGap="10px" fxLayoutAlign="start center">
+    <button class="btn" matTooltip="Add User" (click)="addUser()">
+      <mat-icon>person_add</mat-icon>
+    </button>
     <mat-form-field>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
     </mat-form-field>
-    <button class="btn" (click)="addUser()">
-      <mat-icon matTooltip="Add User" matTooltipPosition="left">person_add</mat-icon>
+    <button class="btn" matTooltip="Table Configurator" matTooltipPosition="left">
+        <i class="fa fa-bars"></i>
     </button>
   </div>
   <div class="table-container mat-elevation-z8">
     <mat-table #table [dataSource]="dataSource" matSort>
-
       <ng-container matColumnDef="username">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Username </mat-header-cell>
         <mat-cell *matCellDef="let user">
