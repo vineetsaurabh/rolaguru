@@ -23,7 +23,6 @@ hs_err_pid*
 
 **/server/.gradle/
 **/server/.settings/
-**/server/.classpath/
 **/server/bin/
 **/server/build/
 **/server/gradle/
@@ -34,4 +33,5 @@ hs_err_pid*
 **/client/src/assets/
 **/client/src/environments/
 
+*.classpath
 *.bat

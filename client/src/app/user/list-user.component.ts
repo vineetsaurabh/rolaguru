@@ -95,7 +95,7 @@ export class ListUserComponent implements OnInit {
 
   activateUser(user) {
     user.active = true;
-    this.userService.createUser(user)
+    this.userService.updateUser(user)
       .subscribe(res => {
           this.toastService.success(`User ${user.username} activated`);
         } 
@@ -104,7 +104,7 @@ export class ListUserComponent implements OnInit {
 
   deActivateUser(user) {
     user.active = false;
-    this.userService.createUser(user)
+    this.userService.updateUser(user)
       .subscribe(res => {
           this.toastService.success(`User ${user.username} deactivated`);
         } 

@@ -31,7 +31,7 @@ public class User {
 	@Column
 	private String lastName;
 
-	@Column
+	@Column(columnDefinition = "BOOLEAN DEFAULT false")
 	private boolean active;
 
 	@Column(unique = true, nullable = false)

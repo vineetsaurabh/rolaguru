@@ -14,8 +14,6 @@ export class AddUserComponent {
 
   user: User = new User();
 
-  firstNameRequired = 'First Name is required.';
-
   constructor(
     private router: Router,
     private userService: UserService, 
@@ -25,12 +23,9 @@ export class AddUserComponent {
   }
 
   createUser(userForm: NgForm): void {
-    this.user.active = false;
     this.userService.createUser(this.user)
         .subscribe( data => {
           this.toastService.success(`User ${this.user.username} added`);
-          /*userForm.reset();
-          this.router.navigate(['listUsers']); */
           this.dialogRef.close(false);
         });
   };

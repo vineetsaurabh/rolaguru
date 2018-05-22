@@ -11,7 +11,9 @@ const TOKEN_HEADER_KEY = 'Authorization';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private token: TokenStorage, private router: Router) { }
+  constructor(
+    private token: TokenStorage,
+    private router: Router) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler):
     Observable<HttpSentEvent | HttpHeaderResponse | HttpProgressEvent | HttpResponse<any> | HttpUserEvent<any>> {
@@ -22,8 +24,7 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(authReq).do(
         (err: any) => {
           if (err instanceof HttpErrorResponse) {
-            console.log(err);
-            console.log('req url :: ' + req.url);
+            console.log("Error in response", err);
             if (err.status === 401) {
               this.router.navigate(['login']);
             }

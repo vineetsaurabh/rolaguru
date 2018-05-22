@@ -44,15 +44,10 @@ export class EditErrorComponent implements OnInit {
   }
 
   updateError(errorForm: NgForm) {
-    //Working -- 
-    this.errorService.createError(this.error)
-    // Not Working --this.userService.updateUser(this.user)
+    this.errorService.updateError(this.error)
       .subscribe(res => {
           this.toastService.success(`Error ${this.error.errcode} updated`);
           this.dialogRef.close(false);
-        } 
-        , (error) => {
-            console.log('EditErrorComponent.updateError --> ' + error);
         }
       );
   }

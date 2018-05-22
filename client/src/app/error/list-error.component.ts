@@ -82,7 +82,7 @@ export class ListErrorComponent implements OnInit {
       })
   };
 
-  //Repeated method in error-detail.component
+  //TODO : Repeated method in error-detail.component
   public addCause(errid: string, errcode: string): Observable<boolean> {
     let dialogRef: MatDialogRef<AddCauseComponent>;
     dialogRef = this.dialog.open(AddCauseComponent, {

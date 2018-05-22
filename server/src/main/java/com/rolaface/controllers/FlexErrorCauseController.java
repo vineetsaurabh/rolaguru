@@ -25,7 +25,6 @@ public class FlexErrorCauseController {
 
 	@PostMapping
 	public FlexErrorCause create(@RequestBody FlexErrorCause flexErrorCause) {
-		System.out.println("\n\n\n " + flexErrorCause + "\n\n\n");
 		return flexErrorCauseService.create(flexErrorCause);
 	}
 

@@ -40,7 +40,16 @@ public class FlexErrorServiceImpl implements FlexErrorService {
 
 	@Override
 	public FlexError update(FlexError flexError) {
-		return null;
+		FlexError flexErrorToUpdate = findById(flexError.getErrid());
+		if (flexErrorToUpdate != null) {
+			flexErrorToUpdate.setErrcode(flexError.getErrcode());
+			flexErrorToUpdate.setMessage(flexError.getMessage());
+			flexErrorToUpdate.setCauses(flexError.getCauses());
+			flexErrorToUpdate.setErrortype(flexError.getErrortype());
+			flexErrorToUpdate.setBatchtype(flexError.getBatchtype());
+			flexError = repository.save(flexError);
+		}
+		return flexError;
 	}
 
 	@Override
