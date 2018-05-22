@@ -19,8 +19,8 @@ export class UserService {
     return this.http.get<User[]>(this.userUrl);
   }
 
-  public getUser(userid) {
-    return this.http.get<User>(this.userUrl + "/"+ userid);
+  public getUser(userid: number) {
+    return this.http.get<User>(this.userUrl + "/" + userid);
   }
 
   public getUserByUsername(username: string) {
@@ -36,15 +36,16 @@ export class UserService {
   }
 
   public deleteUser(user) {
-    return this.http.delete(this.userUrl + "/"+ user.userid);
+    return this.http.delete(this.userUrl + "/" + user.userid);
   }
 
   public createUser(user) {
-    return this.http.post<User>(this.userUrl, user);
+    console.log(user);
+    return this.http.post<User>(this.userUrl, user, httpOptions);
   }
 
   public updateUser(user) {
-    return this.http.put<User>(this.userUrl + "/", user);
+    return this.http.put<User>(this.userUrl  + "/" + user.userid, user, httpOptions);
   }
 
 }

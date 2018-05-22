@@ -16,7 +16,7 @@ export class ErrorService {
   private errorUrl = 'http://localhost:8080/flex-error';
 
   public getError(id: number) {
-    return this.http.get<Error>(this.errorUrl + "/"+ id);
+    return this.http.get<Error>(this.errorUrl + "/" + id);
   }
 
   public getErrorByCode(errCode: string) {
@@ -30,11 +30,15 @@ export class ErrorService {
   }
 
   public deleteError(error) {
-    return this.http.delete(this.errorUrl + "/"+ error.errid);
+    return this.http.delete(this.errorUrl + "/" + error.errid);
   }
 
   public createError(error) {
     return this.http.post<Error>(this.errorUrl, error);
+  }
+
+  public updateError(error) {
+    return this.http.put<Error>(this.errorUrl + "/" + error.errid, error, httpOptions);
   }
 
 }

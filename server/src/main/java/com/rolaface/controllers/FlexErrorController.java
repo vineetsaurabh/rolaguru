@@ -35,7 +35,7 @@ public class FlexErrorController {
 		return flexErrorService.findById(id);
 	}
 
-	@PutMapping
+	@PutMapping(path = { "/{id}" })
 	public FlexError update(@RequestBody FlexError flexError) {
 		return flexErrorService.update(flexError);
 	}

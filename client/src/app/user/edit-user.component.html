@@ -1,6 +1,6 @@
 <div class="container col-md-5">
-    <h2 class="text-center">Edit User</h2>
-    <form #editUserForm="ngForm" (ngSubmit)="updateUser(editUserForm)" ngNativeValidate>
+  <h2 class="text-center">Edit User</h2>
+  <form #editUserForm="ngForm" (ngSubmit)="updateUser(editUserForm)" ngNativeValidate>
     
     <div class="form-group">
         <mat-form-field>
@@ -19,19 +19,11 @@
         <input matInput email type="email" [(ngModel)]="user.email" name="email" id="email" [email]="validateEmail" placeholder="Email">
       </mat-form-field>
     </div>
-      <!-- <button class="btn btn-success" (click)="createUser(userForm)">Create</button> -->
-      <div class="text-center mb-4">
-        <button mat-raised-button [disabled]="!editUserForm.valid">
-          <i class="fa fa-save"></i>
-           Save
-        </button>
-      </div>
-    </form>
     <div class="text-center mb-4">
-      <button mat-button (click)="dialogRef.close()">
-        <i class="fa fa-close"></i>
-        Cancel
+      <button mat-raised-button [disabled]="!editUserForm.valid">
+        <i class="fa fa-save"></i>
+          Save
       </button>
     </div>
+  </form>
 </div>
-<!-- <button type="button" mat-raised-button (click)="dialogRef.close(true)">OK</button> -->

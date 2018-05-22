@@ -34,7 +34,7 @@ public class FlexError {
 	@Column
 	private String batchtype;
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "flexerror_cause", joinColumns = { @JoinColumn(name = "errid") }, inverseJoinColumns = {
 			@JoinColumn(name = "causeid") })
 	private Set<Cause> causes;
