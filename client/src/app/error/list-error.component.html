@@ -3,12 +3,51 @@
 <global-toolbar></global-toolbar>
 
 <div class="container col-lg-10">
-  <div fxLayoutGap="10px" fxLayoutAlign="start center"> 
+    <div>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="4px">
+          <div class="border-text" fxLayoutGap="15px">
+            <h1><span data-toggle="tooltip" matTooltip="Please select row(s) to perform these actions" matTooltipPosition="right">
+              Error Actions
+            </span></h1>
+            <button class="btn" matTooltip="Subscribe Errors">
+              <i class="fa fa-rss"></i>
+            </button>
+            <button class="btn" matTooltip="Un-subscribe Errors">
+              <i class="fa fa-rss-square"></i>
+            </button>
+            <button class="btn" matTooltip="Delete Errors">
+              <i class="fa fa-trash"></i>
+            </button>
+          </div>
+          <span class="fill-remaining-space"></span>
+          <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="4px">
+            <div class="border-text" fxLayoutGap="15px">
+              <h1><span>Table Actions</span></h1>
+              <button class="btn" matTooltip="Import Errors">
+                <i class="fa fa-upload"></i>
+              </button>
+              <button class="btn" matTooltip="Export as PDF">
+                <i class="fa fa-file-pdf-o"></i>
+              </button>
+              <button class="btn" matTooltip="Export as Excel">
+                <i class="fa fa-file-excel-o"></i>
+              </button>
+              <button class="btn" matTooltip="Print">
+                <i class="fa fa-print"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+  <div fxLayoutGap="10px" fxLayoutAlign="start center">
+    <button class="btn" (click)="addUser()">
+      <mat-icon matTooltip="Add Error" matTooltipPosition="left">library_add</mat-icon>
+    </button>
     <mat-form-field>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
     </mat-form-field>
-    <button class="btn" (click)="addUser()">
-      <mat-icon matTooltip="Add Error" matTooltipPosition="left">library_add</mat-icon>
+    <button class="btn" matTooltip="Table Configurator" matTooltipPosition="left">
+      <i class="fa fa-bars"></i>
     </button>
   </div>
   <div class="table-container mat-elevation-z8">
@@ -44,14 +83,14 @@
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
         <mat-cell *matCellDef="let error">
-          <button class="btn" (click)="editError(error)">
-            <i class="fa fa-pencil fa-fw" matTooltip="Edit Error"></i>
+          <button class="btn" matTooltip="Edit Error" (click)="editError(error)">
+            <i class="fa fa-pencil fa-fw"></i>
           </button>
-          <button class="btn" (click)="deleteError(error)">
-            <i class="fa fa fa-trash-o fa-fw" matTooltip="Delete Error"></i>
+          <button class="btn" matTooltip="Delete Error" (click)="deleteError(error)">
+            <i class="fa fa fa-trash-o fa-fw"></i>
           </button>
-          <button class="btn" (click)="addCause(error.errid, error.errcode)">
-              <i class="fa fa-plus fa-fw" matTooltip="Add Cause"></i>
+          <button class="btn" matTooltip="Add Cause" (click)="addCause(error.errid, error.errcode)">
+              <i class="fa fa-plus fa-fw"></i>
           </button>
         </mat-cell>
       </ng-container>

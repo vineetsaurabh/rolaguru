@@ -1,13 +1,12 @@
 <global-toolbar></global-toolbar>
 
 <div class="container col-md-3">
-    <h3 class="text-center">Find Error</h3>
     <mat-form-field>
-			<input matInput type="text" placeholder="Search Error Code" [(ngModel)]="error.errcode"/>
-			<button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="findErrorByCode()">
-				<mat-icon>search</mat-icon>
-			</button>
-		</mat-form-field>
+		<input matInput type="text" placeholder="Search Error Code" [(ngModel)]="error.errcode"/>
+		<button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="findErrorByCode()">
+			<mat-icon>search</mat-icon>
+		</button>
+	</mat-form-field>
 </div>
 
 <router-outlet></router-outlet>
