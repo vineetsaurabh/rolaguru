@@ -59,4 +59,7 @@ tslint.json
 /src/tsconfig.app.json
 /src/tsconfig.spec.json
 /src/typings.d.ts
+/src/karma.conf.js
+/src/tslint.json
+
 
