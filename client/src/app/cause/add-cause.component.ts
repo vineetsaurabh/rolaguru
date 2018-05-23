@@ -17,6 +17,7 @@ export class AddCauseComponent {
   errid : string;
   errcode: string;
   cause: Cause = new Cause();
+  stars = [true, true, true, true, true];
 
   constructor(
     private toastService: ToastrService,
@@ -30,9 +31,20 @@ export class AddCauseComponent {
   createCause(): void {
     this.causeService.createCause(this.cause, this.errid)
     .subscribe( data => {
-      this.toastService.success(`Cause for ${this.errcode} added`);
+      this.toastService.success(`Solution for ${this.errcode} added`);
       this.dialogRef.close(false);
     });
   };
+
+  setRating(data: any) {
+    this.cause.rating = data + 1;
+    for(var i=0; i<5; i++) {
+      if(i <= data) {
+        this.stars[i] = false;
+      } else {
+        this.stars[i] = true;
+      }  
+    } 
+  } 
 
 }

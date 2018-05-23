@@ -30,6 +30,10 @@ export class CauseService {
   public createCause(cause, errid) {
     return this.http.post<Cause>(this.causeUrl, {"cause" : cause, "errid" : +errid});
   }
+  
+  public updateCause(cause) {
+    return this.http.put<Cause>(this.causeUrl + "/" + cause.causeid, cause, httpOptions);
+  }
 
   public createErrorCause(error_Cause) {
     return this.http.post<ErrorCause>(this.errorCauseUrl, error_Cause);
