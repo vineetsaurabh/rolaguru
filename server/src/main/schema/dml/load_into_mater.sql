@@ -1,1 +1,0 @@
-LOAD DATA LOCAL INFILE 'C:\\projects\\rolaguru\\src\\main\\resources\\master_data.txt' INTO TABLE pet;
