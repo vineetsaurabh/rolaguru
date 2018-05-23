@@ -36,3 +36,22 @@ server/src/main/resources/application.properties
 
 *.classpath
 *.bat
+
+#client config files
+/client/.angular-cli.json
+/client/.editorconfig
+/client/README.md
+/client/karma.conf.js
+/client/package-lock.json
+/client/package.json
+/client/protractor.conf.js
+/client/tsconfig.json
+/client/tslint.json
+/client/src/favicon.ico
+/client/src/polyfills.ts
+/client/src/test.ts
+/client/src/tsconfig.app.json
+/client/src/tsconfig.spec.json
+/client/src/typings.d.ts
+/client/src/karma.conf.js
+/client/src/tslint.json
