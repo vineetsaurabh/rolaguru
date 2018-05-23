@@ -40,6 +40,7 @@ server/src/main/resources/application.properties
 #client config files
 /client/.angular-cli.json
 /client/.editorconfig
+/client/angular.json
 /client/README.md
 /client/karma.conf.js
 /client/package-lock.json
@@ -55,3 +56,4 @@ server/src/main/resources/application.properties
 /client/src/typings.d.ts
 /client/src/karma.conf.js
 /client/src/tslint.json
+/client/src/browserslist
