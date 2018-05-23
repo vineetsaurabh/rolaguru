@@ -2,6 +2,9 @@ import {Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { Error } from './error.model';
+import { MatDialogRef } from '@angular/material';
+import { Observable } from 'rxjs/Observable';
+import { AddCauseComponent } from '../cause/add-cause.component';
 
 
 const httpOptions = {
@@ -39,6 +42,15 @@ export class ErrorService {
 
   public updateError(error) {
     return this.http.put<Error>(this.errorUrl + "/" + error.errid, error, httpOptions);
+  }
+
+  public addCause(error, dialog): Observable<boolean> {
+    let dialogRef: MatDialogRef<AddCauseComponent>;
+    dialogRef = dialog.open(AddCauseComponent, {
+      data: [error.errid, error.errcode],
+      width: '600px',
+    });
+    return dialogRef.afterClosed();
   }
 
 }

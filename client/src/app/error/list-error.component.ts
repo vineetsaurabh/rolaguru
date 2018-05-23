@@ -13,7 +13,6 @@ import { AddCauseComponent } from '../cause/add-cause.component';
 import { AddErrorComponent } from './add-error.component';
 
 @Component({
-  selector: 'app-user',
   templateUrl: './list-error.component.html',
   styles: []
 })
@@ -81,16 +80,6 @@ export class ListErrorComponent implements OnInit {
         this.getErrors();
       })
   };
-
-  //TODO : Repeated method in error-detail.component
-  public addCause(errid: string, errcode: string): Observable<boolean> {
-    let dialogRef: MatDialogRef<AddCauseComponent>;
-    dialogRef = this.dialog.open(AddCauseComponent, {
-      data: [errid, errcode],
-      width: '600px',
-    });
-    return dialogRef.afterClosed();
-  }
 
   highlight(id) {
     this.selectedRowIndex = id;

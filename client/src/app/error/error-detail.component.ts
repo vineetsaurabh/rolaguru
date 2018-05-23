@@ -1,3 +1,4 @@
+import { CauseService } from './../cause/cause.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Error } from './error.model';
@@ -15,17 +16,22 @@ import { Cause } from '../cause/cause.model';
 })
 export class ErrorDetailComponent implements OnInit {
 
-  objectKeys = Object.keys;
-  items = { };
+  public error: Error = {
+    errid: '',
+    errcode : '',
+    message : '',
+    errortype : '',
+    batchtype : '',
+    causes: new Set<Cause>()
+  };
   errid: number;
-  errcode: string;
-  causes: Set<Cause>;
 
   constructor(
     private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute,
     private errorService: ErrorService,
+    private causeService: CauseService,
     private toastService: ToastrService,
     private dialog: MatDialog ) {
   }
@@ -38,31 +44,33 @@ export class ErrorDetailComponent implements OnInit {
     this.getError();
     this.dialog.afterAllClosed.subscribe(() => {
       this.getError();
-    })
+    });
+    this.router.routeReuseStrategy.shouldReuseRoute = function() {
+      return false;
+    }
   }
 
   private getError() {
     this.errorService.getError(this.errid).subscribe((error) => {
-      this.objectKeys = Object.keys;
-      this.items = { 
-        'Error Code' : error.errcode,
-        'Message' : error.message, 
-        'Error Type' : error.errortype,
-        'Batch Type' : error.batchtype
-      };
-      this.errcode = error.errcode;
-      this.causes = error.causes;
+      this.error = error;
     })
   }
 
-  //This is also used in ListErrorComponent
-  public addCause(errid: string, errcode: string): Observable<boolean> {
-    let dialogRef: MatDialogRef<AddCauseComponent>;
-    dialogRef = this.dialog.open(AddCauseComponent, {
-      data: [errid, errcode],
-      width: '600px',
+  findErrorByCode() {
+    this.errorService.getErrorByCode(this.error.errcode)
+      .subscribe( data => {
+        this.error = data;
+        this.router.navigate(['findError/'+this.error.errid]);
     });
-    return dialogRef.afterClosed();
+  }
+
+
+  updateRating(data: any, cause) {
+    cause.rating = data + 1;                           
+    this.causeService.updateCause(cause)
+      .subscribe(data => {
+        console.log(`Rating changed`);
+      })
   }
 
 }

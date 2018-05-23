@@ -27,7 +27,6 @@ import { UserService } from './user/user.service';
 import { ListErrorComponent } from './error/list-error.component';
 import { AddErrorComponent} from './error/add-error.component';
 import { EditErrorComponent } from './error/edit-error.component';
-import { FindErrorComponent } from './error/find-error.component';
 import { ErrorDetailComponent } from './error/error-detail.component';
 import { ErrorService } from './error/error.service';
 import { EditUserComponent } from './user/edit-user.component';
@@ -87,7 +86,6 @@ import { AuthInterceptor } from './login/auth.inteceptor';
     ListErrorComponent,
     AddErrorComponent,
     EditErrorComponent,
-    FindErrorComponent,
     ErrorDetailComponent,
     FindUserComponent,
     UserDetailComponent,

@@ -89,7 +89,7 @@
           <button class="btn" matTooltip="Delete Error" (click)="deleteError(error)">
             <i class="fa fa fa-trash-o fa-fw"></i>
           </button>
-          <button class="btn" matTooltip="Add Cause" (click)="addCause(error.errid, error.errcode)">
+          <button class="btn" matTooltip="Add Cause" (click)="errorService.addCause(error, dialog)">
               <i class="fa fa-plus fa-fw"></i>
           </button>
         </mat-cell>
