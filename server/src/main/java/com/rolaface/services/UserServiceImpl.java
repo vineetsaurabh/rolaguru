@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.rolaface.entities.User;
+import com.rolaface.model.ContextUser;
 import com.rolaface.repositories.UserRepository;
 
 @Service(value = "userService")
@@ -24,13 +25,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	private BCryptPasswordEncoder bcryptEncoder;
 
 	@Override
-	public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
-		User user = repository.findByUsername(userId);
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		User user = repository.findByUsername(username);
 		if (user == null) {
 			throw new UsernameNotFoundException("Invalid username or password.");
 		}
-		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
-				getAuthority());
+		return new ContextUser(user.getUsername(), user.getPassword(), getAuthority(), user.getUserid());
 	}
 
 	private List<SimpleGrantedAuthority> getAuthority() {

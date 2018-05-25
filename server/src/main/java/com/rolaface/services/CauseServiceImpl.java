@@ -7,16 +7,12 @@ import org.springframework.stereotype.Service;
 
 import com.rolaface.entities.Cause;
 import com.rolaface.repositories.CauseRepository;
-import com.rolaface.repositories.FlexErrorCauseRepository;
 
-@Service
+@Service(value = "causeService")
 public class CauseServiceImpl implements CauseService {
 
 	@Autowired
 	private CauseRepository repository;
-
-	@Autowired
-	private FlexErrorCauseRepository errorCauseRepository;
 
 	@Override
 	public Cause create(Cause cause) {
@@ -48,7 +44,7 @@ public class CauseServiceImpl implements CauseService {
 		if (causeToUpdate != null) {
 			causeToUpdate.setDescription(cause.getDescription());
 			causeToUpdate.setSolution(cause.getSolution());
-			causeToUpdate.setRating(cause.getRating());
+			causeToUpdate.setRatings(cause.getRatings());
 			cause = repository.save(causeToUpdate);
 		}
 		return cause;

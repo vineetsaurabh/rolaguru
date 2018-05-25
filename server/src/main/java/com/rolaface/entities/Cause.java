@@ -1,10 +1,15 @@
 package com.rolaface.entities;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -22,8 +27,9 @@ public class Cause {
 	@Column
 	private String solution;
 
-	@Column
-	private int rating;
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "causeid")
+	private Set<CauseRating> ratings;
 
 	public int getCauseid() {
 		return causeid;
@@ -49,17 +55,18 @@ public class Cause {
 		this.solution = solution;
 	}
 
-	public int getRating() {
-		return rating;
+	public Set<CauseRating> getRatings() {
+		return ratings;
 	}
 
-	public void setRating(int rating) {
-		this.rating = rating;
+	public void setRatings(Set<CauseRating> ratings) {
+		this.ratings = ratings;
 	}
 
 	@Override
 	public String toString() {
-		return "Cause [description=" + description + ", solution=" + solution + ", rating=" + rating + "]";
+		return "Cause [causeid=" + causeid + ", description=" + description + ", solution=" + solution + ", ratings="
+				+ ratings + "]";
 	}
 
 }

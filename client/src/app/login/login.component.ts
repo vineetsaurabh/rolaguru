@@ -27,8 +27,9 @@ export class LoginComponent {
       data => {
         this.token.saveToken(data.token);
         this.userService.getUserByUsername(this.username)
-          .subscribe( data => {
-            this.token.saveCurrentUser(data.firstName);
+          .subscribe( user => {
+            this.token.saveCurrentUser(user.firstName);
+            this.token.saveCurrentUserId(user.userid);
             this.router.navigate(['homepage']);
         }); 
       }, (error) => {

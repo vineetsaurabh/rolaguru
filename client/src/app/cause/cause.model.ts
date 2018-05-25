@@ -1,7 +1,14 @@
+import { CauseRating } from "./cause-rating.model";
 
 export class Cause {
   causeid: string;
   description: string;
   solution: string;
-  rating: number;
+  ratings: Set<CauseRating>;
+
+  myRating: number;
+  overallRating: number;
+
+  overallRatingTooltip: string;
+  myRatingTooltip: string;
 }
