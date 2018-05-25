@@ -34,75 +34,31 @@
     <div *ngIf="error.causes">
         <div fxLayout="column" fxLayoutGap="5px">
             <mat-accordion multi="true">
-                <div *ngFor="let cause of error.causes; let j=index">
-                    <div *ngIf="error.causes.length==1">
-                        <mat-expansion-panel [expanded]="true">
-                            <mat-expansion-panel-header>
-                                <mat-panel-title>
-                                    
-                                </mat-panel-title>
-                                <mat-panel-description>
-                                    <div *ngIf="cause.rating>0">
-                                        <div matTooltip="Overall rating {{cause.rating}}" matTooltipPosition="right">
-                                            <a *ngFor="let star of ('1'.repeat(cause.rating)+'0'.repeat(5-cause.rating)).split(''); let i=index">  
-                                                <i class="fa" [ngClass]="{'fa-star':(star==1),'fa-star-o':(star==0)}"></i>  
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div *ngIf="cause.rating==0">
-                                        <div matTooltip="No rating" matTooltipPosition="right">
-                                            <a *ngFor="let star of ('1'.repeat(cause.rating)+'0'.repeat(5-cause.rating)).split(''); let i=index">  
-                                                <i class="fa" [ngClass]="{'fa-star':(star==1),'fa-star-o':(star==0)}"></i>  
-                                            </a>
-                                        </div>
-                                    </div>
-                                </mat-panel-description>
-                            </mat-expansion-panel-header>
-                            <div>Description : {{ cause.description }}</div>
-                            <div>Solution : {{ cause.solution }}</div>
-                            <div fxLayoutAlign="end">
-                                <div matTooltip="Your rating" matTooltipPosition="left">
-                                    <a *ngFor="let star of ('1'.repeat(cause.rating)+'0'.repeat(5-cause.rating)).split(''); let i=index" (click)="updateRating(i, cause)">  
-                                        <i class="fa" [ngClass]="{'fa-star':(star==1),'fa-star-o':(star==0)}"></i>  
+                <div *ngFor="let cause of error.causes  | orderBy : '-overallRating'; let j=index">
+                    <mat-expansion-panel [expanded]=singleCause>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                {{ j+1 }}
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                <div matTooltip="{{cause.overallRatingTooltip}}" matTooltipPosition="right">
+                                    <a *ngFor="let star of ('1'.repeat(cause.overallRating)+'2'+'0'.repeat(4-(cause.overallRating-cause.overallRating%1))).split(''); let i=index">
+                                        {{index}}
+                                        <i class="fa" [ngClass]="{'fa-star':(star==1),'fa-star-half-o':(star==2&&cause.overallRating%1>=0.5),'fa-star-o':((star==0)||(star==2&&cause.overallRating%1<0.5))}"></i>  
                                     </a>
                                 </div>
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <div>Description : {{ cause.description }}</div>
+                        <div>Solution : {{ cause.solution }}</div>
+                        <div fxLayoutAlign="end">
+                            <div matTooltip="{{cause.myRatingTooltip}}" matTooltipPosition="left">
+                                <a *ngFor="let star of ('1'.repeat(cause.myRating)+'0'.repeat(5-cause.myRating)).split(''); let i=index" (click)="rate(i, cause)">  
+                                    <i class="fa" [ngClass]="{'fa-star':(star==1),'fa-star-o':(star==0)}"></i>  
+                                </a>
                             </div>
-                        </mat-expansion-panel>
-                    </div>
-                    <div *ngIf="error.causes.length>1">
-                        <mat-expansion-panel>
-                            <mat-expansion-panel-header>
-                                <mat-panel-title>
-                                    {{ j+1 }}
-                                </mat-panel-title>
-                                <mat-panel-description>
-                                        <div *ngIf="cause.rating>0">
-                                                <div matTooltip="Overall rating {{cause.rating}}" matTooltipPosition="right">
-                                                    <a *ngFor="let star of ('1'.repeat(cause.rating)+'0'.repeat(5-cause.rating)).split(''); let i=index">  
-                                                        <i class="fa" [ngClass]="{'fa-star':(star==1),'fa-star-o':(star==0)}"></i>  
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div *ngIf="cause.rating==0">
-                                                <div matTooltip="No rating" matTooltipPosition="right">
-                                                    <a *ngFor="let star of ('1'.repeat(cause.rating)+'0'.repeat(5-cause.rating)).split(''); let i=index">  
-                                                        <i class="fa" [ngClass]="{'fa-star':(star==1),'fa-star-o':(star==0)}"></i>  
-                                                    </a>
-                                                </div>
-                                            </div>
-                                </mat-panel-description>
-                            </mat-expansion-panel-header>
-                            <div>Description : {{ cause.description }}</div>
-                            <div>Solution : {{ cause.solution }}</div>
-                            <div fxLayoutAlign="end">
-                                <div matTooltip="Your rating" matTooltipPosition="left">
-                                    <a *ngFor="let star of ('1'.repeat(cause.rating)+'0'.repeat(5-cause.rating)).split(''); let i=index" (click)="updateRating(i, cause)">  
-                                        <i class="fa" [ngClass]="{'fa-star':(star==1),'fa-star-o':(star==0)}"></i>  
-                                    </a>
-                                </div>
-                            </div>
-                        </mat-expansion-panel>
-                    </div>
+                        </div>
+                    </mat-expansion-panel>
                 </div>
             </mat-accordion>
         </div>

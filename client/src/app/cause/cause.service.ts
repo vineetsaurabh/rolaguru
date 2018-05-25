@@ -17,7 +17,7 @@ export class CauseService {
 
   private causeUrl = 'http://localhost:8080/cause';
 
-  private errorCauseUrl = 'http://localhost:8080/error-cause';
+  private causeRatingUrl = 'http://localhost:8080/cause-rating';
 
   public getCause(id: number) {
     return this.http.get<Cause>(this.causeUrl + "/"+ id);
@@ -35,16 +35,12 @@ export class CauseService {
     return this.http.put<Cause>(this.causeUrl + "/" + cause.causeid, cause, httpOptions);
   }
 
-  public createErrorCause(error_Cause) {
-    return this.http.post<ErrorCause>(this.errorCauseUrl, error_Cause);
+  public createRating(causeRating) {
+    return this.http.post<Cause>(this.causeRatingUrl, causeRating);
   }
 
-  public getErrorCause(id: number) {
-    return this.http.get<ErrorCause>(this.errorCauseUrl + "/"+ id);
-  }
-
-  public deleteErrorCause(error_cause) {
-    return this.http.delete(this.errorCauseUrl + "/"+ error_cause.errorcauseid);
+  public updateRating(causeRating) {
+    return this.http.put<Cause>(this.causeRatingUrl + "/" + causeRating.causeRatingId, causeRating, httpOptions);
   }
 
 }

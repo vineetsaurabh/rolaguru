@@ -34,17 +34,6 @@ export class AddCauseComponent {
       this.toastService.success(`Solution for ${this.errcode} added`);
       this.dialogRef.close(false);
     });
-  };
-
-  setRating(data: any) {
-    this.cause.rating = data + 1;
-    for(var i=0; i<5; i++) {
-      if(i <= data) {
-        this.stars[i] = false;
-      } else {
-        this.stars[i] = true;
-      }  
-    } 
-  } 
+  }; 
 
 }

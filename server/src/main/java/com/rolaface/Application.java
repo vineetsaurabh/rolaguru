@@ -1,11 +1,11 @@
-package com.rolaface.core;
+package com.rolaface;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@SpringBootApplication(scanBasePackages = { "com.rolaface.core", "com.rolaface.controllers", "com.rolaface.services",
+@SpringBootApplication(scanBasePackages = { "com.rolaface.controllers", "com.rolaface.services",
 		"com.rolaface.config" })
 @EntityScan("com.rolaface.entities")
 @EnableJpaRepositories("com.rolaface.repositories")

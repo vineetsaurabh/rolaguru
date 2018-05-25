@@ -3,6 +3,7 @@ package com.rolaface.model;
 public class LoginUser {
 
 	private String username;
+
 	private String password;
 
 	public String getUsername() {
@@ -20,4 +21,10 @@ public class LoginUser {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	@Override
+	public String toString() {
+		return "LoginUser [username=" + username + ", password=" + password + "]";
+	}
+
 }
