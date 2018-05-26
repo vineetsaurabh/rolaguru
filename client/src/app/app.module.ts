@@ -1,3 +1,4 @@
+import { CauseComponent } from './cause/cause.component';
 import { HomepageComponent } from './login/homepage.component';
 
 import { NgModule,
@@ -74,6 +75,7 @@ import {
 import { AuthService } from './login/auth.service';
 import { TokenStorage } from './login/token.storage';
 import { AuthInterceptor } from './login/auth.inteceptor';
+import { ListCauseComponent } from './cause/list-cause.compnent';
 
 @NgModule({
   declarations: [
@@ -89,7 +91,9 @@ import { AuthInterceptor } from './login/auth.inteceptor';
     ErrorDetailComponent,
     FindUserComponent,
     UserDetailComponent,
-    AddCauseComponent
+    AddCauseComponent,
+    ListCauseComponent,
+    CauseComponent
   ],
   imports: [
     BrowserModule,

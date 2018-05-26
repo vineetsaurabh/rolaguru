@@ -1,0 +1,11 @@
+<div class="container col-md-6 my-5">
+    <div *ngIf="error.causes">
+        <div fxLayout="column" fxLayoutGap="5px">
+            <mat-accordion multi="true">
+                <div *ngFor="let cause of error.causes; let j=index">
+                    <cause-solution [cause]="cause" [j]="j"></cause-solution>
+                </div>
+            </mat-accordion>
+        </div>
+    </div>
+</div>

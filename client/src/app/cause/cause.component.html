@@ -1,0 +1,23 @@
+<mat-expansion-panel [expanded]="j == 0">
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            {{ j+1 }}
+        </mat-panel-title>
+        <mat-panel-description>
+            <div matTooltip="{{overallRatingTooltip}}" matTooltipPosition="right">
+                <a *ngFor="let star of overallRatingStar.split(''); let i=index">
+                    <i class="fa" [ngClass]="{'fa-star':(star==2),'fa-star-half-o':(star==1),'fa-star-o':(star==0)}"></i>  
+                </a>
+            </div>
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div>Description : {{ cause.description }}</div>
+    <div>Solution : {{ cause.solution }}</div>
+    <div fxLayoutAlign="end">
+        <div matTooltip="{{myRatingTooltip}}" matTooltipPosition="left">
+            <a *ngFor="let star of ('1'.repeat(myRating.rating)+'0'.repeat(5-myRating.rating)).split(''); let i=index" (click)="rate(i, myRating, cause)">  
+                <i class="fa" [ngClass]="{'fa-star':(star==1),'fa-star-o':(star==0)}"></i>  
+            </a>
+        </div>
+    </div>
+</mat-expansion-panel>

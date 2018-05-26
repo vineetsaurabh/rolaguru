@@ -5,10 +5,4 @@ export class Cause {
   description: string;
   solution: string;
   ratings: Set<CauseRating>;
-
-  myRating: number;
-  overallRating: number;
-
-  overallRatingTooltip: string;
-  myRatingTooltip: string;
 }
