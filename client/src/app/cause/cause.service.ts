@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { Cause } from './cause.model';
 import { ErrorCause } from './error-cause.model';
+import { CauseRating } from './cause-rating.model';
 
 
 const httpOptions = {
@@ -36,11 +37,11 @@ export class CauseService {
   }
 
   public createRating(causeRating) {
-    return this.http.post<Cause>(this.causeRatingUrl, causeRating);
+    return this.http.post<CauseRating>(this.causeRatingUrl, causeRating);
   }
 
   public updateRating(causeRating) {
-    return this.http.put<Cause>(this.causeRatingUrl + "/" + causeRating.causeRatingId, causeRating, httpOptions);
+    return this.http.put<CauseRating>(this.causeRatingUrl + "/" + causeRating.causeRatingId, causeRating, httpOptions);
   }
 
 }

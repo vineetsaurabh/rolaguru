@@ -1,8 +1,7 @@
 <global-toolbar></global-toolbar>
 <router-outlet></router-outlet>
    
-<div class="container col-md-6 my-5" fxLayout="column" fxLayoutGap="5px">
-    
+<div class="container col-md-6 my-5">
     <div fxLayout="row" fxLayout.xs="column">
         <div>
             <mat-form-field>
@@ -24,43 +23,11 @@
             </button>
         </div>
     </div>
-
     <div fxLayout="row" fxLayout.xs="column">
         <div>
             <h6 fxLayout="row">{{ error.causes.length }} solutions found</h6>
         </div>
     </div>
-
-    <div *ngIf="error.causes">
-        <div fxLayout="column" fxLayoutGap="5px">
-            <mat-accordion multi="true">
-                <div *ngFor="let cause of error.causes; let j=index">
-                    <mat-expansion-panel [expanded]=singleCause>
-                        <mat-expansion-panel-header>
-                            <mat-panel-title>
-                                {{ j+1 }}
-                            </mat-panel-title>
-                            <mat-panel-description>
-                                <div matTooltip="{{cause.overallRatingTooltip}}" matTooltipPosition="right">
-                                    <a *ngFor="let star of ('1'.repeat(cause.overallRating)+'2'+'0'.repeat(4-(cause.overallRating-cause.overallRating%1))).split(''); let i=index">
-                                        {{index}}
-                                        <i class="fa" [ngClass]="{'fa-star':(star==1),'fa-star-half-o':(star==2&&cause.overallRating%1>=0.5),'fa-star-o':((star==0)||(star==2&&cause.overallRating%1<0.5))}"></i>  
-                                    </a>
-                                </div>
-                            </mat-panel-description>
-                        </mat-expansion-panel-header>
-                        <div>Description : {{ cause.description }}</div>
-                        <div>Solution : {{ cause.solution }}</div>
-                        <div fxLayoutAlign="end">
-                            <div matTooltip="{{cause.myRatingTooltip}}" matTooltipPosition="left">
-                                <a *ngFor="let star of ('1'.repeat(cause.myRating)+'0'.repeat(5-cause.myRating)).split(''); let i=index" (click)="rate(i, cause)">  
-                                    <i class="fa" [ngClass]="{'fa-star':(star==1),'fa-star-o':(star==0)}"></i>  
-                                </a>
-                            </div>
-                        </div>
-                    </mat-expansion-panel>
-                </div>
-            </mat-accordion>
-        </div>
-    </div>
 </div>
+
+<list-causes [error]="error"></list-causes>
