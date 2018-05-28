@@ -40,7 +40,6 @@ export class UserService {
   }
 
   public createUser(user) {
-    console.log(user);
     return this.http.post<User>(this.userUrl, user, httpOptions);
   }
 

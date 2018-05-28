@@ -1,0 +1,14 @@
+<div class="container col-md-8 my-5" fxLayout="column" fxLayoutGap="15px">
+    <mat-divider></mat-divider>
+    <div *ngFor="let comment of comments; let i=index" fxLayout="column" fxLayoutGap="8px">
+        <comment-error [comment]="comment"></comment-error>
+    </div>
+    <div class="editor block">
+        <app-ngx-editor minHeight="50px" [(ngModel)]="htmlContent"></app-ngx-editor>
+    </div>
+    <div class="text-center">
+        <button mat-raised-button (click)="createCommentError()">
+            Save Comment
+        </button>
+    </div>
+</div>

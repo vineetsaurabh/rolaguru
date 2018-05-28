@@ -18,6 +18,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
 import { ToastrModule, ToastContainerModule } from 'ngx-toastr';
+import { NgxEditorModule } from 'ngx-editor';
+import { MomentModule } from 'angular2-moment';
 
 import { AppRoutingModule } from './app.routing.module';
 import { AppComponent } from './app.component';
@@ -76,6 +78,9 @@ import { AuthService } from './login/auth.service';
 import { TokenStorage } from './login/token.storage';
 import { AuthInterceptor } from './login/auth.inteceptor';
 import { ListCauseComponent } from './cause/list-cause.compnent';
+import { CommentErrorComponent } from './error/comment-error.component';
+import { CommentErrorService } from './error/comment-error.service';
+import { ListErrorCommentComponent } from './error/list-comment-error.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +98,9 @@ import { ListCauseComponent } from './cause/list-cause.compnent';
     UserDetailComponent,
     AddCauseComponent,
     ListCauseComponent,
-    CauseComponent
+    CauseComponent,
+    CommentErrorComponent,
+    ListErrorCommentComponent
   ],
   imports: [
     BrowserModule,
@@ -110,6 +117,8 @@ import { ListCauseComponent } from './cause/list-cause.compnent';
     }),
     ToastContainerModule,
     FlexLayoutModule,
+    NgxEditorModule,
+    MomentModule,
 
     CdkTableModule,
     MatAutocompleteModule,
@@ -143,12 +152,13 @@ import { ListCauseComponent } from './cause/list-cause.compnent';
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
-    MatTooltipModule,
+    MatTooltipModule
   ],
   providers: [
     UserService,
     ErrorService,
     CauseService,
+    CommentErrorService,
     AuthService,
     TokenStorage,
     {

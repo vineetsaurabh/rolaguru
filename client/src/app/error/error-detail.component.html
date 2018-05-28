@@ -1,33 +1,39 @@
 <global-toolbar></global-toolbar>
 <router-outlet></router-outlet>
-   
-<div class="container col-md-6 my-5">
-    <div fxLayout="row" fxLayout.xs="column">
-        <div>
+
+<div class="container col-md-8 my-5">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+        <div fxLayoutAlign="start">
             <mat-form-field>
-                <input matInput type="text" [(ngModel)]="error.errcode"/>
-                <button mat-button matSuffix mat-icon-button aria-label="Clear"
-                        matTooltip="Search Error" matTooltipPosition="left" (click)="findErrorByCode()">
+                <input matInput type="text" [(ngModel)]="error.errcode" />
+                <button mat-button matSuffix mat-icon-button aria-label="Clear" matTooltip="Search Error" matTooltipPosition="before" (click)="findErrorByCode()">
                     <mat-icon>search</mat-icon>
                 </button>
             </mat-form-field>
         </div>
         <span class="fill-remaining-space"></span>
-        <div fxLayoutAlign="center center">
-            {{ error.message }}
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center">
+            <div class="border-text" fxLayoutGap="15px">
+                <h1>Description</h1>
+                <span>{{ error.message }}</span>
+            </div>
         </div>
         <span class="fill-remaining-space"></span>
-        <div>
-            <button class="btn" (click)="errorService.addCause(error, dialog)" matTooltip="Add Solution">
-                <i class="fa fa-plus fa-fw"></i>
-            </button>
-        </div>
-    </div>
-    <div fxLayout="row" fxLayout.xs="column">
-        <div>
-            <h6 fxLayout="row">{{ error.causes.length }} solutions found</h6>
+        <div fxLayout="column" fxLayout.xs="row">
+            <div fxLayoutAlign="start">
+                <h6>{{ error.causes.length }}</h6>
+                <small>&nbsp;Solutions</small>
+            </div>
+            <span class="fill-remaining-space"></span>
+            <div fxLayoutAlign="end">
+                <button class="btn" (click)="errorService.addCause(error, dialog)" matTooltip="Add Solution" matTooltipPosition="above">
+                    <i class="fa fa-plus fa-fw"></i>
+                </button>
+            </div>
         </div>
     </div>
 </div>
 
 <list-causes [error]="error"></list-causes>
+
+<list-comment-error [errid]="errid"></list-comment-error>
