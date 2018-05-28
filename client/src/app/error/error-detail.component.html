@@ -21,8 +21,13 @@
         <span class="fill-remaining-space"></span>
         <div fxLayout="column" fxLayout.xs="row">
             <div fxLayoutAlign="start">
-                <h6>{{ error.causes.length }}</h6>
-                <small>&nbsp;Solutions</small>
+                <h5>{{ error.causes.length }}</h5>
+                <div *ngIf="error.causes.length<2">
+                    <small>&nbsp;Solution</small>       
+                </div>
+                <div *ngIf="error.causes.length>1">
+                    <small>&nbsp;Solutions</small>       
+                </div>
             </div>
             <span class="fill-remaining-space"></span>
             <div fxLayoutAlign="end">

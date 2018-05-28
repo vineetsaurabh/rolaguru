@@ -15,10 +15,10 @@ export class CommentErrorComponent implements OnInit {
     @Input() comment: CommentError;
 
     userid: string;
-
-    htmlContent: '';
-    edit: boolean = false;
-    edithtmlContent: string;
+    htmlContent: string = '';
+    edithtmlContent: string = '';
+    editing: boolean = false;
+    deleted: boolean = false;
 
     constructor(
         private commentErrorService: CommentErrorService,
@@ -31,18 +31,29 @@ export class CommentErrorComponent implements OnInit {
         this.edithtmlContent = this.comment.comment;
     }
 
-    updateCommentError(comment): void {
-        this.commentErrorService.updateComment(comment)
-            .subscribe(data => {
-                this.comment = data;
-                this.toastService.success(`Comment updated`);
-            });
+    openInEdit() {
+        this.editing = true; 
+    }
+
+    updateCommentError(): void {
+        console.log('this.comment.comment -> ' + this.comment.comment + '    this.edithtmlContent ->' + this.edithtmlContent)
+        if(this.comment.comment != this.edithtmlContent) {
+            this.comment.comment = this.edithtmlContent;
+            this.commentErrorService.updateComment(this.comment)
+                .subscribe(data => {
+                    this.comment = data;
+                    this.toastService.success(`Comment updated`);
+                    this.editing = false;
+                });
+        } else {
+            this.editing = false;
+        }
     };
 
     deleteCommentError(comment): void {
         this.commentErrorService.deleteComment(comment)
             .subscribe(data => {
-                //Remove this component
+                this.deleted = true;
                 this.toastService.success(`Comment deleted`);
             });
     };

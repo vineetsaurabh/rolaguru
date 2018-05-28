@@ -1,4 +1,4 @@
-<div attr.id="error-comment-{{comment.id}}-view">
+<div [hidden]="deleted">
     <div fxLayout="row">
         <div>
             <small fxLayoutAlign="start">
@@ -9,22 +9,25 @@
             </small>
         </div>
         <span class="fill-remaining-space"></span>
-        <div *ngIf="comment.user.userid == userid" matTooltipPosition="below" fxLayout="row">
-            <button class="btn" (click)="updateCommentError(comment)" matTooltip="Edit Comment" fxLayoutAlign="end">
+        <div *ngIf="comment.user.userid == userid" matTooltipPosition="below" fxLayout="row" [hidden]="editing">
+            <button class="btn" (click)="openInEdit(comment)" matTooltip="Edit Comment" fxLayoutAlign="end">
                 <i class="fa fa-pencil"></i>
             </button>
             <button class="btn" (click)="deleteCommentError(comment)" matTooltip="Delete Comment" fxLayoutAlign="end">
                 <i class="fa fa-trash"></i>
             </button>
         </div>
+        <button class="btn" (click)="updateCommentError()" matTooltip="Save Comment" fxLayoutAlign="end" [hidden]="!editing">
+            <i class="fa fa-floppy-o"></i>
+        </button>
     </div>
-    <div [innerHTML]="comment.comment"></div>
+    <div [innerHTML]="comment.comment" [hidden]="editing"></div>
+    <div attr.id="error-comment-{{comment.id}}-edit" [hidden]="!editing">
+        <div class="editor block">
+            <app-ngx-editor minHeight="50px" [(ngModel)]="edithtmlContent"></app-ngx-editor>
+        </div>
+    </div>
     <mat-divider></mat-divider>
 </div>
-<!--
-<div attr.id="error-comment-{{comment.id}}-edit">
-    <div class="editor block">
-        <app-ngx-editor minHeight="50px" [(ngModel)]="edithtmlContent"></app-ngx-editor>
-    </div>
-</div>
--->
+
+
