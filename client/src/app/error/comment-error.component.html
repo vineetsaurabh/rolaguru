@@ -1,0 +1,30 @@
+<div attr.id="error-comment-{{comment.id}}-view">
+    <div fxLayout="row">
+        <div>
+            <small fxLayoutAlign="start">
+                <i>Comment by {{comment.user.firstName}} {{comment.createdTimestamp | amTimeAgo}}</i>
+                <i *ngIf="comment.modifiedTimestamp">
+                    &nbsp; (edited {{comment.modifiedTimestamp | amTimeAgo}})
+                </i>
+            </small>
+        </div>
+        <span class="fill-remaining-space"></span>
+        <div *ngIf="comment.user.userid == userid" matTooltipPosition="below" fxLayout="row">
+            <button class="btn" (click)="updateCommentError(comment)" matTooltip="Edit Comment" fxLayoutAlign="end">
+                <i class="fa fa-pencil"></i>
+            </button>
+            <button class="btn" (click)="deleteCommentError(comment)" matTooltip="Delete Comment" fxLayoutAlign="end">
+                <i class="fa fa-trash"></i>
+            </button>
+        </div>
+    </div>
+    <div [innerHTML]="comment.comment"></div>
+    <mat-divider></mat-divider>
+</div>
+<!--
+<div attr.id="error-comment-{{comment.id}}-edit">
+    <div class="editor block">
+        <app-ngx-editor minHeight="50px" [(ngModel)]="edithtmlContent"></app-ngx-editor>
+    </div>
+</div>
+-->
