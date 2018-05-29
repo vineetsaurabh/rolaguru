@@ -14,7 +14,11 @@
         <span class="fill-remaining-space"></span>
         <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center">
             <div class="border-text" fxLayoutGap="15px">
-                <h1>Description</h1>
+                <h1>
+                    <span data-toggle="tooltip" matTooltip="Descriptions" matTooltipPosition="above">
+                        Description
+                    </span>
+                </h1>
                 <span>{{ error.message }}</span>
             </div>
         </div>
@@ -23,10 +27,10 @@
             <div fxLayoutAlign="start">
                 <h5>{{ error.causes.length }}</h5>
                 <div *ngIf="error.causes.length<2">
-                    <small>&nbsp;Solution</small>       
+                    <small>&nbsp;Solution</small>
                 </div>
                 <div *ngIf="error.causes.length>1">
-                    <small>&nbsp;Solutions</small>       
+                    <small>&nbsp;Solutions</small>
                 </div>
             </div>
             <span class="fill-remaining-space"></span>
@@ -39,6 +43,6 @@
     </div>
 </div>
 
-<list-causes [error]="error"></list-causes>
+<list-causes [(causes)]="error.causes"></list-causes>
 
 <list-comment-error [errid]="errid"></list-comment-error>

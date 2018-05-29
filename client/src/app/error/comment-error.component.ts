@@ -28,15 +28,14 @@ export class CommentErrorComponent implements OnInit {
 
     ngOnInit(): void {
         this.userid = this.token.getCurrentUserId();
-        this.edithtmlContent = this.comment.comment;
     }
 
     openInEdit() {
         this.editing = true; 
+        this.edithtmlContent = this.comment.comment;
     }
 
     updateCommentError(): void {
-        console.log('this.comment.comment -> ' + this.comment.comment + '    this.edithtmlContent ->' + this.edithtmlContent)
         if(this.comment.comment != this.edithtmlContent) {
             this.comment.comment = this.edithtmlContent;
             this.commentErrorService.updateComment(this.comment)

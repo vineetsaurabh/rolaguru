@@ -1,11 +1,12 @@
 import { ErrorService } from './../error/error.service';
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input } from "@angular/core";
 
 import { Error } from "../error/error.model";
 import { CauseRating } from "./cause-rating.model";
 import { CauseService } from "./cause.service";
 
 import { Location } from '@angular/common';
+import { Cause } from './cause.model';
 
 @Component({
   selector: 'list-causes',
@@ -13,6 +14,6 @@ import { Location } from '@angular/common';
 })
 export class ListCauseComponent {
 
-    @Input() error: Error;
+    @Input() causes: Set<Cause>;
 
 }
