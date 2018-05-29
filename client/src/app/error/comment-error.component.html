@@ -9,7 +9,7 @@
             </small>
         </div>
         <span class="fill-remaining-space"></span>
-        <div *ngIf="comment.user.userid == userid" matTooltipPosition="below" fxLayout="row" [hidden]="editing">
+        <div *ngIf="comment.user.userid == userid" matTooltipPosition="below" fxLayout="row" fxLayoutGap="2px" [hidden]="editing">
             <button class="btn" (click)="openInEdit(comment)" matTooltip="Edit Comment" fxLayoutAlign="end">
                 <i class="fa fa-pencil"></i>
             </button>
@@ -22,12 +22,8 @@
         </button>
     </div>
     <div [innerHTML]="comment.comment" [hidden]="editing"></div>
-    <div attr.id="error-comment-{{comment.id}}-edit" [hidden]="!editing">
-        <div class="editor block">
-            <app-ngx-editor minHeight="50px" [(ngModel)]="edithtmlContent"></app-ngx-editor>
-        </div>
+    <div class="editor block" [hidden]="!editing">
+        <app-ngx-editor minHeight="50px" [(ngModel)]="edithtmlContent"></app-ngx-editor>
     </div>
     <mat-divider></mat-divider>
 </div>
-
-

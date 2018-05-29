@@ -25,7 +25,7 @@ export class CauseService {
   }
 
   public deleteCause(cause) {
-    return this.http.delete(this.causeUrl + "/"+ cause.casueid);
+    return this.http.delete(this.causeUrl + "/"+ cause.causeid);
   }
 
   public createCause(cause, errid) {

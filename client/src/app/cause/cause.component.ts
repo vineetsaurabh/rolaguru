@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, EventEmitter, Output } from "@angular/core";
 import { CauseRating } from "./cause-rating.model";
 import { CauseService } from "./cause.service";
 import { Cause } from "./cause.model";
@@ -13,8 +13,13 @@ import { ToastrService } from 'ngx-toastr';
 export class CauseComponent implements OnInit {
 
     @Input() cause: Cause;
-
     @Input() j: number;
+    @Input() causes: Set<Cause>;
+    @Output() causesChange = new EventEmitter<Set<Cause>>();
+
+    editSolution: string = '';
+    editDescription: string = '';
+    editing: boolean = false;
 
     myRating: CauseRating = new CauseRating();
     myRatingTooltip: string = "Rate this solution";
@@ -35,6 +40,8 @@ export class CauseComponent implements OnInit {
         this.noOfRatings = Object.keys(this.cause.ratings).length;
         this.calculateRating();
         this.calculateOverallRating();
+        this.editSolution = this.cause.solution;
+        this.editDescription = this.cause.description;
     }
     
     calculateRating(): void {
@@ -85,6 +92,40 @@ export class CauseComponent implements OnInit {
                     this.toastService.warning(`Rating changed to ${myRating.rating}`);
                 });
         }
+    }
+
+    openInEdit() {
+        this.editing = true;
+    }
+
+    saveCause() {
+        this.editing = false;
+        if(this.cause.solution != this.editSolution || this.cause.description != this.editDescription) {
+            let causeToUpdate = this.cause;
+            causeToUpdate.solution = this.editSolution;
+            causeToUpdate.description = this.editDescription;
+            this.causeService.updateCause(causeToUpdate)
+                .subscribe(data => {
+                    this.cause = data;
+                    this.toastService.success(`Solution updated`);
+                })
+        }
+    }
+
+    deleteCause() {
+        this.causeService.deleteCause(this.cause)
+            .subscribe(data => {
+                let newCause : Set<Cause> = new Set<Cause>();
+                this.causes.forEach(cause => {
+                    if(cause.causeid  != this.cause.causeid) {
+                        newCause.add(cause);
+                    }
+                })
+                this.causes = newCause;
+                this.causesChange.emit(this.causes);
+                
+                this.toastService.success(`Solution deleted`);
+            })
     }
 
 }
