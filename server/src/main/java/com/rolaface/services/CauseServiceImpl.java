@@ -1,5 +1,6 @@
 package com.rolaface.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,7 @@ public class CauseServiceImpl implements CauseService {
 			causeToUpdate.setDescription(cause.getDescription());
 			causeToUpdate.setSolution(cause.getSolution());
 			causeToUpdate.setRatings(cause.getRatings());
+			causeToUpdate.setModifiedTimestamp(new Date());
 			cause = repository.save(causeToUpdate);
 		}
 		return cause;
