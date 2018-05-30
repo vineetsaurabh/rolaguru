@@ -43,7 +43,7 @@
         </div>
     </div>
     <mat-action-row fxlayout="row" fxLayoutGap="10px">
-        <div matTooltip="{{myRatingTooltip}}" matTooltipPosition="left">
+        <div matTooltip="{{myRatingTooltip}}" matTooltipPosition="left" *ngIf="cause.user.userid != userid">
             <a *ngFor="let star of ('1'.repeat(myRating.rating)+'0'.repeat(5-myRating.rating)).split(''); let i=index" (click)="rate(i, myRating, cause)">
                 <i class="fa" [ngClass]="{'fa-star':(star==1),'fa-star-o':(star==0)}"></i>
             </a>
