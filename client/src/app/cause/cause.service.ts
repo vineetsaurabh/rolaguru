@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Cause } from './cause.model';
 import { ErrorCause } from './error-cause.model';
 import { CauseRating } from './cause-rating.model';
+import { environment } from '../../environments/environment';
 
 
 const httpOptions = {
@@ -16,9 +17,9 @@ export class CauseService {
 
   constructor(private http: HttpClient) {}
 
-  private causeUrl = 'http://localhost:8080/cause';
+  private causeUrl = environment.baseUrl + '/cause';
 
-  private causeRatingUrl = 'http://localhost:8080/cause-rating';
+  private causeRatingUrl = environment.baseUrl + '/cause-rating';
 
   public getCause(id: number) {
     return this.http.get<Cause>(this.causeUrl + "/"+ id);
