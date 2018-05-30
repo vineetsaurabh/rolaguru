@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-
 import { User } from './user.model';
+import { environment } from '../../environments/environment';
 
 
 const httpOptions = {
@@ -13,7 +13,7 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  private userUrl = 'http://localhost:8080/user';
+  private userUrl = environment.baseUrl + '/user';
 
   public getUsers() {
     return this.http.get<User[]>(this.userUrl);

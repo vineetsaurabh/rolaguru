@@ -5,6 +5,7 @@ import { Error } from './error.model';
 import { MatDialogRef } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { AddCauseComponent } from '../cause/add-cause.component';
+import { environment } from '../../environments/environment';
 
 
 const httpOptions = {
@@ -16,7 +17,7 @@ export class ErrorService {
 
   constructor(private http: HttpClient) {}
 
-  private errorUrl = 'http://localhost:8080/flex-error';
+  private errorUrl = environment.baseUrl + '/flex-error';
 
   public getError(id: number) {
     return this.http.get<Error>(this.errorUrl + "/" + id);

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { CommentError } from './comment-error.model';
+import { environment } from '../../environments/environment';
 
 
 const httpOptions = {
@@ -12,7 +13,7 @@ export class CommentErrorService {
 
     constructor(private http: HttpClient) { }
 
-    private commentUrl = 'http://localhost:8080/comment-error';
+    private commentUrl = environment.baseUrl + '/comment-error';
 
     public createComment(comment: CommentError) {
         return this.http.post<CommentError>(this.commentUrl, comment, httpOptions);
