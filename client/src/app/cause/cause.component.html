@@ -48,13 +48,13 @@
                 <i class="fa" [ngClass]="{'fa-star':(star==1),'fa-star-o':(star==0)}"></i>
             </a>
         </div>
-        <button class="btn" matTooltip="Edit Solution" (click)="openInEdit(cause.solution)" [hidden]="editing">
+        <button class="btn" matTooltip="Edit Solution" (click)="openInEdit(cause.solution)" [hidden]="editing" *ngIf="cause.user.userid == userid">
             <i class="fa fa-pencil"></i>
         </button>
-        <button class="btn" (click)="saveCause()" matTooltip="Save" fxLayoutAlign="end" [hidden]="!editing">
+        <button class="btn" (click)="saveCause()" matTooltip="Save" fxLayoutAlign="end" [hidden]="!editing" *ngIf="cause.user.userid == userid">
             <i class="fa fa-floppy-o"></i>
         </button>
-        <button class="btn" (click)="deleteCause()" matTooltip="Delete Solution">
+        <button class="btn" (click)="deleteCause()" matTooltip="Delete Solution" *ngIf="cause.user.userid == userid">
             <i class="fa fa-trash"></i>
         </button>
     </mat-action-row>

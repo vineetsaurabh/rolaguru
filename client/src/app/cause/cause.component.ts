@@ -17,6 +17,7 @@ export class CauseComponent implements OnInit {
     @Input() causes: Set<Cause>;
     @Output() causesChange = new EventEmitter<Set<Cause>>();
 
+    userid: string;
     editSolution: string = '';
     editDescription: string = '';
     editing: boolean = false;
@@ -37,6 +38,7 @@ export class CauseComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.userid = this.token.getCurrentUserId();
         this.noOfRatings = Object.keys(this.cause.ratings).length;
         this.calculateRating();
         this.calculateOverallRating();
@@ -47,7 +49,7 @@ export class CauseComponent implements OnInit {
     calculateRating(): void {
         for(let rating of Array.from(this.cause.ratings.values())) {
             this.totalRating = this.totalRating + rating.rating;
-            if(rating.userid == +this.token.getCurrentUserId()) {
+            if(rating.userid == +this.userid) {
                 this.myRating = rating;
                 this.myRatingTooltip = "My rating " + rating.rating;
             }
