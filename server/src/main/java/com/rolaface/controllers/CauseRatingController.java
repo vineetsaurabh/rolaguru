@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rolaface.entities.Cause;
 import com.rolaface.entities.CauseRating;
 import com.rolaface.model.ContextUser;
 import com.rolaface.services.CauseRatingService;
+import com.rolaface.services.CauseService;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
@@ -26,14 +28,14 @@ public class CauseRatingController {
 	@Autowired
 	private CauseRatingService causeRatingService;
 
+	@Autowired
+	private CauseService causeService;
+
 	@PostMapping
 	public CauseRating create(@RequestBody CauseRating causeRating) {
 		int userId = ((ContextUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
-		CauseRating causeRatingToUpdate = findMyRatingForCause(causeRating.getCauseid(), userId);
-		if (causeRatingToUpdate != null) {
-			causeRatingToUpdate.setRating(causeRating.getRating());
-			causeRating = causeRatingService.update(causeRatingToUpdate);
-		} else {
+		Cause cause = causeService.findById(causeRating.getCauseid());
+		if (userId != cause.getUser().getUserid()) {
 			causeRating.setUserid(userId);
 			causeRating = causeRatingService.create(causeRating);
 		}
@@ -47,7 +49,13 @@ public class CauseRatingController {
 
 	@PutMapping(path = { "/{id}" })
 	public CauseRating update(@RequestBody CauseRating causeRating) {
-		return causeRatingService.update(causeRating);
+		int userId = ((ContextUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
+		CauseRating causeRatingToUpdate = findMyRatingForCause(causeRating.getCauseid(), userId);
+		if (causeRatingToUpdate != null) {
+			causeRatingToUpdate.setRating(causeRating.getRating());
+			causeRating = causeRatingService.update(causeRatingToUpdate);
+		}
+		return causeRating;
 	}
 
 	@DeleteMapping(path = { "/{id}" })
