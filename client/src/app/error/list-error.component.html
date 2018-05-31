@@ -1,106 +1,111 @@
-
-<router-outlet></router-outlet>
+<router-outlet>
+</router-outlet>
 <global-toolbar></global-toolbar>
 
 <div class="container col-lg-10">
     <div>
         <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="4px">
-          <div class="border-text" fxLayoutGap="15px">
-            <h1><span data-toggle="tooltip" matTooltip="Please select row(s) to perform these actions" matTooltipPosition="right">
-              Error Actions
-            </span></h1>
-            <button class="btn" matTooltip="Subscribe Errors">
-              <i class="fa fa-rss"></i>
-            </button>
-            <button class="btn" matTooltip="Un-subscribe Errors">
-              <i class="fa fa-rss-square"></i>
-            </button>
-            <button class="btn" matTooltip="Delete Errors">
-              <i class="fa fa-trash"></i>
-            </button>
-          </div>
-          <span class="fill-remaining-space"></span>
-          <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="4px">
             <div class="border-text" fxLayoutGap="15px">
-              <h1><span>Table Actions</span></h1>
-              <button class="btn" matTooltip="Import Errors">
-                <i class="fa fa-upload"></i>
-              </button>
-              <button class="btn" matTooltip="Export as PDF">
-                <i class="fa fa-file-pdf-o"></i>
-              </button>
-              <button class="btn" matTooltip="Export as Excel">
-                <i class="fa fa-file-excel-o"></i>
-              </button>
-              <button class="btn" matTooltip="Print">
-                <i class="fa fa-print"></i>
-              </button>
+                <h1>
+                    <span data-toggle="tooltip" matTooltip="Please select row(s) to perform these actions" matTooltipPosition="right">
+                        Error Actions
+                    </span>
+                </h1>
+                <button class="btn" matTooltip="Subscribe Errors">
+                    <i class="fa fa-rss"></i>
+                </button>
+                <button class="btn" matTooltip="Un-subscribe Errors">
+                    <i class="fa fa-rss-square"></i>
+                </button>
+                <button class="btn" matTooltip="Delete Errors" (click)="deleteSelectedErrors()">
+                    <i class="fa fa-trash"></i>
+                </button>
             </div>
-          </div>
+            <span class="fill-remaining-space"></span>
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="4px">
+                <div class="border-text" fxLayoutGap="15px">
+                    <h1>
+                        <span>Table Actions</span>
+                    </h1>
+                    <button class="btn" matTooltip="Import Errors">
+                        <i class="fa fa-upload"></i>
+                    </button>
+                    <button class="btn" matTooltip="Export as PDF">
+                        <i class="fa fa-file-pdf-o"></i>
+                    </button>
+                    <button class="btn" matTooltip="Export as Excel">
+                        <i class="fa fa-file-excel-o"></i>
+                    </button>
+                    <button class="btn" matTooltip="Print">
+                        <i class="fa fa-print"></i>
+                    </button>
+                </div>
+            </div>
         </div>
-      </div>
-  <div fxLayoutGap="10px" fxLayoutAlign="start center">
-    <button class="btn" (click)="addUser()">
-      <mat-icon matTooltip="Add Error" matTooltipPosition="left">library_add</mat-icon>
-    </button>
-    <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-    </mat-form-field>
-    <button class="btn" matTooltip="Table Configurator" matTooltipPosition="left">
-      <i class="fa fa-bars"></i>
-    </button>
-  </div>
-  <div class="table-container mat-elevation-z8">
-    <mat-table #table [dataSource]="dataSource" matSort>
+    </div>
+    <div fxLayoutGap="10px" fxLayoutAlign="start center">
+        <button class="btn" (click)="addError()">
+            <mat-icon matTooltip="Add Error" matTooltipPosition="left">library_add</mat-icon>
+        </button>
+        <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+        <button class="btn" matTooltip="Table Configurator" matTooltipPosition="left">
+            <i class="fa fa-bars"></i>
+        </button>
+    </div>
+    <div class="table-container mat-elevation-z8">
+        <mat-table #table [dataSource]="dataSource" matSort>
 
-      <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Id. </mat-header-cell>
-        <mat-cell *matCellDef="let user"> {{error.id}} </mat-cell>
-      </ng-container>
+            <ng-container matColumnDef="checked">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let error">
+                    <mat-checkbox [(ngModel)]="error.checked" color="primary"></mat-checkbox>
+                </mat-cell>
+            </ng-container>
 
-      <ng-container matColumnDef="errcode">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Error Code </mat-header-cell>
-        <mat-cell *matCellDef="let error">
-          <a [routerLink]="['../findError', error.errid]"> {{error.errcode}} </a>
-        </mat-cell>
-      </ng-container>
-  
-      <ng-container matColumnDef="message">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Message </mat-header-cell>
-        <mat-cell *matCellDef="let error"> {{error.message}} </mat-cell>
-      </ng-container>
-  
-      <ng-container matColumnDef="errortype">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Error Type </mat-header-cell>
-        <mat-cell *matCellDef="let error"> {{error.errortype}} </mat-cell>
-      </ng-container>
-  
-      <ng-container matColumnDef="batchtype">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Batch Type </mat-header-cell>
-        <mat-cell *matCellDef="let error"> {{error.batchtype}} </mat-cell>
-      </ng-container>
+            <ng-container matColumnDef="errcode">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Error Code </mat-header-cell>
+                <mat-cell *matCellDef="let error">
+                    <a [routerLink]="['../findError', error.errid]"> {{error.errcode}} </a>
+                </mat-cell>
+            </ng-container>
 
-      <ng-container matColumnDef="actions">
-        <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
-        <mat-cell *matCellDef="let error">
-          <button class="btn" matTooltip="Edit Error" (click)="editError(error)">
-            <i class="fa fa-pencil fa-fw"></i>
-          </button>
-          <button class="btn" matTooltip="Delete Error" (click)="deleteError(error)">
-            <i class="fa fa fa-trash-o fa-fw"></i>
-          </button>
-          <button class="btn" matTooltip="Add Cause" (click)="errorService.addCause(error, dialog)">
-              <i class="fa fa-plus fa-fw"></i>
-          </button>
-        </mat-cell>
-      </ng-container>
-  
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;" 
-          [ngClass]="{'highlight-row': selectedRowIndex == row.errid}" (click)="highlight(row.errid)">
-      </mat-row>
-    </mat-table>
+            <ng-container matColumnDef="message">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Message </mat-header-cell>
+                <mat-cell *matCellDef="let error"> {{error.message}} </mat-cell>
+            </ng-container>
 
-    <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]"></mat-paginator>
-  </div>
+            <ng-container matColumnDef="errortype">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Error Type </mat-header-cell>
+                <mat-cell *matCellDef="let error"> {{error.errortype}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="batchtype">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Batch Type </mat-header-cell>
+                <mat-cell *matCellDef="let error"> {{error.batchtype}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+                <mat-cell *matCellDef="let error">
+                    <button class="btn" matTooltip="Edit Error" (click)="editError(error)">
+                        <i class="fa fa-pencil fa-fw"></i>
+                    </button>
+                    <button class="btn" matTooltip="Delete Error" (click)="deleteError(error)">
+                        <i class="fa fa fa-trash-o fa-fw"></i>
+                    </button>
+                    <button class="btn" matTooltip="Add Cause" (click)="errorService.addCause(error, dialog)">
+                        <i class="fa fa-plus fa-fw"></i>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight-row': selectedRowIndex == row.errid}" (click)="highlight(row.errid)">
+            </mat-row>
+        </mat-table>
+
+        <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]"></mat-paginator>
+    </div>
 </div>

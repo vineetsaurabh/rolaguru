@@ -7,4 +7,5 @@ export class Error {
   errortype: string;
   batchtype: string;
   causes: Set<Cause>;
+  checked: boolean;
 }
