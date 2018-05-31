@@ -7,5 +7,5 @@ export class User {
   lastName: string;
   active: boolean;
   email: string;
+  checked: boolean;
 }
-  
