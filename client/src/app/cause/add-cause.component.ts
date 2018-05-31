@@ -17,7 +17,8 @@ export class AddCauseComponent {
   errid : string;
   errcode: string;
   cause: Cause = new Cause();
-  stars = [true, true, true, true, true];
+  htmlDescription: string = '';
+  htmlSolution: string = '';
 
   constructor(
     private toastService: ToastrService,
@@ -29,6 +30,8 @@ export class AddCauseComponent {
   }
 
   createCause(): void {
+    this.cause.description = this.htmlDescription;
+    this.cause.solution = this.htmlSolution;
     this.causeService.createCause(this.cause, this.errid)
     .subscribe( data => {
       this.toastService.success(`Solution for ${this.errcode} added`);
