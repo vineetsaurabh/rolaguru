@@ -49,7 +49,7 @@ export class ErrorService {
     let dialogRef: MatDialogRef<AddCauseComponent>;
     dialogRef = dialog.open(AddCauseComponent, {
       data: [error.errid, error.errcode],
-      width: '600px',
+      width: '900px',
     });
     return dialogRef.afterClosed();
   }

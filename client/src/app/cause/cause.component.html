@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div>
-                <span [hidden]="editing">{{ cause.description }}</span>
+                <div [innerHTML]="cause.description" [hidden]="editing"></div>
                 <div class="editor block" [hidden]="!editing">
                     <app-ngx-editor minHeight="50px" [(ngModel)]="editDescription"></app-ngx-editor>
                 </div>
@@ -33,9 +33,7 @@
                 <strong>Solution</strong>
             </div>
             <div>
-                <div [hidden]="editing">
-                    {{ cause.solution }}
-                </div>
+                <div [innerHTML]="cause.solution" [hidden]="editing"></div>
                 <div class="editor block" [hidden]="!editing">
                     <app-ngx-editor minHeight="50px" [(ngModel)]="editSolution"></app-ngx-editor>
                 </div>

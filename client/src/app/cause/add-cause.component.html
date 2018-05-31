@@ -1,23 +1,27 @@
-<div class="col-md-5 container">
-    <h2 class="text-center">Add Cause for {{ errcode }}</h2>
+<div class="container" style="width:100%">
+    <h4 fxLayoutAlign="center">Add Cause for {{ errcode }}</h4>
     <form #causeForm="ngForm" (ngSubmit)="createCause(causeForm)" ngNativeValidate>
-
         <div class="form-group">
-            <mat-form-field>
-                <textarea matInput required [(ngModel)]="cause.description" name="description" id="description" #description="ngModel" placeholder="Description"></textarea>
-            </mat-form-field>
-        </div>  
-
+            <div fxLayoutAlign="center">
+                <h5>Description</h5>
+            </div>
+            <div class="editor block">
+                <app-ngx-editor minHeight="50px" [(ngModel)]="htmlDescription" name="description"></app-ngx-editor>
+            </div>
+        </div>
         <div class="form-group">
-            <mat-form-field>
-                <textarea matInput required [(ngModel)]="cause.solution" name="solution" id="solution" placeholder="Solution"></textarea>
-            </mat-form-field>
+            <div fxLayoutAlign="center">
+                <h5>Solution</h5>
+            </div>
+            <div class="editor block">
+                <app-ngx-editor minHeight="50px" [(ngModel)]="htmlSolution" name="solution"></app-ngx-editor>
+            </div>
         </div>
 
         <div class="text-center">
-        <button mat-raised-button color="primary" [disabled]="!causeForm.valid">
-            Submit
-        </button>
+            <button mat-raised-button color="primary" [disabled]="!causeForm.valid">
+                Submit
+            </button>
         </div>
     </form>
 </div>
