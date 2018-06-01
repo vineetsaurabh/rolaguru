@@ -31,7 +31,6 @@ server/src/main/resources/application.properties
 **/client/.gradle/
 **/client/e2e/
 **/client/node_modules/
-**/client/src/assets/
 **/client/src/environments/
 
 *.classpath
@@ -57,3 +56,4 @@ server/src/main/resources/application.properties
 /client/src/karma.conf.js
 /client/src/tslint.json
 /client/src/browserslist
+/client/src/assets/.gitkeep
