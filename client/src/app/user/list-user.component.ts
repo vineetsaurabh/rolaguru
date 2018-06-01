@@ -9,10 +9,11 @@ import { ToastrService } from 'ngx-toastr';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialogRef, MatDialog, MatDialogConfig } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { AddUserComponent } from './add-user.component';
+import { ConfirmDeleteComponent } from '../util/confirm-delete.component';
 
 @Component({
     selector: 'app-comp',
-    templateUrl: './list-user.component.html',
+    templateUrl: './list-user.component.html'
 })
 export class ListUserComponent implements OnInit {
 
@@ -72,6 +73,18 @@ export class ListUserComponent implements OnInit {
         return dialogRef.afterClosed();
     }
 
+    onDeleteUser(user: User) {
+        let dialogRef: MatDialogRef<ConfirmDeleteComponent>;
+        dialogRef = this.dialog.open(ConfirmDeleteComponent, {
+            data: `Are you sure you want to delete user ${user.firstName}?`
+        });
+        dialogRef.afterClosed().subscribe((ok: boolean) => {
+            if (ok) {
+                this.deleteUser(user);
+            }
+        });
+    }
+
     deleteUser(user: User): void {
         this.highlight(user.userid);
         this.userService.deleteUser(user)
@@ -110,21 +123,32 @@ export class ListUserComponent implements OnInit {
             .map(user => user.userid);
     }
 
-    deleteSelectedUsers() {
-        if(this.selectedUsers.length == 0) {
+    onDeleteSelectedUsers() {
+        if (this.selectedUsers.length == 0) {
             this.toastService.warning(`Please select a user to delete`);
         } else {
-            this.userService.deleteUsers(this.selectedUsers)
+            let dialogRef: MatDialogRef<ConfirmDeleteComponent>;
+            dialogRef = this.dialog.open(ConfirmDeleteComponent, {
+                data: `Are you sure want to delete ${this.selectedUsers.length} user(s)?`
+            });
+            dialogRef.afterClosed().subscribe((ok: boolean) => {
+                if (ok) {
+                    this.deleteSelectedUsers();
+                }
+            });
+        }
+    }
+
+    deleteSelectedUsers() {
+        this.userService.deleteUsers(this.selectedUsers)
             .subscribe(res => {
                 this.getUsers();
-                if(this.selectedUsers.length == 1) {
+                if (this.selectedUsers.length == 1) {
                     this.toastService.success(`1 user deleted`);
                 } else {
                     this.toastService.success(`${this.selectedUsers.length} users deleted`);
                 }
-            }
-            );
-        }
+            });
     }
 
 }

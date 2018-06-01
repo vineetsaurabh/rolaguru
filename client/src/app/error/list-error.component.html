@@ -17,7 +17,7 @@
                 <button class="btn" matTooltip="Un-subscribe Errors">
                     <i class="fa fa-rss-square"></i>
                 </button>
-                <button class="btn" matTooltip="Delete Errors" (click)="deleteSelectedErrors()">
+                <button class="btn" matTooltip="Delete Errors" (click)="onDeleteSelectedErrors()">
                     <i class="fa fa-trash"></i>
                 </button>
             </div>
@@ -92,7 +92,7 @@
                     <button class="btn" matTooltip="Edit Error" (click)="editError(error)">
                         <i class="fa fa-pencil fa-fw"></i>
                     </button>
-                    <button class="btn" matTooltip="Delete Error" (click)="deleteError(error)">
+                    <button class="btn" matTooltip="Delete Error" (click)="onDeleteError(error)">
                         <i class="fa fa fa-trash-o fa-fw"></i>
                     </button>
                     <button class="btn" matTooltip="Add Cause" (click)="errorService.addCause(error, dialog)">

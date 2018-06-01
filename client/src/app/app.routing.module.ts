@@ -14,6 +14,7 @@ import { ErrorDetailComponent } from './error/error-detail.component';
 import { AddCauseComponent } from './cause/add-cause.component';
 import { LoginComponent } from './login/login.component';
 import { HomepageComponent } from './login/homepage.component';
+import { ConfirmDeleteComponent } from './util/confirm-delete.component';
 
 const routes: Routes = [
   {
@@ -45,6 +46,10 @@ const routes: Routes = [
       { 
         path: ':id',
         component: UserDetailComponent
+      },
+      {
+        path: '',
+        component: ConfirmDeleteComponent
       }
     ]
   },
@@ -73,6 +78,10 @@ const routes: Routes = [
       { 
         path: ':id',
         component: AddCauseComponent
+      },
+      {
+        path: '',
+        component: ConfirmDeleteComponent
       }
     ]
   }

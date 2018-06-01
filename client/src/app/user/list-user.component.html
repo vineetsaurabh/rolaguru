@@ -20,7 +20,7 @@
                 <button class="btn" matTooltip="Edit Role">
                     <i class="fa fa-group"></i>
                 </button>
-                <button class="btn" matTooltip="Delete Users" (click)="deleteSelectedUsers()">
+                <button class="btn" matTooltip="Delete Users" (click)="onDeleteSelectedUsers()">
                     <i class="fa fa-trash"></i>
                 </button>
             </div>
@@ -101,7 +101,7 @@
                     <button class="btn" (click)="editUser(user)">
                         <i class="fa fa-pencil fa-fw" matTooltip="Edit User"></i>
                     </button>
-                    <button class="btn" (click)="deleteUser(user)" [disabled]="user.active">
+                    <button class="btn" (click)="onDeleteUser(user)" [disabled]="user.active">
                         <i class="fa fa fa-trash-o fa-fw" matTooltip="Delete User"></i>
                     </button>
                 </mat-cell>

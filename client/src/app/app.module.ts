@@ -81,6 +81,7 @@ import { ListCauseComponent } from './cause/list-cause.compnent';
 import { CommentErrorComponent } from './error/comment-error.component';
 import { CommentErrorService } from './error/comment-error.service';
 import { ListErrorCommentComponent } from './error/list-comment-error.component';
+import { ConfirmDeleteComponent } from './util/confirm-delete.component';
 
 @NgModule({
   declarations: [
@@ -100,7 +101,8 @@ import { ListErrorCommentComponent } from './error/list-comment-error.component'
     ListCauseComponent,
     CauseComponent,
     CommentErrorComponent,
-    ListErrorCommentComponent
+    ListErrorCommentComponent,
+    ConfirmDeleteComponent
   ],
   imports: [
     BrowserModule,
