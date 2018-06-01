@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -25,6 +26,7 @@ public class FlexError {
 	@Column(unique = true, nullable = false)
 	private String errcode;
 
+	@Lob
 	@Column(nullable = false)
 	private String message;
 
