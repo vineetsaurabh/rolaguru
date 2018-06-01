@@ -3,54 +3,54 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Error } from './error.model';
 import { HttpClient } from '@angular/common/http';
 import { ErrorService } from './error.service';
-import { NgForm, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'; 
+import { NgForm, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Cause } from '../cause/cause.model';
 
 @Injectable()
 @Component({
-  templateUrl: './edit-error.component.html'
+    templateUrl: './edit-error.component.html'
 })
 export class EditErrorComponent implements OnInit {
 
-  public error: Error = {
-    errid: '',
-    errcode : '',
-    message : '',
-    errortype : '',
-    batchtype : '',
-    causes: new Set<Cause>(),
-    checked: false
-  };
-  errorForm: FormGroup; 
+    public error: Error = {
+        errid: '',
+        errcode: '',
+        message: '',
+        errortype: '',
+        batchtype: '',
+        causes: new Set<Cause>(),
+        checked: false
+    };
+    errorForm: FormGroup;
 
-  constructor(
-    private errorService: ErrorService,
-    private fb: FormBuilder,
-    private toastService: ToastrService,
-    public dialogRef: MatDialogRef<EditErrorComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Error ) {
-      this.error = this.data;
-  }
+    constructor(
+        private errorService: ErrorService,
+        private fb: FormBuilder,
+        private toastService: ToastrService,
+        public dialogRef: MatDialogRef<EditErrorComponent>,
+        @Inject(MAT_DIALOG_DATA) public data: Error) {
+        this.error = this.data;
+    }
 
-  ngOnInit() {
-    this.errorForm = this.fb.group({  
-        id: '',
-        errCode: ['', [Validators.required]],  
-        message: ['', [Validators.required]],  
-        errorType: ['', [Validators.required]],  
-        batchType: ['', [Validators.required]]
-    })
-  }
+    ngOnInit() {
+        this.errorForm = this.fb.group({
+            id: '',
+            errCode: ['', [Validators.required]],
+            message: ['', [Validators.required]],
+            errorType: ['', [Validators.required]],
+            batchType: ['', [Validators.required]]
+        });
+    }
 
-  updateError(errorForm: NgForm) {
-    this.errorService.updateError(this.error)
-      .subscribe(res => {
-          this.toastService.success(`Error ${this.error.errcode} updated`);
-          this.dialogRef.close(false);
-        }
-      );
-  }
+    updateError(errorForm: NgForm) {
+        this.errorService.updateError(this.error)
+            .subscribe(res => {
+                this.toastService.success(`Error ${this.error.errcode} updated`);
+                this.dialogRef.close(false);
+            }
+            );
+    }
 
 }

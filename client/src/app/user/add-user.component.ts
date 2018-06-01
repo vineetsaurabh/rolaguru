@@ -8,26 +8,26 @@ import { ToastrService } from 'ngx-toastr';
 import { MatDialogRef } from '@angular/material';
 
 @Component({
-  templateUrl: './add-user.component.html'
+    templateUrl: './add-user.component.html'
 })
 export class AddUserComponent {
 
-  user: User = new User();
+    user: User = new User();
 
-  constructor(
-    private router: Router,
-    private userService: UserService, 
-    private toastService: ToastrService,
-    public dialogRef: MatDialogRef<AddUserComponent>) {
+    constructor(
+        private router: Router,
+        private userService: UserService,
+        private toastService: ToastrService,
+        public dialogRef: MatDialogRef<AddUserComponent>) {
 
-  }
+    }
 
-  createUser(userForm: NgForm): void {
-    this.userService.createUser(this.user)
-        .subscribe( data => {
-          this.toastService.success(`User ${this.user.username} added`);
-          this.dialogRef.close(false);
-        });
-  };
+    createUser(userForm: NgForm): void {
+        this.userService.createUser(this.user)
+            .subscribe(data => {
+                this.toastService.success(`User ${this.user.username} added`);
+                this.dialogRef.close(false);
+            });
+    };
 
 }
