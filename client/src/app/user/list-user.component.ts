@@ -57,7 +57,7 @@ export class ListUserComponent implements OnInit {
     public addUser(): Observable<boolean> {
         let dialogRef: MatDialogRef<AddUserComponent>;
         dialogRef = this.dialog.open(AddUserComponent, {
-            width: '600px',
+            width: '400px',
         });
         return dialogRef.afterClosed();
     }
@@ -67,7 +67,7 @@ export class ListUserComponent implements OnInit {
         let dialogRef: MatDialogRef<EditUserComponent>;
         dialogRef = this.dialog.open(EditUserComponent, {
             data: id,
-            width: '600px',
+            width: '400px',
         });
         return dialogRef.afterClosed();
     }

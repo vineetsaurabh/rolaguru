@@ -8,28 +8,26 @@ import { ToastrService } from 'ngx-toastr';
 import { MatDialogRef } from '@angular/material';
 
 @Component({
-  templateUrl: './add-error.component.html'
+    templateUrl: './add-error.component.html'
 })
 export class AddErrorComponent {
 
-  error: Error = new Error();
+    error: Error = new Error(); z
 
-  constructor(
-    private router: Router,
-    private errorService: ErrorService, 
-    private toastService: ToastrService,
-    public dialogRef: MatDialogRef<AddErrorComponent>) {
+    constructor(
+        private router: Router,
+        private errorService: ErrorService,
+        private toastService: ToastrService,
+        public dialogRef: MatDialogRef<AddErrorComponent>) {
 
-  }
+    }
 
-  createError(errorForm: NgForm): void {
-    this.errorService.createError(this.error)
-        .subscribe( data => {
-          this.toastService.success(`Error ${this.error.errcode} added`);
-          /*errorForm.reset();
-          this.router.navigate(['listErrors']); */
-          this.dialogRef.close(false);
-        });
-  };
+    createError(errorForm: NgForm): void {
+        this.errorService.createError(this.error)
+            .subscribe(data => {
+                this.toastService.success(`Error ${this.error.errcode} added`);
+                this.dialogRef.close(false);
+            });
+    };
 
 }

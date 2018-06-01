@@ -58,7 +58,7 @@ export class ListErrorComponent implements OnInit {
     public addError(): Observable<boolean> {
         let dialogRef: MatDialogRef<AddErrorComponent>;
         dialogRef = this.dialog.open(AddErrorComponent, {
-            width: '600px',
+            width: '800px',
         });
         return dialogRef.afterClosed();
     }
@@ -67,7 +67,7 @@ export class ListErrorComponent implements OnInit {
         let dialogRef: MatDialogRef<EditErrorComponent>;
         dialogRef = this.dialog.open(EditErrorComponent, {
             data: id,
-            width: '600px',
+            width: '800px',
         });
         return dialogRef.afterClosed();
     }

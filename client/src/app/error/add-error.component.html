@@ -1,35 +1,38 @@
-<div class="col-md-5 container">
-  <h2 class="text-center">Add Error</h2>
-  <form #errorForm="ngForm" (ngSubmit)="createError(errorForm)" ngNativeValidate>
+<div class="container">
+    <h2 class="text-center">Add Error</h2>
+    <form #errorForm="ngForm" (ngSubmit)="createError(errorForm)" ngNativeValidate>
 
-    <div class="form-group">
-      <mat-form-field>
-        <input matInput required [(ngModel)]="error.errcode" name="errcode" id="errcode" #errcode="ngModel" placeholder="Error Code">
-      </mat-form-field>
-    </div>  
+        <div class="form-group">
+            <mat-form-field>
+                <input matInput required [(ngModel)]="error.errcode" name="errcode" id="errcode" #errcode="ngModel" placeholder="Error Code">
+            </mat-form-field>
+        </div>
 
-    <div class="form-group">
-      <mat-form-field>
-        <input matInput [(ngModel)]="error.message" name="message" id="message" placeholder="Message">
-      </mat-form-field>
-    </div>
+        <div class="form-group">
+            <div fxLayoutAlign="center">
+                <h6>Description</h6>
+            </div>
+            <div class="editor block">
+                <app-ngx-editor minHeight="50px" [(ngModel)]="error.message" name="message" #message="ngModel"></app-ngx-editor>
+            </div>
+        </div>
 
-    <div class="form-group">
-      <mat-form-field>
-        <input matInput [(ngModel)]="error.errortype" name="errortype" id="errortype" placeholder="Error Type">
-      </mat-form-field>
-    </div>
+        <div class="form-group">
+            <mat-form-field>
+                <input matInput [(ngModel)]="error.errortype" name="errortype" id="errortype" placeholder="Error Type">
+            </mat-form-field>
+        </div>
 
-    <div class="form-group">
-      <mat-form-field>
-        <input matInput [(ngModel)]="error.batchtype" name="batchtype" id="batchtype" placeholder="Batch Type">
-      </mat-form-field>
-    </div>
+        <div class="form-group">
+            <mat-form-field>
+                <input matInput [(ngModel)]="error.batchtype" name="batchtype" id="batchtype" placeholder="Batch Type">
+            </mat-form-field>
+        </div>
 
-    <div class="text-center">
-      <button mat-raised-button color="primary" [disabled]="!errorForm.valid">
-        Submit
-      </button>
-    </div>
-  </form>
+        <div class="text-center">
+            <button mat-raised-button color="primary" [disabled]="!errorForm.valid">
+                Submit
+            </button>
+        </div>
+    </form>
 </div>
