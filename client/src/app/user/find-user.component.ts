@@ -18,7 +18,8 @@ export class FindUserComponent {
     firstName : '',
     lastName : '',
     email : '',
-    active : false
+    active : false,
+    checked: false
   };
 
   constructor(

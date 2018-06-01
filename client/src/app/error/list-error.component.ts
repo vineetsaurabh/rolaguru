@@ -85,14 +85,27 @@ export class ListErrorComponent implements OnInit {
         this.selectedRowIndex = id;
     }
 
-    get selectedOptions() {
+    get selectedErrors() {
         return this.errors
             .filter(error => error.checked)
             .map(error => error.errid);
     }
 
     deleteSelectedErrors() {
-        console.log(this.selectedOptions);
+        if (this.selectedErrors.length == 0) {
+            this.toastService.warning(`Please select an error to delete`);
+        } else {
+            this.errorService.deleteErrors(this.selectedErrors)
+                .subscribe(res => {
+                    this.getErrors();
+                    if (this.selectedErrors.length == 1) {
+                        this.toastService.success(`1 error deleted`);
+                    } else {
+                        this.toastService.success(`${this.selectedErrors.length} errors deleted`);
+                    }
+                }
+                );
+        }
     }
 
 }

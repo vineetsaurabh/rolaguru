@@ -3,6 +3,7 @@ package com.rolaface.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,5 +54,19 @@ public class FlexErrorController {
 	@GetMapping(value = "/findbyerrcode", params = "code")
 	public FlexError findByErrorCode(@RequestParam("code") String errCode) {
 		return flexErrorService.findByErrorCode(errCode);
+	}
+
+	@Transactional
+	@GetMapping(value = "/deleteerrors", params = "errids")
+	public boolean deleteErrors(@RequestParam("errids") String errids) {
+		try {
+			for (String id : errids.split(",")) {
+				delete(Integer.parseInt(id));
+			}
+			return true;
+		} catch (Exception e) {
+			// TODO : ExceptionHandling
+		}
+		return false;
 	}
 }

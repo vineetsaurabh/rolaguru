@@ -25,7 +25,8 @@ export class ErrorDetailComponent implements OnInit {
     message : '',
     errortype : '',
     batchtype : '',
-    causes: new Set<Cause>()
+    causes: new Set<Cause>(),
+    checked: false
   };
   errid: number;
 

@@ -47,4 +47,10 @@ export class UserService {
     return this.http.put<User>(this.userUrl  + "/" + user.userid, user, httpOptions);
   }
 
+  public deleteUsers(userids: string[]) {
+    let params = new HttpParams();
+    params = params.append('userids', userids.join(","));
+    return this.http.get<boolean>(this.userUrl + "/deleteusers",  {params: params});
+  }
+
 }

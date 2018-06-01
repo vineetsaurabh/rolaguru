@@ -20,7 +20,8 @@ export class EditErrorComponent implements OnInit {
     message : '',
     errortype : '',
     batchtype : '',
-    causes: new Set<Cause>()
+    causes: new Set<Cause>(),
+    checked: false
   };
   errorForm: FormGroup; 
 
