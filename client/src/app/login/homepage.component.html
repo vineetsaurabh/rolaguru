@@ -1,12 +1,21 @@
 <div class="col-md-offset-1">
     <mat-toolbar>
-        <mat-toolbar-row>
-            <span> {{title}} </span>
+        <mat-toolbar-row fxLayoutGap="5px">
+            <div class="image-container">
+                <img src="../assets/images/rolaguru_32.png" />
+            </div>
+            <div>
+                <span> {{title}} </span>
+            </div>
             <span class="fill-remaining-space"></span>
-            <small> {{currentUser}} </small>
-            <button mat-button mat-icon-button matTooltip="Logout" *ngIf="authService.isAuthenticated()" (click)="logout()">
-                <mat-icon color="accent">exit_to_app</mat-icon>
-            </button>
+            <div>
+                <small> {{currentUser}} </small>
+            </div>
+            <div>
+                <button mat-button mat-icon-button matTooltip="Logout" *ngIf="authService.isAuthenticated()" (click)="logout()">
+                    <mat-icon color="accent">exit_to_app</mat-icon>
+                </button>
+            </div>
         </mat-toolbar-row>
     </mat-toolbar>
 </div>
@@ -17,20 +26,10 @@
                 {{tabs[0]}}
             </a>
         </li>
-        <!-- <li class="nav-item">
-            <a class="nav-link" routerLink="/findUser" routerLinkActive="active current">
-                {{tabs[1]}}
-            </a>
-        </li> -->
         <li class="nav-item">
             <a class="nav-link" routerLink="/listErrors" routerLinkActive="active current">
                 {{tabs[2]}}
             </a>
         </li>
-        <!-- <li class="nav-item">
-            <a class="nav-link" routerLink="/findError" routerLinkActive="active current">
-                {{tabs[3]}}
-            </a>
-        </li> -->
     </ul>
 </div>

@@ -9,7 +9,7 @@ import { AuthService } from './auth.service';
 })
 export class HomepageComponent implements OnInit {
 
-    title = 'Knolwedge Base';
+    title = 'Knowledge Base';
     tabs = ['List Users', 'Find User', 'List Errors', 'Find Error'];
     currentUser : string = this.token.getCurrentUser();
 
