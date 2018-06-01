@@ -104,14 +104,27 @@ export class ListUserComponent implements OnInit {
         this.selectedRowIndex = id;
     }
 
-    get selectedOptions() {
+    get selectedUsers() {
         return this.users
             .filter(user => user.checked)
             .map(user => user.userid);
     }
 
     deleteSelectedUsers() {
-        console.log(this.selectedOptions);
+        if(this.selectedUsers.length == 0) {
+            this.toastService.warning(`Please select a user to delete`);
+        } else {
+            this.userService.deleteUsers(this.selectedUsers)
+            .subscribe(res => {
+                this.getUsers();
+                if(this.selectedUsers.length == 1) {
+                    this.toastService.success(`1 user deleted`);
+                } else {
+                    this.toastService.success(`${this.selectedUsers.length} users deleted`);
+                }
+            }
+            );
+        }
     }
 
 }

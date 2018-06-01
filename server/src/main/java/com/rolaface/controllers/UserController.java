@@ -3,6 +3,7 @@ package com.rolaface.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,5 +59,19 @@ public class UserController {
 	@GetMapping(value = "/findbyemail", params = "email")
 	public User findByEmail(@RequestParam("email") String email) {
 		return userService.findByEmail(email);
+	}
+
+	@Transactional
+	@GetMapping(value = "/deleteusers", params = "userids")
+	public boolean deleteUsers(@RequestParam("userids") String userids) {
+		try {
+			for (String id : userids.split(",")) {
+				delete(Integer.parseInt(id));
+			}
+			return true;
+		} catch (Exception e) {
+			// TODO : ExceptionHandling
+		}
+		return false;
 	}
 }
