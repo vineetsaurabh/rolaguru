@@ -11,10 +11,11 @@ import { Observable } from 'rxjs/Observable';
 import { ErrorDetailComponent } from './error-detail.component';
 import { AddCauseComponent } from '../cause/add-cause.component';
 import { AddErrorComponent } from './add-error.component';
+import { ConfirmDeleteComponent } from '../util/confirm-delete.component';
 
 @Component({
-    templateUrl: './list-error.component.html',
-    styles: []
+    selector: 'app-comp',
+    templateUrl: './list-error.component.html'
 })
 export class ListErrorComponent implements OnInit {
 
@@ -72,6 +73,18 @@ export class ListErrorComponent implements OnInit {
         return dialogRef.afterClosed();
     }
 
+    onDeleteError(error: Error) {
+        let dialogRef: MatDialogRef<ConfirmDeleteComponent>;
+        dialogRef = this.dialog.open(ConfirmDeleteComponent, {
+            data: `Are you sure you want to delete error ${error.errcode}?`
+        });
+        dialogRef.afterClosed().subscribe((ok: boolean) => {
+            if (ok) {
+                this.deleteError(error);
+            }
+        });
+    }
+
     deleteError(error: Error): void {
         this.errorService.deleteError(error)
             .subscribe(data => {
@@ -91,21 +104,33 @@ export class ListErrorComponent implements OnInit {
             .map(error => error.errid);
     }
 
-    deleteSelectedErrors() {
+    onDeleteSelectedErrors() {
         if (this.selectedErrors.length == 0) {
             this.toastService.warning(`Please select an error to delete`);
         } else {
-            this.errorService.deleteErrors(this.selectedErrors)
-                .subscribe(res => {
-                    this.getErrors();
-                    if (this.selectedErrors.length == 1) {
-                        this.toastService.success(`1 error deleted`);
-                    } else {
-                        this.toastService.success(`${this.selectedErrors.length} errors deleted`);
-                    }
+            let dialogRef: MatDialogRef<ConfirmDeleteComponent>;
+            dialogRef = this.dialog.open(ConfirmDeleteComponent, {
+                data: `Are you sure want to delete ${this.selectedErrors.length} error(s)?`
+            });
+            dialogRef.afterClosed().subscribe((ok: boolean) => {
+                if (ok) {
+                    this.deleteSelectedErrors();
                 }
-                );
+            });
         }
+    }
+
+    deleteSelectedErrors() {
+        this.errorService.deleteErrors(this.selectedErrors)
+            .subscribe(res => {
+                this.getErrors();
+                if (this.selectedErrors.length == 1) {
+                    this.toastService.success(`1 error deleted`);
+                } else {
+                    this.toastService.success(`${this.selectedErrors.length} errors deleted`);
+                }
+            }
+            );
     }
 
 }
