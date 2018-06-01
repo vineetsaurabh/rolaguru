@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -26,7 +27,8 @@ public class CommentError {
 	@Column
 	private int errid;
 
-	@Column(length = 1000)
+	@Lob
+	@Column
 	private String comment;
 
 	@Temporal(TemporalType.TIMESTAMP)
