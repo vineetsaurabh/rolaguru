@@ -109,9 +109,15 @@ export class ListErrorComponent implements OnInit {
             this.toastService.warning(`Please select an error to delete`);
         } else {
             let dialogRef: MatDialogRef<ConfirmDeleteComponent>;
-            dialogRef = this.dialog.open(ConfirmDeleteComponent, {
-                data: `Are you sure want to delete ${this.selectedErrors.length} error(s)?`
-            });
+            if(this.selectedErrors.length == 1) {
+                dialogRef = this.dialog.open(ConfirmDeleteComponent, {
+                    data: `Are you sure want to delete the selected error?`
+                });
+            } else {
+                dialogRef = this.dialog.open(ConfirmDeleteComponent, {
+                    data: `Are you sure want to delete ${this.selectedErrors.length} errors?`
+                });
+            }
             dialogRef.afterClosed().subscribe((ok: boolean) => {
                 if (ok) {
                     this.deleteSelectedErrors();
@@ -121,13 +127,14 @@ export class ListErrorComponent implements OnInit {
     }
 
     deleteSelectedErrors() {
+        let selectedErrorsLength = this.selectedErrors.length;
         this.errorService.deleteErrors(this.selectedErrors)
             .subscribe(res => {
                 this.getErrors();
-                if (this.selectedErrors.length == 1) {
+                if (selectedErrorsLength == 1) {
                     this.toastService.success(`1 error deleted`);
                 } else {
-                    this.toastService.success(`${this.selectedErrors.length} errors deleted`);
+                    this.toastService.success(`${selectedErrorsLength} errors deleted`);
                 }
             }
             );
