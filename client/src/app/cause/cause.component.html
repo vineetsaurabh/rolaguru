@@ -39,6 +39,40 @@
                 </div>
             </div>
         </div>
+        <div fxLayout="column">
+            <div fxLayoutAlign="start">
+                <strong>Attachments</strong>
+            </div>
+            <div fxLayout="column" [hidden]="editing">
+                <div *ngFor="let file of cause.files" fxLayout="row" fxLayoutGap="30px">
+                    <div>
+                        <a href="#">{{ file.title }}</a>
+                        ({{ file.size }})
+                    </div>
+                    <div>{{ file.description }}</div>
+                </div>
+            </div>
+            <div fxLayout="column" [hidden]="!editing">
+                <div>
+                    <div *ngIf="currentFileUpload" class="progress">
+                        <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+                            aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:progress.percentage+'%'}">
+                            {{ progress.percentage }}%
+                        </div>
+                    </div>
+                    <div>
+                        <label class="btn btn-default">
+                            <input type="file" (change)="selectFile($event)">
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">
+                        Upload
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
     <mat-action-row fxlayout="row" fxLayoutGap="10px">
         <div matTooltip="{{myRatingTooltip}}" matTooltipPosition="left" *ngIf="cause.user.userid != userid">

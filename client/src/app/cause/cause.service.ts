@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/Observable';
 import {Injectable} from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpEvent, HttpRequest } from '@angular/common/http';
 
 import { Cause } from './cause.model';
 import { ErrorCause } from './error-cause.model';
@@ -44,5 +44,16 @@ export class CauseService {
   public updateRating(causeRating) {
     return this.http.put<CauseRating>(this.causeRatingUrl + "/" + causeRating.causeRatingId, causeRating, httpOptions);
   }
+
+  uploadFile(file: File, causeid: string): Observable<HttpEvent<{}>> {
+    const formdata: FormData = new FormData();
+    formdata.append('file', file);
+    formdata.append('causeid', causeid);
+    const req = new HttpRequest('POST', this.causeUrl + '/addfilestocause', formdata, {
+        reportProgress: true,
+        responseType: 'text'
+    });
+    return this.http.request(req);
+}
 
 }
