@@ -128,9 +128,15 @@ export class ListUserComponent implements OnInit {
             this.toastService.warning(`Please select a user to delete`);
         } else {
             let dialogRef: MatDialogRef<ConfirmDeleteComponent>;
-            dialogRef = this.dialog.open(ConfirmDeleteComponent, {
-                data: `Are you sure want to delete ${this.selectedUsers.length} user(s)?`
-            });
+            if(this.selectedUsers.length == 1) {
+                dialogRef = this.dialog.open(ConfirmDeleteComponent, {
+                    data: `Are you sure want to delete the selected user?`
+                });
+            } else {
+                dialogRef = this.dialog.open(ConfirmDeleteComponent, {
+                    data: `Are you sure want to delete ${this.selectedUsers.length} users?`
+                });
+            }
             dialogRef.afterClosed().subscribe((ok: boolean) => {
                 if (ok) {
                     this.deleteSelectedUsers();
@@ -140,13 +146,14 @@ export class ListUserComponent implements OnInit {
     }
 
     deleteSelectedUsers() {
+        let selectedUsersLength = this.selectedUsers.length;
         this.userService.deleteUsers(this.selectedUsers)
             .subscribe(res => {
                 this.getUsers();
-                if (this.selectedUsers.length == 1) {
+                if (selectedUsersLength == 1) {
                     this.toastService.success(`1 user deleted`);
                 } else {
-                    this.toastService.success(`${this.selectedUsers.length} users deleted`);
+                    this.toastService.success(`${selectedUsersLength} users deleted`);
                 }
             });
     }

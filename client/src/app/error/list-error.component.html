@@ -73,7 +73,7 @@
 
             <ng-container matColumnDef="message">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Message </mat-header-cell>
-                <mat-cell *matCellDef="let error"> {{error.message}} </mat-cell>
+                <mat-cell *matCellDef="let error" [innerHTML]="error.message"></mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="errortype">
