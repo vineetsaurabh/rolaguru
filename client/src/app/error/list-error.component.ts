@@ -12,6 +12,7 @@ import { ErrorDetailComponent } from './error-detail.component';
 import { AddCauseComponent } from '../cause/add-cause.component';
 import { AddErrorComponent } from './add-error.component';
 import { ConfirmDeleteComponent } from '../util/confirm-delete.component';
+import { saveAs } from 'file-saver/FileSaver';
 
 @Component({
     selector: 'app-comp',
@@ -142,8 +143,16 @@ export class ListErrorComponent implements OnInit {
 
     importErrors(event) {
         this.errorService.importErrors(event.target.files.item(0))
-            .subscribe(res => {
+            .subscribe(data => {
+                this.toastService.success(`${data} errors imported`);
                 this.getErrors();
+            });
+    }
+
+    exportErrorsInExcel() {
+        this.errorService.exportErrorsInExcel()
+            .subscribe(res => {
+                saveAs(new Blob([res.body]), "err_code.xls");
             });
     }
 
