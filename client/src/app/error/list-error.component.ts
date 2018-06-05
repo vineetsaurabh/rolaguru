@@ -109,7 +109,7 @@ export class ListErrorComponent implements OnInit {
             this.toastService.warning(`Please select an error to delete`);
         } else {
             let dialogRef: MatDialogRef<ConfirmDeleteComponent>;
-            if(this.selectedErrors.length == 1) {
+            if (this.selectedErrors.length == 1) {
                 dialogRef = this.dialog.open(ConfirmDeleteComponent, {
                     data: `Are you sure want to delete the selected error?`
                 });
@@ -138,6 +138,13 @@ export class ListErrorComponent implements OnInit {
                 }
             }
             );
+    }
+
+    importErrors(event) {
+        this.errorService.importErrors(event.target.files.item(0))
+            .subscribe(res => {
+                this.getErrors();
+            });
     }
 
 }

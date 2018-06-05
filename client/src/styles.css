@@ -46,6 +46,6 @@ div.border-text h1{
 div.border-text h1 span{
     background-color: white;
 }
-label[for="cause-file-input"]{
+label[for="file-input"]{
     margin-bottom: 0px;
 }

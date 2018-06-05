@@ -28,7 +28,10 @@
                         <span>Table Actions</span>
                     </h1>
                     <button class="btn" matTooltip="Import Errors">
-                        <i class="fa fa-upload"></i>
+                        <label for="file-input">
+                            <i class="fa fa-upload"></i>
+                        </label>
+                        <input id="file-input" type="file" (change)="importErrors($event)" hidden>
                     </button>
                     <button class="btn" matTooltip="Export as PDF">
                         <i class="fa fa-file-pdf-o"></i>

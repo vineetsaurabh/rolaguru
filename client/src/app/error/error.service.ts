@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpRequest } from '@angular/common/http';
 
 import { Error } from './error.model';
 import { MatDialogRef } from '@angular/material';
@@ -58,6 +58,14 @@ export class ErrorService {
         let params = new HttpParams();
         params = params.append('errids', errids.join(","));
         return this.http.get<boolean>(this.errorUrl + "/deleteerrors", { params: params });
+    }
+
+
+    public importErrors(file: File) {
+        const formdata: FormData = new FormData();
+        formdata.append('file', file);
+        const req = new HttpRequest('POST', this.errorUrl + '/importerrors', formdata);
+        return this.http.request(req);
     }
 
 }
