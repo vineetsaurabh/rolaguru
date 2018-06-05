@@ -138,13 +138,12 @@ export class CauseComponent implements OnInit {
     selectedFiles: FileList;
     currentFileUpload: File;
     progress: { percentage: number } = { percentage: 0 };
-    data: any;
 
     upload() {
         this.progress.percentage = 0;
         this.currentFileUpload = this.selectedFiles.item(0);
         this.causeService.uploadFile(this.currentFileUpload, this.cause.causeid)
-            .subscribe( event => {
+            .subscribe(event => {
                 if (event.type === HttpEventType.UploadProgress) {
                     this.progress.percentage = Math.round(100 * event.loaded / event.total);
                 } else if (event instanceof HttpResponse) {
@@ -152,12 +151,15 @@ export class CauseComponent implements OnInit {
                     this.cause = event.body;
                     this.currentFileUpload = undefined;
                 }
-        });
+            });
         this.selectedFiles = undefined;
     }
 
     selectFile(event) {
         this.selectedFiles = event.target.files;
+        this.upload();
+        event = null;
+        return false;
     }
 
     download(file) {
@@ -174,6 +176,15 @@ export class CauseComponent implements OnInit {
                 this.toastService.success(`${file.filename} is deleted`);
                 this.cause = res;
             });
+    }
+
+    formatBytes(bytes, decimals) {
+        if (bytes == 0) return '0 Bytes';
+        var k = 1024,
+            dm = decimals || 2,
+            sizes = ['B', 'KB', 'MB', 'GB'],
+            i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
     }
 
 }
