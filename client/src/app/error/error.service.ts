@@ -64,8 +64,11 @@ export class ErrorService {
     public importErrors(file: File) {
         const formdata: FormData = new FormData();
         formdata.append('file', file);
-        const req = new HttpRequest('POST', this.errorUrl + '/importerrors', formdata);
-        return this.http.request(req);
+        return this.http.post<number>(this.errorUrl + '/importerrors', formdata);
+    }
+
+    public exportErrorsInExcel(): Observable<any>  {
+        return this.http.get(this.errorUrl + '/exporterrorsinexcel', { observe: 'response', responseType: 'blob' });
     }
 
 }

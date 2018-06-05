@@ -7,7 +7,6 @@ import { Cause } from "./cause.model";
 import { TokenStorage } from "../login/token.storage";
 import { ToastrService } from 'ngx-toastr';
 import { saveAs } from 'file-saver/FileSaver';
-import { BehaviorSubject } from 'rxjs';
 
 @Component({
     selector: 'cause-solution',
