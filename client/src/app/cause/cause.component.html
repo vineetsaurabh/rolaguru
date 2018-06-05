@@ -69,10 +69,10 @@
             </a>
         </div>
         <button class="btn" matTooltip="Upload File" fxLayoutAlign="end" *ngIf="cause.user.userid == userid">
-            <label for="cause-file-input">
+            <label for="file-input">
                 <i class="fa fa-upload"></i>
             </label>
-            <input id="cause-file-input" type="file" (change)="selectFile($event)" hidden>
+            <input id="file-input" type="file" (change)="selectFile($event)" hidden>
         </button>
         <button class="btn" matTooltip="Edit Solution" (click)="openInEdit(cause.solution)" [hidden]="editing" *ngIf="cause.user.userid == userid">
             <i class="fa fa-pencil"></i>
