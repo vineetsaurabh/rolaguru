@@ -20,9 +20,9 @@ import javax.persistence.TemporalType;
 public class CommentError {
 
 	@Id
-	@Column
+	@Column(name = "comment_error_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private int commentErrorId;
 
 	@Column
 	private int errid;
@@ -43,12 +43,12 @@ public class CommentError {
 	@JoinColumn(name = "userid")
 	private User user;
 
-	public int getId() {
-		return id;
+	public int getCommentErrorId() {
+		return commentErrorId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setCommentErrorId(int commentErrorId) {
+		this.commentErrorId = commentErrorId;
 	}
 
 	public int getErrid() {
@@ -93,8 +93,9 @@ public class CommentError {
 
 	@Override
 	public String toString() {
-		return "CommentError [id=" + id + ", errid=" + errid + ", comment=" + comment + ", createdTimestamp="
-				+ createdTimestamp + ", modifiedTimestamp=" + modifiedTimestamp + ", user=" + user + "]";
+		return "CommentError [commentErrorId=" + commentErrorId + ", errid=" + errid + ", comment=" + comment
+				+ ", createdTimestamp=" + createdTimestamp + ", modifiedTimestamp=" + modifiedTimestamp + ", user="
+				+ user + "]";
 	}
 
 }

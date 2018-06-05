@@ -39,6 +39,28 @@
                 </div>
             </div>
         </div>
+        <div fxLayout="column">
+            <div fxLayoutAlign="start">
+                <strong>Attachments</strong>
+            </div>
+            <div fxLayout="column">
+                <div *ngFor="let file of cause.files" fxLayout="row" fxLayoutGap="10px">
+                    <div>
+                        <a href="#" (click)="!!download(file)">{{ file.filename }}</a>
+                        <small> ({{ formatBytes(file.size) }})</small>
+                    </div>
+                    <i class="fa fa-remove" matTooltip="Delete" (click)="delete(file)" [hidden]="!editing" *ngIf="cause.user.userid == userid"
+                        style="color:red" matTooltipPosition="after"></i>
+                    <div>{{ file.description }}</div>
+                </div>
+            </div>
+            <div *ngIf="currentFileUpload" class="progress">
+                <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+                    aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:progress.percentage+'%'}">
+                    {{ progress.percentage }}%
+                </div>
+            </div>
+        </div>
     </div>
     <mat-action-row fxlayout="row" fxLayoutGap="10px">
         <div matTooltip="{{myRatingTooltip}}" matTooltipPosition="left" *ngIf="cause.user.userid != userid">
@@ -46,6 +68,12 @@
                 <i class="fa" [ngClass]="{'fa-star':(star==1),'fa-star-o':(star==0)}"></i>
             </a>
         </div>
+        <button class="btn" matTooltip="Upload File" fxLayoutAlign="end" *ngIf="cause.user.userid == userid">
+            <label for="cause-file-input">
+                <i class="fa fa-upload"></i>
+            </label>
+            <input id="cause-file-input" type="file" (change)="selectFile($event)" hidden>
+        </button>
         <button class="btn" matTooltip="Edit Solution" (click)="openInEdit(cause.solution)" [hidden]="editing" *ngIf="cause.user.userid == userid">
             <i class="fa fa-pencil"></i>
         </button>

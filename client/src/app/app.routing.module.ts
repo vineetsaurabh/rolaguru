@@ -17,83 +17,85 @@ import { HomepageComponent } from './login/homepage.component';
 import { ConfirmDeleteComponent } from './util/confirm-delete.component';
 
 const routes: Routes = [
-  {
-    path : '',
-    component : LoginComponent
-  },
-  { 
-    path: 'login',
-    component: LoginComponent
-  },
-  {
-    path : 'homepage',
-    component : HomepageComponent
-  },
-  { 
-    path: 'listUsers',
-    component: ListUserComponent,
-    children: [
-      { 
-        path: ':id',
-        component: EditUserComponent
-      }
-    ]
-  },
-  { 
-    path: 'findUser',
-    component: FindUserComponent,
-    children: [
-      { 
-        path: ':id',
-        component: UserDetailComponent
-      },
-      {
+    {
         path: '',
-        component: ConfirmDeleteComponent
-      }
-    ]
-  },
-  { 
-    path: 'addUser',
-    component: AddUserComponent
-  },
-  { 
-    path: 'listErrors',
-    component: ListErrorComponent,
-    children: [
-      { 
-        path: ':id',
-        component: EditErrorComponent
-      }
-    ]
-  },
-  {
-    path: 'addError',
-    component: AddErrorComponent
-  },
-  { 
-    path: 'findError/:id',
-    component: ErrorDetailComponent,
-    children: [
-      { 
-        path: ':id',
-        component: AddCauseComponent
-      },
-      {
-        path: '',
-        component: ConfirmDeleteComponent
-      }
-    ]
-  }
+        component: LoginComponent
+    },
+    {
+        path: 'login',
+        component: LoginComponent
+    },
+    {
+        path: 'homepage',
+        component: HomepageComponent
+    },
+    {
+        path: 'listUsers',
+        component: ListUserComponent,
+        children: [
+            {
+                path: ':id',
+                component: EditUserComponent
+            }
+        ]
+    },
+    {
+        path: 'findUser',
+        component: FindUserComponent,
+        children: [
+            {
+                path: ':id',
+                component: UserDetailComponent
+            },
+            {
+                path: '',
+                component: ConfirmDeleteComponent
+            }
+        ]
+    },
+    {
+        path: 'addUser',
+        component: AddUserComponent
+    },
+    {
+        path: 'listErrors',
+        component: ListErrorComponent,
+        children: [
+            {
+                path: ':id',
+                component: EditErrorComponent
+            }
+        ]
+    },
+    {
+        path: 'addError',
+        component: AddErrorComponent
+    },
+    {
+        path: 'findError/:id',
+        component: ErrorDetailComponent,
+        children: [
+            {
+                path: ':id',
+                component: AddCauseComponent,
+                children: [
+                    {
+                        path: '',
+                        component: ConfirmDeleteComponent
+                    }
+                ]
+            }
+        ]
+    }
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes)
-  ],
-  exports: [
-    RouterModule
-  ],
-  declarations: []
+    imports: [
+        RouterModule.forRoot(routes)
+    ],
+    exports: [
+        RouterModule
+    ],
+    declarations: []
 })
 export class AppRoutingModule { }

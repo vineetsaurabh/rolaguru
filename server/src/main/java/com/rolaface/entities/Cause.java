@@ -51,6 +51,10 @@ public class Cause {
 	@JoinColumn(name = "causeid")
 	private Set<CauseRating> ratings;
 
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "causeid")
+	private Set<CauseDocument> files;
+
 	public int getCauseid() {
 		return causeid;
 	}
@@ -105,6 +109,14 @@ public class Cause {
 
 	public void setRatings(Set<CauseRating> ratings) {
 		this.ratings = ratings;
+	}
+
+	public Set<CauseDocument> getFiles() {
+		return files;
+	}
+
+	public void setFiles(Set<CauseDocument> files) {
+		this.files = files;
 	}
 
 	@Override

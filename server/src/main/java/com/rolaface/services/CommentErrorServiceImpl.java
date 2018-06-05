@@ -36,12 +36,12 @@ public class CommentErrorServiceImpl implements CommentErrorService {
 
 	@Override
 	public CommentError findById(int id) {
-		return repository.findById(id);
+		return repository.findByCommentErrorId(id);
 	}
 
 	@Override
 	public CommentError update(CommentError comment) {
-		CommentError commentToUpdate = findById(comment.getId());
+		CommentError commentToUpdate = findById(comment.getCommentErrorId());
 		if (commentToUpdate != null) {
 			commentToUpdate.setComment(comment.getComment());
 			commentToUpdate.setModifiedTimestamp(new Date());

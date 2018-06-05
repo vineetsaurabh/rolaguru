@@ -46,6 +46,7 @@ public class CauseServiceImpl implements CauseService {
 			causeToUpdate.setDescription(cause.getDescription());
 			causeToUpdate.setSolution(cause.getSolution());
 			causeToUpdate.setRatings(cause.getRatings());
+			causeToUpdate.setFiles(cause.getFiles());
 			causeToUpdate.setModifiedTimestamp(new Date());
 			cause = repository.save(causeToUpdate);
 		}

@@ -20,6 +20,6 @@ public interface CommentErrorRepository extends JpaRepository<CommentError, Long
 	@Override
 	CommentError save(CommentError comment);
 
-	CommentError findById(int id);
+	CommentError findByCommentErrorId(int id);
 
 }
