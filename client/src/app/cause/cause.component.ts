@@ -6,6 +6,8 @@ import { CauseService } from "./cause.service";
 import { Cause } from "./cause.model";
 import { TokenStorage } from "../login/token.storage";
 import { ToastrService } from 'ngx-toastr';
+import { saveAs } from 'file-saver/FileSaver';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
     selector: 'cause-solution',
@@ -35,7 +37,7 @@ export class CauseComponent implements OnInit {
         private token: TokenStorage,
         private causeService: CauseService,
         private toastService: ToastrService,
-        private route: Router ) {
+        private route: Router) {
     }
 
     ngOnInit(): void {
@@ -136,23 +138,42 @@ export class CauseComponent implements OnInit {
     selectedFiles: FileList;
     currentFileUpload: File;
     progress: { percentage: number } = { percentage: 0 };
+    data: any;
 
     upload() {
-        console.log('File upload started');
         this.progress.percentage = 0;
         this.currentFileUpload = this.selectedFiles.item(0);
-        this.causeService.uploadFile(this.currentFileUpload, this.cause.causeid).subscribe(event => {
-            if (event.type === HttpEventType.UploadProgress) {
-                this.progress.percentage = Math.round(100 * event.loaded / event.total);
-            } else if (event instanceof HttpResponse) {
-                console.log('File is completely uploaded!');
-            }
+        this.causeService.uploadFile(this.currentFileUpload, this.cause.causeid)
+            .subscribe( event => {
+                if (event.type === HttpEventType.UploadProgress) {
+                    this.progress.percentage = Math.round(100 * event.loaded / event.total);
+                } else if (event instanceof HttpResponse) {
+                    this.toastService.success(`${this.currentFileUpload.name} is uploaded`);
+                    this.cause = event.body;
+                    this.currentFileUpload = undefined;
+                }
         });
         this.selectedFiles = undefined;
     }
 
     selectFile(event) {
         this.selectedFiles = event.target.files;
+    }
+
+    download(file) {
+        this.causeService.downloadFile(file.causeDocId)
+            .subscribe(res => {
+                const blob = new Blob([res.body]);
+                saveAs(blob, file.filename);
+            });
+    }
+
+    delete(file) {
+        this.causeService.deleteFile(file.causeDocId)
+            .subscribe(res => {
+                this.toastService.success(`${file.filename} is deleted`);
+                this.cause = res;
+            });
     }
 
 }

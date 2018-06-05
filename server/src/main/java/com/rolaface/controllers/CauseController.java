@@ -4,7 +4,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -42,7 +44,7 @@ public class CauseController {
 
 	@Autowired
 	// private CauseDocumentService causeDocumentService;
-	private CauseDocumentRepository causeRepository;
+	private CauseDocumentRepository causeDocumentRepository;
 
 	@Autowired
 	private UserService userService;
@@ -94,22 +96,47 @@ public class CauseController {
 	}
 
 	@PostMapping("/addfilestocause")
-	public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file,
+	public ResponseEntity<Cause> handleFileUpload(@RequestParam("file") MultipartFile file,
 			@RequestParam("causeid") String causeid) {
-		String message = "";
+		int causeId = Integer.parseInt(causeid);
+		CauseDocument causeDocument = new CauseDocument();
+		causeDocument.setCauseid(causeId);
+		causeDocument.setFilename(file.getOriginalFilename());
+		causeDocument.setCreatedTimestamp(new Date());
+		causeDocument.setContentType(file.getContentType());
+		causeDocument.setSize(file.getSize());
 		try {
-			CauseDocument causeDocument = new CauseDocument();
-			causeDocument.setCauseid(Integer.parseInt(causeid));
-			causeDocument.setFilename(file.getOriginalFilename());
-			causeDocument.setCreatedTimestamp(new Date());
+			causeDocument.setContent(file.getBytes());
 			// causeDocumentService.create(causeDocument);
-			causeRepository.save(causeDocument);
-			message = "You successfully uploaded " + file.getOriginalFilename() + "!";
-			return ResponseEntity.status(HttpStatus.OK).body(message);
+			causeDocumentRepository.save(causeDocument);
+			Cause cause = causeService.findById(causeId);
+			return ResponseEntity.status(HttpStatus.OK).body(cause);
 		} catch (Exception e) {
-			message = "Fail to upload Profile Picture" + file.getOriginalFilename() + "!";
-			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(message);
+			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(null);
 		}
+	}
+
+	@GetMapping("/downloadfilefromcause/{id}")
+	public ResponseEntity<byte[]> download(@PathVariable("id") int id) {
+		// CauseDocument causeDocument = causeDocumentService.findByCauseDocId(id);
+		CauseDocument causeDocument = causeDocumentRepository.findByCauseDocId(id);
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.parseMediaType(causeDocument.getContentType()));
+		headers.setContentDispositionFormData("inline", causeDocument.getFilename());
+		return new ResponseEntity<>(causeDocument.getContent(), headers, HttpStatus.OK);
+	}
+
+	@DeleteMapping(path = { "/deletefilefromcause/{id}" })
+	public Cause deleteCauseDocument(@PathVariable("id") int id) {
+		int userId = ((ContextUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
+		// CauseDocument causeDocument = causeDocumentService.findByCauseDocId(id);
+		CauseDocument causeDocument = causeDocumentRepository.findByCauseDocId(id);
+		Cause cause = causeService.findById(causeDocument.getCauseid());
+		if (userId == cause.getUser().getUserid()) {
+			causeDocumentRepository.delete(causeDocument);
+			cause.getFiles().remove(causeDocument);
+		}
+		return cause;
 	}
 
 }

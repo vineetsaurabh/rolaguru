@@ -1,13 +1,11 @@
 package com.rolaface.entities;
 
-import java.sql.Blob;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,21 +19,20 @@ public class CauseDocument {
 	@Column(name = "cause_doc_id")
 	private Integer causeDocId;
 
-	@Column(name = "causeid")
+	@Column
 	private Integer causeid;
 
-	@Column(name = "name")
-	private String name;
+	@Column
+	private long size;
 
-	@Column(name = "description")
+	@Column
 	private String description;
 
-	@Column(name = "filename")
+	@Column
 	private String filename;
 
-	@Column(name = "content")
-	@Lob
-	private Blob content;
+	@Column(length = 100000)
+	private byte[] content;
 
 	@Column(name = "content_type")
 	private String contentType;
@@ -60,12 +57,12 @@ public class CauseDocument {
 		this.causeid = causeid;
 	}
 
-	public String getName() {
-		return name;
+	public long getSize() {
+		return size;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setSize(long size) {
+		this.size = size;
 	}
 
 	public String getDescription() {
@@ -84,11 +81,11 @@ public class CauseDocument {
 		this.filename = filename;
 	}
 
-	public Blob getContent() {
+	public byte[] getContent() {
 		return content;
 	}
 
-	public void setContent(Blob content) {
+	public void setContent(byte[] content) {
 		this.content = content;
 	}
 
@@ -110,7 +107,7 @@ public class CauseDocument {
 
 	@Override
 	public String toString() {
-		return "CauseDocument [causeDocId=" + causeDocId + ", causeid=" + causeid + ", name=" + name + ", description="
+		return "CauseDocument [causeDocId=" + causeDocId + ", causeid=" + causeid + ", size=" + size + ", description="
 				+ description + ", filename=" + filename + "]";
 	}
 

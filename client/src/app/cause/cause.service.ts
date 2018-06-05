@@ -1,59 +1,67 @@
 import { Observable } from 'rxjs/Observable';
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams, HttpEvent, HttpRequest } from '@angular/common/http';
 
 import { Cause } from './cause.model';
 import { ErrorCause } from './error-cause.model';
 import { CauseRating } from './cause-rating.model';
 import { environment } from '../../environments/environment';
+import { RequestOptions, ResponseContentType } from '@angular/http';
 
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
 @Injectable()
 export class CauseService {
 
-  constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
 
-  private causeUrl = environment.baseUrl + '/cause';
+    private causeUrl = environment.baseUrl + '/cause';
 
-  private causeRatingUrl = environment.baseUrl + '/cause-rating';
+    private causeRatingUrl = environment.baseUrl + '/cause-rating';
 
-  public getCause(id: number) {
-    return this.http.get<Cause>(this.causeUrl + "/"+ id);
-  }
+    public getCause(id: number) {
+        return this.http.get<Cause>(this.causeUrl + "/" + id);
+    }
 
-  public deleteCause(cause) {
-    return this.http.delete(this.causeUrl + "/"+ cause.causeid);
-  }
+    public deleteCause(cause) {
+        return this.http.delete(this.causeUrl + "/" + cause.causeid);
+    }
 
-  public createCause(cause, errid) {
-    return this.http.post<Cause>(this.causeUrl, {"cause" : cause, "errid" : +errid});
-  }
-  
-  public updateCause(cause) {
-    return this.http.put<Cause>(this.causeUrl + "/" + cause.causeid, cause, httpOptions);
-  }
+    public createCause(cause, errid) {
+        return this.http.post<Cause>(this.causeUrl, { "cause": cause, "errid": +errid });
+    }
 
-  public createRating(causeRating) {
-    return this.http.post<CauseRating>(this.causeRatingUrl, causeRating);
-  }
+    public updateCause(cause) {
+        return this.http.put<Cause>(this.causeUrl + "/" + cause.causeid, cause, httpOptions);
+    }
 
-  public updateRating(causeRating) {
-    return this.http.put<CauseRating>(this.causeRatingUrl + "/" + causeRating.causeRatingId, causeRating, httpOptions);
-  }
+    public createRating(causeRating) {
+        return this.http.post<CauseRating>(this.causeRatingUrl, causeRating);
+    }
 
-  uploadFile(file: File, causeid: string): Observable<HttpEvent<{}>> {
-    const formdata: FormData = new FormData();
-    formdata.append('file', file);
-    formdata.append('causeid', causeid);
-    const req = new HttpRequest('POST', this.causeUrl + '/addfilestocause', formdata, {
-        reportProgress: true,
-        responseType: 'text'
-    });
-    return this.http.request(req);
-}
+    public updateRating(causeRating) {
+        return this.http.put<CauseRating>(this.causeRatingUrl + "/" + causeRating.causeRatingId, causeRating, httpOptions);
+    }
+
+    public uploadFile(file: File, causeid: string): Observable<HttpEvent<Cause>> {
+        const formdata: FormData = new FormData();
+        formdata.append('file', file);
+        formdata.append('causeid', causeid);
+        const req = new HttpRequest('POST', this.causeUrl + '/addfilestocause', formdata, {
+            reportProgress: true
+        });
+        return this.http.request(req);
+    }
+
+    public downloadFile(id): Observable<any> {
+        return this.http.get(this.causeUrl + "/downloadfilefromcause/" + id, { observe: 'response', responseType: 'blob' });
+    }
+
+    public deleteFile(id): Observable<any>  {
+        return this.http.delete<any>(this.causeUrl + "/deletefilefromcause/" + id);
+    }
 
 }

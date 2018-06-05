@@ -43,12 +43,13 @@
             <div fxLayoutAlign="start">
                 <strong>Attachments</strong>
             </div>
-            <div fxLayout="column" [hidden]="editing">
-                <div *ngFor="let file of cause.files" fxLayout="row" fxLayoutGap="30px">
+            <div fxLayout="column">
+                <div *ngFor="let file of cause.files" fxLayout="row" fxLayoutGap="10px">
                     <div>
-                        <a href="#">{{ file.title }}</a>
-                        ({{ file.size }})
+                        <a href="#" (click)="!!download(file)">{{ file.filename }}</a>
+                        <small> ({{ file.size }} B)</small>
                     </div>
+                    <i class="fa fa-remove" matTooltip="Delete" (click)="delete(file)" [hidden]="!editing" *ngIf="cause.user.userid == userid" style="color:red" matTooltipPosition="after"></i>
                     <div>{{ file.description }}</div>
                 </div>
             </div>
