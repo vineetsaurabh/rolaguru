@@ -17,7 +17,7 @@
                 <i class="fa fa-trash"></i>
             </button>
         </div>
-        <button class="btn" (click)="updateCommentError()" matTooltip="Save Comment" fxLayoutAlign="end" [hidden]="!editing">
+        <button class="btn" (click)="updateCommentError()" matTooltip="Save Comment" fxLayoutAlign="end" [hidden]="!editing" [disabled]="edithtmlContent == ''">
             <i class="fa fa-floppy-o"></i>
         </button>
     </div>

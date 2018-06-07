@@ -7,7 +7,7 @@
         <app-ngx-editor minHeight="50px" [(ngModel)]="htmlContent"></app-ngx-editor>
     </div>
     <div class="text-center">
-        <button mat-raised-button (click)="createCommentError()">
+        <button mat-raised-button (click)="createCommentError()" [disabled]="htmlContent == ''">
             Save Comment
         </button>
     </div>
