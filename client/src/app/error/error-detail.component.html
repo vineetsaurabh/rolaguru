@@ -11,18 +11,16 @@
                 </button>
             </mat-form-field>
         </div>
-        <span class="fill-remaining-space"></span>
-        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center">
-            <div class="border-text" fxLayoutGap="15px">
+        <div class="fill-remaining-space" fxLayoutAlign="center center">
+            <div class="border-text" fxLayoutGap="15px" style="width: 100%">
                 <h1>
                     <span data-toggle="tooltip" matTooltip="Descriptions" matTooltipPosition="above">
                         Description
                     </span>
                 </h1>
-                <span>{{ error.message }}</span>
+                <span fxLayoutAlign="center center">{{ error.message }}</span>
             </div>
         </div>
-        <span class="fill-remaining-space"></span>
         <div fxLayout="column" fxLayout.xs="row">
             <div fxLayoutAlign="start">
                 <h5>{{ error.causes.length }}</h5>
