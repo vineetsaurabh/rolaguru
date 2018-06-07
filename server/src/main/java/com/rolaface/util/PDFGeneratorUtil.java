@@ -2,6 +2,7 @@ package com.rolaface.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -44,7 +45,11 @@ public final class PDFGeneratorUtil {
 
 	private static float CURRENT_TEXT_POSITION_X = PAGE_MARGIN_X + CELL_MARGIN;
 	private static float CURRENT_TEXT_POSITION_Y = NEW_PAGE_TABLE_TEXT_POSITION_Y;
+	private static float CURRENT_ROW_POSITION_Y = NEW_PAGE_TABLE_POSITION_Y;
+	private static float CURRENT_ROW_HEIGHT = ROW_HEIGHT;
 	private static float END_ROW_POSITION_Y = 0.0f;
+
+	private static int count = 1;
 
 	private PDFGeneratorUtil() {
 		throw new AssertionError();
@@ -78,26 +83,93 @@ public final class PDFGeneratorUtil {
 	}
 
 	private static void drawTable(PDPageContentStream contentStream, List<FlexError> flexErrors) throws IOException {
+		drawRowLine(contentStream);
+		drawHeader(contentStream);
 		drawRows(contentStream, flexErrors);
 		drawColumns(contentStream);
 
-		addTextInHeader(contentStream, flexErrors);
-		addTextInCell(contentStream, flexErrors);
+		CURRENT_TEXT_POSITION_X = PAGE_MARGIN_X + CELL_MARGIN;
+		CURRENT_TEXT_POSITION_Y = NEW_PAGE_TABLE_TEXT_POSITION_Y;
+		CURRENT_ROW_POSITION_Y = NEW_PAGE_TABLE_POSITION_Y;
 	}
 
 	private static void drawRows(PDPageContentStream contentStream, List<FlexError> flexErrors) throws IOException {
-		int rows = flexErrors.size() + 1;
-		float nextY = NEW_PAGE_TABLE_POSITION_Y;
-		for (int i = 0; i <= rows; i++) {
-			if (nextY <= PAGE_MARGIN_Y) {
+		for (FlexError flexError : flexErrors) {
+			if (CURRENT_ROW_POSITION_Y <= PAGE_MARGIN_Y) {
 				break;
 			}
-			contentStream.moveTo(PAGE_MARGIN_X, nextY);
-			contentStream.lineTo(PAGE_MARGIN_X + TABLE_WIDTH, nextY);
-			contentStream.stroke();
-			nextY -= ROW_HEIGHT;
+			addTextInRow(contentStream, flexError, count++);
+			CURRENT_ROW_HEIGHT = ROW_HEIGHT;
+			drawRowLine(contentStream);
 		}
-		END_ROW_POSITION_Y = nextY + ROW_HEIGHT;
+		END_ROW_POSITION_Y = CURRENT_ROW_POSITION_Y + ROW_HEIGHT;
+	}
+
+	private static void drawRowLine(PDPageContentStream contentStream) throws IOException {
+		contentStream.moveTo(PAGE_MARGIN_X, CURRENT_ROW_POSITION_Y);
+		contentStream.lineTo(PAGE_MARGIN_X + TABLE_WIDTH, CURRENT_ROW_POSITION_Y);
+		contentStream.stroke();
+		CURRENT_ROW_POSITION_Y -= CURRENT_ROW_HEIGHT;
+	}
+
+	private static void drawHeader(PDPageContentStream contentStream) throws IOException {
+		contentStream.setFont(HEADER_FONT, HEADER_FONT_SIZE);
+		for (int j = 0; j < NO_OF_COLUMNS; j++) {
+			contentStream.beginText();
+			contentStream.newLineAtOffset(CURRENT_TEXT_POSITION_X, CURRENT_TEXT_POSITION_Y);
+			contentStream.showText(HEADERS[j]);
+			contentStream.endText();
+			CURRENT_TEXT_POSITION_X += COL_WIDTH[j];
+		}
+		CURRENT_TEXT_POSITION_X = PAGE_MARGIN_X + CELL_MARGIN;
+		CURRENT_TEXT_POSITION_Y -= ROW_HEIGHT;
+		drawRowLine(contentStream);
+	}
+
+	private static void addTextInRow(PDPageContentStream contentStream, FlexError flexError, int count)
+			throws IOException {
+		String[] flexErrorValues = new String[NO_OF_COLUMNS];
+		flexErrorValues[0] = String.valueOf(count);
+		flexErrorValues[1] = flexError.getErrcode();
+		flexErrorValues[2] = flexError.getMessage();
+		flexErrorValues[3] = flexError.getErrortype();
+		flexErrorValues[4] = flexError.getBatchtype();
+
+		int colCount = 0;
+		for (String flexErrorValue : flexErrorValues) {
+			addTextInCell(contentStream, flexErrorValue, colCount);
+			CURRENT_TEXT_POSITION_X += COL_WIDTH[colCount];
+			colCount++;
+		}
+		CURRENT_TEXT_POSITION_X = PAGE_MARGIN_X + CELL_MARGIN;
+		CURRENT_TEXT_POSITION_Y -= CURRENT_ROW_HEIGHT;
+	}
+
+	private static void addTextInCell(PDPageContentStream contentStream, String text, int colCount) throws IOException {
+		contentStream.setFont(CELL_FONT, CELL_FONT_SIZE);
+		float textWidth = CELL_FONT.getStringWidth(text) / 1000 * CELL_FONT_SIZE;
+		float cellWidth = COL_WIDTH[2];
+		if (colCount == 2 && textWidth > cellWidth) {
+			int length = (int) (cellWidth / (CELL_FONT.getAverageFontWidth() / 1000 * CELL_FONT_SIZE));
+			String[] lines = wrapText(text, length);
+
+			for (int i = 0; i < lines.length; i++) {
+				contentStream.beginText();
+				contentStream.newLineAtOffset(CURRENT_TEXT_POSITION_X, CURRENT_TEXT_POSITION_Y);
+				contentStream.showText(lines[i]);
+				contentStream.endText();
+
+				CURRENT_TEXT_POSITION_Y -= ROW_HEIGHT;
+			}
+			CURRENT_TEXT_POSITION_Y = CURRENT_TEXT_POSITION_Y + lines.length * ROW_HEIGHT;
+			CURRENT_ROW_POSITION_Y = CURRENT_ROW_POSITION_Y - (lines.length - 1) * ROW_HEIGHT;
+			CURRENT_ROW_HEIGHT = CURRENT_ROW_HEIGHT + (lines.length - 1) * ROW_HEIGHT;
+		} else {
+			contentStream.beginText();
+			contentStream.newLineAtOffset(CURRENT_TEXT_POSITION_X, CURRENT_TEXT_POSITION_Y);
+			contentStream.showText(text);
+			contentStream.endText();
+		}
 	}
 
 	private static void drawColumns(PDPageContentStream contentStream) throws IOException {
@@ -110,44 +182,43 @@ public final class PDFGeneratorUtil {
 		}
 	}
 
-	private static void addTextInHeader(PDPageContentStream contentStream, List<FlexError> flexErrors)
-			throws IOException {
-		contentStream.setFont(HEADER_FONT, HEADER_FONT_SIZE);
-		for (int j = 0; j < NO_OF_COLUMNS; j++) {
-			contentStream.beginText();
-			contentStream.newLineAtOffset(CURRENT_TEXT_POSITION_X, CURRENT_TEXT_POSITION_Y);
-			contentStream.showText(HEADERS[j]);
-			contentStream.endText();
-			CURRENT_TEXT_POSITION_X += COL_WIDTH[j];
-		}
-		CURRENT_TEXT_POSITION_X = PAGE_MARGIN_X + CELL_MARGIN;
-		CURRENT_TEXT_POSITION_Y -= ROW_HEIGHT;
-	}
+	public static String[] wrapText(String text, int len) {
+		char[] chars = text.toCharArray();
+		List<String> lines = new ArrayList<>();
+		StringBuffer line = new StringBuffer();
+		StringBuffer word = new StringBuffer();
 
-	private static void addTextInCell(PDPageContentStream contentStream, List<FlexError> flexErrors)
-			throws IOException {
-		contentStream.setFont(CELL_FONT, CELL_FONT_SIZE);
-		int count = 1;
-		for (final FlexError flexError : flexErrors) {
-			String[] flexErrorValues = new String[NO_OF_COLUMNS];
-			flexErrorValues[0] = String.valueOf(count++);
-			flexErrorValues[1] = flexError.getErrcode();
-			flexErrorValues[2] = flexError.getMessage();
-			flexErrorValues[3] = flexError.getErrortype();
-			flexErrorValues[4] = flexError.getBatchtype();
-
-			int colCount = 0;
-			for (String flexErrorValue : flexErrorValues) {
-				contentStream.beginText();
-				contentStream.newLineAtOffset(CURRENT_TEXT_POSITION_X, CURRENT_TEXT_POSITION_Y);
-				contentStream.showText(flexErrorValue);
-				contentStream.endText();
-				CURRENT_TEXT_POSITION_X += COL_WIDTH[colCount];
-				colCount++;
+		for (int i = 0; i < chars.length; i++) {
+			word.append(chars[i]);
+			if (chars[i] == ' ') {
+				if ((line.length() + word.length()) > len) {
+					lines.add(line.toString());
+					line.delete(0, line.length());
+				}
+				line.append(word);
+				word.delete(0, word.length());
 			}
-			CURRENT_TEXT_POSITION_X = PAGE_MARGIN_X + CELL_MARGIN;
-			CURRENT_TEXT_POSITION_Y -= ROW_HEIGHT;
 		}
+
+		// handle any extra chars in current word
+		if (word.length() > 0) {
+			if ((line.length() + word.length()) > len) {
+				lines.add(line.toString());
+				line.delete(0, line.length());
+			}
+			line.append(word);
+		}
+
+		// handle extra line
+		if (line.length() > 0) {
+			lines.add(line.toString());
+		}
+
+		String[] ret = new String[lines.size()];
+		for (int i = 0; i < lines.size(); i++) {
+			ret[i] = lines.get(i);
+		}
+		return ret;
 	}
 
 }
