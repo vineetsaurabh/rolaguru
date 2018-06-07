@@ -156,4 +156,11 @@ export class ListErrorComponent implements OnInit {
             });
     }
 
+    exportErrorsInPDF() {
+        this.errorService.exportErrorsInPDF()
+            .subscribe(res => {
+                saveAs(new Blob([res.body]), "err_code.pdf");
+            });
+    }
+
 }

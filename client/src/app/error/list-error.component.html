@@ -33,7 +33,7 @@
                         </label>
                         <input id="file-input" type="file" (change)="importErrors($event)" hidden>
                     </button>
-                    <button class="btn" matTooltip="Export as PDF">
+                    <button class="btn" matTooltip="Export as PDF" (click)="exportErrorsInPDF()">
                         <i class="fa fa-file-pdf-o"></i>
                     </button>
                     <button class="btn" matTooltip="Export as Excel" (click)="exportErrorsInExcel()">
