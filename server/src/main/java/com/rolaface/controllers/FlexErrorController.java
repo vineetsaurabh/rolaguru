@@ -31,6 +31,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.rolaface.entities.FlexError;
 import com.rolaface.services.FlexErrorService;
+import com.rolaface.util.PDFGeneratorUtil;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
@@ -143,6 +144,15 @@ public class FlexErrorController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.parseMediaType("application/vnd.ms-excel"));
 		headers.setContentDispositionFormData("attachment", "err_code.xls");
+		return new ResponseEntity<>(err_code, headers, HttpStatus.OK);
+	}
+
+	@GetMapping("/exporterrorsinpdf")
+	public ResponseEntity<byte[]> exportErrorsInPDF() {
+		byte[] err_code = PDFGeneratorUtil.generateListOfErrors(flexErrorService.findAll());
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.parseMediaType("application/pdf"));
+		headers.setContentDispositionFormData("attachment", "err_code.pdf");
 		return new ResponseEntity<>(err_code, headers, HttpStatus.OK);
 	}
 

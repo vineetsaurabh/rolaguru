@@ -40,6 +40,9 @@ dependencies {
     
     //to work with the old Microsoft binary file format for excel. These file formats have .xls extension.
     compile "org.apache.poi:poi:3.17"
+    
+    //to generate PDF report
+    compile "org.apache.pdfbox:pdfbox:2.0.4"
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
 

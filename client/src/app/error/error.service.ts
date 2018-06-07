@@ -71,4 +71,8 @@ export class ErrorService {
         return this.http.get(this.errorUrl + '/exporterrorsinexcel', { observe: 'response', responseType: 'blob' });
     }
 
+    public exportErrorsInPDF(): Observable<any>  {
+        return this.http.get(this.errorUrl + '/exporterrorsinpdf', { observe: 'response', responseType: 'blob' });
+    }
+
 }
