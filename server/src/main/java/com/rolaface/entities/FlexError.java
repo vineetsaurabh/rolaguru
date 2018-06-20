@@ -1,6 +1,6 @@
 package com.rolaface.entities;
 
-import java.util.Set;
+import java.util.SortedSet;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +13,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.SortComparator;
+
+import com.rolaface.util.CauseComparator;
 
 @Entity
 @Table(name = "flexerrors")
@@ -39,7 +43,8 @@ public class FlexError {
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "flexerror_cause", joinColumns = { @JoinColumn(name = "errid") }, inverseJoinColumns = {
 			@JoinColumn(name = "causeid") })
-	private Set<Cause> causes;
+	@SortComparator(CauseComparator.class)
+	private SortedSet<Cause> causes;
 
 	public int getErrid() {
 		return errid;
@@ -81,11 +86,11 @@ public class FlexError {
 		this.batchtype = batchtype;
 	}
 
-	public Set<Cause> getCauses() {
+	public SortedSet<Cause> getCauses() {
 		return causes;
 	}
 
-	public void setCauses(Set<Cause> causes) {
+	public void setCauses(SortedSet<Cause> causes) {
 		this.causes = causes;
 	}
 
