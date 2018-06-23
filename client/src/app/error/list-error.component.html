@@ -11,10 +11,10 @@
                         Error Actions
                     </span>
                 </h1>
-                <button class="btn" matTooltip="Subscribe Errors">
+                <button class="btn" matTooltip="Subscribe Errors" (click)="subscribeErrors()">
                     <i class="fa fa-rss"></i>
                 </button>
-                <button class="btn" matTooltip="Un-subscribe Errors">
+                <button class="btn" matTooltip="Un-subscribe Errors" (click)="unSubscribeErrors()">
                     <i class="fa fa-rss-square"></i>
                 </button>
                 <button class="btn" matTooltip="Delete Errors" (click)="onDeleteSelectedErrors()">
@@ -98,14 +98,12 @@
                     <button class="btn" matTooltip="Delete Error" (click)="onDeleteError(error)">
                         <i class="fa fa fa-trash-o fa-fw"></i>
                     </button>
-                    <button class="btn" matTooltip="Un-subscribe" (click)="unSubscribeError(error)" *ngIf="subscribedErrorIds && subscribedErrorIds.indexOf(''+error.errid) > -1; else unsubscribe">
+                    <button class="btn" matTooltip="Un-subscribe" (click)="unSubscribeError(error)" *ngIf="subscribedErrorIds && subscribedErrorIds.indexOf(''+error.errid) > -1">
                         <i class="fa fa-rss-square"></i>
                     </button>
-                    <ng-template #unsubscribe>
-                        <button class="btn" matTooltip="Subscribe" (click)="subscribeError(error)">
-                            <i class="fa fa-rss"></i>
-                        </button>
-                    </ng-template>
+                    <button class="btn" matTooltip="Subscribe" (click)="subscribeError(error)" *ngIf="subscribedErrorIds == null || subscribedErrorIds.indexOf(''+error.errid) == -1">
+                        <i class="fa fa-rss"></i>
+                    </button>
                     <!--
                     <button class="btn" matTooltip="Add Cause" (click)="errorService.addCause(error, dialog)">
                         <i class="fa fa-plus fa-fw"></i>

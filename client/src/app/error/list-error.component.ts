@@ -65,6 +65,8 @@ export class ListErrorComponent implements OnInit {
         let subscribedErrors = this.token.getSubscribedErrorIds();
         if(subscribedErrors) {
             this.subscribedErrorIds = subscribedErrors.split(',');
+        } else {
+            this.subscribedErrorIds = null;
         }
     }
 
@@ -189,6 +191,49 @@ export class ListErrorComponent implements OnInit {
                 this.token.removeSubscribedErrorIds(error.errid);
                 this.getSubscribedErrorIds();
                 this.toastService.success(`You have unsubscribed for Error ${error.errcode}`);
+            });
+    }
+
+    subscribeErrors() {
+        if (this.selectedErrors.length == 0) {
+            this.toastService.warning(`Please select an error to subscribe`);
+            return;
+        }
+        let selectedErrorsLength = this.selectedErrors.length;
+        let errids = this.selectedErrors.join(",");
+        this.errorService.subscribeErrors(errids)
+            .subscribe(res => {
+                this.token.addSubscribedErrorIds(errids);
+                this.getSubscribedErrorIds();
+                if (res == 0) {
+                    this.toastService.warning(`All selected errors are already subscribed`);
+                } else if (res == 1) {
+                    this.toastService.success(`1 error subscribed`);
+                } else {
+                    this.toastService.success(`${res} errors subscribed`);
+                }
+            }
+            );
+    }
+
+    unSubscribeErrors() {
+        if (this.selectedErrors.length == 0) {
+            this.toastService.warning(`Please select an error to un-subscribe`);
+            return;
+        }
+        let selectedErrorsLength = this.selectedErrors.length;
+        let errids = this.selectedErrors.join(",");
+        this.errorService.unSubscribeErrors(errids)
+            .subscribe(res => {
+                this.token.removeSubscribedErrorIds(errids);
+                this.getSubscribedErrorIds();
+                if (res == 0) {
+                    this.toastService.warning(`All selected errors are not subscribed`);
+                } else if (res == 1) {
+                    this.toastService.success(`1 error un-subscribed`);
+                } else {
+                    this.toastService.success(`${res} errors un-subscribed`);
+                }
             });
     }
 

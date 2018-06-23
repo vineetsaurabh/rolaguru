@@ -85,4 +85,16 @@ export class ErrorService {
         return this.http.delete(this.errorSubscribeUrl + "/" + errid);
     }
 
+    public subscribeErrors(errids: string) {
+        let params = new HttpParams();
+        params = params.append('errids', errids);
+        return this.http.get<number>(this.errorSubscribeUrl + "/subscribeerrors", { params: params });
+    }
+
+    public unSubscribeErrors(errids: string) {
+        let params = new HttpParams();
+        params = params.append('errids', errids);
+        return this.http.get<number>(this.errorSubscribeUrl + "/unsubscribeerrors", { params: params });
+    }
+
 }
