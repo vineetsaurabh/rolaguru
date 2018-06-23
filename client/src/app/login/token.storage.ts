@@ -65,10 +65,13 @@ export class TokenStorage {
         let subscribedErrorIds = this.getSubscribedErrorIds();
         window.sessionStorage.removeItem(SUBSCRIBED_ERROR);
         let subscribedErrorIdsArr = subscribedErrorIds.split(",");
-        let index = subscribedErrorIdsArr.indexOf(""+unSubscribedErrorId);
-        if (index > -1) {
-            subscribedErrorIdsArr.splice(index, 1);
-        }
+        let unSubscribedErrorIdsArr = unSubscribedErrorId.split(",");
+        unSubscribedErrorIdsArr.forEach(unSubscribedErrorId => {
+            let index = subscribedErrorIdsArr.indexOf(""+unSubscribedErrorId);
+            if (index > -1) {
+                subscribedErrorIdsArr.splice(index, 1);
+            }
+        });
         this.saveSubscribedError(subscribedErrorIdsArr.join(","));
         return this.getSubscribedErrorIds();
     }
