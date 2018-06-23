@@ -19,6 +19,8 @@ export class ErrorService {
 
     private errorUrl = environment.baseUrl + '/flex-error';
 
+    private errorSubscribeUrl = environment.baseUrl + '/flex-error-subscribe';
+
     public getError(id: number) {
         return this.http.get<Error>(this.errorUrl + "/" + id);
     }
@@ -73,6 +75,14 @@ export class ErrorService {
 
     public exportErrorsInPDF(): Observable<any>  {
         return this.http.get(this.errorUrl + '/exporterrorsinpdf', { observe: 'response', responseType: 'blob' });
+    }
+
+    public subscribeError(errid) {
+        return this.http.post(this.errorSubscribeUrl, errid);
+    }
+
+    public unSubscribeError(errid) {
+        return this.http.delete(this.errorSubscribeUrl + "/" + errid);
     }
 
 }

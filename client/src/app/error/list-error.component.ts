@@ -13,6 +13,7 @@ import { AddCauseComponent } from '../cause/add-cause.component';
 import { AddErrorComponent } from './add-error.component';
 import { ConfirmDeleteComponent } from '../util/confirm-delete.component';
 import { saveAs } from 'file-saver/FileSaver';
+import { TokenStorage } from '../login/token.storage';
 
 @Component({
     selector: 'app-comp',
@@ -21,6 +22,7 @@ import { saveAs } from 'file-saver/FileSaver';
 export class ListErrorComponent implements OnInit {
 
     errors: Error[];
+    subscribedErrorIds: string[];
     displayedColumns = ['checked', 'errcode', 'message', 'errortype', 'batchtype', 'actions'];
     dataSource: MatTableDataSource<Error>;
     selectedRowIndex: number = -1;
@@ -32,13 +34,15 @@ export class ListErrorComponent implements OnInit {
         private router: Router,
         private errorService: ErrorService,
         private toastService: ToastrService,
-        private dialog: MatDialog) {
+        private dialog: MatDialog,
+        private token: TokenStorage) {
     }
 
     ngOnInit() {
         this.dialog.afterAllClosed.subscribe(() => {
             this.getErrors();
-        })
+            this.getSubscribedErrorIds();
+        });
     };
 
     applyFilter(filterValue: string) {
@@ -55,6 +59,13 @@ export class ListErrorComponent implements OnInit {
                 this.dataSource.paginator = this.paginator;
                 this.dataSource.sort = this.sort;
             });
+    }
+
+    getSubscribedErrorIds() {
+        let subscribedErrors = this.token.getSubscribedErrorIds();
+        if(subscribedErrors) {
+            this.subscribedErrorIds = subscribedErrors.split(',');
+        }
     }
 
     public addError(): Observable<boolean> {
@@ -160,6 +171,24 @@ export class ListErrorComponent implements OnInit {
         this.errorService.exportErrorsInPDF()
             .subscribe(res => {
                 saveAs(new Blob([res.body]), "err_code.pdf");
+            });
+    }
+
+    subscribeError(error) {
+        this.errorService.subscribeError(error.errid)
+            .subscribe(res => { 
+                this.token.addSubscribedErrorIds(error.errid);
+                this.getSubscribedErrorIds();
+                this.toastService.success(`You have subscribed for Error ${error.errcode}`);
+            });
+    }
+
+    unSubscribeError(error) {
+        this.errorService.unSubscribeError(error.errid)
+            .subscribe(res => { 
+                this.token.removeSubscribedErrorIds(error.errid);
+                this.getSubscribedErrorIds();
+                this.toastService.success(`You have unsubscribed for Error ${error.errcode}`);
             });
     }
 

@@ -30,6 +30,10 @@ export class LoginComponent {
           .subscribe( user => {
             this.token.saveCurrentUser(user.firstName);
             this.token.saveCurrentUserId(user.userid);
+            this.userService.getSubscribedErrors()
+                .subscribe( subscribedErrIds => {
+                    this.token.saveSubscribedError(subscribedErrIds.toString());
+                });
             this.router.navigate(['homepage']);
         }); 
       }, (error) => {

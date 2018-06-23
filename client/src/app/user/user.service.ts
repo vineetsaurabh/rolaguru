@@ -1,56 +1,62 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { User } from './user.model';
 import { environment } from '../../environments/environment';
 
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
 @Injectable()
 export class UserService {
 
-  constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
 
-  private userUrl = environment.baseUrl + '/user';
+    private userUrl = environment.baseUrl + '/user';
 
-  public getUsers() {
-    return this.http.get<User[]>(this.userUrl);
-  }
+    private errorSubscribeUrl = environment.baseUrl + '/flex-error-subscribe';
 
-  public getUser(userid: number) {
-    return this.http.get<User>(this.userUrl + "/" + userid);
-  }
+    public getUsers() {
+        return this.http.get<User[]>(this.userUrl);
+    }
 
-  public getUserByUsername(username: string) {
-    let params = new HttpParams();
-    params = params.append('username', username);
-    return this.http.get<User>(this.userUrl + '/findbyusername', {params: params});
-  }
+    public getUser(userid: number) {
+        return this.http.get<User>(this.userUrl + "/" + userid);
+    }
 
-  public getUserByEmail(email: string) {
-    let params = new HttpParams();
-    params = params.append('email', email);
-    return this.http.get<User>(this.userUrl + '/findbyemail', {params: params});
-  }
+    public getUserByUsername(username: string) {
+        let params = new HttpParams();
+        params = params.append('username', username);
+        return this.http.get<User>(this.userUrl + '/findbyusername', { params: params });
+    }
 
-  public deleteUser(user) {
-    return this.http.delete(this.userUrl + "/" + user.userid);
-  }
+    public getUserByEmail(email: string) {
+        let params = new HttpParams();
+        params = params.append('email', email);
+        return this.http.get<User>(this.userUrl + '/findbyemail', { params: params });
+    }
 
-  public createUser(user) {
-    return this.http.post<User>(this.userUrl, user, httpOptions);
-  }
+    public deleteUser(user) {
+        return this.http.delete(this.userUrl + "/" + user.userid);
+    }
 
-  public updateUser(user) {
-    return this.http.put<User>(this.userUrl  + "/" + user.userid, user, httpOptions);
-  }
+    public createUser(user) {
+        return this.http.post<User>(this.userUrl, user, httpOptions);
+    }
 
-  public deleteUsers(userids: string[]) {
-    let params = new HttpParams();
-    params = params.append('userids', userids.join(","));
-    return this.http.get<boolean>(this.userUrl + "/deleteusers",  {params: params});
-  }
+    public updateUser(user) {
+        return this.http.put<User>(this.userUrl + "/" + user.userid, user, httpOptions);
+    }
+
+    public deleteUsers(userids: string[]) {
+        let params = new HttpParams();
+        params = params.append('userids', userids.join(","));
+        return this.http.get<boolean>(this.userUrl + "/deleteusers", { params: params });
+    }
+
+    public getSubscribedErrors() {
+        return this.http.get<string[]>(this.errorSubscribeUrl + "/subscribederrors", );
+    }
 
 }
