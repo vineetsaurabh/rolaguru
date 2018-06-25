@@ -1,0 +1,14 @@
+<div *ngIf="displayedColumns.length > 0">
+    <div *ngFor="let column of displayedColumns" fxLayout="row">
+        <div fxLayoutAlign="start">
+            <mat-checkbox [(ngModel)]="column.checked" color="primary" value="{{column.value}}"></mat-checkbox>
+        </div>
+        &nbsp;
+        <div>{{ column.value }}</div>
+    </div>
+    <div fxLayoutAlign="center" fxLayout="row">
+        <button class="btn" matTooltip="Submit" (click)="submit()"> Submit </button>
+        &nbsp;&nbsp;
+        <button class="btn" matTooltip="Submit" (click)="reset()"> Reset </button>
+    </div>
+</div>

@@ -14,6 +14,7 @@ import { AddErrorComponent } from './add-error.component';
 import { ConfirmDeleteComponent } from '../util/confirm-delete.component';
 import { saveAs } from 'file-saver/FileSaver';
 import { TokenStorage } from '../login/token.storage';
+import { TableConfiguratorComponent } from './table-configurator.component';
 
 @Component({
     selector: 'app-comp',
@@ -23,7 +24,8 @@ export class ListErrorComponent implements OnInit {
 
     errors: Error[];
     subscribedErrorIds: string[];
-    displayedColumns = ['checked', 'errcode', 'message', 'errortype', 'batchtype', 'actions'];
+    allColumns = ['Checkbox', 'Error Code', 'Message', 'Error Type', 'Batch Type', 'Actions'];
+    displayedColumns = this.allColumns;
     dataSource: MatTableDataSource<Error>;
     selectedRowIndex: number = -1;
 
@@ -235,6 +237,19 @@ export class ListErrorComponent implements OnInit {
                     this.toastService.success(`${res} errors un-subscribed`);
                 }
             });
+    }
+
+    openTableConfigurator() {
+        let dialogRef: MatDialogRef<TableConfiguratorComponent>;
+        dialogRef = this.dialog.open(TableConfiguratorComponent, {
+            data: {'allColumns': this.allColumns, 'displayedColumns': this.displayedColumns},
+            width: '200px',
+        });
+        return dialogRef.afterClosed().subscribe(result => {
+            if(result) {
+                this.displayedColumns = result;
+            }
+        });
     }
 
 }

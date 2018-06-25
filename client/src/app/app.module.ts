@@ -88,6 +88,7 @@ import { CommentErrorComponent } from './error/comment-error.component';
 import { CommentErrorService } from './error/comment-error.service';
 import { ListErrorCommentComponent } from './error/list-comment-error.component';
 import { ConfirmDeleteComponent } from './util/confirm-delete.component';
+import { TableConfiguratorComponent } from './error/table-configurator.component';
 
 @NgModule({
     declarations: [
@@ -108,7 +109,8 @@ import { ConfirmDeleteComponent } from './util/confirm-delete.component';
         CauseComponent,
         CommentErrorComponent,
         ListErrorCommentComponent,
-        ConfirmDeleteComponent
+        ConfirmDeleteComponent,
+        TableConfiguratorComponent
     ],
     imports: [
         BrowserModule,
