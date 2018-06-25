@@ -10,6 +10,7 @@ import { MatTableDataSource, MatPaginator, MatSort, MatDialogRef, MatDialog, Mat
 import { Observable } from 'rxjs/Observable';
 import { AddUserComponent } from './add-user.component';
 import { ConfirmDeleteComponent } from '../util/confirm-delete.component';
+import { TableConfiguratorComponent } from '../util/table-configurator.component';
 
 @Component({
     selector: 'app-comp',
@@ -18,7 +19,8 @@ import { ConfirmDeleteComponent } from '../util/confirm-delete.component';
 export class ListUserComponent implements OnInit {
 
     users: User[];
-    displayedColumns = ['checked', 'username', 'firstName', 'lastName', 'email', 'actions'];
+    allColumns = ['Checkbox', 'Username', 'First Name', 'Last Name', 'Email', 'Actions'];
+    displayedColumns = this.allColumns;
     dataSource: MatTableDataSource<User>;
     selectedRowIndex: number = -1;
 
@@ -156,6 +158,20 @@ export class ListUserComponent implements OnInit {
                     this.toastService.success(`${selectedUsersLength} users deleted`);
                 }
             });
+    }
+
+    //TODO: Repeated n ListErrorComponent
+    openTableConfigurator() {
+        let dialogRef: MatDialogRef<TableConfiguratorComponent>;
+        dialogRef = this.dialog.open(TableConfiguratorComponent, {
+            data: {'allColumns': this.allColumns, 'displayedColumns': this.displayedColumns},
+            width: '200px',
+        });
+        return dialogRef.afterClosed().subscribe(result => {
+            if(result) {
+                this.displayedColumns = result;
+            }
+        });
     }
 
 }

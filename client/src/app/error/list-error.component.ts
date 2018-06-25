@@ -14,7 +14,7 @@ import { AddErrorComponent } from './add-error.component';
 import { ConfirmDeleteComponent } from '../util/confirm-delete.component';
 import { saveAs } from 'file-saver/FileSaver';
 import { TokenStorage } from '../login/token.storage';
-import { TableConfiguratorComponent } from './table-configurator.component';
+import { TableConfiguratorComponent } from '../util/table-configurator.component';
 
 @Component({
     selector: 'app-comp',
@@ -239,6 +239,7 @@ export class ListErrorComponent implements OnInit {
             });
     }
 
+     //TODO: Repeated n ListUserComponent
     openTableConfigurator() {
         let dialogRef: MatDialogRef<TableConfiguratorComponent>;
         dialogRef = this.dialog.open(TableConfiguratorComponent, {
