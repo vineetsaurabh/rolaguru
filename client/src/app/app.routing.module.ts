@@ -15,7 +15,7 @@ import { AddCauseComponent } from './cause/add-cause.component';
 import { LoginComponent } from './login/login.component';
 import { HomepageComponent } from './login/homepage.component';
 import { ConfirmDeleteComponent } from './util/confirm-delete.component';
-import { TableConfiguratorComponent } from './error/table-configurator.component';
+import { TableConfiguratorComponent } from './util/table-configurator.component';
 
 const routes: Routes = [
     {
