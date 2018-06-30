@@ -253,4 +253,8 @@ export class ListErrorComponent implements OnInit {
         });
     }
 
+    printErrors() {
+        window.print();
+    }
+
 }

@@ -39,7 +39,7 @@
                     <button class="btn" matTooltip="Export as Excel" (click)="exportErrorsInExcel()">
                         <i class="fa fa-file-excel-o"></i>
                     </button>
-                    <button class="btn" matTooltip="Print">
+                    <button class="btn" matTooltip="Print" (click)="printErrors()">
                         <i class="fa fa-print"></i>
                     </button>
                 </div>
@@ -57,7 +57,7 @@
             <i class="fa fa-bars"></i>
         </button>
     </div>
-    <div class="table-container mat-elevation-z8">
+    <div class="table-container mat-elevation-z8 printable">
         <mat-table #table [dataSource]="dataSource" matSort>
 
             <ng-container matColumnDef="Checkbox">

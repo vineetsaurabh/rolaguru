@@ -49,3 +49,18 @@ div.border-text h1 span{
 label[for="file-input"]{
     margin-bottom: 0px;
 }
+
+/* Print*/
+@media print {
+    body * {
+      visibility: hidden;
+    }
+    div.printable, div.printable * {
+      visibility: visible;
+    }
+    div.printable {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
