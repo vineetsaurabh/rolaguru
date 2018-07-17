@@ -89,11 +89,13 @@ import { CommentErrorService } from './error/comment-error.service';
 import { ListErrorCommentComponent } from './error/list-comment-error.component';
 import { ConfirmDeleteComponent } from './util/confirm-delete.component';
 import { TableConfiguratorComponent } from './util/table-configurator.component';
+import { HeaderComponent } from './common/header.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         LoginComponent,
+        HeaderComponent,
         HomepageComponent,
         ListUserComponent,
         AddUserComponent,
