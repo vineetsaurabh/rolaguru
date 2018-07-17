@@ -15,6 +15,11 @@ mat-form-field {
     color: gray;
 }
 
+.mat-toolbar {
+    background: linear-gradient(to right, blue, royalblue, steelblue, lightskyblue, steelblue, royalblue, blue); 
+    color: white;
+}
+
 /* Add button on right side of table filter */
 .table-container {
     display: flex;

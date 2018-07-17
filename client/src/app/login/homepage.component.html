@@ -1,35 +1,12 @@
-<div class="col-md-offset-1">
-    <mat-toolbar>
-        <mat-toolbar-row fxLayoutGap="5px">
-            <div class="image-container">
-                <img src="../assets/images/rolaguru_32.png" />
-            </div>
-            <div>
-                <span> {{title}} </span>
-            </div>
-            <span class="fill-remaining-space"></span>
-            <div>
-                <small> {{currentUser}} </small>
-            </div>
-            <div>
-                <button mat-button mat-icon-button matTooltip="Logout" *ngIf="authService.isAuthenticated()" (click)="logout()">
-                    <mat-icon color="accent">exit_to_app</mat-icon>
-                </button>
-            </div>
-        </mat-toolbar-row>
-    </mat-toolbar>
-</div>
-<div class="navbar container">
-    <ul class="nav nav-pills mx-auto">
-        <li class="nav-item">
-            <a class="nav-link" routerLink="/listUsers" routerLinkActive="active current">
-                {{tabs[0]}}
+<global-toolbar></global-toolbar>
+<div class="container col-lg-10">
+    <mat-grid-list cols="3" rowHeight="3:2" gutterSize="25">
+        <mat-grid-tile *ngFor="let category of errorCategories" [style.background]="category.color">
+            <a routerLink="/listErrors">
+                <div style="text-align: center">
+                    <h3>{{ category.name }}</h3>
+                </div>
             </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" routerLink="/listErrors" routerLinkActive="active current">
-                {{tabs[2]}}
-            </a>
-        </li>
-    </ul>
+        </mat-grid-tile>
+    </mat-grid-list>
 </div>
