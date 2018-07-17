@@ -47,7 +47,7 @@
         </div>
     </div>
     <div fxLayoutGap="10px" fxLayoutAlign="start center">
-        <button class="btn" (click)="addError()">
+        <button class="btn add-element" (click)="addError()">
             <mat-icon matTooltip="Add Error" matTooltipPosition="left">library_add</mat-icon>
         </button>
         <mat-form-field>
@@ -113,7 +113,7 @@
             </ng-container>
 
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight-row': selectedRowIndex == row.errid}" (click)="highlight(row.errid)">
+            <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight-row': row.checked}">
             </mat-row>
         </mat-table>
 

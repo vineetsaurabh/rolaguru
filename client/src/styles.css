@@ -3,38 +3,35 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-mat-form-field {
-    width: 100%;
+body{
+    background-color: rgb(250,255,255);
 }
 
 .fill-remaining-space {
     flex: 1 1 auto;
 }
-
-.inactive-user {
-    color: gray;
-}
-
 .mat-toolbar {
     background: linear-gradient(to right, blue, royalblue, steelblue, lightskyblue, steelblue, royalblue, blue); 
     color: white;
 }
 
-/* Add button on right side of table filter */
+/* Table Styles */
 .table-container {
     display: flex;
     flex-direction: column;
 }
-.mat-form-field {
-    width: 100%;
+.mat-header-cell{
+    font-weight: bold;
+    text-align: center;
+    color: darkblue;
 }
-
-/* Highlight a clicked row */
 .highlight-row{
-    background: lightyellow;
+    background: linear-gradient(azure, powderblue);
 }
-
-/* Border with text on it, like fieldset*/
+.inactive-user {
+    color: gray;
+}
+/* Border with text on it, like fieldset */
 div.border-text{
     border: 1px dotted;
     border-color: lightgrey;
@@ -46,7 +43,7 @@ div.border-text h1{
     height: 12px;
     line-height: 16px;
     font-size: 10px;
-    color:lightgrey;
+    color: cornflowerblue;
 }
 div.border-text h1 span{
     background-color: white;
@@ -55,7 +52,15 @@ label[for="file-input"]{
     margin-bottom: 0px;
 }
 
-/* Print*/
+/* Form Styles */
+mat-form-field {
+    width: 100%;
+}
+.mat-form-field {
+    width: 100%;
+}
+
+/* Print */
 @media print {
     body * {
       visibility: hidden;
@@ -69,3 +74,47 @@ label[for="file-input"]{
       top: 0;
     }
   }
+
+/* Icons */
+.home-icon{
+    color: yellow;
+}
+.fa-pencil{
+    color: midnightblue;
+}
+.fa-bars{
+    color: goldenrod;
+}
+.add-element{
+    color: forestgreen;
+}
+.fa-trash, .fa-trash-o{
+    color: maroon;
+}
+.fa-rss{
+    color: coral;
+}
+.fa-rss-square{
+    color: cornflowerblue;
+}
+.fa-upload{
+    color: darkblue;
+}
+.fa-file-pdf-o{
+    color: red;
+}
+.fa-file-excel-o{
+    color: mediumseagreen;
+}
+.fa-print{
+    color: darkslategray;
+}
+.fa-check{
+    color: darkgreen;
+}
+.fa-times{
+    color: crimson;
+}
+.fa-group{
+    color: blueviolet;
+}

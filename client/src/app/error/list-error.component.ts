@@ -27,7 +27,6 @@ export class ListErrorComponent implements OnInit {
     allColumns = ['Checkbox', 'Error Code', 'Message', 'Error Type', 'Batch Type', 'Actions'];
     displayedColumns = this.allColumns;
     dataSource: MatTableDataSource<Error>;
-    selectedRowIndex: number = -1;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
@@ -109,10 +108,6 @@ export class ListErrorComponent implements OnInit {
                 this.getErrors();
             })
     };
-
-    highlight(id) {
-        this.selectedRowIndex = id;
-    }
 
     get selectedErrors() {
         return this.errors
