@@ -118,3 +118,46 @@ mat-form-field {
 .fa-group{
     color: blueviolet;
 }
+
+/* Comment */
+.commented{
+    font-size: 12px;
+    display: inline-block;
+}
+.commented-by{
+    font-weight: bold;
+    color: royalblue;
+}
+.commented-on{
+    font-style: oblique;
+    color: slateblue;
+}
+.edited-on{
+    font-size: 10px;
+    font-style: italic;
+    color: steelblue;
+}
+.comment-action{
+    min-width: 90px!important;
+    margin-right: 28px;
+}
+.comment-action-button{
+    height: 24px!important;
+    line-height: 24px!important;
+    padding: 0 0 0 8px!important;
+}
+.comment-action-icon{
+    margin-right: 2px!important;
+}
+.comment-action-label{
+    font-size: 14px;
+}
+.comment-action-edit-icon{
+    margin-right: 2px!important;
+    color: royalblue!important;
+}
+.comment-action-delete-icon{
+    margin-right: 2px!important;
+    color: maroon!important;
+}
+
