@@ -22,7 +22,6 @@ export class ListUserComponent implements OnInit {
     allColumns = ['Checkbox', 'Username', 'First Name', 'Last Name', 'Email', 'Actions'];
     displayedColumns = this.allColumns;
     dataSource: MatTableDataSource<User>;
-    selectedRowIndex: number = -1;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
@@ -66,7 +65,6 @@ export class ListUserComponent implements OnInit {
     }
 
     public editUser(id: string): Observable<boolean> {
-        this.highlight(id);
         let dialogRef: MatDialogRef<EditUserComponent>;
         dialogRef = this.dialog.open(EditUserComponent, {
             data: id,
@@ -88,7 +86,6 @@ export class ListUserComponent implements OnInit {
     }
 
     deleteUser(user: User): void {
-        this.highlight(user.userid);
         this.userService.deleteUser(user)
             .subscribe(data => {
                 this.users = this.users.filter(u => u !== user);
@@ -113,10 +110,6 @@ export class ListUserComponent implements OnInit {
                 this.toastService.success(`User ${user.username} deactivated`);
             }
             );
-    }
-
-    highlight(id) {
-        this.selectedRowIndex = id;
     }
 
     get selectedUsers() {
