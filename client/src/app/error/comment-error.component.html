@@ -1,29 +1,43 @@
 <div [hidden]="deleted">
     <div fxLayout="row">
-        <div>
-            <small fxLayoutAlign="start">
-                <i>Comment by {{comment.user.firstName}} {{comment.createdTimestamp | amTimeAgo}}</i>
-                <i *ngIf="comment.modifiedTimestamp">
-                    &nbsp; (edited {{comment.modifiedTimestamp | amTimeAgo}})
-                </i>
-            </small>
+        <div fxLayout="column" fxLayoutGap="5px" [hidden]="editing">
+            <div [innerHTML]="comment.comment"></div>
+            <div class="commented" fxLayout="row" fxLayoutGap="5px">
+                <div class="commented-by"> -
+                    <a [routerLink]="['/findUser', comment.user.userid]"> {{comment.user.firstName}} </a>
+                </div>
+                <div class="commented-on"> {{comment.createdTimestamp | amTimeAgo}} </div>
+                <div class="edited-on" *ngIf="comment.modifiedTimestamp" fxFlexAlign="end">
+                    (edited {{comment.modifiedTimestamp | amTimeAgo}})
+                </div>
+            </div>
         </div>
         <span class="fill-remaining-space"></span>
-        <div *ngIf="comment.user.userid == userid" matTooltipPosition="below" fxLayout="row" fxLayoutGap="2px" [hidden]="editing">
-            <button class="btn" (click)="openInEdit(comment)" matTooltip="Edit Comment" fxLayoutAlign="end">
-                <i class="fa fa-pencil"></i>
+        <div *ngIf="comment.user.userid == userid" fxLayoutAlign="end" [hidden]="editing">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
             </button>
-            <button class="btn" (click)="deleteCommentError(comment)" matTooltip="Delete Comment" fxLayoutAlign="end">
-                <i class="fa fa-trash"></i>
+            <mat-menu #menu="matMenu" xPosition="before" class="comment-action">
+                <button mat-menu-item (click)="openInEdit(comment)" class="comment-action-button">
+                    <mat-icon class="comment-action-icon comment-action-edit-icon">edit</mat-icon>
+                    <span class="comment-action-label">Edit</span>
+                </button>
+                <button mat-menu-item (click)="deleteCommentError(comment)" class="comment-action-button">
+                    <mat-icon class="comment-action-icon comment-action-delete-icon">delete</mat-icon>
+                    <span class="comment-action-label">Delete</span>
+                </button>
+            </mat-menu>
+        </div>
+    </div>
+    <div [hidden]="!editing">
+        <div class="editor block">
+            <app-ngx-editor minHeight="50px" [(ngModel)]="edithtmlContent"></app-ngx-editor>
+        </div>
+        <div fxLayoutAlign="center">
+            <button class="btn" (click)="updateCommentError()" matTooltip="Save Comment" [disabled]="edithtmlContent == ''">
+                <i class="fa fa-floppy-o"></i>
             </button>
         </div>
-        <button class="btn" (click)="updateCommentError()" matTooltip="Save Comment" fxLayoutAlign="end" [hidden]="!editing" [disabled]="edithtmlContent == ''">
-            <i class="fa fa-floppy-o"></i>
-        </button>
-    </div>
-    <div [innerHTML]="comment.comment" [hidden]="editing"></div>
-    <div class="editor block" [hidden]="!editing">
-        <app-ngx-editor minHeight="50px" [(ngModel)]="edithtmlContent"></app-ngx-editor>
     </div>
     <mat-divider></mat-divider>
 </div>
