@@ -27,6 +27,9 @@ public class FlexError {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int errid;
 
+	@Column(nullable = false)
+	private String category;
+
 	@Column(unique = true, nullable = false)
 	private String errcode;
 
@@ -52,6 +55,14 @@ public class FlexError {
 
 	public void setErrid(int errid) {
 		this.errid = errid;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	public String getErrcode() {
@@ -96,8 +107,8 @@ public class FlexError {
 
 	@Override
 	public String toString() {
-		return "FlexError [errid=" + errid + ", errcode=" + errcode + ", message=" + message + ", errortype="
-				+ errortype + ", batchtype=" + batchtype + ", causes=" + causes + "]";
+		return "FlexError [errid=" + errid + ", category=" + category + ", errcode=" + errcode + ", message=" + message
+				+ ", errortype=" + errortype + ", batchtype=" + batchtype + "]";
 	}
 
 }

@@ -1,8 +1,8 @@
 <div class="container">
-    <h4 fxLayoutAlign="center">Add Cause for {{ errcode }}</h4>
+    <h4 fxLayoutAlign="center" class="add-item add-cause">Add Cause for {{ errcode }}</h4>
     <form #causeForm="ngForm" (ngSubmit)="createCause(causeForm)" ngNativeValidate>
         <div class="form-group">
-            <div fxLayoutAlign="center">
+            <div fxLayoutAlign="center" class="add-item-field">
                 <h5>Description</h5>
             </div>
             <div class="editor block">
@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="form-group">
-            <div fxLayoutAlign="center">
+            <div fxLayoutAlign="center" class="add-item-field">
                 <h5>Solution</h5>
             </div>
             <div class="editor block">
@@ -19,7 +19,7 @@
         </div>
 
         <div class="text-center">
-            <button mat-raised-button color="primary" [disabled]="!causeForm.valid">
+            <button mat-raised-button color="primary" [disabled]="!causeForm.valid || htmlDescription == '' || htmlSolution ==''">
                 Submit
             </button>
         </div>

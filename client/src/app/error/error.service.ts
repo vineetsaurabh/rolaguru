@@ -31,8 +31,10 @@ export class ErrorService {
         return this.http.get<Error>(this.errorUrl + '/findbyerrcode', { params: params });
     }
 
-    public getErrors() {
-        return this.http.get<Error[]>(this.errorUrl);
+    public getErrors(category: string) {
+        let params = new HttpParams();
+        params = params.append('category', category);
+        return this.http.get<Error[]>(this.errorUrl, { params: params });
     }
 
     public deleteError(error) {
@@ -63,17 +65,18 @@ export class ErrorService {
     }
 
 
-    public importErrors(file: File) {
+    public importErrors(file: File, category: string) {
         const formdata: FormData = new FormData();
         formdata.append('file', file);
+        formdata.append('category', category);
         return this.http.post<number>(this.errorUrl + '/importerrors', formdata);
     }
 
-    public exportErrorsInExcel(): Observable<any>  {
+    public exportErrorsInExcel(): Observable<any> {
         return this.http.get(this.errorUrl + '/exporterrorsinexcel', { observe: 'response', responseType: 'blob' });
     }
 
-    public exportErrorsInPDF(): Observable<any>  {
+    public exportErrorsInPDF(): Observable<any> {
         return this.http.get(this.errorUrl + '/exporterrorsinpdf', { observe: 'response', responseType: 'blob' });
     }
 

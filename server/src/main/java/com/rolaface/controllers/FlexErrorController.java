@@ -61,9 +61,9 @@ public class FlexErrorController {
 		return flexErrorService.delete(id);
 	}
 
-	@GetMapping
-	public List<FlexError> findAll() {
-		return flexErrorService.findAll();
+	@GetMapping(params = "category")
+	public List<FlexError> findAll(@RequestParam("category") String category) {
+		return flexErrorService.findAll(category);
 	}
 
 	@GetMapping(value = "/findbyerrcode", params = "code")
@@ -87,7 +87,7 @@ public class FlexErrorController {
 
 	@Transactional
 	@PostMapping("/importerrors")
-	public int importFlexErrors(@RequestParam("file") MultipartFile file) {
+	public int importFlexErrors(@RequestParam("file") MultipartFile file, @RequestParam("category") String category) {
 		int noOfRowInserted = 0;
 		try (InputStream stream = file.getInputStream(); HSSFWorkbook workbook = new HSSFWorkbook(stream)) {
 			HSSFSheet sheet = workbook.getSheetAt(0);
@@ -98,6 +98,7 @@ public class FlexErrorController {
 					flexError.setMessage(row.getCell(2).toString());
 					flexError.setErrortype(row.getCell(3).toString());
 					flexError.setBatchtype(row.getCell(4).toString());
+					flexError.setCategory(category);
 					create(flexError);
 				}
 			});

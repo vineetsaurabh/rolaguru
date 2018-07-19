@@ -16,6 +16,7 @@ export class EditErrorComponent implements OnInit {
 
     public error: Error = {
         errid: '',
+        category: '',
         errcode: '',
         message: '',
         errortype: '',
