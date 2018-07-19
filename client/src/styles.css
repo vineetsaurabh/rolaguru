@@ -7,6 +7,17 @@ body{
     background-color: rgb(250,255,255);
 }
 
+.error-category{
+    cursor: pointer;
+    color: purple;
+}
+.error-category:hover{
+    outline: none !important;
+    box-shadow: 0 0 10px blue;
+    /*background-color: mediumturquoise!important;*/
+    background: linear-gradient(mediumturquoise, palegreen, mediumseagreen)!important;
+    z-index: 10;
+}
 .fill-remaining-space {
     flex: 1 1 auto;
 }
@@ -66,6 +77,17 @@ mat-form-field {
 }
 .mat-form-field {
     width: 100%;
+}
+.add-item,.edit-item{
+    color: purple;
+    text-align: center;
+}
+.add-cause{
+    background: linear-gradient(to right, lightskyblue, powderblue, lightskyblue);
+}
+.add-item-field{
+    background-color: azure;
+    color: darkblue;
 }
 
 /* Print */

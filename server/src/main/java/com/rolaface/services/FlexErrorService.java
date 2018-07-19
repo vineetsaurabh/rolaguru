@@ -15,6 +15,8 @@ public interface FlexErrorService {
 
 	List<FlexError> findAll();
 
+	List<FlexError> findAll(String category);
+
 	FlexError findById(int id);
 
 	FlexError update(FlexError flexError);

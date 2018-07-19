@@ -3,6 +3,7 @@ package com.rolaface.repositories;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.rolaface.entities.FlexError;
 
@@ -21,4 +22,7 @@ public interface FlexErrorRepository extends JpaRepository<FlexError, Long> {
 	FlexError save(FlexError flexError);
 
 	FlexError findByErrcode(String errCode);
+
+	@Query(value = "SELECT * FROM flexerrors f WHERE f.category = ?1", nativeQuery = true)
+	List<FlexError> findErrorsByCategory(String category);
 }

@@ -1,6 +1,7 @@
+import { HomepageComponent } from './../login/homepage.component';
 
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 
 import { Error } from './error.model';
 import { ErrorService } from './error.service';
@@ -27,12 +28,15 @@ export class ListErrorComponent implements OnInit {
     allColumns = ['Checkbox', 'Error Code', 'Message', 'Error Type', 'Batch Type', 'Actions'];
     displayedColumns = this.allColumns;
     dataSource: MatTableDataSource<Error>;
+    errorCategoryId: string;
+    errorCategoryName: string;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
     constructor(
         private router: Router,
+        private route: ActivatedRoute,
         private errorService: ErrorService,
         private toastService: ToastrService,
         private dialog: MatDialog,
@@ -40,6 +44,10 @@ export class ListErrorComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.route.queryParams.subscribe(params => {
+            this.errorCategoryId = params.cat;
+            this.errorCategoryName = params.name;
+        });
         this.dialog.afterAllClosed.subscribe(() => {
             this.getErrors();
             this.getSubscribedErrorIds();
@@ -53,7 +61,7 @@ export class ListErrorComponent implements OnInit {
     }
 
     getErrors() {
-        this.errorService.getErrors()
+        this.errorService.getErrors(this.errorCategoryId)
             .subscribe(data => {
                 this.errors = data;
                 this.dataSource = new MatTableDataSource(data);
@@ -64,7 +72,7 @@ export class ListErrorComponent implements OnInit {
 
     getSubscribedErrorIds() {
         let subscribedErrors = this.token.getSubscribedErrorIds();
-        if(subscribedErrors) {
+        if (subscribedErrors) {
             this.subscribedErrorIds = subscribedErrors.split(',');
         } else {
             this.subscribedErrorIds = null;
@@ -74,6 +82,10 @@ export class ListErrorComponent implements OnInit {
     public addError(): Observable<boolean> {
         let dialogRef: MatDialogRef<AddErrorComponent>;
         dialogRef = this.dialog.open(AddErrorComponent, {
+            data: {
+                category: this.errorCategoryId,
+                categoryName: this.errorCategoryName
+            },
             width: '800px',
         });
         return dialogRef.afterClosed();
@@ -152,9 +164,9 @@ export class ListErrorComponent implements OnInit {
     }
 
     importErrors(event) {
-        this.errorService.importErrors(event.target.files.item(0))
+        this.errorService.importErrors(event.target.files.item(0), this.errorCategoryId)
             .subscribe(data => {
-                this.toastService.success(`${data} errors imported`);
+                this.toastService.success(`${data} ${this.errorCategoryName} errors imported`);
                 this.getErrors();
             });
     }
@@ -162,29 +174,29 @@ export class ListErrorComponent implements OnInit {
     exportErrorsInExcel() {
         this.errorService.exportErrorsInExcel()
             .subscribe(res => {
-                saveAs(new Blob([res.body]), "err_code.xls");
+                saveAs(new Blob([res.body]), `${this.errorCategoryId}_err_code.xls`);
             });
     }
 
     exportErrorsInPDF() {
         this.errorService.exportErrorsInPDF()
             .subscribe(res => {
-                saveAs(new Blob([res.body]), "err_code.pdf");
+                saveAs(new Blob([res.body]), `${this.errorCategoryId}_err_code.pdf`);
             });
     }
 
     subscribeError(error) {
         this.errorService.subscribeError(error.errid)
-            .subscribe(res => { 
+            .subscribe(res => {
                 this.token.addSubscribedErrorIds(error.errid);
                 this.getSubscribedErrorIds();
-                this.toastService.success(`You have subscribed for Error ${error.errcode}`);
+                this.toastService.success(`You have subscribed for ${this.errorCategoryName} Error ${error.errcode}`);
             });
     }
 
     unSubscribeError(error) {
         this.errorService.unSubscribeError(error.errid)
-            .subscribe(res => { 
+            .subscribe(res => {
                 this.token.removeSubscribedErrorIds(error.errid);
                 this.getSubscribedErrorIds();
                 this.toastService.success(`You have unsubscribed for Error ${error.errcode}`);
@@ -234,15 +246,15 @@ export class ListErrorComponent implements OnInit {
             });
     }
 
-     //TODO: Repeated n ListUserComponent
+    //TODO: Repeated in ListUserComponent
     openTableConfigurator() {
         let dialogRef: MatDialogRef<TableConfiguratorComponent>;
         dialogRef = this.dialog.open(TableConfiguratorComponent, {
-            data: {'allColumns': this.allColumns, 'displayedColumns': this.displayedColumns},
+            data: { 'allColumns': this.allColumns, 'displayedColumns': this.displayedColumns },
             width: '200px',
         });
         return dialogRef.afterClosed().subscribe(result => {
-            if(result) {
+            if (result) {
                 this.displayedColumns = result;
             }
         });

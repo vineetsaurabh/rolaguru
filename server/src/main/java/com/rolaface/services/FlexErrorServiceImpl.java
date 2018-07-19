@@ -34,6 +34,11 @@ public class FlexErrorServiceImpl implements FlexErrorService {
 	}
 
 	@Override
+	public List<FlexError> findAll(String category) {
+		return repository.findErrorsByCategory(category);
+	}
+
+	@Override
 	public FlexError findById(int errid) {
 		return repository.findByErrid(errid);
 	}
