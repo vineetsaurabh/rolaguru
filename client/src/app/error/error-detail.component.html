@@ -1,11 +1,11 @@
 <global-toolbar></global-toolbar>
 <router-outlet></router-outlet>
 
-<div class="container col-md-8 my-5">
-    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+<div class="container col-md-8 my-2">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" class="error-detail">
         <div fxLayoutAlign="start">
             <mat-form-field>
-                <input matInput type="text" [(ngModel)]="error.errcode" />
+                <input matInput class="search-input" type="text" [(ngModel)]="error.errcode" />
                 <button mat-button matSuffix mat-icon-button aria-label="Clear" matTooltip="Search Error" matTooltipPosition="before" (click)="findErrorByCode()">
                     <mat-icon>search</mat-icon>
                 </button>
@@ -18,7 +18,7 @@
                         Description
                     </span>
                 </h1>
-                <span fxLayoutAlign="center center">{{ error.message }}</span>
+                <span class="error-description" fxLayoutAlign="center center">{{ error.message }}</span>
             </div>
         </div>
         <div fxLayout="column" fxLayout.xs="row">
