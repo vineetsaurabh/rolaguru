@@ -26,11 +26,11 @@ export class CommentErrorService {
     }
 
     public updateComment(comment: CommentError) {
-        return this.http.put<CommentError>(this.commentUrl + "/" + comment.id, comment, httpOptions);
+        return this.http.put<CommentError>(this.commentUrl + "/" + comment.commentErrorId, comment, httpOptions);
     }
 
     public deleteComment(comment: CommentError) {
-        return this.http.delete(this.commentUrl + "/" + comment.id);
+        return this.http.delete(this.commentUrl + "/" + comment.commentErrorId);
     }
 
 }

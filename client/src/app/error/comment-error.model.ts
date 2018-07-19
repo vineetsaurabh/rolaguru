@@ -1,7 +1,7 @@
 import { User } from "../user/user.model";
 
 export class CommentError {
-    id: string;
+    commentErrorId: string;
     errid: string;
     userid: string;
     comment: string;

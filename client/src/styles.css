@@ -14,8 +14,16 @@ body{
     background: linear-gradient(to right, blue, royalblue, steelblue, lightskyblue, steelblue, royalblue, blue); 
     color: white;
 }
+.search-input{
+    font-size: 24px!important;
+    font-weight: bold!important;
+    color: purple!important;
+}
 
 /* Table Styles */
+.list-title{
+    color: purple;
+}
 .table-container {
     display: flex;
     flex-direction: column;
@@ -46,7 +54,7 @@ div.border-text h1{
     color: cornflowerblue;
 }
 div.border-text h1 span{
-    background-color: white;
+    background-color: inherit;
 }
 label[for="file-input"]{
     margin-bottom: 0px;
@@ -161,3 +169,22 @@ mat-form-field {
     color: maroon!important;
 }
 
+/* Error Detail */
+.error-detail{
+    background: radial-gradient(rgb(225,255,255), rgb(250,255,255));
+}
+.error-description{
+    color: purple;
+}
+/* Cause Panel */
+.cause-panel-header{
+    height: 40px!important;
+}
+.cause-panel-action{
+    padding: 6px 24px 6px 24px!important;
+    background: linear-gradient(to right, cadetblue, powderblue);
+}
+/* Cause Detail */
+.cause-detail{
+    background-color: azure;
+}
