@@ -1,8 +1,12 @@
 package com.rolaface.controllers;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,8 +18,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.rolaface.entities.ProfilePicture;
 import com.rolaface.entities.User;
+import com.rolaface.model.ContextUser;
+import com.rolaface.repositories.ProfilePictureRepository;
 import com.rolaface.services.UserService;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
@@ -25,6 +33,10 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	// private ProfilePictureService profilePictureService;
+	private ProfilePictureRepository profilePictureRepository;
 
 	@PostMapping
 	public User create(@RequestBody User user) {
@@ -73,5 +85,38 @@ public class UserController {
 			// TODO : ExceptionHandling
 		}
 		return false;
+	}
+
+	@PostMapping("/uploadProfilePicture")
+	public ResponseEntity<User> uploadProfilePicture(@RequestParam("file") MultipartFile file) {
+		int userId = ((ContextUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
+		ProfilePicture profilePicture = new ProfilePicture();
+		profilePicture.setUserid(userId);
+		profilePicture.setFilename(file.getOriginalFilename());
+		profilePicture.setCreatedTimestamp(new Date());
+		profilePicture.setSize(file.getSize());
+		try {
+			profilePicture.setContent(file.getBytes());
+			// profilePictureService.create(profilePicture);
+			profilePictureRepository.save(profilePicture);
+			User user = userService.findById(userId);
+			return ResponseEntity.status(HttpStatus.OK).body(user);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(null);
+		}
+	}
+
+	@DeleteMapping(path = { "/deleteprofilepicture/{id}" })
+	public User deleteProfilePicture(@PathVariable("id") int id) {
+		int userId = ((ContextUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
+		User user = userService.findById(userId);
+		// ProfilePicture profilePicture = profilePictureService.findById(id);
+		ProfilePicture profilePicture = profilePictureRepository.findByProfilePictureId(id);
+		if (userId == profilePicture.getUserid()) {
+			// profilePictureService.delete(profilePicture);
+			profilePictureRepository.delete(profilePicture);
+			user.setProfilePic(null);
+		}
+		return user;
 	}
 }
