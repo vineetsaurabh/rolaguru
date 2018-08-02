@@ -1,10 +1,22 @@
-<div class="container col-md-6 my-5">
-    <div class="table-responsive">
-        <table class="table table-bordered table-hover">
-            <tr *ngFor="let key of objectKeys(items)">
-                <td>{{ key }}</td>
-                <td>{{ items[key] }}</td>
-            </tr>
-        </table>
+<div class="container col-md-6 my-2">
+    <div fxLayout="row" fxLayoutGap="4px">
+        <div>
+            <img [src]="url" onerror="this.src='../../assets/images/default-profile.jpg'">
+            <!--<img src="javascript:showProfilePicture()"> -->
+        </div>
+        <div fxLayout="column">
+            <div>
+                {{user.lastName}}, {{user.firstName}}
+            </div>
+            <div>
+                {{user.email}}
+            </div>
+        </div>
     </div>
+    <button class="btn" matTooltip="Upload File" fxLayoutAlign="end">
+        <label for="file-input">
+            <i class="fa fa-upload"></i>
+        </label>
+        <input id="file-input" type="file" (change)="selectFile($event)"  accept=".jpg,.jpeg" hidden>
+    </button>
 </div>

@@ -21,7 +21,8 @@ export class EditUserComponent implements OnInit {
         lastName: '',
         email: '',
         active: false,
-        checked: false
+        checked: false,
+        picture: null
     };
     id: string;
     userForm: FormGroup;

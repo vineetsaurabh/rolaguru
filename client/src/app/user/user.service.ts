@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpEvent, HttpRequest } from '@angular/common/http';
 import { User } from './user.model';
 import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs/Observable';
 
 
 const httpOptions = {
@@ -57,6 +58,23 @@ export class UserService {
 
     public getSubscribedErrors() {
         return this.http.get<string[]>(this.errorSubscribeUrl + "/subscribederrors", );
+    }
+
+    public uploadFile(file: File): Observable<HttpEvent<User>> {
+        const formdata: FormData = new FormData();
+        formdata.append('file', file);
+        const req = new HttpRequest('POST', this.userUrl + '/uploadProfilePicture', formdata, {
+            reportProgress: true
+        });
+        return this.http.request(req);
+    }
+
+    public downloadFile(id): Observable<any> {
+        return this.http.get(this.userUrl + "/downloadprofilepic/" + id, { observe: 'response', responseType: 'blob' });
+    }
+
+    public deleteFile(id): Observable<any>  {
+        return this.http.delete<any>(this.userUrl + "/deleteprofilepicture/" + id);
     }
 
 }

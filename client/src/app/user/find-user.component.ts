@@ -19,7 +19,8 @@ export class FindUserComponent {
     lastName : '',
     email : '',
     active : false,
-    checked: false
+    checked: false,
+    picture: null,
   };
 
   constructor(

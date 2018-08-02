@@ -1,5 +1,5 @@
-export class User {
 
+export class User {
   userid: string;
   username: string;
   password: string;
@@ -8,4 +8,5 @@ export class User {
   active: boolean;
   email: string;
   checked: boolean;
+  picture: Blob;
 }

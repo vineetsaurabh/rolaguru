@@ -1,10 +1,13 @@
 package com.rolaface.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -36,6 +39,10 @@ public class User {
 
 	@Column(unique = true, nullable = false)
 	private String email;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "causeid")
+	private ProfilePicture profilePic;
 
 	public int getUserid() {
 		return userid;
@@ -93,6 +100,14 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public ProfilePicture getProfilePic() {
+		return profilePic;
+	}
+
+	public void setProfilePic(ProfilePicture profilePic) {
+		this.profilePic = profilePic;
 	}
 
 	@Override
