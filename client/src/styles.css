@@ -25,6 +25,12 @@ body{
     background: linear-gradient(to right, blue, royalblue, steelblue, lightskyblue, steelblue, royalblue, blue); 
     color: white;
 }
+.global-search{
+    background-color: azure;
+}
+.global-search:focus{
+    background-color: palegreen;
+}
 .search-input{
     font-size: 24px!important;
     font-weight: bold!important;
@@ -49,6 +55,10 @@ body{
 }
 .inactive-user {
     color: gray;
+}
+.btn:hover{
+    background: linear-gradient(powderblue, azure, powderblue)!important;
+    z-index: 2;
 }
 /* Border with text on it, like fieldset */
 div.border-text{

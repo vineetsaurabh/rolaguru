@@ -1,0 +1,512 @@
+= *Rolaguru - User Guide*
+:jbake-type: page
+:jbake-tags: documentation
+:jbake-status: published
+:imagesdir: ../resources/img/
+:idprefix:
+:numbered:
+:sectanchors:
+:icons: font
+:toc: macro
+:toc-title: Table of Contents
+:toc-placement: preamble
+
+__Rolaface Softwares Pvt. Ltd.__
+
+
+toc::[]
+
+== Legal Notes
+
+(C) Copyright 2018 by Rolaface Softwares Pvt. Ltd. 
+
+All rights reserved.
+
+PROPRIETARY RIGHTS NOTICE: This documentation is proprietary property of Rolaface Pvt. Ltd. In accordance with the terms and conditions of the Software License Agreement between the Customer and Rolaface Pvt. Ltd., the Customer is allowed to print as many copies as necessary of documentation copyrighted by Rolaface Pvt. Ltd. relating to the software being used. This documentation shall be treated as confidential information and should be used only by employees or contractors with the Customer in accordance with the Agreement.
+
+This product includes software developed by the Apache Software
+Foundation. (http://www.apache.org/).
+
+== Introduction
+
+Rolaguru is an application to store and reuse knowledge related to trouble-shooting. It is a responsive web based application, which can be easily used in a web browser on any device. The recommended browser for this application is Chrome 67+.
+
+
+== Login
+
+You are required to login with user name and password in order to use this application. Login screen has two fields :-
+
+. Username
+. Password
+
+Enter yourFchec correct username and password, then click on Login button. It will navigate to Homepage and activate Global Toolbar.
+
+image::Login.png[image,title="Login Page"]
+
+== Global Toolbar
+
+You will get a global toolbar all the time, when you are logged in.
+
+image::GlobalToolbar.png[image,title="Global Toolbar"]
+
+Global Toolbar has below elements:
+
+=== My Rolaguru
+
+My Rolaguru is is a dropdown menu containing commands:-
+
+[cols="1a,3a",options="header",]
+|=======================================================================
+|Commands |Description
+|My Profile |It will display the profile of logged user.
+|Admin Task * |Admin task is again a menu containing below admin tasks
+|User Managements |It will list all users in a page, where one can add, edit or delete users.
+|=======================================================================
+
+(* If logged user has admin role)
+
+=== User
+
+It display first name of the logged user.
+
+=== Global Error search
+
+It will search all error matching the input in a list.
+
+=== Home
+
+It will redirect to the Homepage, irrespective of your current page.
+
+=== Logout
+
+It will logged out you from the application. You will be redirected to the login page.
+
+
+== Home Page
+
+The homepage opened after successfully login. It has six tiles which represents different group of errors.
+
+image::Homepage.png[image,title="A Home Page"]
+
+The color of the tiles will changed if you put mouse over the tile.
+
+Clicking on the tile will open a list of errors of that particular error group.
+
+
+== List Errors
+
+It is a table displaying list of a particular group of errors. The table has filter, pagination and configurator feature.
+
+image::ListErrors.png[image,width=1000,height=314,title="List of Errors"]
+
+There are two set of buttons :-
+
+. Error Actions
+. Table Actions
+
+=== Error Actions 
+
+image::ErrorActions.png[image,title="Error Actions"]
+
+To enable these buttons, at least a row must be selected.
+
+[cols="1a,3a",options="header",]
+|=======================================================================
+|Action |Description
+|Subscribe | User will be subscribed to selected errors.
+|Un-subscribe | User will be un-subscribed from selected errors, if already subscribed.
+|Delete | Selected errors will be deleted.
+|=======================================================================
+
+There will a confirmation dialog for delete action.
+
+image::ConfirmDeleteErrors.png[image,title="Delete Error Confirmation"]
+
+If the performed action is succeeded, a notification in green box will be displayed on the top right corner of the screen.
+
+image::ErrorDeleteSuccess.png[image,title="Delete Error Succeed"]
+
+
+=== Table Actions
+
+image::ErrorTableActions.png[image,title="Error Table Actions"]
+
+[cols="1a,3a",options="header",]
+|=======================================================================
+|Action |Description
+|Import Errors | Errors will be imported from an excel sheet.
+|Export Errors as PDF | All the errors will be imported in a PDF.
+|Export Errors as Excel | All the errors will be imported in an excel.
+|Print | It will open the print dialouge. 
+|=======================================================================
+
+NOTE: Checkbox and action columns will be ignored for table actions.
+
+=== Add Error
+
+image::AddError.png[image,title="Add Error"]
+
+This button is used to add a new error. A popup will be opened on clicking this button.
+
+image::AddErrorDialog.png[image,title="Add Error Dialog"]
+
+One can fill all required field and then click on submit. If everything is fine
+
+. An error is created
+. Table will be updated 
+. A notification in green box will appear on the top right corner of the screen
+
+=== Table of Errors
+
+All errors of a particular category is displayed in their respective table.
+
+image::TableError.png[image,title="Table of Errors"]
+
+There are below columns in the list of errors table:-
+
+[cols="1a,3a",options="header",]
+|=======================================================================
+|Column |Description
+|Checkbox | Select the error
+|Message | A short description of the error. It is generally a message displayed for the error.
+|Error Type | Type of the error
+|Batch Type | Batch type of the error
+|Actions | Edit, Delete, Subscribe, Unsubscribe
+|=======================================================================
+
+==== Edit
+
+This button is used to edit the selected error. A popup will be opened on clicking this button with pre-filled value.
+
+image::EditErrorDialog.png[image,title="Edit Error Dialog"]
+
+One can fill all required field and then click on submit. If everything is fine
+
+. The updated value of the selected error is saved
+. Table will be updated 
+. A notification in green box will appear on the top right corner of the screen
+
+image::EditErrorSuccess.png[image,title="Edit Error Succeed"]
+
+==== Delete
+
+There will a confirmation dialog for delete action.
+
+image::ConfirmDeleteErrors.png[image,title="Delete Error Confirmation"]
+
+If the performed action is succeeded, a notification in green box will be displayed on the top right corner of the screen.
+
+image::ErrorDeleteSuccess.png[image,title="Delete Error Succeed"]
+
+==== Subscribe
+
+User will be subscribed to selected errors. He will get notification of any update in the subscribed error.
+
+==== Un-subscribe
+
+User will be un-subscribed from selected errors, if already subscribed.
+
+== Error Detail
+
+You will navigate to an error detail page, where solution of the error and comments are displayed.
+image::ErrorDetailNoSolutionNoComment.png[image,title="Error Detail"]
+
+=== Error Detail Header
+
+==== Search Error
+
+There is a search bar on the left top side of the error detail page. 
+
+TIP: If you want to see detail of another error, you need not to navigate back to error list page. You can directly search the error here.
+
+==== Description
+
+Description of the error is displayed here.
+
+==== Number of solution
+
+The number of solution for this error is displayed here. Below that there is a button to add solution.
+
+image::AddSolution.png[image,title="Add Solution"] 
+
+== Solution
+
+One can provide the solution of a error.
+
+=== Add Solution
+
+A popup will appear on clicking add solution button:-
+
+image::AddSolutionDialog.png[image,title="Add Solution Dialog"]
+
+Once you will enter cause and solution, submit button will enabled. One can fill all required field and then click on submit. If everything is fine
+
+. The newly created solution is saved against that particular error
+. List of solution will be updated
+. Number of solution will be increased by one
+. A notification in green box will appear on the top right corner of the screen
+
+image::SolutionAdded.png[image,title="List of solution updated"]
+
+=== Rate Solution
+
+Rating is on the scale of 1 to 5. Stars are counted from left to right.
+
+==== My Rating
+
+Anyone except the owner of the solution can rate the solution. Below is an example of a solution owned by other:
+
+image::SolutionOwnedByOther.png[image,title="Solution Owned by Other"]
+
+One can click on the star to rate solution provided by someone else. You can choose rating from 1 to 5.
+
+
+After clicking on star, if everything is fine
+
+. My rating is saved for the solution
+. Overall rating is updated immediately
+. A notification in green box will appear on the top right corner of the screen
+
+image::RatingSucceed.png[image,title="Rating Succeed"]
+
+==== Overall Rating
+
+One the top left of the solution panel, there is overall rating. It is an average of rating provided by all users. You can get actual average on tooltip. Half stars are supported for overall rating.
+
+image::OverallRating.png[image,title="Rating and Overall Rating"]
+
+=== Update Solution
+
+The owner of the solution can update or delete solution.
+
+==== Edit Solution
+
+On clicking "Edit Solution" button solution panel will have two input box with pre-filled values of description and solution.
+
+image::EditSolution.png[image,title="Edit Solution"]
+
+One click of save button:
+
+. The updated value of the solution is saved
+. List of solution will be updated 
+. A notification in green box will appear on the top right corner of the screen
+
+image::EditSolutionSucceed.png[image,title="Edit Solution Succeed"]
+
+==== Add documents
+
+You can attach document to the solution. Once clicking on "Upload File" button, you will get a file chooser:
+
+image::AddDocument.png[image,title="Add Document"]
+
+After successfully uploading the file:
+
+. You can see filename in solution panel, below "Attachments"
+. You can download the file on clicking the filename
+
+==== Delete Solution
+
+You can delete the solution on clicking "Delete Solution" button.
+
+=== List of Solutions
+
+List of Solution is a stacked collapsable panel. The highest rated solution will appear on the top and the lowest rated solution will appear at the bottom.
+By default, the top solution panel will be expanded.
+
+image::ListSolutions.png[image,title="List Solutions"]
+
+== Comment
+
+One can comment on the error. 
+
+=== Save Comment
+
+There is comment input area at the bottom of the error detail page. By default the "Save Comment" button is disabled.
+
+image::SaveComment.png[image,title="Add Comment"]
+
+Once you enter something in comment box, the "Save Comment" button will be enabled.
+
+image::SaveCommentEnabled.png[image,title="Comment Save Enabled"]
+
+On click of "Save Comment" button, a notification will appear that the comments is saved.
+
+image::SaveCommentSuccees.png[image,title="Comment Save Succeed"]
+
+And, the saved comment will appear above comment box.
+
+image::CommentSaved.png[image,title="Comment"]
+
+=== Update Comment
+
+One can update his own comment. At the right most of comment, there is icon to update comment. It is a menu containing two action:
+
+image::CommentActions.png[image,title="Update Comment"]
+
+==== Edit Comment
+
+On click of "Save Comment" button, a notification will appear that the comments is saved.
+
+image::EditComment.png[image,title="Edit Comment"]
+
+==== Delete Comment
+
+Comments will be removed immediately and the list of comments will be updated.
+
+== List Users
+
+It is a table displaying list of all users. The table has filter, pagination and configurator feature.
+
+image::ListUsers.png[image,title="List of Users"]
+
+There are two set of buttons :-
+
+=== User Actions 
+
+image::UserActions.png[image,title="User Actions"]
+
+To enable these buttons, at least a row must be selected.
+
+[cols="1a,3a",options="header",]
+|=======================================================================
+|Action |Description
+|Activate | Selected user will be activated, if not activated already
+|Deactivate | Selected user will be deactivated, if activated already
+|Edit Role | Edit the roles of selected user
+|Delete | Selected errors will be deleted.
+|=======================================================================
+
+There will a confirmation dialog for delete action.
+
+image::ConfirmDeleteUsers.png[image,title="Delete User Confirmation"]
+
+If the performed action is succeeded, a notification in green box will be displayed on the top right corner of the screen.
+
+image::UserDeleteSuccess.png[image,title="Delete User Succeed"]
+
+
+=== Table Actions
+
+image::UserTableActions.png[image,title="Table Actions"]
+
+[cols="1a,3a",options="header",]
+|=======================================================================
+|Action |Description
+|Export Errors as PDF | All the errors will be imported in a PDF.
+|Export Errors as Excel | All the errors will be imported in an excel.
+|Print | It will open the print dialouge. 
+|=======================================================================
+
+NOTE: Checkbox and action columns will be ignored for table actions.
+
+
+=== Add User
+
+image::AddUser.png[image,title="Add User"]
+
+This button is used to add a new user. A popup will be opened on clicking this button.
+
+image::AddUserDialog.png[image,title="Add User Dialog"]
+
+One can fill all required field and then click on submit. If everything is fine
+
+. A user is created
+. Table will be updated 
+. A notification in green box will appear on the top right corner of the screen
+
+The newly created user will be in in-active state. An admin can activate this.
+
+=== Table of user
+
+All users are displayed in this table.
+
+image::TableUser.png[image,title="Table of Users"]
+
+There are below columns in the list of users table:-
+
+[cols="1a,3a",options="header",]
+|=======================================================================
+|Column |Description
+|Checkbox | Select the user
+|First Name | First name of the user
+|Last Name | Last name of the user
+|Username | A unique username of the user
+|Email | A unique email id of the user
+|Actions | Activate, De-activate, Edit, Delete 
+|=======================================================================
+
+==== Activate
+
+Selected user will be activated, if not activated already
+
+==== De-activate
+
+Selected user will be deactivated, if activated already
+
+==== Edit
+
+This button is used to edit the selected error. A popup will be opened on clicking this button with pre-filled value.
+
+image::EditUserDialog.png[image,title="Edit User Dialog"]
+
+One can fill all required field and then click on submit. If everything is fine
+
+. The updated value of the selected user is saved
+. Table will be updated 
+. A notification in green box will appear on the top right corner of the screen
+
+image::EditUserSuccess.png[image,title="Edit User Succeed"]
+
+==== Delete
+
+There will a confirmation dialog for delete action.
+
+image::ConfirmDeleteUsers.png[image,title="Delete User Confirmation"]
+
+If the performed action is succeeded, a notification in green box will be displayed on the top right corner of the screen.
+
+image::UserDeleteSuccess.png[image,title="Delete User Succeed"]
+
+
+== User Detail
+
+
+== Table Feature
+
+The table used here is using Material Table. It is responsive by default.
+
+=== Table Filter
+
+There is a filter on the top of table. One can enter any text to search that text in the table. The result will search in all the pages. 
+
+image::Filter.png[image,title="Filter"]
+
+=== Sorting
+
+You can sort data on the basis of a particular column. There is an arrow at the right of column name in the table header. 
+
+image::SortingAscending.png[image,title="Sorting in ascending order"]
+
+image::SortingDescending.png[image,title="Sorting in descending order"]
+
+=== Table Configurator
+
+On clicking this button, a popup will be opened. Popup will list all columns of the table having a checkbox. All the displayed columns will be checked by default. One can check the columns which should be displayed and un-check all columns which should be hidden. After clicking on submit, the table will be updated immediately.
+
+image::TableConfigurator.png[image,title="Table Configurator"]
+
+=== Pagination
+
+There is an option of pagination at the right bottom of the table. You can selected the number of items per pages in the table. The default value is 10, but can be changed to 20, 50 and 100. Left and Right arrows are available to navigate through table pages. The total number of pages and current page number is also displayed.
+
+image::Pagination.png[image,title="Pagination"]
+
+== Miscellaneous Features
+
+=== Notification
+
+. It will fade away in 5 seconds.
+. You can click on the notification to hide it immediately. 
+. Notification will stack over each other. The most recent notification will be stacked on the top.
+
+

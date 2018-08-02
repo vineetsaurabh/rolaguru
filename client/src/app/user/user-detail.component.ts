@@ -1,3 +1,4 @@
+import { saveAs } from 'file-saver/FileSaver';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User } from './user.model';
@@ -11,10 +12,18 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class UserDetailComponent implements OnInit {
 
-    objectKeys = Object.keys;
-    items = {};
     id: number;
-    user: User;
+    public user: User = {
+        userid : '',
+        username : '',
+        password : '',
+        firstName : '',
+        lastName : '',
+        email : '',
+        active : false,
+        checked: false,
+        picture: null,
+      };
 
     constructor(
         private http: HttpClient,
@@ -36,14 +45,6 @@ export class UserDetailComponent implements OnInit {
 
         this.userService.getUser(this.id).subscribe((user) => {
             this.user = user;
-            this.objectKeys = Object.keys;
-            this.items = {
-                'Username': user.username,
-                'First Name': user.firstName,
-                'Last Name': user.lastName,
-                'Active': user.active,
-                'Email ID': user.email
-            };
         })
     }
 
@@ -51,6 +52,24 @@ export class UserDetailComponent implements OnInit {
     selectedFiles: FileList;
     currentFileUpload: File;
     progress: { percentage: number } = { percentage: 0 };
+
+    url: string;
+    selectFile(event: any) {
+        let target: any = event.target;
+        this.selectedFiles = target.files;
+
+        if (target.files && target.files[0]) {
+            var reader = new FileReader();
+            reader.readAsDataURL(target.files[0]);
+            reader.onload = (event) => {
+                this.url = target.result;
+            }
+        }
+
+        this.upload();
+        event = null;
+        return false;
+    }
 
     upload() {
         this.progress.percentage = 0;
@@ -68,11 +87,13 @@ export class UserDetailComponent implements OnInit {
         this.selectedFiles = undefined;
     }
 
-    selectFile(event) {
-        this.selectedFiles = event.target.files;
-        this.upload();
-        event = null;
-        return false;
+    showProfilePicture () {
+        alert('Displaying profile picture of user id = ' + this.user.userid)
+        this.userService.downloadFile(this.user.userid)
+            .subscribe(res => {
+                const blob = new Blob([res.body]);
+                saveAs(blob, this.user.firstName);
+            });
     }
 
     delete(file) {

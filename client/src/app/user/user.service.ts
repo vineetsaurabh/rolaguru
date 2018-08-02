@@ -69,6 +69,10 @@ export class UserService {
         return this.http.request(req);
     }
 
+    public downloadFile(id): Observable<any> {
+        return this.http.get(this.userUrl + "/downloadprofilepic/" + id, { observe: 'response', responseType: 'blob' });
+    }
+
     public deleteFile(id): Observable<any>  {
         return this.http.delete<any>(this.userUrl + "/deleteprofilepicture/" + id);
     }
