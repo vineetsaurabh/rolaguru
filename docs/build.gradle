@@ -1,0 +1,31 @@
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'org.asciidoctor:asciidoctor-gradle-plugin:1.5.8'
+    }
+}
+
+apply plugin: 'org.asciidoctor.convert'
+apply plugin: 'java'
+
+
+
+asciidoctor {
+  sourceDir = file('src')
+  outputDir = file('build/output')
+}
+
+
+task copyResources(type: Copy) {
+  from ("src/asset") {
+    include '**'
+  }
+  into("build/output/html5/resources")
+}
+
+
+asciidoctor.dependsOn copyResources
