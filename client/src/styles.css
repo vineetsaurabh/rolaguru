@@ -220,3 +220,10 @@ mat-form-field {
 .cause-detail{
     background-color: azure;
 }
+
+
+/* ngx editor */
+.mat-dialog-container .ngx-editor-textarea{
+    height: 120px !important;
+    overflow-y: visible !important;
+}
