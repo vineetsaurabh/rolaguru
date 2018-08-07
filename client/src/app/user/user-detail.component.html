@@ -1,8 +1,13 @@
 <div class="container col-md-6 my-2">
-    <div fxLayout="row" fxLayoutGap="4px">
-        <div>
-            <img [src]="url" onerror="this.src='../../assets/images/default-profile.jpg'">
-            <!--<img src="javascript:showProfilePicture()"> -->
+    <div fxLayout="row" fxLayoutGap="10px">
+        <div class="profile-picture-container">
+            <img class="profile-picture">
+            <div class="edit" *ngIf="user.userid == loggedUserId">
+                <label for="file-input">
+                    <i class="fa fa-pencil fa-lg"></i>
+                </label>
+                <input id="file-input" type="file" (change)="selectFile($event)"  accept=".jpg,.jpeg" hidden>
+            </div>
         </div>
         <div fxLayout="column">
             <div>
@@ -13,10 +18,4 @@
             </div>
         </div>
     </div>
-    <button class="btn" matTooltip="Upload File" fxLayoutAlign="end">
-        <label for="file-input">
-            <i class="fa fa-upload"></i>
-        </label>
-        <input id="file-input" type="file" (change)="selectFile($event)"  accept=".jpg,.jpeg" hidden>
-    </button>
 </div>
