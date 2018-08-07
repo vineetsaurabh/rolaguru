@@ -11,10 +11,10 @@
                         User Actions
                     </span>
                 </h1>
-                <button class="btn" matTooltip="Activate User">
+                <button class="btn" matTooltip="Activate User" (click)="activateSelectedUsers()">
                     <i class="fa fa-check"></i>
                 </button>
-                <button class="btn" matTooltip="De-activate User">
+                <button class="btn" matTooltip="De-activate User" (click)="deactivateSelectedUsers()">
                     <i class="fa fa-times"></i>
                 </button>
                 <button class="btn" matTooltip="Edit Role">

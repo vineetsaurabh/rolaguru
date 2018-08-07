@@ -91,7 +91,7 @@ export class ListUserComponent implements OnInit {
                 this.users = this.users.filter(u => u !== user);
                 this.toastService.success(`User ${user.username} deleted`);
                 this.getUsers();
-            })
+            });
     };
 
     activateUser(user) {
@@ -99,8 +99,7 @@ export class ListUserComponent implements OnInit {
         this.userService.updateUser(user)
             .subscribe(res => {
                 this.toastService.success(`User ${user.username} activated`);
-            }
-            );
+            });
     }
 
     deActivateUser(user) {
@@ -108,28 +107,32 @@ export class ListUserComponent implements OnInit {
         this.userService.updateUser(user)
             .subscribe(res => {
                 this.toastService.success(`User ${user.username} deactivated`);
-            }
-            );
+            });
     }
 
-    get selectedUsers() {
+    get selectedUserIds() {
         return this.users
             .filter(user => user.checked)
             .map(user => user.userid);
     }
 
+    get selectedUsers() {
+        return this.users
+            .filter(user => user.checked);
+    }
+
     onDeleteSelectedUsers() {
-        if (this.selectedUsers.length == 0) {
+        if (this.selectedUserIds.length == 0) {
             this.toastService.warning(`Please select a user to delete`);
         } else {
             let dialogRef: MatDialogRef<ConfirmDeleteComponent>;
-            if(this.selectedUsers.length == 1) {
+            if (this.selectedUserIds.length == 1) {
                 dialogRef = this.dialog.open(ConfirmDeleteComponent, {
                     data: `Are you sure want to delete the selected user?`
                 });
             } else {
                 dialogRef = this.dialog.open(ConfirmDeleteComponent, {
-                    data: `Are you sure want to delete ${this.selectedUsers.length} users?`
+                    data: `Are you sure want to delete ${this.selectedUserIds.length} users?`
                 });
             }
             dialogRef.afterClosed().subscribe((ok: boolean) => {
@@ -141,8 +144,8 @@ export class ListUserComponent implements OnInit {
     }
 
     deleteSelectedUsers() {
-        let selectedUsersLength = this.selectedUsers.length;
-        this.userService.deleteUsers(this.selectedUsers)
+        let selectedUsersLength = this.selectedUserIds.length;
+        this.userService.deleteUsers(this.selectedUserIds)
             .subscribe(res => {
                 this.getUsers();
                 if (selectedUsersLength == 1) {
@@ -153,15 +156,41 @@ export class ListUserComponent implements OnInit {
             });
     }
 
+    activateSelectedUsers() {
+        if (this.selectedUsers.length == 0) {
+            this.toastService.warning(`Please select a user to activate`);
+        } else {
+            this.selectedUsers.forEach(user => {
+                if(user.active == false) {
+                    user.active = true;
+                    this.userService.updateUser(user);
+                }
+            });
+        }
+    }
+
+    deactivateSelectedUsers() {
+        if (this.selectedUsers.length == 0) {
+            this.toastService.warning(`Please select a user to deactivate`);
+        } else {
+            this.selectedUsers.forEach(user => {
+                if(user.active == true) {
+                    user.active = false;
+                    this.userService.updateUser(user);
+                }
+            });
+        }
+    }
+
     //TODO: Repeated n ListErrorComponent
     openTableConfigurator() {
         let dialogRef: MatDialogRef<TableConfiguratorComponent>;
         dialogRef = this.dialog.open(TableConfiguratorComponent, {
-            data: {'allColumns': this.allColumns, 'displayedColumns': this.displayedColumns},
+            data: { 'allColumns': this.allColumns, 'displayedColumns': this.displayedColumns },
             width: '200px',
         });
         return dialogRef.afterClosed().subscribe(result => {
-            if(result) {
+            if (result) {
                 this.displayedColumns = result;
             }
         });
