@@ -197,7 +197,7 @@ export class ListErrorComponent implements OnInit {
     unSubscribeError(error) {
         this.errorService.unSubscribeError(error.errid)
             .subscribe(res => {
-                this.token.removeSubscribedErrorIds(error.errid);
+                this.token.removeSubscribedErrorIds("" + error.errid);
                 this.getSubscribedErrorIds();
                 this.toastService.success(`You have unsubscribed for Error ${error.errcode}`);
             });
