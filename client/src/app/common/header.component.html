@@ -1,6 +1,26 @@
 <div class="col-md-offset-1">
     <mat-toolbar>
         <mat-toolbar-row fxLayoutGap="5px">
+            <div matTooltip="{{currentUser}}">
+                <img class="user-picture">
+            </div>
+            <div></div>
+            <div class="d-none d-sm-block">
+                <small>{{currentUser}}</small>
+            </div>
+            <span class="fill-remaining-space"></span>
+            <div>
+                <input class="global-search" type="text" placeholder="Search Error" [(ngModel)]="input" />
+                <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="findErrors()" matTooltip="Search">
+                    <mat-icon>search</mat-icon>
+                </button>
+            </div>
+            <span class="fill-remaining-space"></span>
+            <div *ngIf="authService.isAuthenticated()">
+                <button mat-button mat-icon-button matTooltip="Home" routerLink="/homepage">
+                    <mat-icon class="home-icon">home</mat-icon>
+                </button>
+            </div>
             <div *ngIf="authService.isAuthenticated()">
                 <button mat-button mat-icon-button mat-raised-button [matMenuTriggerFor]="menu" matTooltip="My Rolaguru">
                     <div class="image-container">
@@ -14,23 +34,6 @@
                 <mat-menu #admin="matMenu">
                     <button mat-menu-item [routerLink]="['/listUsers']">User Management</button>
                 </mat-menu>
-            </div>
-            <div></div>
-            <div>
-                <small>{{currentUser}}</small>
-            </div>
-            <span class="fill-remaining-space"></span>
-            <div>
-                <input class="global-search" type="text" placeholder=" Search Error"[(ngModel)]="input" />
-                <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="findErrors()" matTooltip="Search">
-                    <mat-icon>search</mat-icon>
-                </button>
-            </div>
-            <span class="fill-remaining-space"></span>
-            <div *ngIf="authService.isAuthenticated()">
-                <button mat-button mat-icon-button matTooltip="Home" routerLink="/homepage">
-                    <mat-icon class="home-icon">home</mat-icon>
-                </button>
             </div>
             <div>
                 <button mat-button mat-icon-button mat-raised-button (click)="logout()" matTooltip="Logout">

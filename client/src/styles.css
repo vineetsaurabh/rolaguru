@@ -27,12 +27,14 @@ body{
 }
 .global-search{
     background-color: azure;
+    min-width: 100px;
+    width: 80%;
 }
 .global-search:focus{
     background-color: palegreen;
 }
 .search-input{
-    font-size: 24px!important;
+    font-size: 20px!important;
     font-weight: bold!important;
     color: purple!important;
 }
@@ -226,4 +228,29 @@ mat-form-field {
 .mat-dialog-container .ngx-editor-textarea{
     height: 120px !important;
     overflow-y: visible !important;
+}
+
+/* Profile Picture */
+img.user-picture{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+img.profile-picture{
+    height: 200px;
+}
+.profile-picture-container{
+	position: relative;
+	display: inline-block;
+}
+.profile-picture-container:hover .edit{
+	display: block;
+}
+.edit{
+	padding-top: 7px;	
+	padding-right: 7px;
+	position: absolute;
+	right: 0;
+	top: 0;
+	display: none;
 }
