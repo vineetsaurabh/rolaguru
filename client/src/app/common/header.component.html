@@ -21,8 +21,8 @@
             </div>
             <span class="fill-remaining-space"></span>
             <div>
-                <input class="global-search" type="text" placeholder=" Search Error" />
-                <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="dummy()" matTooltip="Search">
+                <input class="global-search" type="text" placeholder=" Search Error"[(ngModel)]="input" />
+                <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="findErrors()" matTooltip="Search">
                     <mat-icon>search</mat-icon>
                 </button>
             </div>

@@ -90,6 +90,7 @@ import { ListErrorCommentComponent } from './error/list-comment-error.component'
 import { ConfirmDeleteComponent } from './util/confirm-delete.component';
 import { TableConfiguratorComponent } from './util/table-configurator.component';
 import { HeaderComponent } from './common/header.component';
+import { FindErrorResultComponent } from './error/find-error-result.component';
 
 @NgModule({
     declarations: [
@@ -112,7 +113,8 @@ import { HeaderComponent } from './common/header.component';
         CommentErrorComponent,
         ListErrorCommentComponent,
         ConfirmDeleteComponent,
-        TableConfiguratorComponent
+        TableConfiguratorComponent,
+        FindErrorResultComponent
     ],
     imports: [
         BrowserModule,

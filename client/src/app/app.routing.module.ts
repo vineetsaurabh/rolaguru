@@ -16,6 +16,7 @@ import { LoginComponent } from './login/login.component';
 import { HomepageComponent } from './login/homepage.component';
 import { ConfirmDeleteComponent } from './util/confirm-delete.component';
 import { TableConfiguratorComponent } from './util/table-configurator.component';
+import { FindErrorResultComponent } from './error/find-error-result.component';
 
 const routes: Routes = [
     {
@@ -29,6 +30,10 @@ const routes: Routes = [
     {
         path: 'homepage',
         component: HomepageComponent
+    },
+    {
+        path: 'findUsers',
+        component: FindErrorResultComponent
     },
     {
         path: 'listUsers',
