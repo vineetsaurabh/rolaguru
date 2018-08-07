@@ -64,6 +64,11 @@ public class FlexErrorController {
 		return flexErrorService.findAll(category);
 	}
 
+	@GetMapping(value = "/finderrors", params = "input")
+	public List<FlexError> findErrors(@RequestParam("input") String input) {
+		return flexErrorService.findErrors(input);
+	}
+
 	@GetMapping(value = "/findbyerrcode", params = "code")
 	public FlexError findByErrorCode(@RequestParam("code") String errCode) {
 		return flexErrorService.findByErrorCode(errCode);
