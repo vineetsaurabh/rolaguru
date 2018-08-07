@@ -21,10 +21,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.rolaface.entities.FlexErrorSubscribe;
 import com.rolaface.entities.ProfilePicture;
 import com.rolaface.entities.User;
 import com.rolaface.model.ContextUser;
 import com.rolaface.repositories.ProfilePictureRepository;
+import com.rolaface.services.FlexErrorSubscribeService;
 import com.rolaface.services.UserService;
 
 @RestController
@@ -37,6 +39,9 @@ public class UserController {
 	@Autowired
 	// private ProfilePictureService profilePictureService;
 	private ProfilePictureRepository profilePictureRepository;
+
+	@Autowired
+	private FlexErrorSubscribeService flexErrorSubscribeService;
 
 	@PostMapping
 	public User create(@RequestBody User user) {
@@ -53,9 +58,17 @@ public class UserController {
 		return userService.update(user);
 	}
 
+	@Transactional
 	@DeleteMapping(path = { "/{id}" })
 	public User delete(@PathVariable("id") int id) {
-		return userService.delete(id);
+		User deletedUser = userService.delete(id);
+		if (deletedUser != null) {
+			List<FlexErrorSubscribe> subscribedErrors = flexErrorSubscribeService.findByUserid(id);
+			for (FlexErrorSubscribe subscribedError : subscribedErrors) {
+				flexErrorSubscribeService.delete(subscribedError);
+			}
+		}
+		return deletedUser;
 	}
 
 	@GetMapping

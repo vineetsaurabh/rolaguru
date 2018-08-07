@@ -17,6 +17,7 @@ import { HomepageComponent } from './login/homepage.component';
 import { ConfirmDeleteComponent } from './util/confirm-delete.component';
 import { TableConfiguratorComponent } from './util/table-configurator.component';
 import { FindErrorResultComponent } from './error/find-error-result.component';
+import { SubscribedErrorsComponent } from './error/subscribe-error.component';
 
 const routes: Routes = [
     {
@@ -96,6 +97,10 @@ const routes: Routes = [
                 ]
             }
         ]
+    },
+    {
+        path: 'subscribedErrors',
+        component: SubscribedErrorsComponent
     }
 ];
 
