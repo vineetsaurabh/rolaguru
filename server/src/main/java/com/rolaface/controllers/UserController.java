@@ -98,7 +98,10 @@ public class UserController {
 		try {
 			profilePicture.setContent(file.getBytes());
 			// profilePictureService.create(profilePicture);
+			ProfilePicture existingProfilePicture = profilePictureRepository.findByUserid(userId);
+			if (existingProfilePicture != null) {
 				profilePictureRepository.delete(existingProfilePicture);
+			}
 			profilePictureRepository.save(profilePicture);
 			User user = userService.findById(userId);
 			return ResponseEntity.status(HttpStatus.OK).body(user);
