@@ -35,12 +35,12 @@ export class ListErrorComponent implements OnInit {
     @ViewChild(MatSort) sort: MatSort;
 
     constructor(
-        private router: Router,
-        private route: ActivatedRoute,
-        private errorService: ErrorService,
-        private toastService: ToastrService,
-        private dialog: MatDialog,
-        private token: TokenStorage) {
+        protected router: Router,
+        protected route: ActivatedRoute,
+        protected errorService: ErrorService,
+        protected toastService: ToastrService,
+        protected dialog: MatDialog,
+        protected token: TokenStorage) {
     }
 
     ngOnInit() {
@@ -197,7 +197,7 @@ export class ListErrorComponent implements OnInit {
     unSubscribeError(error) {
         this.errorService.unSubscribeError(error.errid)
             .subscribe(res => {
-                this.token.removeSubscribedErrorIds(error.errid);
+                this.token.removeSubscribedErrorIds("" + error.errid);
                 this.getSubscribedErrorIds();
                 this.toastService.success(`You have unsubscribed for Error ${error.errcode}`);
             });

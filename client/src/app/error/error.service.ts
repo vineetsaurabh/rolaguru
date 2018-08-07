@@ -100,4 +100,10 @@ export class ErrorService {
         return this.http.get<number>(this.errorSubscribeUrl + "/unsubscribeerrors", { params: params });
     }
 
+    public findErrors(input: string) {
+        let params = new HttpParams();
+        params = params.append('input', input);
+        return this.http.get<Error[]>(this.errorUrl + '/finderrors', { params: params });
+    }
+
 }

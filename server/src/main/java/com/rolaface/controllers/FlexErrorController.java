@@ -17,7 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,7 +32,6 @@ import com.rolaface.entities.FlexError;
 import com.rolaface.services.FlexErrorService;
 import com.rolaface.util.PDFGeneratorUtil;
 
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
 @RequestMapping({ "/flex-error" })
 public class FlexErrorController {
@@ -64,6 +62,11 @@ public class FlexErrorController {
 	@GetMapping(params = "category")
 	public List<FlexError> findAll(@RequestParam("category") String category) {
 		return flexErrorService.findAll(category);
+	}
+
+	@GetMapping(value = "/finderrors", params = "input")
+	public List<FlexError> findErrors(@RequestParam("input") String input) {
+		return flexErrorService.findErrors(input);
 	}
 
 	@GetMapping(value = "/findbyerrcode", params = "code")

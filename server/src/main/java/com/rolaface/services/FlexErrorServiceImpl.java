@@ -60,4 +60,9 @@ public class FlexErrorServiceImpl implements FlexErrorService {
 	public FlexError findByErrorCode(String errCode) {
 		return repository.findByErrcode(errCode);
 	}
+
+	@Override
+	public List<FlexError> findErrors(String input) {
+		return repository.findErrors(input);
+	}
 }
