@@ -91,6 +91,7 @@ import { ConfirmDeleteComponent } from './util/confirm-delete.component';
 import { TableConfiguratorComponent } from './util/table-configurator.component';
 import { HeaderComponent } from './common/header.component';
 import { FindErrorResultComponent } from './error/find-error-result.component';
+import { SubscribedErrorsComponent } from './error/subscribe-error.component';
 
 @NgModule({
     declarations: [
@@ -114,7 +115,8 @@ import { FindErrorResultComponent } from './error/find-error-result.component';
         ListErrorCommentComponent,
         ConfirmDeleteComponent,
         TableConfiguratorComponent,
-        FindErrorResultComponent
+        FindErrorResultComponent,
+        SubscribedErrorsComponent 
     ],
     imports: [
         BrowserModule,

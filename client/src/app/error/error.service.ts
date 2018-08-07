@@ -106,4 +106,8 @@ export class ErrorService {
         return this.http.get<Error[]>(this.errorUrl + '/finderrors', { params: params });
     }
 
+    public getSubscribeErrors() {
+        return this.http.get<string[]>(this.errorSubscribeUrl + "/subscribederrors");
+    }
+
 }

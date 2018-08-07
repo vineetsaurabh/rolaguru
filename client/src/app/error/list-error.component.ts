@@ -27,7 +27,7 @@ export class ListErrorComponent implements OnInit {
     subscribedErrorIds: string[];
     allColumns = ['Checkbox', 'Error Code', 'Message', 'Error Type', 'Batch Type', 'Actions'];
     displayedColumns = this.allColumns;
-    dataSource: MatTableDataSource<Error>;
+    dataSource: MatTableDataSource<any>;
     errorCategoryId: string;
     errorCategoryName: string;
 

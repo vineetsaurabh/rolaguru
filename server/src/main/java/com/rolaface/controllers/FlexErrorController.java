@@ -29,7 +29,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.rolaface.entities.FlexError;
+import com.rolaface.entities.FlexErrorSubscribe;
 import com.rolaface.services.FlexErrorService;
+import com.rolaface.services.FlexErrorSubscribeService;
 import com.rolaface.util.PDFGeneratorUtil;
 
 @RestController
@@ -38,6 +40,9 @@ public class FlexErrorController {
 
 	@Autowired
 	private FlexErrorService flexErrorService;
+
+	@Autowired
+	private FlexErrorSubscribeService flexErrorSubscribeService;
 
 	@PostMapping
 	public FlexError create(@RequestBody FlexError flexError) {
@@ -56,7 +61,14 @@ public class FlexErrorController {
 
 	@DeleteMapping(path = { "/{id}" })
 	public FlexError delete(@PathVariable("id") int id) {
-		return flexErrorService.delete(id);
+		FlexError deletedFlexError = flexErrorService.delete(id);
+		if (deletedFlexError != null) {
+			List<FlexErrorSubscribe> subscribedErrors = flexErrorSubscribeService.findByErrid(id);
+			for (FlexErrorSubscribe subscribedError : subscribedErrors) {
+				flexErrorSubscribeService.delete(subscribedError);
+			}
+		}
+		return deletedFlexError;
 	}
 
 	@GetMapping(params = "category")
