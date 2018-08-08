@@ -1,13 +1,17 @@
 package com.rolaface.entities;
 
-import javax.persistence.CascadeType;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -40,9 +44,18 @@ public class User {
 	@Column(unique = true, nullable = false)
 	private String email;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "causeid")
-	private ProfilePicture profilePic;
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "flexerror_subscribe", joinColumns = { @JoinColumn(name = "userid") }, inverseJoinColumns = {
+			@JoinColumn(name = "errid") })
+	private Set<FlexError> subscribedErrors = new HashSet<>();
+
+	public Set<FlexError> getSubscribedErrors() {
+		return subscribedErrors;
+	}
+
+	public void setSubscribedErrors(Set<FlexError> subscribedErrors) {
+		this.subscribedErrors = subscribedErrors;
+	}
 
 	public int getUserid() {
 		return userid;
@@ -100,14 +113,6 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public ProfilePicture getProfilePic() {
-		return profilePic;
-	}
-
-	public void setProfilePic(ProfilePicture profilePic) {
-		this.profilePic = profilePic;
 	}
 
 	@Override

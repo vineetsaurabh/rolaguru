@@ -1,3 +1,4 @@
+import { Error } from '../error/error.model';
 
 export class User {
   userid: string;
@@ -8,5 +9,5 @@ export class User {
   active: boolean;
   email: string;
   checked: boolean;
-  picture: Blob;
+  subscribedErrors: Set<Error>
 }

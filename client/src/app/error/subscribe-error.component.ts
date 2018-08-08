@@ -5,14 +5,16 @@ import { ErrorService } from './error.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog, MatTableDataSource } from '@angular/material';
 import { TokenStorage } from '../login/token.storage';
+import { User } from '../user/user.model';
+import { UserService } from '../user/user.service';
 
 @Component({
     selector: 'app-comp',
-    templateUrl: './subscribe-error.component.html'
+    templateUrl: './list-error.component.html'
 })
 export class SubscribedErrorsComponent extends ListErrorComponent {
 
-    allColumns = ['Error Code'];
+    allColumns = ['Checkbox', 'Error Code', 'Message', 'Actions'];
     displayedColumns = this.allColumns;
     errorids: string[];
 
@@ -22,21 +24,33 @@ export class SubscribedErrorsComponent extends ListErrorComponent {
         protected errorService: ErrorService,
         protected toastService: ToastrService,
         protected dialog: MatDialog,
-        protected token: TokenStorage) {
+        protected token: TokenStorage,
+        private userService: UserService) {
         super(router, route, errorService, toastService, dialog, token);
     }
 
     ngOnInit() {
         this.getErrors();
+        this.getSubscribedErrorIds();
     };
 
     getErrors() {
-        this.errorService.getSubscribeErrors()
-            .subscribe(data => {
-                this.errorids = data;
-                this.dataSource = new MatTableDataSource(data);
-                this.dataSource.paginator = this.paginator;
-                this.dataSource.sort = this.sort;
+        const userid = this.token.getCurrentUserId();
+        this.userService.getUser(+userid).subscribe(data => {
+            this.errors = Array.from(data.subscribedErrors);
+            this.dataSource = new MatTableDataSource(this.errors);
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+        });
+    }
+
+    unSubscribeError(error) {
+        this.errorService.unSubscribeError(error.errid)
+            .subscribe(res => {
+                this.token.removeSubscribedErrorIds("" + error.errid);
+                this.getSubscribedErrorIds();
+                this.toastService.success(`You have unsubscribed for Error ${error.errcode}`);
+                this.getErrors();
             });
     }
 

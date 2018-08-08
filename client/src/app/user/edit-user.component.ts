@@ -6,6 +6,7 @@ import { UserService } from './user.service';
 import { NgForm, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Error } from '../error/error.model';
 
 @Injectable()
 @Component({
@@ -22,7 +23,7 @@ export class EditUserComponent implements OnInit {
         email: '',
         active: false,
         checked: false,
-        picture: null
+        subscribedErrors: new Set<Error>(),
     };
     id: string;
     userForm: FormGroup;

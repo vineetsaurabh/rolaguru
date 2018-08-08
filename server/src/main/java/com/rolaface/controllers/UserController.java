@@ -142,7 +142,6 @@ public class UserController {
 		if (userId == profilePicture.getUserid()) {
 			// profilePictureService.delete(profilePicture);
 			profilePictureRepository.delete(profilePicture);
-			user.setProfilePic(null);
 		}
 		return user;
 	}

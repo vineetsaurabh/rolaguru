@@ -6,7 +6,7 @@ import { User } from './user.model';
 import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
 import { UserService } from './user.service';
 import { ToastrService } from 'ngx-toastr';
-
+import { Error } from '../error/error.model';
 
 @Component({
     templateUrl: './user-detail.component.html'
@@ -23,7 +23,7 @@ export class UserDetailComponent implements OnInit {
         email: '',
         active: false,
         checked: false,
-        picture: null,
+        subscribedErrors: new Set<Error>(),
     };
     loggedUserId: string;
 
