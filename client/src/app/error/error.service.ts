@@ -37,15 +37,16 @@ export class ErrorService {
         return this.http.get<Error[]>(this.errorUrl, { params: params });
     }
 
-    public deleteError(error) {
+    public deleteError(error: Error) {
         return this.http.delete(this.errorUrl + "/" + error.errid);
     }
 
-    public createError(error) {
+    public createError(error: Error) {
         return this.http.post<Error>(this.errorUrl, error);
     }
 
-    public updateError(error) {
+    public updateError(error: Error) {
+        error.causes = null;
         return this.http.put<Error>(this.errorUrl + "/" + error.errid, error, httpOptions);
     }
 
@@ -106,8 +107,8 @@ export class ErrorService {
         return this.http.get<Error[]>(this.errorUrl + '/finderrors', { params: params });
     }
 
-    public getSubscribeErrors() {
-        return this.http.get<string[]>(this.errorSubscribeUrl + "/subscribederrors");
+    public getSubscribedErrors() {
+        return this.http.get<Error[]>(this.errorSubscribeUrl + "/subscribederrors");
     }
 
 }

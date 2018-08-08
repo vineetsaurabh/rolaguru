@@ -21,7 +21,6 @@ export class FindUserComponent {
     email : '',
     active : false,
     checked: false,
-    subscribedErrors: new Set<Error>()
   };
 
   constructor(

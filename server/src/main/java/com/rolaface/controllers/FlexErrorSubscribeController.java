@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rolaface.entities.FlexError;
 import com.rolaface.entities.FlexErrorSubscribe;
 import com.rolaface.model.ContextUser;
+import com.rolaface.services.FlexErrorService;
 import com.rolaface.services.FlexErrorSubscribeService;
 
 @RestController
@@ -27,6 +29,9 @@ public class FlexErrorSubscribeController {
 
 	@Autowired
 	private FlexErrorSubscribeService flexErrorSubscribeService;
+
+	@Autowired
+	private FlexErrorService errorService;
 
 	@PostMapping
 	public FlexErrorSubscribe create(@RequestBody int errid) {
@@ -52,8 +57,20 @@ public class FlexErrorSubscribeController {
 		}
 	}
 
+	@Transactional
 	@GetMapping(value = "/subscribederrors")
-	public Set<String> getSubscribedErrors() {
+	public Set<FlexError> getSubscribedErrors() {
+		int userId = ((ContextUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
+		List<FlexErrorSubscribe> flexErrors = flexErrorSubscribeService.findByUserid(userId);
+		Set<FlexError> subscribedErrors = new HashSet<>();
+		for (FlexErrorSubscribe flexError : flexErrors) {
+			subscribedErrors.add(errorService.findById(flexError.getErrid()));
+		}
+		return subscribedErrors;
+	}
+
+	@GetMapping(value = "/subscribederrorids")
+	public Set<String> getSubscribedErrorIds() {
 		int userId = ((ContextUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
 		List<FlexErrorSubscribe> flexErrors = flexErrorSubscribeService.findByUserid(userId);
 		Set<String> subscribedErrors = new HashSet<>();

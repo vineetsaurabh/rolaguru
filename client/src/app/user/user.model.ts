@@ -9,5 +9,4 @@ export class User {
   active: boolean;
   email: string;
   checked: boolean;
-  subscribedErrors: Set<Error>
 }
