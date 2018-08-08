@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { UserService } from './user.service';
 import { User } from './user.model';
 import { Router } from '@angular/router';
+import { Error } from '../error/error.model';
 
 @Component({
   selector: 'user-detail',
@@ -20,7 +21,7 @@ export class FindUserComponent {
     email : '',
     active : false,
     checked: false,
-    picture: null,
+    subscribedErrors: new Set<Error>()
   };
 
   constructor(
