@@ -23,7 +23,6 @@ export class UserDetailComponent implements OnInit {
         email: '',
         active: false,
         checked: false,
-        subscribedErrors: new Set<Error>(),
     };
     loggedUserId: string;
 

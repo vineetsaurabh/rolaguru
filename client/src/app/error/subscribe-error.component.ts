@@ -24,8 +24,7 @@ export class SubscribedErrorsComponent extends ListErrorComponent {
         protected errorService: ErrorService,
         protected toastService: ToastrService,
         protected dialog: MatDialog,
-        protected token: TokenStorage,
-        private userService: UserService) {
+        protected token: TokenStorage) {
         super(router, route, errorService, toastService, dialog, token);
     }
 
@@ -36,9 +35,9 @@ export class SubscribedErrorsComponent extends ListErrorComponent {
 
     getErrors() {
         const userid = this.token.getCurrentUserId();
-        this.userService.getUser(+userid).subscribe(data => {
-            this.errors = Array.from(data.subscribedErrors);
-            this.dataSource = new MatTableDataSource(this.errors);
+        this.errorService.getSubscribedErrors().subscribe(data => {
+            this.errors = data;
+            this.dataSource = new MatTableDataSource(data);
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;
         });

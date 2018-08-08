@@ -23,7 +23,6 @@ export class EditUserComponent implements OnInit {
         email: '',
         active: false,
         checked: false,
-        subscribedErrors: new Set<Error>(),
     };
     id: string;
     userForm: FormGroup;
