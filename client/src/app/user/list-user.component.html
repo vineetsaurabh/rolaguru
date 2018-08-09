@@ -67,6 +67,8 @@
 
             <ng-container matColumnDef="Checkbox">
                 <mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox (change)="toggleSelection($event)" fxLayoutAlign="start">
+                    </mat-checkbox>
                 </mat-header-cell>
                 <mat-cell *matCellDef="let user">
                     <mat-checkbox [(ngModel)]="user.checked" color="primary"></mat-checkbox>

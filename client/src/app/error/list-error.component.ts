@@ -16,12 +16,13 @@ import { ConfirmDeleteComponent } from '../util/confirm-delete.component';
 import { saveAs } from 'file-saver/FileSaver';
 import { TokenStorage } from '../login/token.storage';
 import { TableConfiguratorComponent } from '../util/table-configurator.component';
+import { ListComponent } from '../common/list.component';
 
 @Component({
     selector: 'app-comp',
     templateUrl: './list-error.component.html'
 })
-export class ListErrorComponent implements OnInit {
+export class ListErrorComponent extends ListComponent implements OnInit {
 
     errors: Error[];
     subscribedErrorIds: string[];
@@ -41,6 +42,7 @@ export class ListErrorComponent implements OnInit {
         protected toastService: ToastrService,
         protected dialog: MatDialog,
         protected token: TokenStorage) {
+            super(dialog);
     }
 
     ngOnInit() {
@@ -246,22 +248,12 @@ export class ListErrorComponent implements OnInit {
             });
     }
 
-    //TODO: Repeated in ListUserComponent
-    openTableConfigurator() {
-        let dialogRef: MatDialogRef<TableConfiguratorComponent>;
-        dialogRef = this.dialog.open(TableConfiguratorComponent, {
-            data: { 'allColumns': this.allColumns, 'displayedColumns': this.displayedColumns },
-            width: '200px',
-        });
-        return dialogRef.afterClosed().subscribe(result => {
-            if (result) {
-                this.displayedColumns = result;
-            }
-        });
-    }
-
-    printErrors() {
-        window.print();
+    toggleSelection($event) {
+        if($event.checked) {
+            this.errors.forEach(error => error.checked = true);
+        } else {
+            this.errors.forEach(error => error.checked = false);
+        }
     }
 
 }

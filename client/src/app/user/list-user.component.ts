@@ -11,12 +11,13 @@ import { Observable } from 'rxjs/Observable';
 import { AddUserComponent } from './add-user.component';
 import { ConfirmDeleteComponent } from '../util/confirm-delete.component';
 import { TableConfiguratorComponent } from '../util/table-configurator.component';
+import { ListComponent } from '../common/list.component';
 
 @Component({
     selector: 'app-comp',
     templateUrl: './list-user.component.html'
 })
-export class ListUserComponent implements OnInit {
+export class ListUserComponent extends ListComponent implements OnInit {
 
     users: User[];
     allColumns = ['Checkbox', 'Username', 'First Name', 'Last Name', 'Email', 'Actions'];
@@ -30,7 +31,8 @@ export class ListUserComponent implements OnInit {
         private router: Router,
         private userService: UserService,
         private toastService: ToastrService,
-        private dialog: MatDialog) {
+        protected dialog: MatDialog) {
+            super(dialog);
     }
 
     ngOnInit() {
@@ -182,18 +184,12 @@ export class ListUserComponent implements OnInit {
         }
     }
 
-    //TODO: Repeated n ListErrorComponent
-    openTableConfigurator() {
-        let dialogRef: MatDialogRef<TableConfiguratorComponent>;
-        dialogRef = this.dialog.open(TableConfiguratorComponent, {
-            data: { 'allColumns': this.allColumns, 'displayedColumns': this.displayedColumns },
-            width: '200px',
-        });
-        return dialogRef.afterClosed().subscribe(result => {
-            if (result) {
-                this.displayedColumns = result;
-            }
-        });
+    toggleSelection($event) {
+        if($event.checked) {
+            this.users.forEach(user => user.checked = true);
+        } else {
+            this.users.forEach(user => user.checked = false);
+        }
     }
 
 }
