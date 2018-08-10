@@ -48,6 +48,10 @@ export class CauseComponent implements OnInit {
         this.editDescription = this.cause.description;
     }
 
+    ngAfterViewInit() {
+        // this.cause.files.forEach(file => this.showFile(file));
+    }
+
     calculateRating(): void {
         for (let rating of Array.from(this.cause.ratings.values())) {
             this.totalRating = this.totalRating + rating.rating;
@@ -164,9 +168,19 @@ export class CauseComponent implements OnInit {
     download(file) {
         this.causeService.downloadFile(file.causeDocId)
             .subscribe(res => {
-                const blob = new Blob([res.body]);
-                saveAs(blob, file.filename);
+                saveAs(res.body, file.filename);
             });
+    }
+
+    showFile(file) {
+        const fileToShow: any = document.getElementById(`file-${file.causeDocId}`);
+        this.causeService.downloadFile(file.causeDocId)
+            .subscribe(res => {
+                const url = URL.createObjectURL(res.body);
+                fileToShow.addEventListener('load', () => URL.revokeObjectURL(url));
+                fileToShow.src = url;
+            });
+
     }
 
     delete(file) {

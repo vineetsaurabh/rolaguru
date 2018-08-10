@@ -222,6 +222,10 @@ mat-form-field {
 .cause-detail{
     background-color: azure;
 }
+.cause-document-preview{
+    height: 200px;
+    width: 180px;
+}
 
 
 /* ngx editor */
