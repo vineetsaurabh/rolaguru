@@ -53,12 +53,15 @@ Global Toolbar has below elements:
 
 === My Rolaguru
 
+image::MyRolaguru.png[image,title="My Rolaguru"]
+
 My Rolaguru is is a dropdown menu containing commands:-
 
 [cols="1a,3a",options="header",]
 |=======================================================================
 |Commands |Description
 |My Profile |It will display the profile of logged user.
+|My Subscribed Errors |It will list all errors which current user is subscribed
 |Admin Task * |Admin task is again a menu containing below admin tasks
 |User Managements |It will list all users in a page, where one can add, edit or delete users.
 |=======================================================================
@@ -67,11 +70,12 @@ My Rolaguru is is a dropdown menu containing commands:-
 
 === User
 
-It display first name of the logged user.
+It display picture of the user and then first name of the logged user.
+In small screen like mobile, firstname will not appear.
 
 === Global Error search
 
-It will search all error matching the input in a list.
+It will search all error matching the input in a list. It will check for error code and error message.
 
 === Home
 
@@ -173,6 +177,12 @@ There are below columns in the list of errors table:-
 |Batch Type | Batch type of the error
 |Actions | Edit, Delete, Subscribe, Unsubscribe
 |=======================================================================
+
+=== Table of Errors
+
+All errors which is subscribed by the current user is displayed in this table. If a user unsubscribe any error from this table, that error will br removed from the list and the table will be updated immediately.
+
+image::MySubscribedErrors.png[image,title="My Subscribed Errors"]
 
 ==== Edit
 
@@ -470,6 +480,18 @@ image::UserDeleteSuccess.png[image,title="Delete User Succeed"]
 
 == User Detail
 
+=== User Profile
+
+This page will display user information and profile picture of a user.
+
+image::MyProfile.png[image,title="My Profile"]
+
+=== Profile Picture
+
+There is a default profile picture for a new user. If a user want to change his profile pciture he can click on the pen icon on the top right corner of the picture.
+
+image::MyProfileSelectPicture.png[image,title="Default Profile Picture"]
+
 
 == Table Feature
 
@@ -500,6 +522,12 @@ image::TableConfigurator.png[image,title="Table Configurator"]
 There is an option of pagination at the right bottom of the table. You can selected the number of items per pages in the table. The default value is 10, but can be changed to 20, 50 and 100. Left and Right arrows are available to navigate through table pages. The total number of pages and current page number is also displayed.
 
 image::Pagination.png[image,title="Pagination"]
+
+=== Select All
+
+This is a checkbox in the header of any table. When a user will click on this checkbox, all wors will be selected.
+
+image::SelectAll.png[image,title="Select All"]
 
 == Miscellaneous Features
 
