@@ -39,19 +39,26 @@
                 </div>
             </div>
         </div>
-        <div fxLayout="column">
+        <div fxLayout="column" fxLayoutGap="10px">
             <div fxLayoutAlign="start" class="cause-detail">
                 <strong>Attachments</strong>
             </div>
-            <div fxLayout="column">
-                <div *ngFor="let file of cause.files" fxLayout="row" fxLayoutGap="10px">
+            <div fxLayout="column" fxLayoutGap="5px">
+                <div *ngFor="let file of cause.files" fxLayout="row" fxLayoutGap="5px">
+                    <!--
                     <div>
-                        <a href="#" (click)="!!download(file)">{{ file.filename }}</a>
-                        <small> ({{ formatBytes(file.size) }})</small>
+                        <iframe id="file-{{file.causeDocId}}" class="cause-document-preview"></iframe>
                     </div>
-                    <i class="fa fa-remove" matTooltip="Delete" (click)="delete(file)" [hidden]="!editing" *ngIf="cause.user.userid == userid"
-                        style="color:red" matTooltipPosition="after"></i>
-                    <div>{{ file.description }}</div>
+                    -->
+                    <div>
+                        <a href="#" (click)="!!download(file)" oncontextmenu="return false">{{ file.filename }}</a>
+                    </div>
+                    <div>
+                        <small>({{ formatBytes(file.size) }})</small>
+                    </div>
+                    <div [hidden]="!editing" *ngIf="cause.user.userid == userid">
+                        <i class="fa fa-remove" matTooltip="Delete" (click)="delete(file)" style="color:red" matTooltipPosition="after"></i>
+                    </div>
                 </div>
             </div>
             <div *ngIf="currentFileUpload" class="progress">
