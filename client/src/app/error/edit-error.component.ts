@@ -16,13 +16,16 @@ export class EditErrorComponent implements OnInit {
 
     public error: Error = {
         errid: '',
-        category: '',
+        domain: '',
+        module: '',
         errcode: '',
-        message: '',
-        errortype: '',
-        batchtype: '',
+        description: '',
+        operation: '',
+        severity: '',
+        frequency: '',
         causes: new Set<Cause>(),
-        checked: false
+        checked: false,
+        files: null
     };
     errorForm: FormGroup;
 

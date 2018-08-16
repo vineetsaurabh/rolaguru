@@ -14,10 +14,10 @@ import { UserService } from '../user/user.service';
 })
 export class SubscribedErrorsComponent extends ListErrorComponent {
 
-    allColumns = ['Checkbox', 'Error Code', 'Message', 'Actions'];
+    allColumns = ['Checkbox', 'Error Code', 'Description', 'Actions'];
     displayedColumns = this.allColumns;
     errorids: string[];
-    errorModuleName = 'My Subscribed';
+    errorDomainName = 'My Subscribed';
 
     constructor(
         protected router: Router,

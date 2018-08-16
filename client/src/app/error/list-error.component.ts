@@ -26,11 +26,11 @@ export class ListErrorComponent extends ListComponent implements OnInit {
 
     errors: Error[];
     subscribedErrorIds: string[];
-    allColumns = ['Checkbox', 'Error Code', 'Description', 'Operation', 'Severity', 'Frequency', 'Actions'];
+    allColumns = ['Checkbox', 'Error Code', 'Description', 'Module', 'Operation', 'Severity', 'Frequency', 'Attachments', 'Actions'];
     displayedColumns = this.allColumns;
     dataSource: MatTableDataSource<any>;
-    errorModuleId: string;
-    errorModuleName: string;
+    errorDomainId: string;
+    errorDomainName: string;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
@@ -47,8 +47,8 @@ export class ListErrorComponent extends ListComponent implements OnInit {
 
     ngOnInit() {
         this.route.queryParams.subscribe(params => {
-            this.errorModuleId = params.cat;
-            this.errorModuleName = params.name;
+            this.errorDomainId = params.cat;
+            this.errorDomainName = params.name;
         });
         this.dialog.afterAllClosed.subscribe(() => {
             this.getErrors();
@@ -63,7 +63,7 @@ export class ListErrorComponent extends ListComponent implements OnInit {
     }
 
     getErrors() {
-        this.errorService.getErrors(this.errorModuleId)
+        this.errorService.getErrors(this.errorDomainId)
             .subscribe(data => {
                 this.errors = data;
                 this.dataSource = new MatTableDataSource(data);
@@ -85,8 +85,8 @@ export class ListErrorComponent extends ListComponent implements OnInit {
         let dialogRef: MatDialogRef<AddErrorComponent>;
         dialogRef = this.dialog.open(AddErrorComponent, {
             data: {
-                moduleId: this.errorModuleId,
-                moduleName: this.errorModuleName
+                domainId: this.errorDomainId,
+                domainName: this.errorDomainName
             },
             width: '800px',
         });
@@ -166,9 +166,9 @@ export class ListErrorComponent extends ListComponent implements OnInit {
     }
 
     importErrors(event) {
-        this.errorService.importErrors(event.target.files.item(0), this.errorModuleId)
+        this.errorService.importErrors(event.target.files.item(0), this.errorDomainId)
             .subscribe(data => {
-                this.toastService.success(`${data} ${this.errorModuleName} errors imported`);
+                this.toastService.success(`${data} ${this.errorDomainName} errors imported`);
                 this.getErrors();
             });
     }
@@ -176,14 +176,14 @@ export class ListErrorComponent extends ListComponent implements OnInit {
     exportErrorsInExcel() {
         this.errorService.exportErrorsInExcel()
             .subscribe(res => {
-                saveAs(new Blob([res.body]), `${this.errorModuleId}_err_code.xls`);
+                saveAs(new Blob([res.body]), `${this.errorDomainId}_err_code.xls`);
             });
     }
 
     exportErrorsInPDF() {
         this.errorService.exportErrorsInPDF()
             .subscribe(res => {
-                saveAs(new Blob([res.body]), `${this.errorModuleId}_err_code.pdf`);
+                saveAs(new Blob([res.body]), `${this.errorDomainId}_err_code.pdf`);
             });
     }
 
@@ -192,7 +192,7 @@ export class ListErrorComponent extends ListComponent implements OnInit {
             .subscribe(res => {
                 this.token.addSubscribedErrorIds(error.errid);
                 this.getSubscribedErrorIds();
-                this.toastService.success(`You have subscribed for ${this.errorModuleName} Error ${error.errcode}`);
+                this.toastService.success(`You have subscribed for ${this.errorDomainName} Error ${error.errcode}`);
             });
     }
 
@@ -254,6 +254,13 @@ export class ListErrorComponent extends ListComponent implements OnInit {
         } else {
             this.errors.forEach(error => error.checked = false);
         }
+    }
+
+    download(file) {
+        this.errorService.downloadFile(file.errorDocId)
+            .subscribe(res => {
+                saveAs(res.body, file.filename);
+            });
     }
 
 }

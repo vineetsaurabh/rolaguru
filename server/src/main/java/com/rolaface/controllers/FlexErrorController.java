@@ -3,6 +3,7 @@ package com.rolaface.controllers;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -28,8 +29,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.rolaface.entities.ErrorDocument;
 import com.rolaface.entities.FlexError;
 import com.rolaface.entities.FlexErrorSubscribe;
+import com.rolaface.services.ErrorDocumentService;
 import com.rolaface.services.FlexErrorService;
 import com.rolaface.services.FlexErrorSubscribeService;
 import com.rolaface.util.PDFGeneratorUtil;
@@ -43,6 +46,9 @@ public class FlexErrorController {
 
 	@Autowired
 	private FlexErrorSubscribeService flexErrorSubscribeService;
+
+	@Autowired
+	private ErrorDocumentService errorDocumentService;
 
 	@PostMapping
 	public FlexError create(@RequestBody FlexError flexError) {
@@ -71,9 +77,9 @@ public class FlexErrorController {
 		return deletedFlexError;
 	}
 
-	@GetMapping(params = "module")
-	public List<FlexError> findAll(@RequestParam("module") String module) {
-		return flexErrorService.findAll(module);
+	@GetMapping(params = "domain")
+	public List<FlexError> findAll(@RequestParam("domain") String domain) {
+		return flexErrorService.findAll(domain);
 	}
 
 	@GetMapping(value = "/finderrors", params = "input")
@@ -102,19 +108,20 @@ public class FlexErrorController {
 
 	@Transactional
 	@PostMapping("/importerrors")
-	public int importFlexErrors(@RequestParam("file") MultipartFile file, @RequestParam("module") String module) {
+	public int importFlexErrors(@RequestParam("file") MultipartFile file, @RequestParam("domain") String domain) {
 		int noOfRowInserted = 0;
 		try (InputStream stream = file.getInputStream(); HSSFWorkbook workbook = new HSSFWorkbook(stream)) {
 			HSSFSheet sheet = workbook.getSheetAt(0);
 			sheet.forEach(row -> {
 				if (row.getRowNum() != 0) {
 					FlexError flexError = new FlexError();
-					flexError.setErrcode(row.getCell(1).toString());
-					flexError.setDescription(row.getCell(2).toString());
-					flexError.setOperation(row.getCell(3).toString());
-					flexError.setSeverity(row.getCell(4).toString());
-					flexError.setFrequency(row.getCell(5).toString());
-					flexError.setModule(module);
+					flexError.setModule(row.getCell(1).toString());
+					flexError.setErrcode(row.getCell(2).toString());
+					flexError.setDescription(row.getCell(3).toString());
+					flexError.setOperation(row.getCell(4).toString());
+					flexError.setSeverity(row.getCell(5).toString());
+					flexError.setFrequency(row.getCell(6).toString());
+					flexError.setDomain(domain);
 					create(flexError);
 				}
 			});
@@ -128,7 +135,7 @@ public class FlexErrorController {
 	@GetMapping("/exporterrorsinexcel")
 	public ResponseEntity<byte[]> exportErrorsInExcel() {
 		byte[] err_code = null;
-		String[] columns = { "", "ERR_CODE", "DESCRIPTION", "OPERATION", "SEVERITY", "FREQUENCY", "MODULE" };
+		String[] columns = { "", "ERR_CODE", "DESCRIPTION", "MODULE", "OPERATION", "SEVERITY", "FREQUENCY" };
 		try (HSSFWorkbook workbook = new HSSFWorkbook(); ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
 			HSSFSheet sheet = workbook.createSheet("Errors");
 			HSSFFont headerFont = workbook.createFont();
@@ -146,11 +153,11 @@ public class FlexErrorController {
 				HSSFRow row = sheet.createRow(rowNum);
 				row.createCell(0).setCellValue(rowNum++);
 				row.createCell(1).setCellValue(flexError.getErrcode());
-				flexError.setDescription(row.getCell(2).toString());
-				flexError.setOperation(row.getCell(3).toString());
-				flexError.setSeverity(row.getCell(4).toString());
-				flexError.setFrequency(row.getCell(5).toString());
-				flexError.setModule(row.getCell(6).toString());
+				row.createCell(2).setCellValue(flexError.getDescription().toString());
+				row.createCell(3).setCellValue(flexError.getModule().toString());
+				row.createCell(4).setCellValue(flexError.getOperation().toString());
+				row.createCell(5).setCellValue(flexError.getSeverity().toString());
+				row.createCell(6).setCellValue(flexError.getFrequency().toString());
 			}
 			for (int i = 0; i < columns.length; i++) {
 				sheet.autoSizeColumn(i);
@@ -173,6 +180,46 @@ public class FlexErrorController {
 		headers.setContentType(MediaType.parseMediaType("application/pdf"));
 		headers.setContentDispositionFormData("attachment", "err_code.pdf");
 		return new ResponseEntity<>(err_code, headers, HttpStatus.OK);
+	}
+
+	@PostMapping("/addfilestoerror")
+	public ResponseEntity<FlexError> handleFileUpload(@RequestParam("file") MultipartFile file,
+			@RequestParam("errid") String errid) {
+		int errId = Integer.parseInt(errid);
+		ErrorDocument errorDocument = new ErrorDocument();
+		errorDocument.setErrid(errId);
+		errorDocument.setFilename(file.getOriginalFilename());
+		errorDocument.setCreatedTimestamp(new Date());
+		errorDocument.setContentType(file.getContentType());
+		errorDocument.setSize(file.getSize());
+		try {
+			errorDocument.setContent(file.getBytes());
+			errorDocumentService.create(errorDocument);
+			FlexError error = flexErrorService.findById(errId);
+			return ResponseEntity.status(HttpStatus.OK).body(error);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(null);
+		}
+	}
+
+	@GetMapping("/downloadfilefromerror/{id}")
+	public ResponseEntity<byte[]> download(@PathVariable("id") int id) {
+		ErrorDocument errorDocument = errorDocumentService.findById(id);
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.parseMediaType(errorDocument.getContentType()));
+		headers.setContentDispositionFormData("inline", errorDocument.getFilename());
+		return new ResponseEntity<>(errorDocument.getContent(), headers, HttpStatus.OK);
+	}
+
+	@DeleteMapping(path = { "/deletefilefromerror/{id}" })
+	public FlexError deleteCauseDocument(@PathVariable("id") int id) {
+		ErrorDocument errorDocument = errorDocumentService.findById(id);
+		FlexError error = flexErrorService.findById(errorDocument.getErrid());
+		// if (userId == error.getUser().getUserid()) {
+		errorDocumentService.delete(errorDocument.getErrorDocId());
+		error.getFiles().remove(errorDocument);
+		// }
+		return error;
 	}
 
 }

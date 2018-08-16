@@ -7,6 +7,7 @@ import { Cause } from "./cause.model";
 import { TokenStorage } from "../login/token.storage";
 import { ToastrService } from 'ngx-toastr';
 import { saveAs } from 'file-saver/FileSaver';
+import { RolaguruUtils } from '../util/rolaguru.util'
 
 @Component({
     selector: 'cause-solution',
@@ -31,6 +32,8 @@ export class CauseComponent implements OnInit {
     overallRatingStar: string = "00000";
     totalRating: number = 0;
     noOfRatings: number = 0;
+
+    rolaguruUtils = RolaguruUtils.getInstance();
 
     constructor(
         private token: TokenStorage,
@@ -142,7 +145,14 @@ export class CauseComponent implements OnInit {
     currentFileUpload: File;
     progress: { percentage: number } = { percentage: 0 };
 
-    upload() {
+    selectFileForCause(event) {
+        this.selectedFiles = event.target.files;
+        this.uploadFileForCause();
+        event = null;
+        return false;
+    }
+    
+    uploadFileForCause() {
         this.progress.percentage = 0;
         this.currentFileUpload = this.selectedFiles.item(0);
         this.causeService.uploadFile(this.currentFileUpload, this.cause.causeid)
@@ -156,13 +166,6 @@ export class CauseComponent implements OnInit {
                 }
             });
         this.selectedFiles = undefined;
-    }
-
-    selectFile(event) {
-        this.selectedFiles = event.target.files;
-        this.upload();
-        event = null;
-        return false;
     }
 
     download(file) {
@@ -189,15 +192,6 @@ export class CauseComponent implements OnInit {
                 this.toastService.success(`${file.filename} is deleted`);
                 this.cause = res;
             });
-    }
-
-    formatBytes(bytes, decimals) {
-        if (bytes == 0) return '0 Bytes';
-        var k = 1024,
-            dm = decimals || 2,
-            sizes = ['B', 'KB', 'MB', 'GB'],
-            i = Math.floor(Math.log(bytes) / Math.log(k));
-        return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
     }
 
 }

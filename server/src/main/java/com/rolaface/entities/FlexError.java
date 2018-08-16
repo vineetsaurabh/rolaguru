@@ -1,7 +1,9 @@
 package com.rolaface.entities;
 
+import java.util.Set;
 import java.util.SortedSet;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.SortComparator;
@@ -28,7 +31,7 @@ public class FlexError {
 	private int errid;
 
 	@Column(nullable = false)
-	private String module;
+	private String domain;
 
 	@Column(unique = true, nullable = false)
 	private String errcode;
@@ -37,7 +40,10 @@ public class FlexError {
 	@Column(nullable = false)
 	private String description;
 
-	@Column
+	@Column(nullable = false)
+	private String module;
+
+	@Column(nullable = false)
 	private String operation;
 
 	@Column
@@ -47,17 +53,21 @@ public class FlexError {
 	private String frequency;
 
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "flexerror_cause", joinColumns = { @JoinColumn(name = "errid") }, inverseJoinColumns = {
+	@JoinTable(name = "error_cause", joinColumns = { @JoinColumn(name = "errid") }, inverseJoinColumns = {
 			@JoinColumn(name = "causeid") })
 	@SortComparator(CauseComparator.class)
 	private SortedSet<Cause> causes;
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "errid")
+	private Set<ErrorDocument> files;
 
 	public int getErrid() {
 		return errid;
 	}
 
-	public void setErrid(int errid) {
-		this.errid = errid;
+	public String getDomain() {
+		return domain;
 	}
 
 	public String getModule() {
@@ -88,6 +98,18 @@ public class FlexError {
 		return causes;
 	}
 
+	public Set<ErrorDocument> getFiles() {
+		return files;
+	}
+
+	public void setErrid(int errid) {
+		this.errid = errid;
+	}
+
+	public void setDomain(String domain) {
+		this.domain = domain;
+	}
+
 	public void setModule(String module) {
 		this.module = module;
 	}
@@ -116,11 +138,15 @@ public class FlexError {
 		this.causes = causes;
 	}
 
+	public void setFiles(Set<ErrorDocument> files) {
+		this.files = files;
+	}
+
 	@Override
 	public String toString() {
-		return "FlexError [errid=" + errid + ", module=" + module + ", errcode=" + errcode + ", description="
-				+ description + ", operation=" + operation + ", severity=" + severity + ", frequency=" + frequency
-				+ "]";
+		return "FlexError [errid=" + errid + ", domain=" + domain + ", module=" + module + ", errcode=" + errcode
+				+ ", description=" + description + ", operation=" + operation + ", severity=" + severity
+				+ ", frequency=" + frequency + "]";
 	}
 
 }

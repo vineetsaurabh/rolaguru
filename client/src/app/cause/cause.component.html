@@ -54,7 +54,7 @@
                         <a href="#" (click)="!!download(file)" oncontextmenu="return false">{{ file.filename }}</a>
                     </div>
                     <div>
-                        <small>({{ formatBytes(file.size) }})</small>
+                        <small>({{ rolaguruUtils.formatBytes(file.size) }})</small>
                     </div>
                     <div [hidden]="!editing" *ngIf="cause.user.userid == userid">
                         <i class="fa fa-remove" matTooltip="Delete" (click)="delete(file)" style="color:red" matTooltipPosition="after"></i>
@@ -76,10 +76,10 @@
             </a>
         </div>
         <button class="btn" matTooltip="Upload File" fxLayoutAlign="end" *ngIf="cause.user.userid == userid">
-            <label for="file-input">
+            <label for="file-input-cause" class="file-input">
                 <i class="fa fa-upload"></i>
             </label>
-            <input id="file-input" type="file" (change)="selectFile($event)" hidden>
+            <input id="file-input-cause" type="file" (change)="selectFileForCause($event)" hidden>
         </button>
         <button class="btn" matTooltip="Edit Solution" (click)="openInEdit(cause.solution)" [hidden]="editing" *ngIf="cause.user.userid == userid">
             <i class="fa fa-pencil"></i>

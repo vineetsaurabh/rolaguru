@@ -34,8 +34,8 @@ public class FlexErrorServiceImpl implements FlexErrorService {
 	}
 
 	@Override
-	public List<FlexError> findAll(String category) {
-		return repository.findErrorsByCategory(category);
+	public List<FlexError> findAll(String domain) {
+		return repository.findErrorsByDomain(domain);
 	}
 
 	@Override
@@ -49,6 +49,7 @@ public class FlexErrorServiceImpl implements FlexErrorService {
 		if (flexErrorToUpdate != null) {
 			flexErrorToUpdate.setErrcode(flexError.getErrcode());
 			flexErrorToUpdate.setDescription(flexError.getDescription());
+			flexErrorToUpdate.setModule(flexError.getModule());
 			flexErrorToUpdate.setOperation(flexError.getOperation());
 			flexErrorToUpdate.setSeverity(flexError.getSeverity());
 			flexErrorToUpdate.setFrequency(flexError.getFrequency());

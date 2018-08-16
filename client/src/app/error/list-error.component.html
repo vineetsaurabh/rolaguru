@@ -22,7 +22,7 @@
                 </button>
             </div>
             <span class="fill-remaining-space"></span>
-            <h3 fxLayoutAlign="center" class="list-title">{{errorModuleName}} Errors</h3>
+            <h3 fxLayoutAlign="center" class="list-title">{{errorDomainName}} Errors</h3>
             <span class="fill-remaining-space"></span>
             <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="4px">
                 <div class="border-text" fxLayoutGap="15px">
@@ -84,6 +84,11 @@
                 <mat-cell *matCellDef="let error" [innerHTML]="error.description"></mat-cell>
             </ng-container>
 
+            <ng-container matColumnDef="Module">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Error Module </mat-header-cell>
+                <mat-cell *matCellDef="let error"> {{error.module}} </mat-cell>
+            </ng-container>
+
             <ng-container matColumnDef="Operation">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Operation </mat-header-cell>
                 <mat-cell *matCellDef="let error"> {{error.operation}} </mat-cell>
@@ -99,9 +104,20 @@
                 <mat-cell *matCellDef="let error"> {{error.frequency}} </mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="Error Module">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Error Module </mat-header-cell>
-                <mat-cell *matCellDef="let error"> {{error.module}} </mat-cell>
+            <ng-container matColumnDef="Attachments">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Attachments </mat-header-cell>
+                <mat-cell *matCellDef="let error">
+                    <div *ngFor="let file of error.files" fxLayout="row" fxLayoutGap="5px">
+                        <div>
+                            <a href="#" (click)="!!download(file)" oncontextmenu="return false"> {{ file.filename }} </a>
+                        </div>
+                    </div>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Domain">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Error Domain </mat-header-cell>
+                <mat-cell *matCellDef="let error"> {{error.domain}} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="Actions">

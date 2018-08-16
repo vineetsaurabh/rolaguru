@@ -79,7 +79,7 @@ div.border-text h1{
 div.border-text h1 span{
     background-color: inherit;
 }
-label[for="file-input"]{
+.file-input{
     margin-bottom: 0px;
 }
 

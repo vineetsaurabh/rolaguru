@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpRequest, HttpEvent } from '@angular/common/http';
 
 import { Error } from './error.model';
 import { MatDialogRef } from '@angular/material';
@@ -31,9 +31,9 @@ export class ErrorService {
         return this.http.get<Error>(this.errorUrl + '/findbyerrcode', { params: params });
     }
 
-    public getErrors(module: string) {
+    public getErrors(domain: string) {
         let params = new HttpParams();
-        params = params.append('module', module);
+        params = params.append('domain', domain);
         return this.http.get<Error[]>(this.errorUrl, { params: params });
     }
 
@@ -66,10 +66,10 @@ export class ErrorService {
     }
 
 
-    public importErrors(file: File, module: string) {
+    public importErrors(file: File, domain: string) {
         const formdata: FormData = new FormData();
         formdata.append('file', file);
-        formdata.append('module', module);
+        formdata.append('domain', domain);
         return this.http.post<number>(this.errorUrl + '/importerrors', formdata);
     }
 
@@ -110,5 +110,24 @@ export class ErrorService {
     public getSubscribedErrors() {
         return this.http.get<Error[]>(this.errorSubscribeUrl + "/subscribederrors");
     }
+
+    public uploadFile(file: File, errid: string): Observable<HttpEvent<Error>> {
+        const formdata: FormData = new FormData();
+        formdata.append('file', file);
+        formdata.append('errid', errid);
+        const req = new HttpRequest('POST', this.errorUrl + '/addfilestoerror', formdata, {
+            reportProgress: true
+        });
+        return this.http.request(req);
+    }
+
+    public downloadFile(id): Observable<any> {
+        return this.http.get(this.errorUrl + "/downloadfilefromerror/" + id, { observe: 'response', responseType: 'blob' });
+    }
+
+    public deleteFile(id): Observable<any>  {
+        return this.http.delete<any>(this.errorUrl + "/deletefilefromerror/" + id);
+    }
+
 
 }
