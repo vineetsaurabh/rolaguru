@@ -71,9 +71,9 @@ public class FlexErrorController {
 		return deletedFlexError;
 	}
 
-	@GetMapping(params = "category")
-	public List<FlexError> findAll(@RequestParam("category") String category) {
-		return flexErrorService.findAll(category);
+	@GetMapping(params = "module")
+	public List<FlexError> findAll(@RequestParam("module") String module) {
+		return flexErrorService.findAll(module);
 	}
 
 	@GetMapping(value = "/finderrors", params = "input")
@@ -102,7 +102,7 @@ public class FlexErrorController {
 
 	@Transactional
 	@PostMapping("/importerrors")
-	public int importFlexErrors(@RequestParam("file") MultipartFile file, @RequestParam("category") String category) {
+	public int importFlexErrors(@RequestParam("file") MultipartFile file, @RequestParam("module") String module) {
 		int noOfRowInserted = 0;
 		try (InputStream stream = file.getInputStream(); HSSFWorkbook workbook = new HSSFWorkbook(stream)) {
 			HSSFSheet sheet = workbook.getSheetAt(0);
@@ -110,10 +110,11 @@ public class FlexErrorController {
 				if (row.getRowNum() != 0) {
 					FlexError flexError = new FlexError();
 					flexError.setErrcode(row.getCell(1).toString());
-					flexError.setMessage(row.getCell(2).toString());
-					flexError.setErrortype(row.getCell(3).toString());
-					flexError.setBatchtype(row.getCell(4).toString());
-					flexError.setCategory(category);
+					flexError.setDescription(row.getCell(2).toString());
+					flexError.setOperation(row.getCell(3).toString());
+					flexError.setSeverity(row.getCell(4).toString());
+					flexError.setFrequency(row.getCell(5).toString());
+					flexError.setModule(module);
 					create(flexError);
 				}
 			});
@@ -127,9 +128,9 @@ public class FlexErrorController {
 	@GetMapping("/exporterrorsinexcel")
 	public ResponseEntity<byte[]> exportErrorsInExcel() {
 		byte[] err_code = null;
-		String[] columns = { "", "ERR_CODE", "MESSAGE", "TYPE", "BATCH_TYPE" };
+		String[] columns = { "", "ERR_CODE", "DESCRIPTION", "OPERATION", "SEVERITY", "FREQUENCY", "MODULE" };
 		try (HSSFWorkbook workbook = new HSSFWorkbook(); ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-			HSSFSheet sheet = workbook.createSheet("Flex Errors");
+			HSSFSheet sheet = workbook.createSheet("Errors");
 			HSSFFont headerFont = workbook.createFont();
 			headerFont.setBold(true);
 			HSSFCellStyle headerCellStyle = workbook.createCellStyle();
@@ -145,9 +146,11 @@ public class FlexErrorController {
 				HSSFRow row = sheet.createRow(rowNum);
 				row.createCell(0).setCellValue(rowNum++);
 				row.createCell(1).setCellValue(flexError.getErrcode());
-				row.createCell(2).setCellValue(flexError.getMessage());
-				row.createCell(3).setCellValue(flexError.getErrortype());
-				row.createCell(4).setCellValue(flexError.getBatchtype());
+				flexError.setDescription(row.getCell(2).toString());
+				flexError.setOperation(row.getCell(3).toString());
+				flexError.setSeverity(row.getCell(4).toString());
+				flexError.setFrequency(row.getCell(5).toString());
+				flexError.setModule(row.getCell(6).toString());
 			}
 			for (int i = 0; i < columns.length; i++) {
 				sheet.autoSizeColumn(i);

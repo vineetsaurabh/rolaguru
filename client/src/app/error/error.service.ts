@@ -31,9 +31,9 @@ export class ErrorService {
         return this.http.get<Error>(this.errorUrl + '/findbyerrcode', { params: params });
     }
 
-    public getErrors(category: string) {
+    public getErrors(module: string) {
         let params = new HttpParams();
-        params = params.append('category', category);
+        params = params.append('module', module);
         return this.http.get<Error[]>(this.errorUrl, { params: params });
     }
 
@@ -66,10 +66,10 @@ export class ErrorService {
     }
 
 
-    public importErrors(file: File, category: string) {
+    public importErrors(file: File, module: string) {
         const formdata: FormData = new FormData();
         formdata.append('file', file);
-        formdata.append('category', category);
+        formdata.append('module', module);
         return this.http.post<number>(this.errorUrl + '/importerrors', formdata);
     }
 

@@ -21,11 +21,12 @@ export class ErrorDetailComponent implements OnInit {
 
   public error: Error = {
     errid: '',
-    category: '',
+    module: '',
     errcode : '',
-    message : '',
-    errortype : '',
-    batchtype : '',
+    description : '',
+    operation: '',
+    severity : '',
+    frequency : '',
     causes: new Set<Cause>(),
     checked: false
   };

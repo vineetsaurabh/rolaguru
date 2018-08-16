@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
-import { ErrorCategory } from '../error/error-category.model';
+import { ErrorModule } from '../error/error-module.model';
 
 @Component({
     selector: 'dashboard',
@@ -8,7 +8,7 @@ import { ErrorCategory } from '../error/error-category.model';
 })
 export class HomepageComponent {
 
-    errorCategories: ErrorCategory[] = [
+    errorCategories: ErrorModule[] = [
         {name: 'Flexcube', id: 'fx', color: 'lightsteelblue'},
         {name: 'Database', id: 'db', color: 'lavender'},
         {name: 'Acumen', id: 'am', color: 'lightsteelblue'},

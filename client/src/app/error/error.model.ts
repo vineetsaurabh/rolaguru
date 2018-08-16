@@ -2,11 +2,12 @@ import { Cause } from "../cause/cause.model";
 
 export class Error {
   errid: string;
-  category: string;
+  module: string;
   errcode: string;
-  message: string;
-  errortype: string;
-  batchtype: string;
+  description: string;
+  operation: string;
+  severity: string;
+  frequency: string;
   causes: Set<Cause>;
   checked: boolean;
 }

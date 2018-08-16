@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "flexerror_cause")
+@Table(name = "error_cause")
 public class FlexErrorCause {
 
 	@Id

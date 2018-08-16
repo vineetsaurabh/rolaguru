@@ -10,7 +10,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "flexerror_subscribe")
+@Table(name = "error_subscribe")
 public class FlexErrorSubscribe {
 
 	@Id

@@ -22,7 +22,7 @@
                 </button>
             </div>
             <span class="fill-remaining-space"></span>
-            <h3 fxLayoutAlign="center" class="list-title">{{errorCategoryName}} Errors</h3>
+            <h3 fxLayoutAlign="center" class="list-title">{{errorModuleName}} Errors</h3>
             <span class="fill-remaining-space"></span>
             <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="4px">
                 <div class="border-text" fxLayoutGap="15px">
@@ -79,24 +79,29 @@
                 </mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="Message">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Message </mat-header-cell>
-                <mat-cell *matCellDef="let error" [innerHTML]="error.message"></mat-cell>
+            <ng-container matColumnDef="Description">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
+                <mat-cell *matCellDef="let error" [innerHTML]="error.description"></mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="Error Type">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Error Type </mat-header-cell>
-                <mat-cell *matCellDef="let error"> {{error.errortype}} </mat-cell>
+            <ng-container matColumnDef="Operation">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Operation </mat-header-cell>
+                <mat-cell *matCellDef="let error"> {{error.operation}} </mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="Batch Type">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Batch Type </mat-header-cell>
-                <mat-cell *matCellDef="let error"> {{error.batchtype}} </mat-cell>
+            <ng-container matColumnDef="Severity">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Severity </mat-header-cell>
+                <mat-cell *matCellDef="let error"> {{error.severity}} </mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="Error Category">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Error Category </mat-header-cell>
-                <mat-cell *matCellDef="let error"> {{error.category}} </mat-cell>
+            <ng-container matColumnDef="Frequency">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Frequency </mat-header-cell>
+                <mat-cell *matCellDef="let error"> {{error.frequency}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Error Module">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Error Module </mat-header-cell>
+                <mat-cell *matCellDef="let error"> {{error.module}} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="Actions">

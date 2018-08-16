@@ -23,9 +23,9 @@ public interface FlexErrorRepository extends JpaRepository<FlexError, Long> {
 
 	FlexError findByErrcode(String errCode);
 
-	@Query(value = "SELECT * FROM flexerrors f WHERE f.category = ?1", nativeQuery = true)
+	@Query(value = "SELECT * FROM errors f WHERE f.module = ?1", nativeQuery = true)
 	List<FlexError> findErrorsByCategory(String category);
 
-	@Query(value = "SELECT * FROM flexerrors f WHERE f.message LIKE %:input% OR f.errcode LIKE %:input%", nativeQuery = true)
+	@Query(value = "SELECT * FROM errors f WHERE f.description LIKE %:input% OR f.errcode LIKE %:input%", nativeQuery = true)
 	List<FlexError> findErrors(String input);
 }

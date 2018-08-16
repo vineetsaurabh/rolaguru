@@ -22,7 +22,7 @@ public interface FlexErrorSubscribeRepository extends JpaRepository<FlexErrorSub
 
 	List<FlexErrorSubscribe> findByUserid(int userid);
 
-	@Query(value = "SELECT * FROM flexerror_subscribe f WHERE f.errid = ?1 AND f.userid = ?2", nativeQuery = true)
+	@Query(value = "SELECT * FROM error_subscribe f WHERE f.errid = ?1 AND f.userid = ?2", nativeQuery = true)
 	FlexErrorSubscribe findSubscription(int errid, int userid);
 
 	@Override

@@ -30,7 +30,7 @@ public final class PDFGeneratorUtil {
 	private static final float NEW_PAGE_TABLE_POSITION_Y = PAGE_HEIGHT - PAGE_MARGIN_Y;
 	private static final float NEW_PAGE_TABLE_TEXT_POSITION_Y = NEW_PAGE_TABLE_POSITION_Y - 15;
 
-	private static final int NO_OF_COLUMNS = 5;
+	private static final int NO_OF_COLUMNS = 6;
 	private static final int ROW_HEIGHT = 20;
 	private static final int CELL_MARGIN = 5;
 	private static final float[] COL_WIDTH = { 40.0f, 90.0f, TABLE_WIDTH - 170.0f, 20.0f, 20.0f, 0.0f };
@@ -148,9 +148,10 @@ public final class PDFGeneratorUtil {
 		String[] flexErrorValues = new String[NO_OF_COLUMNS];
 		flexErrorValues[0] = String.valueOf(count);
 		flexErrorValues[1] = flexError.getErrcode();
-		flexErrorValues[2] = flexError.getMessage().trim();
-		flexErrorValues[3] = flexError.getErrortype();
-		flexErrorValues[4] = flexError.getBatchtype();
+		flexErrorValues[2] = flexError.getDescription().trim();
+		flexErrorValues[3] = flexError.getOperation();
+		flexErrorValues[4] = flexError.getSeverity();
+		flexErrorValues[5] = flexError.getFrequency();
 
 		int colCount = 0;
 		for (String flexErrorValue : flexErrorValues) {
