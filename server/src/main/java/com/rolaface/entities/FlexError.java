@@ -19,7 +19,7 @@ import org.hibernate.annotations.SortComparator;
 import com.rolaface.util.CauseComparator;
 
 @Entity
-@Table(name = "flexerrors")
+@Table(name = "errors")
 public class FlexError {
 
 	@Id
@@ -28,20 +28,23 @@ public class FlexError {
 	private int errid;
 
 	@Column(nullable = false)
-	private String category;
+	private String module;
 
 	@Column(unique = true, nullable = false)
 	private String errcode;
 
 	@Lob
 	@Column(nullable = false)
-	private String message;
+	private String description;
 
 	@Column
-	private String errortype;
+	private String operation;
 
 	@Column
-	private String batchtype;
+	private String severity;
+
+	@Column
+	private String frequency;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "flexerror_cause", joinColumns = { @JoinColumn(name = "errid") }, inverseJoinColumns = {
@@ -57,48 +60,56 @@ public class FlexError {
 		this.errid = errid;
 	}
 
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
+	public String getModule() {
+		return module;
 	}
 
 	public String getErrcode() {
 		return errcode;
 	}
 
-	public void setErrcode(String errcode) {
-		this.errcode = errcode;
+	public String getDescription() {
+		return description;
 	}
 
-	public String getMessage() {
-		return message;
+	public String getOperation() {
+		return operation;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
+	public String getSeverity() {
+		return severity;
 	}
 
-	public String getErrortype() {
-		return errortype;
-	}
-
-	public void setErrortype(String errortype) {
-		this.errortype = errortype;
-	}
-
-	public String getBatchtype() {
-		return batchtype;
-	}
-
-	public void setBatchtype(String batchtype) {
-		this.batchtype = batchtype;
+	public String getFrequency() {
+		return frequency;
 	}
 
 	public SortedSet<Cause> getCauses() {
 		return causes;
+	}
+
+	public void setModule(String module) {
+		this.module = module;
+	}
+
+	public void setErrcode(String errcode) {
+		this.errcode = errcode;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setOperation(String operation) {
+		this.operation = operation;
+	}
+
+	public void setSeverity(String severity) {
+		this.severity = severity;
+	}
+
+	public void setFrequency(String frequency) {
+		this.frequency = frequency;
 	}
 
 	public void setCauses(SortedSet<Cause> causes) {
@@ -107,8 +118,9 @@ public class FlexError {
 
 	@Override
 	public String toString() {
-		return "FlexError [errid=" + errid + ", category=" + category + ", errcode=" + errcode + ", message=" + message
-				+ ", errortype=" + errortype + ", batchtype=" + batchtype + "]";
+		return "FlexError [errid=" + errid + ", module=" + module + ", errcode=" + errcode + ", description="
+				+ description + ", operation=" + operation + ", severity=" + severity + ", frequency=" + frequency
+				+ "]";
 	}
 
 }

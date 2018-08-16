@@ -48,9 +48,10 @@ public class FlexErrorServiceImpl implements FlexErrorService {
 		FlexError flexErrorToUpdate = findById(flexError.getErrid());
 		if (flexErrorToUpdate != null) {
 			flexErrorToUpdate.setErrcode(flexError.getErrcode());
-			flexErrorToUpdate.setMessage(flexError.getMessage());
-			flexErrorToUpdate.setErrortype(flexError.getErrortype());
-			flexErrorToUpdate.setBatchtype(flexError.getBatchtype());
+			flexErrorToUpdate.setDescription(flexError.getDescription());
+			flexErrorToUpdate.setOperation(flexError.getOperation());
+			flexErrorToUpdate.setSeverity(flexError.getSeverity());
+			flexErrorToUpdate.setFrequency(flexError.getFrequency());
 			flexError = repository.save(flexErrorToUpdate);
 		}
 		return flexError;

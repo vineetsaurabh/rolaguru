@@ -10,19 +10,25 @@
 
         <div class="form-group">
             <mat-form-field>
-                <input matInput [(ngModel)]="error.message" name="message" id="message" placeholder="Message">
+                <input matInput [(ngModel)]="error.description" name="message" id="message" placeholder="Message">
             </mat-form-field>
         </div>
 
         <div class="form-group">
             <mat-form-field>
-                <input matInput [(ngModel)]="error.errortype" name="errortype" id="errortype" placeholder="Error Type">
+                <input matInput [(ngModel)]="error.operation" name="operation" id="operation" placeholder="Operation">
             </mat-form-field>
         </div>
 
         <div class="form-group">
             <mat-form-field>
-                <input matInput [(ngModel)]="error.batchtype" name="batchtype" id="batchtype" placeholder="Batch Type">
+                <input matInput [(ngModel)]="error.severity" name="severity" id="severity" placeholder="Severity">
+            </mat-form-field>
+        </div>
+
+        <div class="form-group">
+            <mat-form-field>
+                <input matInput [(ngModel)]="error.frequency" name="frequency" id="frequency" placeholder="Frequency">
             </mat-form-field>
         </div>
 
