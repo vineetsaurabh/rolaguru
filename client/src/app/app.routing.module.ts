@@ -18,6 +18,7 @@ import { ConfirmDeleteComponent } from './util/confirm-delete.component';
 import { TableConfiguratorComponent } from './util/table-configurator.component';
 import { FindErrorResultComponent } from './error/find-error-result.component';
 import { SubscribedErrorsComponent } from './error/subscribe-error.component';
+import { SearchReportComponent } from './report/search-report.component';
 
 const routes: Routes = [
     {
@@ -101,7 +102,11 @@ const routes: Routes = [
     {
         path: 'subscribedErrors',
         component: SubscribedErrorsComponent
-    }
+    },
+    {
+        path: 'searchReport',
+        component: SearchReportComponent
+    },
 ];
 
 @NgModule({
