@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rolaface.entities.ErrorSearchHistory;
+import com.rolaface.model.SearchStringAndCount;
 import com.rolaface.repositories.ErrorSearchHistoryRepository;
 
 @Service
@@ -32,6 +33,11 @@ public class ErrorSearchHistoryServiceImpl implements ErrorSearchHistoryService 
 	@Override
 	public List<ErrorSearchHistory> findAll() {
 		return repository.findAll();
+	}
+
+	@Override
+	public List<SearchStringAndCount> findMostSearchedString() {
+		return repository.findMostSearchedString();
 	}
 
 	@Override

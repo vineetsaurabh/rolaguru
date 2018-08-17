@@ -15,7 +15,11 @@ export class ReportService {
     private reportUrl = environment.baseUrl + '/report';
 
     public getSearchHistory() {
-        return this.http.get<ErrorSearchHistory[]>(this.reportUrl);
+        return this.http.get<ErrorSearchHistory[]>(this.reportUrl + "/findallsearch");
+    }
+
+    public getMostSearchedString() {
+        return this.http.get<any>(this.reportUrl + "/mostsearchstring");
     }
 
 }

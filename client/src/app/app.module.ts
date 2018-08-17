@@ -1,4 +1,3 @@
-import { SearchReportComponent } from './report/search-report.component';
 import { CauseComponent } from './cause/cause.component';
 import { HomepageComponent } from './login/homepage.component';
 
@@ -94,6 +93,8 @@ import { HeaderComponent } from './common/header.component';
 import { FindErrorResultComponent } from './error/find-error-result.component';
 import { SubscribedErrorsComponent } from './error/subscribe-error.component';
 import { ReportService } from './report/report.service';
+import { SearchReportMonthwiseComponent } from './report/search-report-monthwise.component';
+import { SearchReportInputwiseComponent } from './report/search-report-inputwise.component';
 
 @NgModule({
     declarations: [
@@ -119,7 +120,8 @@ import { ReportService } from './report/report.service';
         TableConfiguratorComponent,
         FindErrorResultComponent,
         SubscribedErrorsComponent,
-        SearchReportComponent
+        SearchReportMonthwiseComponent,
+        SearchReportInputwiseComponent
     ],
     imports: [
         BrowserModule,

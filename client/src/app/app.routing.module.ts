@@ -18,7 +18,8 @@ import { ConfirmDeleteComponent } from './util/confirm-delete.component';
 import { TableConfiguratorComponent } from './util/table-configurator.component';
 import { FindErrorResultComponent } from './error/find-error-result.component';
 import { SubscribedErrorsComponent } from './error/subscribe-error.component';
-import { SearchReportComponent } from './report/search-report.component';
+import { SearchReportMonthwiseComponent } from './report/search-report-monthwise.component';
+import { SearchReportInputwiseComponent } from './report/search-report-inputwise.component';
 
 const routes: Routes = [
     {
@@ -104,8 +105,12 @@ const routes: Routes = [
         component: SubscribedErrorsComponent
     },
     {
-        path: 'searchReport',
-        component: SearchReportComponent
+        path: 'searchReportMonthwise',
+        component: SearchReportMonthwiseComponent
+    },
+    {
+        path: 'searchReportInputwise',
+        component: SearchReportInputwiseComponent
     },
 ];
 
