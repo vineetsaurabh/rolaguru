@@ -13,8 +13,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 export class AddErrorComponent {
 
     error: Error = new Error();
-    errorModuleId: string;
-    errorModuleName: string;
+    errorDomainId: string;
+    errorDomainName: string;
 
     constructor(
         private router: Router,
@@ -22,12 +22,12 @@ export class AddErrorComponent {
         private toastService: ToastrService,
         public dialogRef: MatDialogRef<AddErrorComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any) {
-            this.errorModuleId = data.moduleId;
-            this.errorModuleName = data.moduleName;
+            this.errorDomainId = data.domainId;
+            this.errorDomainName = data.DomainName;
     }
 
     createError(errorForm: NgForm): void {
-        this.error.module = this.errorModuleId;
+        this.error.domain = this.errorDomainId;
         this.errorService.createError(this.error)
             .subscribe(data => {
                 this.toastService.success(`Error ${this.error.errcode} added`);

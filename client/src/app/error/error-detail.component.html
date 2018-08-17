@@ -18,7 +18,7 @@
                         Description
                     </span>
                 </h1>
-                <span class="error-description" fxLayoutAlign="center center">{{ error.message }}</span>
+                <span class="error-description" fxLayoutAlign="center center">{{ error.description }}</span>
             </div>
         </div>
         <div fxLayout="column" fxLayout.xs="row">
@@ -36,6 +36,36 @@
                 <button class="btn add-element" (click)="errorService.addCause(error, dialog)" matTooltip="Add Solution" matTooltipPosition="above">
                     <i class="fa fa-plus fa-fw"></i>
                 </button>
+            </div>
+        </div>
+    </div>
+    <div fxLayout="column" fxLayoutGap="10px">
+        <div fxLayoutAlign="start" class="cause-detail" fxLayoutGap="5px">
+            <button class="btn" matTooltip="Upload File" fxLayoutAlign="end">
+                <label for="file-input-error" class="file-input">
+                    <i class="fa fa-upload"></i>
+                </label>
+                <input id="file-input-error" type="file" (change)="selectFileForError($event)" hidden>
+            </button>
+            <strong>Attachments</strong>
+        </div>
+        <div fxLayout="column" fxLayoutGap="5px">
+            <div *ngFor="let file of error.files" fxLayout="row" fxLayoutGap="5px">
+                <div>
+                    <a href="#" (click)="!!download(file)" oncontextmenu="return false">{{ file.filename }}</a>
+                </div>
+                <div>
+                    <small>({{ rolaguruUtils.formatBytes(file.size) }})</small>
+                </div>
+                <div>
+                    <i class="fa fa-remove" matTooltip="Delete" (click)="delete(file)" style="color:red" matTooltipPosition="after"></i>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="currentFileUpload" class="progress">
+            <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+                aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:progress.percentage+'%'}">
+                {{ progress.percentage }}%
             </div>
         </div>
     </div>

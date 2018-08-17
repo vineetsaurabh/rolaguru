@@ -1,6 +1,12 @@
 <div class="container">
-    <h2 class="text-center" class="add-item">Add {{errorModuleName}} Error</h2>
+    <h2 class="text-center" class="add-item">Add {{errorDomainName}} Error</h2>
     <form #errorForm="ngForm" (ngSubmit)="createError(errorForm)" ngNativeValidate>
+
+        <div class="form-group">
+            <mat-form-field>
+                <input matInput [(ngModel)]="error.module" name="module" id="module" placeholder="Module">
+            </mat-form-field>
+        </div>
 
         <div class="form-group">
             <mat-form-field>

@@ -4,6 +4,12 @@
 
         <div class="form-group">
             <mat-form-field>
+                <input matInput [(ngModel)]="error.module" name="module" id="module" placeholder="Module">
+            </mat-form-field>
+        </div>
+
+        <div class="form-group">
+            <mat-form-field>
                 <input matInput required [(ngModel)]="error.errcode" name="errcode" id="errCode" #errCode="ngModel" placeholder="Error Code">
             </mat-form-field>
         </div>

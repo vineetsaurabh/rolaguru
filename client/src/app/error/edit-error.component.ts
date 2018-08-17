@@ -16,13 +16,16 @@ export class EditErrorComponent implements OnInit {
 
     public error: Error = {
         errid: '',
-        category: '',
+        domain: '',
         errcode: '',
-        message: '',
-        errortype: '',
-        batchtype: '',
+        description: '',
+        module: '',
+        operation: '',
+        severity: '',
+        frequency: '',
         causes: new Set<Cause>(),
-        checked: false
+        checked: false,
+        files: null
     };
     errorForm: FormGroup;
 
@@ -39,9 +42,9 @@ export class EditErrorComponent implements OnInit {
         this.errorForm = this.fb.group({
             id: '',
             errCode: ['', [Validators.required]],
-            message: ['', [Validators.required]],
-            errorType: ['', [Validators.required]],
-            batchType: ['', [Validators.required]]
+            description: ['', [Validators.required]],
+            module: ['', [Validators.required]],
+            operation: ['', [Validators.required]]
         });
     }
 
@@ -50,8 +53,7 @@ export class EditErrorComponent implements OnInit {
             .subscribe(res => {
                 this.toastService.success(`Error ${this.error.errcode} updated`);
                 this.dialogRef.close(false);
-            }
-            );
+            });
     }
 
 }
