@@ -1,9 +1,9 @@
 <global-toolbar></global-toolbar>
 <div class="container col-lg-10">
     <mat-grid-list cols="3" rowHeight="3:2" gutterSize="25">
-        <mat-grid-tile *ngFor="let category of errorCategories" [style.background]="category.color" (click)="navigate(category)" class="error-category">
+        <mat-grid-tile *ngFor="let domain of errorDomains" [style.background]="domain.color" (click)="navigate(domain)" class="error-domain">
             <div style="text-align: center">
-                <h3>{{ category.name }}</h3>
+                <h3>{{ domain.name }}</h3>
             </div>
         </mat-grid-tile>
     </mat-grid-list>

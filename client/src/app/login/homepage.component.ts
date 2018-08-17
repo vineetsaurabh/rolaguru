@@ -8,7 +8,7 @@ import { ErrorDomain } from '../error/error-domain.model';
 })
 export class HomepageComponent {
 
-    errorCategories: ErrorDomain[] = [
+    errorDomains: ErrorDomain[] = [
         {name: 'Flexcube', id: 'fx', color: 'lightsteelblue'},
         {name: 'Database', id: 'db', color: 'lavender'},
         {name: 'Acumen', id: 'am', color: 'lightsteelblue'},
@@ -19,11 +19,11 @@ export class HomepageComponent {
 
     constructor(private router: Router) { }
 
-    navigate(category) {
+    navigate(domain) {
         let params: NavigationExtras = {
             queryParams: {
-                cat: category.id,
-                name: category.name
+                domainId: domain.id,
+                domainName: domain.name
             }
         }
         this.router.navigate(['listErrors'], params);

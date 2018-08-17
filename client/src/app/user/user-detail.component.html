@@ -3,7 +3,7 @@
         <div class="profile-picture-container">
             <img class="profile-picture">
             <div class="edit" *ngIf="user.userid == loggedUserId">
-                <label for="file-input">
+                <label for="file-input" class="file-input">
                     <i class="fa fa-pencil fa-lg"></i>
                 </label>
                 <input id="file-input" type="file" (change)="selectFile($event)"  accept=".jpg,.jpeg" hidden>

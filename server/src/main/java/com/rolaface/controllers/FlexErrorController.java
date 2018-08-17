@@ -17,6 +17,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,11 +31,16 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.rolaface.entities.ErrorDocument;
+import com.rolaface.entities.ErrorSearchHistory;
 import com.rolaface.entities.FlexError;
 import com.rolaface.entities.FlexErrorSubscribe;
+import com.rolaface.entities.User;
+import com.rolaface.model.ContextUser;
 import com.rolaface.services.ErrorDocumentService;
+import com.rolaface.services.ErrorSearchHistoryService;
 import com.rolaface.services.FlexErrorService;
 import com.rolaface.services.FlexErrorSubscribeService;
+import com.rolaface.services.UserService;
 import com.rolaface.util.PDFGeneratorUtil;
 
 @RestController
@@ -49,6 +55,12 @@ public class FlexErrorController {
 
 	@Autowired
 	private ErrorDocumentService errorDocumentService;
+
+	@Autowired
+	private ErrorSearchHistoryService errorSearchHistoryService;
+
+	@Autowired
+	private UserService userService;
 
 	@PostMapping
 	public FlexError create(@RequestBody FlexError flexError) {
@@ -83,8 +95,9 @@ public class FlexErrorController {
 	}
 
 	@GetMapping(value = "/finderrors", params = "input")
-	public List<FlexError> findErrors(@RequestParam("input") String input) {
-		return flexErrorService.findErrors(input);
+	public List<FlexError> findErrors(@RequestParam("input") String searchString) {
+		saveSearchHistory(searchString);
+		return flexErrorService.findErrors(searchString);
 	}
 
 	@GetMapping(value = "/findbyerrcode", params = "code")
@@ -220,6 +233,16 @@ public class FlexErrorController {
 		error.getFiles().remove(errorDocument);
 		// }
 		return error;
+	}
+
+	private void saveSearchHistory(String searchString) {
+		int userId = ((ContextUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
+		User user = userService.findById(userId);
+		ErrorSearchHistory errorSearchHistory = new ErrorSearchHistory();
+		errorSearchHistory.setSearchString(searchString);
+		errorSearchHistory.setSearchTimestamp(new Date());
+		errorSearchHistory.setUser(user);
+		errorSearchHistoryService.create(errorSearchHistory);
 	}
 
 }
