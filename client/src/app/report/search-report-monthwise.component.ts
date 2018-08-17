@@ -6,9 +6,9 @@ import { RolaguruUtils } from '../util/rolaguru.util';
 import { MatRadioChange } from '@angular/material/radio';
 
 @Component({
-    templateUrl: './search-report.component.html'
+    templateUrl: './search-report-monthwise.component.html'
 })
-export class SearchReportComponent implements AfterViewInit {
+export class SearchReportMonthwiseComponent implements AfterViewInit {
 
     rolaguruUtils: RolaguruUtils = RolaguruUtils.getInstance();
 
@@ -18,11 +18,8 @@ export class SearchReportComponent implements AfterViewInit {
     noOfMonths: number[] = [12, 9, 6, 3];
     selectedNoOfMonth: number = 6;
 
-    canvas: any;
-    ctx: any;
-
     constructor(
-        protected reportService: ReportService) {
+        private reportService: ReportService) {
     }
 
     ngAfterViewInit() {
@@ -42,12 +39,15 @@ export class SearchReportComponent implements AfterViewInit {
                         this.searchPerMonth[index] = this.searchPerMonth[index] + 1;
                     }
                 });
-                document.getElementById('searchReportChart').innerHTML = "";
-                this.canvas = document.getElementById('searchReportChart');
-                this.canvas.width  = 800;
-                this.canvas.height = 500;
-                this.ctx = this.canvas.getContext('2d');
-                let myChart = new Chart(this.ctx, {
+
+                const canvasDiv = document.getElementById('searchReportMonthwise');
+                canvasDiv.innerHTML = "";
+                const canvas: any = document.createElement('canvas');
+                canvas.width = 800;
+                canvas.height = 500;
+                canvasDiv.appendChild(canvas);
+                const ctx = canvas.getContext('2d');
+                let myChart = new Chart(ctx, {
                     type: 'line',
                     data: {
                         labels: this.lastMonths,
@@ -70,6 +70,6 @@ export class SearchReportComponent implements AfterViewInit {
     onNoOfMonthChange(event: MatRadioChange) {
         this.selectedNoOfMonth = event.value;
         this.getSearchHistory();
-      }
+    }
 
 }

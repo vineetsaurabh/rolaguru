@@ -1,0 +1,22 @@
+<global-toolbar></global-toolbar>
+<div class="container col-lg-10">
+    <div fxLayout="column" fxLayoutGap="25px">
+        <div fxLayout="column" fxLayoutGap="5px">
+            <div class="chart-title" fxLayoutAlign="center">
+                <h2>Most Searched Input</h2>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center">
+                <mat-radio-group [(ngModel)]="selectedNoOfSearchString" fxLayoutGap="30px">
+                    <mat-radio-button color="primary" *ngFor="let noOfSearchString of noOfSearchStrings" [value]="noOfSearchString" (change)="onNoOfSearchStringChange($event)">
+                        <div>
+                            <small>Top </small>
+                            {{noOfSearchString}}
+                            <small> Search</small>
+                        </div>
+                    </mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </div>
+        <div fxLayoutAlign="center" id="searchReportInputwise"></div>
+    </div>
+</div>

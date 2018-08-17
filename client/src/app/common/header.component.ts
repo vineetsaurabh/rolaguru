@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
     findErrors() {
         let params: NavigationExtras = {
             queryParams: {
-                input: this.input,
+                input: this.input.trim(),
             }
         }
         this.router.navigate(['findUsers'], params);
