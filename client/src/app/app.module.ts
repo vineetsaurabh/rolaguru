@@ -1,3 +1,4 @@
+import { SearchReportComponent } from './report/search-report.component';
 import { CauseComponent } from './cause/cause.component';
 import { HomepageComponent } from './login/homepage.component';
 
@@ -92,6 +93,7 @@ import { TableConfiguratorComponent } from './util/table-configurator.component'
 import { HeaderComponent } from './common/header.component';
 import { FindErrorResultComponent } from './error/find-error-result.component';
 import { SubscribedErrorsComponent } from './error/subscribe-error.component';
+import { ReportService } from './report/report.service';
 
 @NgModule({
     declarations: [
@@ -116,7 +118,8 @@ import { SubscribedErrorsComponent } from './error/subscribe-error.component';
         ConfirmDeleteComponent,
         TableConfiguratorComponent,
         FindErrorResultComponent,
-        SubscribedErrorsComponent 
+        SubscribedErrorsComponent,
+        SearchReportComponent
     ],
     imports: [
         BrowserModule,
@@ -176,6 +179,7 @@ import { SubscribedErrorsComponent } from './error/subscribe-error.component';
         CauseService,
         CommentErrorService,
         AuthService,
+        ReportService,
         TokenStorage,
         {
             provide: HTTP_INTERCEPTORS,

@@ -258,3 +258,12 @@ img.profile-picture{
 	top: 0;
 	display: none;
 }
+
+/* Chart Styles */
+.chart-title{
+    color: royalblue;
+}
+canvas#searchReportChart{
+    width: 800px;
+    height: 500px;
+}

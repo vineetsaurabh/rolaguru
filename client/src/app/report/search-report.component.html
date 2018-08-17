@@ -1,0 +1,24 @@
+<global-toolbar></global-toolbar>
+<div class="container col-lg-10">
+    <div fxLayout="column" fxLayoutGap="25px">
+        <div fxLayout="column" fxLayoutGap="5px">
+            <div class="chart-title" fxLayoutAlign="center">
+                <h2>Search Report Chart</h2>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center">
+                <mat-radio-group [(ngModel)]="selectedNoOfMonth" fxLayoutGap="30px">
+                    <mat-radio-button color="primary" *ngFor="let noOfMonth of noOfMonths" [value]="noOfMonth" (change)="onNoOfMonthChange($event)">
+                        <div>
+                            <small>Last </small>
+                            {{noOfMonth}}
+                            <small> Months</small>
+                        </div>
+                    </mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </div>
+        <div fxLayoutAlign="center">
+            <canvas id="searchReportChart"></canvas>
+        </div>
+    </div>
+</div>
