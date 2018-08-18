@@ -126,16 +126,17 @@ export class CauseComponent implements OnInit {
     deleteCause() {
         this.causeService.deleteCause(this.cause)
             .subscribe(data => {
-                let newCause: Set<Cause> = new Set<Cause>();
+                let newCauses: Set<Cause> = new Set<Cause>();
                 this.causes.forEach(cause => {
                     if (cause.causeid != this.cause.causeid) {
-                        newCause.add(cause);
+                        newCauses.add(cause);
                     }
                 })
-                this.causes = newCause;
+                this.causes = newCauses;
                 this.causesChange.emit(this.causes);
-
                 this.toastService.success(`Solution deleted`);
+
+                this.causeService.emitCauseDeleted(1);
             })
     }
 

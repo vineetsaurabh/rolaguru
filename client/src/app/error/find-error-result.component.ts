@@ -29,7 +29,6 @@ export class FindErrorResultComponent extends ListErrorComponent {
         this.findErrors();
     };
 
-
     findErrors() {
         this.route.queryParams.subscribe(params => {
             this.errorService.findErrors(params.input)
