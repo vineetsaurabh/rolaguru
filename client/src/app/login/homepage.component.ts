@@ -13,14 +13,19 @@ import { RolaguruUtils } from '../util/rolaguru.util';
 })
 export class HomepageComponent implements AfterViewInit {
 
-    rolaguruUtils = RolaguruUtils.getInstance();
-    errorDomains: ErrorDomain[];
+    errorDomains: ErrorDomain[] = [
+        { name: 'Flexcube', id: 'fx', color: 'lightsteelblue' },
+        { name: 'Database', id: 'db', color: 'lavender' },
+        { name: 'Acumen', id: 'am', color: 'lightsteelblue' },
+        { name: 'Mobile App', id: 'ma', color: 'lavender' },
+        { name: 'ERP', id: 'er', color: 'lightsteelblue' },
+        { name: 'FCDB', id: 'fc', color: 'lavender' },
+    ];
 
     constructor(private router: Router,
         private errorService: ErrorService) { }
 
     ngAfterViewInit() {
-        this.errorDomains = this.rolaguruUtils.errorDomains;
         this.errorDomains.forEach(domain => {
             this.getErrorsCountDomainWise(domain);
         });

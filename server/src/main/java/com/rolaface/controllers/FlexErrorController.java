@@ -69,7 +69,11 @@ public class FlexErrorController {
 
 	@GetMapping(path = { "/{id}" })
 	public FlexError findOne(@PathVariable("id") int id) {
-		return flexErrorService.findById(id);
+		System.out.println("findOne called ..... ");
+		FlexError flexError = flexErrorService.findById(id);
+		flexError.setFrequency(flexError.getFrequency() + 1);
+		flexErrorService.update(flexError);
+		return flexError;
 	}
 
 	@PutMapping(path = { "/{id}" })
@@ -133,12 +137,11 @@ public class FlexErrorController {
 			sheet.forEach(row -> {
 				if (row.getRowNum() != 0) {
 					FlexError flexError = new FlexError();
-					flexError.setModule(row.getCell(1).toString());
-					flexError.setErrcode(row.getCell(2).toString());
-					flexError.setDescription(row.getCell(3).toString());
+					flexError.setErrcode(row.getCell(1).toString());
+					flexError.setDescription(row.getCell(2).toString());
+					flexError.setModule(row.getCell(3).toString());
 					flexError.setOperation(row.getCell(4).toString());
-					flexError.setSeverity(row.getCell(5).toString());
-					flexError.setFrequency(row.getCell(6).toString());
+					flexError.setSeverity(Integer.valueOf(row.getCell(5).toString()));
 					flexError.setDomain(domain);
 					create(flexError);
 				}
@@ -153,7 +156,7 @@ public class FlexErrorController {
 	@GetMapping("/exporterrorsinexcel")
 	public ResponseEntity<byte[]> exportErrorsInExcel() {
 		byte[] err_code = null;
-		String[] columns = { "", "ERR_CODE", "DESCRIPTION", "MODULE", "OPERATION", "SEVERITY", "FREQUENCY" };
+		String[] columns = { "", "ERR_CODE", "DESCRIPTION", "DOMAIN", "MODULE", "OPERATION", "SEVER", "FREQ" };
 		try (HSSFWorkbook workbook = new HSSFWorkbook(); ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
 			HSSFSheet sheet = workbook.createSheet("Errors");
 			HSSFFont headerFont = workbook.createFont();
@@ -172,10 +175,11 @@ public class FlexErrorController {
 				row.createCell(0).setCellValue(rowNum++);
 				row.createCell(1).setCellValue(flexError.getErrcode());
 				row.createCell(2).setCellValue(flexError.getDescription().toString());
-				row.createCell(3).setCellValue(flexError.getModule().toString());
-				row.createCell(4).setCellValue(flexError.getOperation().toString());
-				row.createCell(5).setCellValue(flexError.getSeverity().toString());
-				row.createCell(6).setCellValue(flexError.getFrequency().toString());
+				row.createCell(3).setCellValue(flexError.getDomain().toString());
+				row.createCell(4).setCellValue(flexError.getModule().toString());
+				row.createCell(5).setCellValue(flexError.getOperation().toString());
+				row.createCell(6).setCellValue(flexError.getSeverity());
+				row.createCell(7).setCellValue(String.valueOf(flexError.getFrequency()));
 			}
 			for (int i = 0; i < columns.length; i++) {
 				sheet.autoSizeColumn(i);

@@ -4,7 +4,7 @@
 
         <div class="form-group">
             <mat-form-field>
-                <input matInput [(ngModel)]="error.module" name="module" id="module" placeholder="Module">
+                <input matInput required [(ngModel)]="error.module" name="module" id="module" placeholder="Module">
             </mat-form-field>
         </div>
 
@@ -16,26 +16,25 @@
 
         <div class="form-group">
             <mat-form-field>
-                <input matInput [(ngModel)]="error.description" name="description" id="description" placeholder="Description">
+                <input matInput required [(ngModel)]="error.description" name="description" id="description" placeholder="Description">
             </mat-form-field>
         </div>
 
         <div class="form-group">
             <mat-form-field>
-                <input matInput [(ngModel)]="error.operation" name="operation" id="operation" placeholder="Operation">
+                <input matInput required [(ngModel)]="error.operation" name="operation" id="operation" placeholder="Operation">
             </mat-form-field>
         </div>
 
-        <div class="form-group">
-            <mat-form-field>
-                <input matInput [(ngModel)]="error.severity" name="severity" id="severity" placeholder="Severity">
-            </mat-form-field>
-        </div>
-
-        <div class="form-group">
-            <mat-form-field>
-                <input matInput [(ngModel)]="error.frequency" name="frequency" id="frequency" placeholder="Frequency">
-            </mat-form-field>
+        <div class="form-group" fxLayoutGap="10px">
+            <label>Severity: </label>
+            <mat-radio-group [(ngModel)]="error.severity" name="severity" id="severity" fxLayoutGap="25px">
+                <mat-radio-button color="primary" [value]="1">1</mat-radio-button>
+                <mat-radio-button color="primary" [value]="2">2</mat-radio-button>
+                <mat-radio-button color="primary" [value]="3">3</mat-radio-button>
+                <mat-radio-button color="primary" [value]="4">4</mat-radio-button>
+                <mat-radio-button color="primary" [value]="5">5</mat-radio-button>
+            </mat-radio-group>
         </div>
 
         <div class="text-center">

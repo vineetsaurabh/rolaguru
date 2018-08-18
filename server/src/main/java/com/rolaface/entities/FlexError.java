@@ -47,10 +47,10 @@ public class FlexError {
 	private String operation;
 
 	@Column
-	private String severity;
+	private int severity = 1;
 
 	@Column
-	private String frequency;
+	private int frequency = 0;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "error_cause", joinColumns = { @JoinColumn(name = "errid") }, inverseJoinColumns = {
@@ -86,11 +86,11 @@ public class FlexError {
 		return operation;
 	}
 
-	public String getSeverity() {
+	public int getSeverity() {
 		return severity;
 	}
 
-	public String getFrequency() {
+	public int getFrequency() {
 		return frequency;
 	}
 
@@ -126,11 +126,11 @@ public class FlexError {
 		this.operation = operation;
 	}
 
-	public void setSeverity(String severity) {
+	public void setSeverity(int severity) {
 		this.severity = severity;
 	}
 
-	public void setFrequency(String frequency) {
+	public void setFrequency(int frequency) {
 		this.frequency = frequency;
 	}
 

@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { ErrorService } from './error.service';
 import { NgForm, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatRadioChange } from '@angular/material';
 import { Cause } from '../cause/cause.model';
 
 @Injectable()
@@ -21,8 +21,8 @@ export class EditErrorComponent implements OnInit {
         description: '',
         module: '',
         operation: '',
-        severity: '',
-        frequency: '',
+        severity: 0,
+        frequency: 0,
         causes: new Set<Cause>(),
         checked: false,
         files: null

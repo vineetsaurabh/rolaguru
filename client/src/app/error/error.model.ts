@@ -8,8 +8,8 @@ export class Error {
   errcode: string;
   description: string;
   operation: string;
-  severity: string;
-  frequency: string;
+  severity: number = 1;
+  frequency: number;
   causes: Set<Cause>;
   checked: boolean;
   files: Observable<string[]>;

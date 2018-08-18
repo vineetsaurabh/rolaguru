@@ -30,12 +30,12 @@ public final class PDFGeneratorUtil {
 	private static final float NEW_PAGE_TABLE_POSITION_Y = PAGE_HEIGHT - PAGE_MARGIN_Y;
 	private static final float NEW_PAGE_TABLE_TEXT_POSITION_Y = NEW_PAGE_TABLE_POSITION_Y - 15;
 
-	private static final int NO_OF_COLUMNS = 6;
+	private static final int NO_OF_COLUMNS = 7;
 	private static final int ROW_HEIGHT = 20;
 	private static final int CELL_MARGIN = 5;
-	private static final float[] COL_WIDTH = { 40.0f, 90.0f, TABLE_WIDTH - 170.0f, 20.0f, 20.0f, 0.0f };
+	private static final float[] COL_WIDTH = { 40.0f, TABLE_WIDTH - 380.0f, 80.0f, 80.0f, 80.0f, 50.0f, 50.0f, 0.0f };
 
-	private static final String[] HEADERS = { "", "ERR_CODE", "MESSAGE", "T", "B" };
+	private static final String[] HEADERS = { "", "ERR_CODE", "DOMAIN", "MODULE", "OPERATION", "SEVER", "FREQ" };
 	private static final PDType1Font HEADER_FONT = PDType1Font.HELVETICA_BOLD;
 	private static final int HEADER_FONT_SIZE = 12;
 
@@ -148,13 +148,15 @@ public final class PDFGeneratorUtil {
 		String[] flexErrorValues = new String[NO_OF_COLUMNS];
 		flexErrorValues[0] = String.valueOf(count);
 		flexErrorValues[1] = flexError.getErrcode();
-		flexErrorValues[2] = flexError.getDescription().trim();
-		flexErrorValues[3] = flexError.getOperation();
-		flexErrorValues[4] = flexError.getSeverity();
-		flexErrorValues[5] = flexError.getFrequency();
+		flexErrorValues[2] = flexError.getDomain();
+		flexErrorValues[3] = flexError.getModule();
+		flexErrorValues[4] = flexError.getOperation();
+		flexErrorValues[5] = String.valueOf(flexError.getSeverity());
+		flexErrorValues[6] = String.valueOf(flexError.getFrequency());
 
 		int colCount = 0;
 		for (String flexErrorValue : flexErrorValues) {
+			flexErrorValue = flexErrorValue != null ? flexErrorValue : StringUtils.EMPTY_STRING;
 			addTextInCell(contentStream, flexErrorValue, colCount);
 			CURRENT_TEXT_POSITION_X += COL_WIDTH[colCount];
 			colCount++;
