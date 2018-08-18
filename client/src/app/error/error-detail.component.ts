@@ -14,6 +14,7 @@ import { Observable } from 'rxjs/Observable';
 import { AddCauseComponent } from '../cause/add-cause.component';
 import { Cause } from '../cause/cause.model';
 import { CauseRating } from '../cause/cause-rating.model';
+import { Subscription } from 'rxjs/Subscription';
 
 
 @Component({
@@ -36,6 +37,9 @@ export class ErrorDetailComponent implements OnInit {
     };
     errid: number;
     rolaguruUtils = RolaguruUtils.getInstance();
+    noOfSolutions: number;
+
+    subscription: Subscription;
 
     constructor(
         private http: HttpClient,
@@ -50,17 +54,28 @@ export class ErrorDetailComponent implements OnInit {
 
     ngOnInit() {
         this.route.paramMap.subscribe(params => {
-                this.errid = +params.get('id');
-            });
-        this.getError();
+            this.errid = +params.get('id');
+        });
         this.router.routeReuseStrategy.shouldReuseRoute = function () {
             return false;
-        }
+        };
+        this.dialog.afterAllClosed.subscribe(() => {
+            this.noOfSolutions++;
+            this.getError();
+        });
+        this.subscription = this.causeService.noOfDeleted
+            .subscribe(item => this.noOfSolutions = this.noOfSolutions - item);
+    }
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
     }
 
     private getError() {
         this.errorService.getError(this.errid).subscribe((error) => {
             this.error = error;
+            const causes: any = error.causes;
+            this.noOfSolutions = causes.length;
         });
     }
 
@@ -83,7 +98,7 @@ export class ErrorDetailComponent implements OnInit {
         event = null;
         return false;
     }
-    
+
     uploadFileForError() {
         this.progress.percentage = 0;
         this.currentFileUpload = this.selectedFiles.item(0);
@@ -124,6 +139,15 @@ export class ErrorDetailComponent implements OnInit {
                 this.toastService.success(`${file.filename} is deleted`);
                 this.error = res;
             });
+    }
+
+    addCause(error, dialog): Observable<boolean> {
+        let dialogRef: MatDialogRef<AddCauseComponent>;
+        dialogRef = dialog.open(AddCauseComponent, {
+            data: [error.errid, error.errcode],
+            width: '900px',
+        });
+        return dialogRef.afterClosed();
     }
 
 }

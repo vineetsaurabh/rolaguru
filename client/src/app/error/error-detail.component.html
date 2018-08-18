@@ -1,7 +1,7 @@
 <global-toolbar></global-toolbar>
 <router-outlet></router-outlet>
 
-<div class="container col-md-8 my-2">
+<div class="container col-md-8 my-2" fxLayout="column"  fxLayoutGap="10px">
     <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" class="error-detail">
         <div fxLayoutAlign="start">
             <mat-form-field>
@@ -14,16 +14,42 @@
         <div class="fill-remaining-space" fxLayoutAlign="center center">
             <div class="border-text" fxLayoutGap="15px" style="width: 100%">
                 <h1>
-                    <span data-toggle="tooltip" matTooltip="Descriptions" matTooltipPosition="above">
-                        Description
+                    <span data-toggle="tooltip" matTooltip="Detail" matTooltipPosition="above">
+                        Detail
                     </span>
                 </h1>
-                <span class="error-description" fxLayoutAlign="center center">{{ error.description }}</span>
+                <div fxLayout="row" fxLayout.xs="column">
+                    <div fxLayout="row">
+                        <div class="error-property">Domain :</div>
+                        <div class="error-property-value">{{error.domain}}</div>
+                    </div>
+                    <div class="fill-remaining-space"></div>
+                    <div fxLayout="row">
+                        <div class="error-property">Module :</div>
+                        <div class="error-property-value">{{error.module}}</div>
+                    </div>
+                    <div class="fill-remaining-space"></div>
+                    <div fxLayout="row">
+                        <div class="error-property">Operation :</div>
+                        <div class="error-property-value">{{error.operation}}</div>
+                    </div>
+                    <div class="fill-remaining-space"></div>
+
+                    <div fxLayout="row">
+                        <div class="error-property">Severity :</div>
+                        <div class="error-property-value">{{error.severity}}</div>
+                    </div>
+                    <div class="fill-remaining-space"></div>
+                    <div fxLayout="row">
+                        <div class="error-property">Frequency :</div>
+                        <div class="error-property-value">{{ error.frequency }}</div>
+                    </div>
+                </div>
             </div>
         </div>
         <div fxLayout="column" fxLayout.xs="row">
             <div fxLayoutAlign="start">
-                <h5>{{ error.causes.length }}</h5>
+                <h5>{{ noOfSolutions }}</h5>
                 <div *ngIf="error.causes.length<2">
                     <small>&nbsp;Solution</small>
                 </div>
@@ -33,39 +59,42 @@
             </div>
             <span class="fill-remaining-space"></span>
             <div fxLayoutAlign="end">
-                <button class="btn add-element" (click)="errorService.addCause(error, dialog)" matTooltip="Add Solution" matTooltipPosition="above">
+                <button class="btn add-element" (click)="addCause(error, dialog)" matTooltip="Add Solution" matTooltipPosition="above">
                     <i class="fa fa-plus fa-fw"></i>
                 </button>
             </div>
         </div>
     </div>
-    <div fxLayout="column" fxLayoutGap="10px">
-        <div fxLayoutAlign="start" class="cause-detail" fxLayoutGap="5px">
-            <button class="btn" matTooltip="Upload File" fxLayoutAlign="end">
-                <label for="file-input-error" class="file-input">
-                    <i class="fa fa-upload"></i>
-                </label>
-                <input id="file-input-error" type="file" (change)="selectFileForError($event)" hidden>
-            </button>
-            <strong>Attachments</strong>
-        </div>
-        <div fxLayout="column" fxLayoutGap="5px">
-            <div *ngFor="let file of error.files" fxLayout="row" fxLayoutGap="5px">
-                <div>
-                    <a href="#" (click)="!!download(file)" oncontextmenu="return false">{{ file.filename }}</a>
-                </div>
-                <div>
-                    <small>({{ rolaguruUtils.formatBytes(file.size) }})</small>
-                </div>
-                <div>
-                    <i class="fa fa-remove" matTooltip="Delete" (click)="delete(file)" style="color:red" matTooltipPosition="after"></i>
+    <div class="error-description" fxLayoutAlign="center center">{{ error.description }}</div>
+    <div fxLayout="row">
+        <div fxLayout="column" fxLayoutAlign="end" fxLayoutGap="10px">
+            <div fxLayoutAlign="start" class="error-attachment" fxLayoutGap="5px">
+                <button matTooltip="Upload File" class="error-attachment-button" fxLayoutAlign="end">
+                    <label for="file-input-error" class="file-input">
+                        <i class="fa fa-upload"></i>
+                    </label>
+                    <input id="file-input-error" type="file" (change)="selectFileForError($event)" hidden>
+                </button>
+                <strong>Attachments</strong>
+            </div>
+            <div fxLayout="column" fxLayoutGap="5px">
+                <div *ngFor="let file of error.files" fxLayout="row" fxLayoutGap="5px">
+                    <div>
+                        <a href="#" (click)="!!download(file)" oncontextmenu="return false">{{ file.filename }}</a>
+                    </div>
+                    <div>
+                        <small>({{ rolaguruUtils.formatBytes(file.size) }})</small>
+                    </div>
+                    <div>
+                        <i class="fa fa-remove" matTooltip="Delete" (click)="delete(file)" style="color:red" matTooltipPosition="after"></i>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div *ngIf="currentFileUpload" class="progress">
-            <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
-                aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:progress.percentage+'%'}">
-                {{ progress.percentage }}%
+            <div *ngIf="currentFileUpload" class="progress">
+                <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+                    aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:progress.percentage+'%'}">
+                    {{ progress.percentage }}%
+                </div>
             </div>
         </div>
     </div>

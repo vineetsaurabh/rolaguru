@@ -7,6 +7,7 @@ import { ErrorCause } from './error-cause.model';
 import { CauseRating } from './cause-rating.model';
 import { environment } from '../../environments/environment';
 import { RequestOptions, ResponseContentType } from '@angular/http';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 
 const httpOptions = {
@@ -60,8 +61,16 @@ export class CauseService {
         return this.http.get(this.causeUrl + "/downloadfilefromcause/" + id, { observe: 'response', responseType: 'blob' });
     }
 
-    public deleteFile(id): Observable<any>  {
+    public deleteFile(id): Observable<any> {
         return this.http.delete<any>(this.causeUrl + "/deletefilefromcause/" + id);
+    }
+
+    
+
+    private behaviourSubject = new BehaviorSubject<number>(0);
+    public noOfDeleted = this.behaviourSubject.asObservable();
+    public emitCauseDeleted(number) {
+        this.behaviourSubject.next(number);
     }
 
 }

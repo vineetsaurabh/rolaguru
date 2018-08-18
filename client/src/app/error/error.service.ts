@@ -54,15 +54,6 @@ export class ErrorService {
         return this.http.put<Error>(this.errorUrl + "/" + error.errid, error, httpOptions);
     }
 
-    public addCause(error, dialog): Observable<boolean> {
-        let dialogRef: MatDialogRef<AddCauseComponent>;
-        dialogRef = dialog.open(AddCauseComponent, {
-            data: [error.errid, error.errcode],
-            width: '900px',
-        });
-        return dialogRef.afterClosed();
-    }
-
     public deleteErrors(errids: string[]) {
         let params = new HttpParams();
         params = params.append('errids', errids.join(","));
