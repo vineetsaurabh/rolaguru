@@ -176,14 +176,14 @@ export class ListErrorComponent extends ListComponent implements OnInit {
     exportErrorsInExcel() {
         this.errorService.exportErrorsInExcel()
             .subscribe(res => {
-                saveAs(new Blob([res.body]), `${this.errorDomainId}_err_code.xls`);
+                saveAs(new Blob([res.body]), `ErrorList.xls`);
             });
     }
 
     exportErrorsInPDF() {
         this.errorService.exportErrorsInPDF()
             .subscribe(res => {
-                saveAs(new Blob([res.body]), `${this.errorDomainId}_err_code.pdf`);
+                saveAs(new Blob([res.body]), `ErrorList.pdf`);
             });
     }
 

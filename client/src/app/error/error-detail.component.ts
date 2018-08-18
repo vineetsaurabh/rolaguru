@@ -28,8 +28,8 @@ export class ErrorDetailComponent implements OnInit {
         errcode: '',
         description: '',
         operation: '',
-        severity: '',
-        frequency: '',
+        severity: 0,
+        frequency: 0,
         causes: new Set<Cause>(),
         checked: false,
         files: null
@@ -49,15 +49,10 @@ export class ErrorDetailComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.route.paramMap
-            .subscribe(params => {
+        this.route.paramMap.subscribe(params => {
                 this.errid = +params.get('id');
             });
-
         this.getError();
-        this.dialog.afterAllClosed.subscribe(() => {
-            this.getError();
-        });
         this.router.routeReuseStrategy.shouldReuseRoute = function () {
             return false;
         }
@@ -66,7 +61,7 @@ export class ErrorDetailComponent implements OnInit {
     private getError() {
         this.errorService.getError(this.errid).subscribe((error) => {
             this.error = error;
-        })
+        });
     }
 
     findErrorByCode() {
