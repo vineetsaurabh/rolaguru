@@ -20,6 +20,7 @@ import { FindErrorResultComponent } from './error/find-error-result.component';
 import { SubscribedErrorsComponent } from './error/subscribe-error.component';
 import { SearchReportMonthwiseComponent } from './report/search-report-monthwise.component';
 import { SearchReportInputwiseComponent } from './report/search-report-inputwise.component';
+import { RcaReportComponent } from './report/rca-report.component';
 
 const routes: Routes = [
     {
@@ -111,6 +112,10 @@ const routes: Routes = [
     {
         path: 'searchReportInputwise',
         component: SearchReportInputwiseComponent
+    },
+    {
+        path: 'rcaReport',
+        component: RcaReportComponent
     },
 ];
 

@@ -95,6 +95,7 @@ import { SubscribedErrorsComponent } from './error/subscribe-error.component';
 import { ReportService } from './report/report.service';
 import { SearchReportMonthwiseComponent } from './report/search-report-monthwise.component';
 import { SearchReportInputwiseComponent } from './report/search-report-inputwise.component';
+import { RcaReportComponent } from './report/rca-report.component';
 
 @NgModule({
     declarations: [
@@ -121,7 +122,8 @@ import { SearchReportInputwiseComponent } from './report/search-report-inputwise
         FindErrorResultComponent,
         SubscribedErrorsComponent,
         SearchReportMonthwiseComponent,
-        SearchReportInputwiseComponent
+        SearchReportInputwiseComponent,
+        RcaReportComponent
     ],
     imports: [
         BrowserModule,

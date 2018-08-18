@@ -1,0 +1,16 @@
+<global-toolbar></global-toolbar>
+<div class="container col-lg-10">
+    <div fxLayout="column" fxLayoutGap="20px">
+        <div class="chart-title" fxLayoutAlign="center" fxLayoutGap="5px">
+            <div id="chart-drilldown-back">
+                <button class="btn rca-report-back" matTooltip="Back to Error Per Domain" (click)="reload()">
+                    <i class="fa fa-arrow-left"></i>
+                </button>
+            </div>
+            <div>
+                <h2>RCA Report</h2>
+            </div>
+        </div>
+        <div fxLayoutAlign="center" id="error-count"></div>
+    </div>
+</div>

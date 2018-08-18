@@ -30,11 +30,11 @@ export class SubscribedErrorsComponent extends ListErrorComponent {
     }
 
     ngOnInit() {
-        this.getErrors();
+        this.getSubscribedErrors();
         this.getSubscribedErrorIds();
     };
 
-    getErrors() {
+    getSubscribedErrors() {
         const userid = this.token.getCurrentUserId();
         this.errorService.getSubscribedErrors().subscribe(data => {
             this.errors = data;
@@ -50,7 +50,7 @@ export class SubscribedErrorsComponent extends ListErrorComponent {
                 this.token.removeSubscribedErrorIds("" + error.errid);
                 this.getSubscribedErrorIds();
                 this.toastService.success(`You have unsubscribed for Error ${error.errcode}`);
-                this.getErrors();
+                this.getSubscribedErrors();
             });
     }
 

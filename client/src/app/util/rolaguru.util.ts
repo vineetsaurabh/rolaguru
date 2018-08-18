@@ -1,3 +1,4 @@
+import { ErrorDomain } from "../error/error-domain.model";
 
 
 export class RolaguruUtils {
@@ -5,6 +6,15 @@ export class RolaguruUtils {
     protected static rolaguruUtils: RolaguruUtils;
 
     monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+    errorDomains: ErrorDomain[] = [
+        { name: 'Flexcube', id: 'fx', color: 'lightsteelblue' },
+        { name: 'Database', id: 'db', color: 'lavender' },
+        { name: 'Acumen', id: 'am', color: 'lightsteelblue' },
+        { name: 'Mobile App', id: 'ma', color: 'lavender' },
+        { name: 'ERP', id: 'er', color: 'lightsteelblue' },
+        { name: 'FCDB', id: 'fc', color: 'lavender' },
+    ];
 
     static getInstance(): RolaguruUtils {
         if (!this.rolaguruUtils) {

@@ -89,8 +89,13 @@ public class FlexErrorController {
 		return deletedFlexError;
 	}
 
-	@GetMapping(params = "domain")
-	public List<FlexError> findAll(@RequestParam("domain") String domain) {
+	@GetMapping(value = "/findallerrors")
+	public List<FlexError> findAll() {
+		return flexErrorService.findAll();
+	}
+
+	@GetMapping(value = "/findallerrorsofdomain", params = "domain")
+	public List<FlexError> findAllErrorsOfDomain(@RequestParam("domain") String domain) {
 		return flexErrorService.findAll(domain);
 	}
 

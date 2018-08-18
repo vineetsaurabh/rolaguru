@@ -26,11 +26,11 @@ export class FindErrorResultComponent extends ListErrorComponent {
     }
 
     ngOnInit() {
-        this.getErrors();
+        this.findErrors();
     };
 
 
-    getErrors() {
+    findErrors() {
         this.route.queryParams.subscribe(params => {
             this.errorService.findErrors(params.input)
                 .subscribe(data => {

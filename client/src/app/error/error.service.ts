@@ -31,10 +31,14 @@ export class ErrorService {
         return this.http.get<Error>(this.errorUrl + '/findbyerrcode', { params: params });
     }
 
-    public getErrors(domain: string) {
+    public getAllErrors() {
+        return this.http.get<Error[]>(this.errorUrl + "/findallerrors");
+    }
+
+    public getAllErrorsOfDomian(domain: string) {
         let params = new HttpParams();
         params = params.append('domain', domain);
-        return this.http.get<Error[]>(this.errorUrl, { params: params });
+        return this.http.get<Error[]>(this.errorUrl + "/findallerrorsofdomain", { params: params });
     }
 
     public deleteError(error: Error) {
