@@ -4,6 +4,9 @@
         <mat-grid-tile *ngFor="let domain of errorDomains" [style.background]="domain.color" (click)="navigate(domain)" class="error-domain">
             <div style="text-align: center">
                 <h3>{{ domain.name }}</h3>
+                <div class="d-none d-sm-block">
+                    <div fxLayoutAlign="center" id="error-count-{{domain.id}}"></div>
+                </div>
             </div>
         </mat-grid-tile>
     </mat-grid-list>

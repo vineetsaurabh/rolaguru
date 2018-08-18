@@ -267,3 +267,10 @@ canvas#searchReportChart{
     width: 800px;
     height: 500px;
 }
+.rca-report-back{
+    color: green;
+    background-color: transparent;
+}
+.rca-report-back:hover{
+    background: transparent!important;
+}

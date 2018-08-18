@@ -51,7 +51,7 @@ export class ListErrorComponent extends ListComponent implements OnInit {
             this.errorDomainName = params.domainName;
         });
         this.dialog.afterAllClosed.subscribe(() => {
-            this.getErrors();
+            this.getAllErrorsOfDomian();
             this.getSubscribedErrorIds();
         });
     };
@@ -62,8 +62,8 @@ export class ListErrorComponent extends ListComponent implements OnInit {
         this.dataSource.filter = filterValue;
     }
 
-    getErrors() {
-        this.errorService.getErrors(this.errorDomainId)
+    getAllErrorsOfDomian() {
+        this.errorService.getAllErrorsOfDomian(this.errorDomainId)
             .subscribe(data => {
                 this.errors = data;
                 this.dataSource = new MatTableDataSource(data);
@@ -119,7 +119,7 @@ export class ListErrorComponent extends ListComponent implements OnInit {
             .subscribe(data => {
                 this.errors = this.errors.filter(u => u !== error);
                 this.toastService.success(`Error ${error.errcode} delete`);
-                this.getErrors();
+                this.getAllErrorsOfDomian();
             })
     };
 
@@ -155,7 +155,7 @@ export class ListErrorComponent extends ListComponent implements OnInit {
         let selectedErrorsLength = this.selectedErrors.length;
         this.errorService.deleteErrors(this.selectedErrors)
             .subscribe(res => {
-                this.getErrors();
+                this.getAllErrorsOfDomian();
                 if (selectedErrorsLength == 1) {
                     this.toastService.success(`1 error deleted`);
                 } else {
@@ -169,7 +169,7 @@ export class ListErrorComponent extends ListComponent implements OnInit {
         this.errorService.importErrors(event.target.files.item(0), this.errorDomainId)
             .subscribe(data => {
                 this.toastService.success(`${data} ${this.errorDomainName} errors imported`);
-                this.getErrors();
+                this.getAllErrorsOfDomian();
             });
     }
 
