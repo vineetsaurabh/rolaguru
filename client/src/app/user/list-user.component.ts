@@ -20,8 +20,8 @@ import { ListComponent } from '../common/list.component';
 export class ListUserComponent extends ListComponent implements OnInit {
 
     users: User[];
-    allColumns = ['Checkbox', 'Username', 'First Name', 'Last Name', 'Email', 'Actions'];
-    displayedColumns = this.allColumns;
+    allColumns = ['Checkbox', 'Name', 'DateOfBirth', 'Email', 'Phone', 'Expertise', 'Address', 'Actions'];
+    displayedColumns = ['Checkbox', 'Name', 'DateOfBirth', 'Email', 'Phone', 'Expertise', 'Actions'];
     dataSource: MatTableDataSource<User>;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -61,7 +61,8 @@ export class ListUserComponent extends ListComponent implements OnInit {
     public addUser(): Observable<boolean> {
         let dialogRef: MatDialogRef<AddUserComponent>;
         dialogRef = this.dialog.open(AddUserComponent, {
-            width: '400px',
+            width: '500px',
+            height: '600px',
         });
         return dialogRef.afterClosed();
     }

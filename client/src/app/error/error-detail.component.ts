@@ -149,6 +149,7 @@ export class ErrorDetailComponent implements OnInit {
         dialogRef = dialog.open(AddCauseComponent, {
             data: [error.errid, error.errcode],
             width: '900px',
+            height: '600px',
         });
         return dialogRef.afterClosed();
     }

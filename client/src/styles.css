@@ -84,7 +84,7 @@ div.border-text h1 span{
 }
 /* Error Table Columns */
 .mat-column-Checkbox{
-    max-width: 40px;
+    max-width: 50px;
 }
 .mat-column-Error-Code{
     max-width: 120px;
@@ -281,13 +281,6 @@ mat-form-field {
     width: 180px;
 }
 
-
-/* ngx editor */
-.mat-dialog-container .ngx-editor-textarea{
-    height: 120px !important;
-    overflow-y: visible !important;
-}
-
 /* Profile Picture */
 img.user-picture{
     height: 40px;
@@ -327,4 +320,22 @@ canvas#searchReportChart{
 }
 .rca-report-back:hover{
     background: transparent!important;
+}
+
+/* User Info */
+.user-info-label{
+    min-width: 150px;
+    color: royalblue;
+    font-weight: 400;
+}
+.user-info-value{
+    color: darkblue;
+    font-weight: 800;
+}
+/* User Table */
+.mat-column-DateOfBirth{
+    max-width: 120px;
+}
+.mat-column-Phone{
+    max-width: 120px;
 }
