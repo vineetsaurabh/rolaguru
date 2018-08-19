@@ -20,9 +20,11 @@ export class CauseComponent implements OnInit {
     @Input() causes: Set<Cause>;
     @Output() causesChange = new EventEmitter<Set<Cause>>();
 
+    rootCauses: string[] = ['Operation', 'Data', 'Code'];
+
     userid: string;
-    editSolution: string = '';
     editDescription: string = '';
+    editBankingScenerio: string = '';
     editing: boolean = false;
 
     myRating: CauseRating = new CauseRating();
@@ -47,7 +49,7 @@ export class CauseComponent implements OnInit {
         this.noOfRatings = Object.keys(this.cause.ratings).length;
         this.calculateRating();
         this.calculateOverallRating();
-        this.editSolution = this.cause.solution;
+        this.editBankingScenerio = this.cause.bankingScenerio;
         this.editDescription = this.cause.description;
     }
 
@@ -111,10 +113,10 @@ export class CauseComponent implements OnInit {
 
     saveCause() {
         this.editing = false;
-        if (this.cause.solution != this.editSolution || this.cause.description != this.editDescription) {
+        if (this.cause.description != this.editDescription || this.cause.bankingScenerio != this.editBankingScenerio) {
             let causeToUpdate = this.cause;
-            causeToUpdate.solution = this.editSolution;
             causeToUpdate.description = this.editDescription;
+            causeToUpdate.bankingScenerio = this.editBankingScenerio;
             this.causeService.updateCause(causeToUpdate)
                 .subscribe(data => {
                     this.cause = data;

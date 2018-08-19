@@ -64,12 +64,15 @@ public class FlexErrorController {
 
 	@PostMapping
 	public FlexError create(@RequestBody FlexError flexError) {
+		int userId = ((ContextUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
+		User user = userService.findById(userId);
+		flexError.setUser(user);
+		flexError.setCreatedTimestamp(new Date());
 		return flexErrorService.create(flexError);
 	}
 
 	@GetMapping(path = { "/{id}" })
 	public FlexError findOne(@PathVariable("id") int id) {
-		System.out.println("findOne called ..... ");
 		FlexError flexError = flexErrorService.findById(id);
 		flexError.setFrequency(flexError.getFrequency() + 1);
 		flexErrorService.update(flexError);
@@ -78,6 +81,7 @@ public class FlexErrorController {
 
 	@PutMapping(path = { "/{id}" })
 	public FlexError update(@RequestBody FlexError flexError) {
+		flexError.setModifiedTimestamp(new Date());
 		return flexErrorService.update(flexError);
 	}
 

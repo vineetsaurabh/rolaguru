@@ -25,7 +25,10 @@ export class EditErrorComponent implements OnInit {
         frequency: 0,
         causes: new Set<Cause>(),
         checked: false,
-        files: null
+        files: null,
+        createdTimestamp: null,
+        modifiedTimeStamp: null,
+        user: null
     };
     errorForm: FormGroup;
 

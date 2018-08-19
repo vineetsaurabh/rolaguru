@@ -262,6 +262,16 @@ mat-form-field {
     padding: 6px 24px 6px 24px!important;
     background: linear-gradient(to right, cadetblue, powderblue);
 }
+.solution-title{
+    font-weight: 200;
+    font-size: 12px;
+    color: goldenrod;
+}
+.solution-last-modified-on{
+    font-size: 10px;
+    font-style: italic;
+    color: coral;
+}
 /* Cause Detail */
 .cause-detail{
     background-color: azure;

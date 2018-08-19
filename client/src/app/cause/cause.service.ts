@@ -65,8 +65,6 @@ export class CauseService {
         return this.http.delete<any>(this.causeUrl + "/deletefilefromcause/" + id);
     }
 
-    
-
     private behaviourSubject = new BehaviorSubject<number>(0);
     public noOfDeleted = this.behaviourSubject.asObservable();
     public emitCauseDeleted(number) {

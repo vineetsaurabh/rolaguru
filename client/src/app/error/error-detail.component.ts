@@ -33,7 +33,10 @@ export class ErrorDetailComponent implements OnInit {
         frequency: 0,
         causes: new Set<Cause>(),
         checked: false,
-        files: null
+        files: null,
+        createdTimestamp: null,
+        modifiedTimeStamp: null,
+        user: null,
     };
     errid: number;
     rolaguruUtils = RolaguruUtils.getInstance();

@@ -33,7 +33,10 @@ public class Cause {
 
 	@Lob
 	@Column
-	private String solution;
+	private String bankingScenerio;
+
+	@Column(nullable = false)
+	private String rootCause;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "created")
@@ -59,60 +62,68 @@ public class Cause {
 		return causeid;
 	}
 
-	public void setCauseid(int causeid) {
-		this.causeid = causeid;
-	}
-
 	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public String getBankingScenerio() {
+		return bankingScenerio;
 	}
 
-	public String getSolution() {
-		return solution;
-	}
-
-	public void setSolution(String solution) {
-		this.solution = solution;
+	public String getRootCause() {
+		return rootCause;
 	}
 
 	public java.util.Date getCreatedTimestamp() {
 		return createdTimestamp;
 	}
 
-	public void setCreatedTimestamp(java.util.Date createdTimestamp) {
-		this.createdTimestamp = createdTimestamp;
-	}
-
 	public Date getModifiedTimestamp() {
 		return modifiedTimestamp;
-	}
-
-	public void setModifiedTimestamp(Date modifiedTimestamp) {
-		this.modifiedTimestamp = modifiedTimestamp;
 	}
 
 	public User getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
-	}
-
 	public Set<CauseRating> getRatings() {
 		return ratings;
 	}
 
-	public void setRatings(Set<CauseRating> ratings) {
-		this.ratings = ratings;
-	}
-
 	public Set<CauseDocument> getFiles() {
 		return files;
+	}
+
+	public void setCauseid(int causeid) {
+		this.causeid = causeid;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setBankingScenerio(String bankingScenerio) {
+		this.bankingScenerio = bankingScenerio;
+	}
+
+	public void setRootCause(String rootCause) {
+		this.rootCause = rootCause;
+	}
+
+	public void setCreatedTimestamp(java.util.Date createdTimestamp) {
+		this.createdTimestamp = createdTimestamp;
+	}
+
+	public void setModifiedTimestamp(Date modifiedTimestamp) {
+		this.modifiedTimestamp = modifiedTimestamp;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public void setRatings(Set<CauseRating> ratings) {
+		this.ratings = ratings;
 	}
 
 	public void setFiles(Set<CauseDocument> files) {
@@ -121,9 +132,10 @@ public class Cause {
 
 	@Override
 	public String toString() {
-		return "Cause [causeid=" + causeid + ", description=" + description + ", solution=" + solution
-				+ ", createdTimestamp=" + createdTimestamp + ", modifiedTimestamp=" + modifiedTimestamp + ", user="
-				+ user + ", ratings=" + ratings + "]";
+		return "Cause [causeid=" + causeid + ", description=" + description + ", bankingScenerio=" + bankingScenerio
+				+ ", rootCause=" + rootCause + ", createdTimestamp=" + createdTimestamp + ", modifiedTimestamp="
+				+ modifiedTimestamp + ", user=" + user.getFirstName() + ", ratings=" + ratings + ", files="
+				+ files.size() + "]";
 	}
 
 }

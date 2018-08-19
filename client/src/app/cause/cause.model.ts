@@ -3,10 +3,13 @@ import { User } from "../user/user.model";
 import { Observable } from "rxjs/Observable";
 
 export class Cause {
-  causeid: string;
-  description: string;
-  solution: string;
-  ratings: Set<CauseRating>;
-  user: User;
-  files: Observable<string[]>;
+    causeid: string;
+    description: string;
+    bankingScenerio: string;
+    rootCause: string;
+    ratings: Set<CauseRating>;
+    createdTimestamp: Date;
+    modifiedTimeStamp: Date;
+    user: User;
+    files: Observable<string[]>;
 }
