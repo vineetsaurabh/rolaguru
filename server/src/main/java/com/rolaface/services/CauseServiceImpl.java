@@ -44,7 +44,8 @@ public class CauseServiceImpl implements CauseService {
 		Cause causeToUpdate = findById(cause.getCauseid());
 		if (causeToUpdate != null) {
 			causeToUpdate.setDescription(cause.getDescription());
-			causeToUpdate.setSolution(cause.getSolution());
+			causeToUpdate.setBankingScenerio(cause.getBankingScenerio());
+			causeToUpdate.setRootCause(cause.getRootCause());
 			causeToUpdate.setRatings(cause.getRatings());
 			causeToUpdate.setFiles(cause.getFiles());
 			causeToUpdate.setModifiedTimestamp(new Date());

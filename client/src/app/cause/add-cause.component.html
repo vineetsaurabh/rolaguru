@@ -3,7 +3,7 @@
     <form #causeForm="ngForm" (ngSubmit)="createCause(causeForm)" ngNativeValidate>
         <div class="form-group">
             <div fxLayoutAlign="center" class="add-item-field">
-                <h5>Description</h5>
+                <h5>Solution Description</h5>
             </div>
             <div class="editor block">
                 <app-ngx-editor minHeight="50px" [(ngModel)]="htmlDescription" name="description"></app-ngx-editor>
@@ -11,15 +11,24 @@
         </div>
         <div class="form-group">
             <div fxLayoutAlign="center" class="add-item-field">
-                <h5>Solution</h5>
+                <h5>Banking Scenerio</h5>
             </div>
             <div class="editor block">
-                <app-ngx-editor minHeight="50px" [(ngModel)]="htmlSolution" name="solution"></app-ngx-editor>
+                <app-ngx-editor minHeight="50px" [(ngModel)]="htmlBankingScenerio" name="bankingScenerio"></app-ngx-editor>
             </div>
         </div>
-
+        <div class="form-group" fxLayoutGap="10px">
+            <div fxLayoutAlign="center" class="add-item-field">
+                <h5>Root Cause</h5>
+            </div>
+            <mat-radio-group [(ngModel)]="rootCause" name="rootCause" id="rootCause" fxLayoutGap="25px">
+                <mat-radio-button color="primary" [value]="1">Operation</mat-radio-button>
+                <mat-radio-button color="primary" [value]="2">Data</mat-radio-button>
+                <mat-radio-button color="primary" [value]="3">Code</mat-radio-button>
+            </mat-radio-group>
+        </div>
         <div class="text-center">
-            <button mat-raised-button color="primary" [disabled]="!causeForm.valid || htmlDescription == '' || htmlSolution ==''">
+            <button mat-raised-button color="primary" [disabled]="!causeForm.valid || htmlDescription=='' || htmlBankingScenerio==''">
                 Submit
             </button>
         </div>

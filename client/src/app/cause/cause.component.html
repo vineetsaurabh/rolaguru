@@ -1,7 +1,12 @@
 <mat-expansion-panel [expanded]="j == 0">
     <mat-expansion-panel-header class="cause-panel-header">
-        <mat-panel-title>
-            {{ j+1 }}
+        <mat-panel-title class="solution-title">
+            <div fxLayout="row" fxLayout.xs="column">
+                <span>Provided on {{cause.createdTimestamp | date: 'dd-MMM-yyyy'}}</span> &nbsp;
+                <div> by
+                    <a [routerLink]="['/findUser', cause.user.userid]"> {{cause.user.firstName}} </a>
+                </div>
+            </div>
         </mat-panel-title>
         <mat-panel-description>
             <div class="fill-remaining-space"></div>
@@ -18,7 +23,7 @@
         <div fxLayout="column">
             <div fxLayout="row" class="cause-detail">
                 <div fxLayoutAlign="start">
-                    <strong>Description</strong>
+                    <strong>Solution Description</strong>
                 </div>
             </div>
             <div>
@@ -30,12 +35,27 @@
         </div>
         <div fxLayout="column">
             <div fxLayoutAlign="start" class="cause-detail">
-                <strong>Solution</strong>
+                <strong>Banking Scenerio</strong>
             </div>
             <div>
-                <div [innerHTML]="cause.solution" [hidden]="editing"></div>
+                <div [innerHTML]="cause.bankingScenerio" [hidden]="editing"></div>
                 <div class="editor block" [hidden]="!editing">
-                    <app-ngx-editor minHeight="50px" [(ngModel)]="editSolution"></app-ngx-editor>
+                    <app-ngx-editor minHeight="50px" [(ngModel)]="editBankingScenerio"></app-ngx-editor>
+                </div>
+            </div>
+        </div>
+        <div fxLayout="column">
+            <div fxLayoutAlign="start" class="cause-detail">
+                <strong>Root Cause</strong>
+            </div>
+            <div>
+                <div [hidden]="editing">{{rootCauses[cause.rootCause - 1]}}</div>
+                <div [hidden]="!editing">
+                    <mat-radio-group [(ngModel)]="cause.rootCause" name="root-cause-{{cause.causeid}}" id="root-cause-{{cause.causeid}}" fxLayoutGap="25px">
+                        <mat-radio-button color="primary" [value]="1">{{rootCauses[0]}}</mat-radio-button>
+                        <mat-radio-button color="primary" [value]="2">{{rootCauses[1]}}</mat-radio-button>
+                        <mat-radio-button color="primary" [value]="3">{{rootCauses[2]}}</mat-radio-button>
+                    </mat-radio-group>
                 </div>
             </div>
         </div>
@@ -67,6 +87,9 @@
                     {{ progress.percentage }}%
                 </div>
             </div>
+        </div>
+        <div class="solution-last-modified-on" *ngIf="cause.modifiedTimestamp" fxLayoutAlign="end">
+            <span>Last modified on {{cause.modifiedTimestamp | date: 'dd-MMM-yyyy'}}</span>
         </div>
     </div>
     <mat-action-row fxlayout="row" fxLayoutGap="10px" class="cause-panel-action">

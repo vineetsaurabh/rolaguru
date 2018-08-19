@@ -1,5 +1,6 @@
 package com.rolaface.entities;
 
+import java.util.Date;
 import java.util.Set;
 import java.util.SortedSet;
 
@@ -15,7 +16,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.SortComparator;
 
@@ -51,6 +55,18 @@ public class FlexError {
 
 	@Column
 	private int frequency = 0;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "created")
+	private java.util.Date createdTimestamp;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "modified")
+	private Date modifiedTimestamp;
+
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "userid")
+	private User user;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "error_cause", joinColumns = { @JoinColumn(name = "errid") }, inverseJoinColumns = {
@@ -140,6 +156,30 @@ public class FlexError {
 
 	public void setFiles(Set<ErrorDocument> files) {
 		this.files = files;
+	}
+
+	public Date getCreatedTimestamp() {
+		return createdTimestamp;
+	}
+
+	public void setCreatedTimestamp(java.util.Date createdTimestamp) {
+		this.createdTimestamp = createdTimestamp;
+	}
+
+	public Date getModifiedTimestamp() {
+		return modifiedTimestamp;
+	}
+
+	public void setModifiedTimestamp(Date modifiedTimestamp) {
+		this.modifiedTimestamp = modifiedTimestamp;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override
