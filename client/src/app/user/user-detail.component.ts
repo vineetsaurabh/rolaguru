@@ -20,6 +20,7 @@ export class UserDetailComponent implements OnInit {
         password: '',
         firstName: '',
         lastName: '',
+        dateOfBirth: null,
         email: '',
         phone: '',
         address: '',
