@@ -21,6 +21,9 @@ export class UserDetailComponent implements OnInit {
         firstName: '',
         lastName: '',
         email: '',
+        phone: '',
+        address: '',
+        expertise: '',
         active: false,
         checked: false,
     };

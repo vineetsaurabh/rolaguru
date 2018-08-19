@@ -1,20 +1,60 @@
 <div class="container col-md-6 my-2">
-    <div fxLayout="row" fxLayoutGap="10px">
-        <div class="profile-picture-container">
-            <img class="profile-picture">
-            <div class="edit" *ngIf="user.userid == loggedUserId">
-                <label for="file-input" class="file-input">
-                    <i class="fa fa-pencil fa-lg"></i>
-                </label>
-                <input id="file-input" type="file" (change)="selectFile($event)"  accept=".jpg,.jpeg" hidden>
+    <div fxLayout="column" fxLayoutGap="10px">
+        <div fxLayout="row" fxLayout.xs="column">
+            <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="10px">
+                <div fxLayout="row">
+                    <div class="user-info-label">First Name</div>
+                    <div class="user-info-value">
+                        {{user.lastName}}
+                    </div>
+                </div>
+                <div fxLayout="row">
+                    <div class="user-info-label">Last Name</div>
+                    <div class="user-info-value">
+                        {{user.firstName}}
+                    </div>
+                </div>
+                <div fxLayout="row">
+                    <div class="user-info-label">Date of Birth</div>
+                    <div class="user-info-value">
+                        {{user.dateOfBirth | date: 'dd-MMM-yyyy'}}
+                    </div>
+                </div>
+                <div fxLayout="row">
+                    <div class="user-info-label">Email</div>
+                    <div class="user-info-value">
+                        {{user.email}}
+                    </div>
+                </div>
+                <div fxLayout="row">
+                    <div class="user-info-label">Phone Number</div>
+                    <div class="user-info-value">
+                        {{user.phone}}
+                    </div>
+                </div>
+                <div fxLayout="row">
+                    <div class="user-info-label">Address</div>
+                    <div class="user-info-value">
+                        {{user.address}}
+                    </div>
+                </div>
+            </div>
+            <div class="fill-remaining-space"></div>
+            <div class="profile-picture-container" fxLayoutAlign="end" fxLayoutAlign.xs="center">
+                <img class="profile-picture">
+                <div class="edit" *ngIf="user.userid == loggedUserId">
+                    <label for="file-input" class="file-input">
+                        <i class="fa fa-pencil fa-lg"></i>
+                    </label>
+                    <input id="file-input" type="file" (change)="selectFile($event)" accept=".jpg,.jpeg" hidden>
+                </div>
             </div>
         </div>
-        <div fxLayout="column">
-            <div>
-                {{user.lastName}}, {{user.firstName}}
-            </div>
-            <div>
-                {{user.email}}
+        <mat-divider></mat-divider>
+        <div fxLayout="row">
+            <div class="user-info-label">Expertise</div>
+            <div class="user-info-value">
+                {{user.expertise}}
             </div>
         </div>
     </div>

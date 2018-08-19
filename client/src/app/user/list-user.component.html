@@ -75,19 +75,34 @@
                 </mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="First Name">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> First Name </mat-header-cell>
-                <mat-cell *matCellDef="let user" [ngClass]="{'inactive-user': !user.active}"> {{user.firstName}} </mat-cell>
+            <ng-container matColumnDef="Name">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+                <mat-cell *matCellDef="let user" [ngClass]="{'inactive-user': !user.active}"> {{user.firstName}} {{user.lastName}}</mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="Last Name">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </mat-header-cell>
-                <mat-cell *matCellDef="let user" [ngClass]="{'inactive-user': !user.active}"> {{user.lastName}} </mat-cell>
+            <ng-container matColumnDef="DateOfBirth">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Date of Birth </mat-header-cell>
+                <mat-cell *matCellDef="let user" [ngClass]="{'inactive-user': !user.active}"> {{user.dateOfBirth | date: 'dd-MMM-yyyy'}} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="Email">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
                 <mat-cell *matCellDef="let user" [ngClass]="{'inactive-user': !user.active}"> {{user.email}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Phone">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Phone </mat-header-cell>
+                <mat-cell *matCellDef="let user" [ngClass]="{'inactive-user': !user.active}"> {{user.phone}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Expertise">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Expertise </mat-header-cell>
+                <mat-cell *matCellDef="let user" [ngClass]="{'inactive-user': !user.active}"> {{user.expertise}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Address">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Address </mat-header-cell>
+                <mat-cell *matCellDef="let user" [ngClass]="{'inactive-user': !user.active}"> {{user.address}} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="Actions">

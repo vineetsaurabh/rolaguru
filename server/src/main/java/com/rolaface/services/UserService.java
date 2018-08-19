@@ -21,5 +21,12 @@ public interface UserService {
 
 	User update(User user);
 
+	User findByUsername(String username);
+
 	User findByEmail(String email);
+
+	User findByPhone(String phone);
+
+	List<User> findByExpertise(String expertise);
+
 }

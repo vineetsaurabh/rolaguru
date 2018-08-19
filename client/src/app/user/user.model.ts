@@ -6,7 +6,11 @@ export class User {
   password: string;
   firstName: string;
   lastName: string;
-  active: boolean;
+  dateOfBirth: Date;
   email: string;
+  phone: string;
+  expertise: string;
+  address: string;
+  active: boolean;
   checked: boolean;
 }

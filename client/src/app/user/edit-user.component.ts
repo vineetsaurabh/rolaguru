@@ -20,7 +20,11 @@ export class EditUserComponent implements OnInit {
         password: '',
         firstName: '',
         lastName: '',
+        dateOfBirth: null,
         email: '',
+        phone: '',
+        expertise: '',
+        address: '',
         active: false,
         checked: false,
     };

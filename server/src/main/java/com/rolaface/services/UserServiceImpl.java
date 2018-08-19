@@ -44,7 +44,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
 		newUser.setFirstName(user.getFirstName());
 		newUser.setLastName(user.getLastName());
+		newUser.setDateOfBirth(user.getDateOfBirth());
 		newUser.setEmail(user.getEmail());
+		newUser.setPhone(user.getPhone());
+		newUser.setAddress(user.getAddress());
+		newUser.setExpertise(user.getExpertise());
 		return repository.save(newUser);
 	}
 
@@ -78,7 +82,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		if (userToUpdate != null) {
 			userToUpdate.setFirstName(user.getFirstName());
 			userToUpdate.setLastName(user.getLastName());
+			userToUpdate.setDateOfBirth(user.getDateOfBirth());
 			userToUpdate.setEmail(user.getEmail());
+			userToUpdate.setPhone(user.getPhone());
+			userToUpdate.setExpertise(user.getExpertise());
+			userToUpdate.setAddress(user.getAddress());
 			userToUpdate.setActive(user.isActive());
 			user = repository.save(userToUpdate);
 		}
@@ -89,4 +97,20 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	public User findByEmail(String email) {
 		return repository.findByEmail(email);
 	}
+
+	@Override
+	public User findByUsername(String username) {
+		return repository.findByUsername(username);
+	}
+
+	@Override
+	public User findByPhone(String phone) {
+		return repository.findByPhone(phone);
+	}
+
+	@Override
+	public List<User> findByExpertise(String expertise) {
+		return repository.findByExpertise(expertise);
+	}
+
 }
