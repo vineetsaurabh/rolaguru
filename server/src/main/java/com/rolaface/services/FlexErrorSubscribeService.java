@@ -21,6 +21,8 @@ public interface FlexErrorSubscribeService {
 
 	List<FlexErrorSubscribe> findByErrid(int errid);
 
+	List<String> findSubscribedEmails(int errid);
+
 	List<FlexErrorSubscribe> findByUserid(int userid);
 
 }

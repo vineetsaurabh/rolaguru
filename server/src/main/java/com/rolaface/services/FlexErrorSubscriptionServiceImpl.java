@@ -45,6 +45,11 @@ public class FlexErrorSubscriptionServiceImpl implements FlexErrorSubscribeServi
 	}
 
 	@Override
+	public List<String> findSubscribedEmails(int errid) {
+		return repository.findSubscribedEmails(errid);
+	}
+
+	@Override
 	public List<FlexErrorSubscribe> findByUserid(int userid) {
 		return repository.findByUserid(userid);
 	}

@@ -25,6 +25,9 @@ public interface FlexErrorSubscribeRepository extends JpaRepository<FlexErrorSub
 	@Query(value = "SELECT * FROM error_subscribe f WHERE f.errid = ?1 AND f.userid = ?2", nativeQuery = true)
 	FlexErrorSubscribe findSubscription(int errid, int userid);
 
+	@Query(value = "SELECT email FROM error_subscribe f WHERE f.errid = ?1", nativeQuery = true)
+	List<String> findSubscribedEmails(int errid);
+
 	@Override
 	FlexErrorSubscribe save(FlexErrorSubscribe flexErrorSubscribe);
 

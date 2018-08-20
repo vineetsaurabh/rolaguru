@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.rolaface.entities.FlexError;
 import com.rolaface.entities.FlexErrorSubscribe;
 import com.rolaface.model.ContextUser;
+import com.rolaface.services.EmailService;
 import com.rolaface.services.FlexErrorService;
 import com.rolaface.services.FlexErrorSubscribeService;
 
@@ -27,22 +28,38 @@ import com.rolaface.services.FlexErrorSubscribeService;
 @RequestMapping({ "/flex-error-subscribe" })
 public class FlexErrorSubscribeController {
 
+	private final static String SUBSCRIPTION_SUBJECT = "ROLAGURU Notification : Your are subscribed to Error";
+
+	private final static String UN_SUBSCRIPTION_SUBJECT = "ROLAGURU Notification : Your are un-subscribed from Error";
+
+	private final static String SUBSCRIPTION_MESSAGE = "You are subscribed to Error(s) \n Error ID - %d";
+
+	private final static String UN_SUBSCRIPTION_MESSAGE = "You are un-subscribed to Error(s) \n Error ID - %d";
+
 	@Autowired
 	private FlexErrorSubscribeService flexErrorSubscribeService;
 
 	@Autowired
 	private FlexErrorService errorService;
 
+	@Autowired
+	private EmailService emailService;
+
 	@PostMapping
 	public FlexErrorSubscribe create(@RequestBody int errid) {
-		int userId = ((ContextUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
-		FlexErrorSubscribe flexErrorSubscribe = flexErrorSubscribeService.findSubscription(errid, userId);
+		ContextUser user = (ContextUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		FlexErrorSubscribe flexErrorSubscribe = flexErrorSubscribeService.findSubscription(errid, user.getUserId());
 		if (flexErrorSubscribe == null) {
 			flexErrorSubscribe = new FlexErrorSubscribe();
 			flexErrorSubscribe.setErrid(errid);
-			flexErrorSubscribe.setUserid(userId);
+			flexErrorSubscribe.setUserid(user.getUserId());
+			flexErrorSubscribe.setEmail(user.getEmail());
 			flexErrorSubscribe.setSubscribedTimestamp(new Date());
 			flexErrorSubscribe = flexErrorSubscribeService.create(flexErrorSubscribe);
+		}
+		if (flexErrorSubscribe != null) {
+			String message = String.format(SUBSCRIPTION_MESSAGE, errid);
+			emailService.sendMail(SUBSCRIPTION_SUBJECT, message);
 		}
 		return flexErrorSubscribe;
 	}
@@ -54,6 +71,10 @@ public class FlexErrorSubscribeController {
 		if (flexErrorSubscribe != null) {
 			flexErrorSubscribe = flexErrorSubscribeService.findSubscription(id, userId);
 			flexErrorSubscribeService.delete(flexErrorSubscribe);
+		}
+		if (flexErrorSubscribe != null) {
+			String message = String.format(UN_SUBSCRIPTION_MESSAGE, flexErrorSubscribe.getErrid());
+			emailService.sendMail(UN_SUBSCRIPTION_SUBJECT, message);
 		}
 	}
 
@@ -83,16 +104,17 @@ public class FlexErrorSubscribeController {
 	@Transactional
 	@GetMapping(value = "/subscribeerrors", params = "errids")
 	public int subscribeErrors(@RequestParam("errids") String errids) {
-		int userId = ((ContextUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
+		ContextUser user = (ContextUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		int noOfErrorSubscribed = 0;
 		try {
 			for (String errid : errids.split(",")) {
 				FlexErrorSubscribe flexErrorSubscribe = flexErrorSubscribeService
-						.findSubscription(Integer.parseInt(errid), userId);
+						.findSubscription(Integer.parseInt(errid), user.getUserId());
 				if (flexErrorSubscribe == null) {
 					flexErrorSubscribe = new FlexErrorSubscribe();
 					flexErrorSubscribe.setErrid(Integer.parseInt(errid));
-					flexErrorSubscribe.setUserid(userId);
+					flexErrorSubscribe.setUserid(user.getUserId());
+					flexErrorSubscribe.setEmail(user.getEmail());
 					flexErrorSubscribe.setSubscribedTimestamp(new Date());
 					flexErrorSubscribeService.create(flexErrorSubscribe);
 					noOfErrorSubscribed++;
@@ -101,6 +123,8 @@ public class FlexErrorSubscribeController {
 		} catch (Exception e) {
 			// TODO : ExceptionHandling
 		}
+		String message = String.format(SUBSCRIPTION_MESSAGE, errids);
+		emailService.sendMail(SUBSCRIPTION_SUBJECT, message);
 		return noOfErrorSubscribed;
 	}
 
@@ -121,6 +145,8 @@ public class FlexErrorSubscribeController {
 		} catch (Exception e) {
 			// TODO : ExceptionHandling
 		}
+		String message = String.format(UN_SUBSCRIPTION_SUBJECT, errids);
+		emailService.sendMail(UN_SUBSCRIPTION_SUBJECT, message);
 		return noOfErrorUnsubscribed;
 	}
 
