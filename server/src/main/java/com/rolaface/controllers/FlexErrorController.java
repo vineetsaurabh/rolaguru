@@ -36,6 +36,7 @@ import com.rolaface.entities.FlexError;
 import com.rolaface.entities.FlexErrorSubscribe;
 import com.rolaface.entities.User;
 import com.rolaface.model.ContextUser;
+import com.rolaface.services.EmailService;
 import com.rolaface.services.ErrorDocumentService;
 import com.rolaface.services.ErrorSearchHistoryService;
 import com.rolaface.services.FlexErrorService;
@@ -46,6 +47,16 @@ import com.rolaface.util.PDFGeneratorUtil;
 @RestController
 @RequestMapping({ "/flex-error" })
 public class FlexErrorController {
+
+	private final static String SUBSCRIPTION_SUBJECT = "ROLAGURU Notification : Error has been updated";
+
+	private final static String UPDATE_MESSAGE = "Your subscribed error has been updated. \n Error Code - %s \n Updated by %s";
+
+	private final static String DELETE_MESSAGE = "Your subscribed error has been deleted. \n Error Code - %s \n Updated by %s";
+
+	private final static String ERROR_FILE_UPLOADED_MESSAGE = "A file has been uploaded by %s to your subscribed error \n Error Code - %s";
+
+	private final static String ERROR_FILE_DELETED_MESSAGE = "A file has been deleted by %s from your subscribed error \n Error Code - %s";
 
 	@Autowired
 	private FlexErrorService flexErrorService;
@@ -61,6 +72,9 @@ public class FlexErrorController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private EmailService emailService;
 
 	@PostMapping
 	public FlexError create(@RequestBody FlexError flexError) {
@@ -82,7 +96,13 @@ public class FlexErrorController {
 	@PutMapping(path = { "/{id}" })
 	public FlexError update(@RequestBody FlexError flexError) {
 		flexError.setModifiedTimestamp(new Date());
-		return flexErrorService.update(flexError);
+		flexError = flexErrorService.update(flexError);
+		if (flexError != null) {
+			ContextUser user = (ContextUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			notifySubscription(flexError.getErrid(),
+					String.format(UPDATE_MESSAGE, flexError.getErrcode(), user.getFirstName()));
+		}
+		return flexError;
 	}
 
 	@DeleteMapping(path = { "/{id}" })
@@ -94,6 +114,8 @@ public class FlexErrorController {
 				flexErrorSubscribeService.delete(subscribedError);
 			}
 		}
+		ContextUser user = (ContextUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		notifySubscription(id, String.format(DELETE_MESSAGE, deletedFlexError.getErrcode(), user.getFirstName()));
 		return deletedFlexError;
 	}
 
@@ -222,6 +244,11 @@ public class FlexErrorController {
 			errorDocument.setContent(file.getBytes());
 			errorDocumentService.create(errorDocument);
 			FlexError error = flexErrorService.findById(errId);
+
+			ContextUser user = (ContextUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			String message = String.format(ERROR_FILE_UPLOADED_MESSAGE, user.getFirstName(), error.getErrcode());
+			notifySubscription(errId, message);
+
 			return ResponseEntity.status(HttpStatus.OK).body(error);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(null);
@@ -238,12 +265,16 @@ public class FlexErrorController {
 	}
 
 	@DeleteMapping(path = { "/deletefilefromerror/{id}" })
-	public FlexError deleteCauseDocument(@PathVariable("id") int id) {
+	public FlexError deleteErrorDocument(@PathVariable("id") int id) {
 		ErrorDocument errorDocument = errorDocumentService.findById(id);
 		FlexError error = flexErrorService.findById(errorDocument.getErrid());
 		// if (userId == error.getUser().getUserid()) {
 		errorDocumentService.delete(errorDocument.getErrorDocId());
 		error.getFiles().remove(errorDocument);
+
+		ContextUser user = (ContextUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String message = String.format(ERROR_FILE_DELETED_MESSAGE, user.getFirstName(), error.getErrcode());
+		notifySubscription(error.getErrid(), message);
 		// }
 		return error;
 	}
@@ -256,6 +287,11 @@ public class FlexErrorController {
 		errorSearchHistory.setSearchTimestamp(new Date());
 		errorSearchHistory.setUser(user);
 		errorSearchHistoryService.create(errorSearchHistory);
+	}
+
+	public void notifySubscription(int errid, String message) {
+		List<String> subscriptions = flexErrorSubscribeService.findSubscribedEmails(errid);
+		emailService.sendMails(subscriptions, SUBSCRIPTION_SUBJECT, message);
 	}
 
 }

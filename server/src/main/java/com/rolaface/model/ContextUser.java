@@ -11,13 +11,27 @@ public class ContextUser extends User {
 
 	private final int userId;
 
-	public ContextUser(String username, String password, Collection<? extends GrantedAuthority> authorities,
-			int userId) {
+	private final String email;
+
+	private final String firstName;
+
+	public ContextUser(String username, String password, Collection<? extends GrantedAuthority> authorities, int userId,
+			String firstName, String email) {
 		super(username, password, authorities);
 		this.userId = userId;
+		this.firstName = firstName;
+		this.email = email;
 	}
 
 	public int getUserId() {
 		return userId;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getEmail() {
+		return email;
 	}
 }

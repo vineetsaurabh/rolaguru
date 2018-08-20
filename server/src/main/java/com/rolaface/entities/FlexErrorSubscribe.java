@@ -24,6 +24,9 @@ public class FlexErrorSubscribe {
 	@Column(nullable = false)
 	private int userid;
 
+	@Column(nullable = false)
+	private String email;
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "subscribed")
 	private java.util.Date subscribedTimestamp;
@@ -52,6 +55,14 @@ public class FlexErrorSubscribe {
 		this.userid = userid;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public java.util.Date getSubscribedTimestamp() {
 		return subscribedTimestamp;
 	}
@@ -62,8 +73,8 @@ public class FlexErrorSubscribe {
 
 	@Override
 	public String toString() {
-		return "FlexErrorSubscribe [erruserid=" + erruserid + ", errid=" + errid + ", userid=" + userid
-				+ ", subscribedTimestamp=" + subscribedTimestamp + "]";
+		return "FlexErrorSubscribe [erruserid=" + erruserid + ", errid=" + errid + ", userid=" + userid + ", email="
+				+ email + ", subscribedTimestamp=" + subscribedTimestamp + "]";
 	}
 
 }

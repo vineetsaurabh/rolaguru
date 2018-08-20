@@ -27,6 +27,9 @@ public class Cause {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int causeid;
 
+	@Column(nullable = false)
+	private int errid;
+
 	@Lob
 	@Column(nullable = false)
 	private String description;
@@ -60,6 +63,10 @@ public class Cause {
 
 	public int getCauseid() {
 		return causeid;
+	}
+
+	public int getErrid() {
+		return errid;
 	}
 
 	public String getDescription() {
@@ -98,6 +105,10 @@ public class Cause {
 		this.causeid = causeid;
 	}
 
+	public void setErrid(int errid) {
+		this.errid = errid;
+	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -132,10 +143,10 @@ public class Cause {
 
 	@Override
 	public String toString() {
-		return "Cause [causeid=" + causeid + ", description=" + description + ", bankingScenerio=" + bankingScenerio
-				+ ", rootCause=" + rootCause + ", createdTimestamp=" + createdTimestamp + ", modifiedTimestamp="
-				+ modifiedTimestamp + ", user=" + user.getFirstName() + ", ratings=" + ratings + ", files="
-				+ files.size() + "]";
+		return "Cause [causeid=" + causeid + " errid=" + errid + ", description=" + description + ", bankingScenerio="
+				+ bankingScenerio + ", rootCause=" + rootCause + ", createdTimestamp=" + createdTimestamp
+				+ ", modifiedTimestamp=" + modifiedTimestamp + ", user=" + user.getFirstName() + ", ratings=" + ratings
+				+ ", files=" + files.size() + "]";
 	}
 
 }

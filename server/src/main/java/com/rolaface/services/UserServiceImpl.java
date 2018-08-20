@@ -30,7 +30,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		if (user == null) {
 			throw new UsernameNotFoundException("Invalid username or password.");
 		}
-		return new ContextUser(user.getUsername(), user.getPassword(), getAuthority(), user.getUserid());
+		return new ContextUser(user.getUsername(), user.getPassword(), getAuthority(), user.getUserid(),
+				user.getFirstName(), user.getEmail());
 	}
 
 	private List<SimpleGrantedAuthority> getAuthority() {
