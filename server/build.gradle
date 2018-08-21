@@ -37,8 +37,8 @@ dependencies {
         
     //to send Mail
     compile 'org.springframework.boot:spring-boot-starter-mail:2.0.1.RELEASE'
-    //compile 'org.springframework:spring-context-support:5.0.8.RELEASE'
-    //compile 'javax.mail:mail:1.4.1'
+    compile 'org.springframework:spring-context-support:5.0.8.RELEASE'
+    compile 'javax.mail:mail:1.4.1'
 
     // Use MySQL Connector-J
     compile 'mysql:mysql-connector-java'
