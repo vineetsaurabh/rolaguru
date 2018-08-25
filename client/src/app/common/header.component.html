@@ -5,10 +5,6 @@
                 <img class="user-picture">
             </div>
             <div></div>
-            <div class="d-none d-sm-block">
-                <small>{{currentUser}}</small>
-            </div>
-            <span class="fill-remaining-space"></span>
             <div>
                 <input class="global-search" type="text" placeholder="Search Error" [(ngModel)]="input" />
                 <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="findErrors()" matTooltip="Search">
@@ -16,6 +12,9 @@
                 </button>
             </div>
             <span class="fill-remaining-space"></span>
+            <div class="d-none d-sm-block">
+                <small>{{currentUser}}</small>
+            </div>
             <div *ngIf="authService.isAuthenticated()">
                 <button mat-button mat-icon-button matTooltip="Home" routerLink="/homepage">
                     <mat-icon class="home-icon">home</mat-icon>

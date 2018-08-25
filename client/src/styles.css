@@ -22,21 +22,39 @@ body{
     flex: 1 1 auto;
 }
 .mat-toolbar {
-    background: linear-gradient(to right, blue, royalblue, steelblue, lightskyblue, steelblue, royalblue, blue); 
+    background: linear-gradient(to right,  steelblue, lightskyblue, steelblue); 
     color: white;
 }
 .global-search{
     background-color: azure;
-    min-width: 100px;
-    width: 80%;
+    width: 500px;
+    height: 30px;
 }
 .global-search:focus{
-    background-color: palegreen;
+    background-color: beige;
 }
 .search-input{
-    font-size: 20px!important;
+    font-size: 16px!important;
     font-weight: bold!important;
     color: purple!important;
+}
+.homepage-info-1{
+    background-color: #FFCD02;
+}
+.homepage-info-title-1{
+    color: black;
+}
+.homepage-info-text-1{
+    color: darkred;
+}
+.homepage-info-2{
+    background-color: #0E6193;
+}
+.homepage-info-title-2{
+    color: black;
+}
+.homepage-info-text-2{
+    color: darkred;
 }
 
 /* Table Styles */
@@ -120,8 +138,9 @@ mat-form-field {
     color: purple;
     text-align: center;
 }
-.add-cause{
-    background: linear-gradient(to right, lightskyblue, powderblue, lightskyblue);
+.add-solution{
+    /*background: linear-gradient(to right, rgba(202, 230, 247, 0.897), powderblue, lightskyblue);*/
+    background-color: rgba(227, 236, 241, 0.897);
 }
 .add-item-field{
     background-color: azure;

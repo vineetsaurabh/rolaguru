@@ -31,6 +31,7 @@ export class EditErrorComponent implements OnInit {
         user: null
     };
     errorForm: FormGroup;
+    editDescription: string = '';
 
     constructor(
         private errorService: ErrorService,
@@ -39,6 +40,7 @@ export class EditErrorComponent implements OnInit {
         public dialogRef: MatDialogRef<EditErrorComponent>,
         @Inject(MAT_DIALOG_DATA) public data: Error) {
         this.error = this.data;
+        this.editDescription = this.error.description;
     }
 
     ngOnInit() {
@@ -52,6 +54,7 @@ export class EditErrorComponent implements OnInit {
     }
 
     updateError(errorForm: NgForm) {
+        this.error.description = this.editDescription;
         this.errorService.updateError(this.error)
             .subscribe(res => {
                 this.toastService.success(`Error ${this.error.errcode} updated`);

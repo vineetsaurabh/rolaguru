@@ -41,6 +41,7 @@ export class ErrorDetailComponent implements OnInit {
     errid: number;
     rolaguruUtils = RolaguruUtils.getInstance();
     noOfSolutions: number;
+    htmlDescription: string;
 
     subscription: Subscription;
 
@@ -77,6 +78,7 @@ export class ErrorDetailComponent implements OnInit {
     private getError() {
         this.errorService.getError(this.errid).subscribe((error) => {
             this.error = error;
+            this.htmlDescription = error.description;
             const causes: any = error.causes;
             this.noOfSolutions = causes.length;
         });

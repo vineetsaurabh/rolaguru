@@ -15,6 +15,7 @@ export class AddErrorComponent {
     error: Error = new Error();
     errorDomainId: string;
     errorDomainName: string;
+    htmlDescription: string = '';
 
     constructor(
         private router: Router,
@@ -23,10 +24,11 @@ export class AddErrorComponent {
         public dialogRef: MatDialogRef<AddErrorComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any) {
             this.errorDomainId = data.domainId;
-            this.errorDomainName = data.DomainName;
+            this.errorDomainName = data.domainName;
     }
 
     createError(errorForm: NgForm): void {
+        this.error.description = this.htmlDescription;
         this.error.domain = this.errorDomainId;
         this.errorService.createError(this.error)
             .subscribe(data => {

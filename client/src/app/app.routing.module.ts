@@ -21,6 +21,7 @@ import { SubscribedErrorsComponent } from './error/subscribe-error.component';
 import { SearchReportMonthwiseComponent } from './report/search-report-monthwise.component';
 import { SearchReportInputwiseComponent } from './report/search-report-inputwise.component';
 import { RcaReportComponent } from './report/rca-report.component';
+import { ChatComponent } from './chat/chat.component';
 
 const routes: Routes = [
     {
@@ -117,6 +118,10 @@ const routes: Routes = [
         path: 'rcaReport',
         component: RcaReportComponent
     },
+    {
+        path: 'chat',
+        component: ChatComponent
+    }
 ];
 
 @NgModule({

@@ -10,20 +10,18 @@
 
         <div class="form-group">
             <mat-form-field>
+                <input matInput required [(ngModel)]="error.operation" name="operation" id="operation" placeholder="Operation">
+            </mat-form-field>
+        </div>
+
+        <div class="form-group">
+            <mat-form-field>
                 <input matInput disabled [(ngModel)]="error.errcode" name="errcode" id="errCode" #errCode="ngModel" placeholder="Error Code">
             </mat-form-field>
         </div>
 
         <div class="form-group">
-            <mat-form-field>
-                <input matInput required [(ngModel)]="error.description" name="description" id="description" placeholder="Description">
-            </mat-form-field>
-        </div>
-
-        <div class="form-group">
-            <mat-form-field>
-                <input matInput required [(ngModel)]="error.operation" name="operation" id="operation" placeholder="Operation">
-            </mat-form-field>
+            <app-ngx-editor minHeight="50px" [(ngModel)]="editDescription" name="description"></app-ngx-editor>
         </div>
 
         <div class="form-group" fxLayoutGap="10px">
