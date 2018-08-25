@@ -1,13 +1,41 @@
 <global-toolbar></global-toolbar>
-<div class="container col-lg-10">
-    <mat-grid-list cols="3" rowHeight="3:2" gutterSize="25">
-        <mat-grid-tile *ngFor="let domain of errorDomains" [style.background]="domain.color" (click)="navigate(domain)" class="error-domain">
-            <div style="text-align: center">
-                <h3>{{ domain.name }}</h3>
-                <div class="d-none d-sm-block">
-                    <div fxLayoutAlign="center" id="error-count-{{domain.id}}"></div>
-                </div>
-            </div>
-        </mat-grid-tile>
-    </mat-grid-list>
+<div class="container col-lg-12">
+    <div fxLayout="row" fxLayoutGap="40px">
+        <div style="width:80%">
+            <mat-grid-list cols="3" rowHeight="4:3" gutterSize="25">
+                <mat-grid-tile *ngFor="let domain of errorDomains" [style.background]="domain.color" (click)="navigate(domain)" class="error-domain">
+                    <div style="text-align: center">
+                        <h3>{{ domain.name }}</h3>
+                        <div class="d-none d-sm-block">
+                            <div fxLayoutAlign="center" id="error-count-{{domain.id}}"></div>
+                        </div>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </div>
+        <div style="width:20%">
+            <mat-grid-list cols="1" rowHeight="1:1" gutterSize="25">
+                <mat-grid-tile class="homepage-info-1">
+                    <div fxLayout="column">
+                        <div style="text-align: center" class="homepage-info-title-1">
+                            <h3>Updates</h3>
+                        </div>
+                        <div style="text-align: center" class="homepage-info-text-2">
+                            This is a test.
+                        </div>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile class="homepage-info-2">
+                    <div fxLayout="column">
+                        <div style="text-align: center" class="homepage-info-title-2">
+                            <h3>AAAA</h3>
+                        </div>
+                        <div style="text-align: center" class="homepage-info-text-2">
+                            This is a test.
+                        </div>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </div>
+    </div>
 </div>

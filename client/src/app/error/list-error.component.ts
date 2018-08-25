@@ -89,6 +89,7 @@ export class ListErrorComponent extends ListComponent implements OnInit {
                 domainName: this.errorDomainName
             },
             width: '800px',
+            height: '620px',
         });
         return dialogRef.afterClosed();
     }
@@ -98,6 +99,7 @@ export class ListErrorComponent extends ListComponent implements OnInit {
         dialogRef = this.dialog.open(EditErrorComponent, {
             data: id,
             width: '800px',
+            height: '620px',
         });
         return dialogRef.afterClosed();
     }
