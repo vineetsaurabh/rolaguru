@@ -302,7 +302,7 @@ mat-form-field {
     height: 200px;
     width: 180px;
 }
-.root-cause-name{
+.root-cause-name, .attachment-category-name{
     background-color: rgb(245, 252, 252);
     color: darkblue;
     font-weight: 600;

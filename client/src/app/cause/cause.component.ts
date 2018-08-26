@@ -159,9 +159,30 @@ export class CauseComponent implements OnInit {
     currentFileUpload: File;
     progress: { percentage: number } = { percentage: 0 };
 
-    selectFileForCause(event) {
+    selectScriptFileForCause(event) {
         this.selectedFiles = event.target.files;
         this.uploadFileForCause('Script');
+        event = null;
+        return false;
+    }
+
+    selectSolnDocFileForCause(event) {
+        this.selectedFiles = event.target.files;
+        this.uploadFileForCause('SolnDoc');
+        event = null;
+        return false;
+    }
+
+    selectKnowDocFileForCause(event) {
+        this.selectedFiles = event.target.files;
+        this.uploadFileForCause('KnowDoc');
+        event = null;
+        return false;
+    }
+
+    selectVideoFileForCause(event) {
+        this.selectedFiles = event.target.files;
+        this.uploadFileForCause('Video');
         event = null;
         return false;
     }

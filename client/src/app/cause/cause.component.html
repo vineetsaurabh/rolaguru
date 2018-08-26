@@ -70,28 +70,117 @@
                 <app-ngx-editor minHeight="50px" [(ngModel)]="editOperationRootCause"></app-ngx-editor>
             </div>
         </div>
-        <div fxLayout="column" fxLayoutGap="10px">
+        <div fxLayout="column">
             <div fxLayoutAlign="start" class="cause-detail">
                 <strong>Attachments</strong>
             </div>
-            <div fxLayout="column" fxLayoutGap="5px">
-                <div *ngFor="let file of cause.files" fxLayout="row" fxLayoutGap="5px">
-                    <!--
-                    <div>
-                        <iframe id="file-{{file.causeDocId}}" class="cause-document-preview"></iframe>
+            <div fxLayout="row">
+                <div id="Script-attachment" style="width:25%">
+                    <div fxLayout="row" fxLayoutGap="10px">
+                        <div class="attachment-category-name">Script</div>
+                        <button class="error-attachment-button" matTooltip="Upload File" fxLayoutAlign="end" *ngIf="cause.user.userid == userid">
+                            <label for="Script-file-input-cause" class="file-input">
+                                <i class="fa fa-upload"></i>
+                            </label>
+                            <input id="Script-file-input-cause" type="file" (change)="selectScriptFileForCause($event)" hidden>
+                        </button>
                     </div>
-                    -->
-                    <div>
-                        <a href="#" (click)="!!download(file)" oncontextmenu="return false">{{ file.filename }}</a>
+                    <div fxLayout="column">
+                        <div *ngFor="let file of cause.files">
+                            <div *ngIf="file.category=='Script'">
+                                <div>
+                                    <a href="#" (click)="!!download(file)" oncontextmenu="return false">{{ file.filename }}</a>
+                                </div>
+                                <div fxLayout="row" fxLayoutGap="10px">
+                                    <small>({{ rolaguruUtils.formatBytes(file.size) }})</small>
+                                    <div [hidden]="!editing" *ngIf="cause.user.userid == userid">
+                                        <i class="fa fa-remove" matTooltip="Delete" (click)="delete(file)" style="color:red" matTooltipPosition="after"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <small>({{ rolaguruUtils.formatBytes(file.size) }})</small>
+                </div>
+                <div id="SolnDoc-attachment" style="width:25%">
+                    <div fxLayout="row" fxLayoutGap="10px">
+                        <div class="attachment-category-name">Solution Doc</div>
+                        <button class="error-attachment-button" matTooltip="Upload File" fxLayoutAlign="end" *ngIf="cause.user.userid == userid">
+                            <label for="SolnDoc-file-input-cause" class="file-input">
+                                <i class="fa fa-upload"></i>
+                            </label>
+                            <input id="SolnDoc-file-input-cause" type="file" (change)="selectSolnDocFileForCause($event)" hidden>
+                        </button>
                     </div>
-                    <div [hidden]="!editing" *ngIf="cause.user.userid == userid">
-                        <i class="fa fa-remove" matTooltip="Delete" (click)="delete(file)" style="color:red" matTooltipPosition="after"></i>
+                    <div fxLayout="column">
+                        <div *ngFor="let file of cause.files">
+                            <div *ngIf="file.category=='SolnDoc'">
+                                <div>
+                                    <a href="#" (click)="!!download(file)" oncontextmenu="return false">{{ file.filename }}</a>
+                                </div>
+                                <div fxLayout="row" fxLayoutGap="10px">
+                                    <small>({{ rolaguruUtils.formatBytes(file.size) }})</small>
+                                    <div [hidden]="!editing" *ngIf="cause.user.userid == userid">
+                                        <i class="fa fa-remove" matTooltip="Delete" (click)="delete(file)" style="color:red" matTooltipPosition="after"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="KnowDoc-attachment" style="width:25%">
+                    <div fxLayout="row" fxLayoutGap="10px">
+                        <div class="attachment-category-name">Knowledge Doc</div>
+                        <button class="error-attachment-button" matTooltip="Upload File" fxLayoutAlign="end" *ngIf="cause.user.userid == userid">
+                            <label for="KnowDoc-file-input-cause" class="file-input">
+                                <i class="fa fa-upload"></i>
+                            </label>
+                            <input id="KnowDoc-file-input-cause" type="file" (change)="selectKnowDocFileForCause($event)" hidden>
+                        </button>
+                    </div>
+                    <div fxLayout="column">
+                        <div *ngFor="let file of cause.files">
+                            <div *ngIf="file.category=='KnowDoc'">
+                                <div>
+                                    <a href="#" (click)="!!download(file)" oncontextmenu="return false">{{ file.filename }}</a>
+                                </div>
+                                <div fxLayout="row" fxLayoutGap="10px">
+                                    <small>({{ rolaguruUtils.formatBytes(file.size) }})</small>
+                                    <div [hidden]="!editing" *ngIf="cause.user.userid == userid">
+                                        <i class="fa fa-remove" matTooltip="Delete" (click)="delete(file)" style="color:red" matTooltipPosition="after"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="Video-attachment" style="width:25%">
+                    <div fxLayout="row" fxLayoutGap="10px">
+                        <div class="attachment-category-name">Video</div>
+                        <button class="error-attachment-button" matTooltip="Upload File" fxLayoutAlign="end" *ngIf="cause.user.userid == userid">
+                            <label for="Video-file-input-cause" class="file-input">
+                                <i class="fa fa-upload"></i>
+                            </label>
+                            <input id="Video-file-input-cause" type="file" (change)="selectVideoFileForCause($event)" hidden>
+                        </button>
+                    </div>
+                    <div fxLayout="column">
+                        <div *ngFor="let file of cause.files">
+                            <div *ngIf="file.category=='Video'">
+                                <div>
+                                    <a href="#" (click)="!!download(file)" oncontextmenu="return false">{{ file.filename }}</a>
+                                </div>
+                                <div fxLayout="row" fxLayoutGap="10px">
+                                    <small>({{ rolaguruUtils.formatBytes(file.size) }})</small>
+                                    <div [hidden]="!editing" *ngIf="cause.user.userid == userid">
+                                        <i class="fa fa-remove" matTooltip="Delete" (click)="delete(file)" style="color:red" matTooltipPosition="after"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
             <div *ngIf="currentFileUpload" class="progress">
                 <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
                     aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:progress.percentage+'%'}">
@@ -109,12 +198,6 @@
                 <i class="fa" [ngClass]="{'fa-star':(star==1),'fa-star-o':(star==0)}"></i>
             </a>
         </div>
-        <button class="btn" matTooltip="Upload File" fxLayoutAlign="end" *ngIf="cause.user.userid == userid">
-            <label for="file-input-cause" class="file-input">
-                <i class="fa fa-upload"></i>
-            </label>
-            <input id="file-input-cause" type="file" (change)="selectFileForCause($event)" hidden>
-        </button>
         <button class="btn" matTooltip="Edit Solution" (click)="openInEdit(cause.solution)" [hidden]="editing" *ngIf="cause.user.userid == userid">
             <i class="fa fa-pencil"></i>
         </button>
