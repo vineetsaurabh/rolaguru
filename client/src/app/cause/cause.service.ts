@@ -47,10 +47,11 @@ export class CauseService {
         return this.http.put<CauseRating>(this.causeRatingUrl + "/" + causeRating.causeRatingId, causeRating, httpOptions);
     }
 
-    public uploadFile(file: File, causeid: string): Observable<HttpEvent<Cause>> {
+    public uploadFile(file: File, causeid: string, category: string): Observable<HttpEvent<Cause>> {
         const formdata: FormData = new FormData();
         formdata.append('file', file);
         formdata.append('causeid', causeid);
+        formdata.append('category', category);
         const req = new HttpRequest('POST', this.causeUrl + '/addfilestocause', formdata, {
             reportProgress: true
         });

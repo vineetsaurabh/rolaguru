@@ -26,8 +26,8 @@ export class ListErrorComponent extends ListComponent implements OnInit {
 
     errors: Error[];
     subscribedErrorIds: string[];
-    allColumns = ['Checkbox', 'Error Code', 'Description', 'Module', 'Operation', 'Severity', 'Frequency', 'Attachments', 'Actions'];
-    displayedColumns = ['Checkbox', 'Error Code', 'Description', 'Module', 'Operation', 'Severity', 'Frequency', 'Actions'];
+    allColumns = ['SolnAvail', 'Checkbox', 'Error Code', 'Description', 'Module', 'Operation', 'Severity', 'Frequency', 'Attachments', 'Actions'];
+    displayedColumns = ['SolnAvail', 'Checkbox', 'Error Code', 'Description', 'Module', 'Operation', 'Severity', 'Frequency', 'Actions'];
     dataSource: MatTableDataSource<any>;
     errorDomainId: string;
     errorDomainName: string;
@@ -225,8 +225,7 @@ export class ListErrorComponent extends ListComponent implements OnInit {
                 } else {
                     this.toastService.success(`${res} errors subscribed`);
                 }
-            }
-            );
+            });
     }
 
     unSubscribeErrors() {

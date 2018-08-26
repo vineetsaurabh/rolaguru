@@ -54,7 +54,7 @@ body{
     color: black;
 }
 .homepage-info-text-2{
-    color: darkred;
+    color: white;
 }
 
 /* Table Styles */
@@ -101,6 +101,9 @@ div.border-text h1 span{
     margin-bottom: 0px;
 }
 /* Error Table Columns */
+.mat-column-SolnAvail{
+    max-width: 60px;
+}
 .mat-column-Checkbox{
     max-width: 50px;
 }
@@ -298,6 +301,11 @@ mat-form-field {
 .cause-document-preview{
     height: 200px;
     width: 180px;
+}
+.root-cause-name{
+    background-color: rgb(245, 252, 252);
+    color: darkblue;
+    font-weight: 600;
 }
 
 /* Profile Picture */

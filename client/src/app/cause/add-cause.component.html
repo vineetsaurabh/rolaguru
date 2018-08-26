@@ -21,14 +21,35 @@
             <div class="add-item-field">
                 <h5>Root Cause</h5>
             </div>
-            <mat-radio-group [(ngModel)]="rootCause" name="rootCause" id="rootCause" fxLayoutGap="25px">
-                <mat-radio-button color="primary" [value]="1">Operation</mat-radio-button>
-                <mat-radio-button color="primary" [value]="2">Data</mat-radio-button>
-                <mat-radio-button color="primary" [value]="3">Code</mat-radio-button>
-            </mat-radio-group>
+            <div>
+                <mat-checkbox [(ngModel)]="displayCodeRootCause" name="codeRootCause" color="primary">
+                    <div class="root-cause-name">Code</div>
+                </mat-checkbox>
+                <div class="editor block" [hidden]="!displayCodeRootCause">
+                    <app-ngx-editor minHeight="50px" [(ngModel)]="htmlCodeRootCause" name="codeRootCause"></app-ngx-editor>
+                </div>
+            </div>
+            <div>
+                <mat-checkbox [(ngModel)]="displayDataRootCause" name="dataRootCause" color="primary">
+                    <div class="root-cause-name">Data</div>
+                </mat-checkbox>
+                <div class="editor block" [hidden]="!displayDataRootCause">
+                    <app-ngx-editor minHeight="50px" [(ngModel)]="htmlDataRootCause" name="dataRootCause"></app-ngx-editor>
+                </div>
+            </div>
+            <div>
+                <mat-checkbox [(ngModel)]="displayOperationRootCause" name="operationRootCause" color="primary">
+                    <div class="root-cause-name">Opeartion</div>
+                </mat-checkbox>
+                <div class="editor block" [hidden]="!displayOperationRootCause">
+                    <app-ngx-editor minHeight="50px" [(ngModel)]="htmlOperationRootCause" name="operationRootCause"></app-ngx-editor>
+                </div>
+            </div>
         </div>
         <div class="text-center">
-            <button mat-raised-button color="primary" [disabled]="!causeForm.valid || htmlDescription=='' || htmlBankingScenerio==''">
+            <button mat-raised-button color="primary" 
+                    [disabled]="!causeForm.valid || htmlDescription=='' || htmlBankingScenerio=='' || 
+                    (htmlCodeRootCause=='' && htmlDataRootCause=='' && htmlOperationRootCause=='')">
                 Submit
             </button>
         </div>

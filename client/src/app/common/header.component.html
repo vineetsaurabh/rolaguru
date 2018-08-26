@@ -30,9 +30,12 @@
                     <button mat-menu-item [routerLink]="['/findUser', currentUserId]">My Profile</button>
                     <button mat-menu-item [routerLink]="['/subscribedErrors']">My Subscribed Errors</button>
                     <button mat-menu-item [matMenuTriggerFor]="admin">Admin Tasks</button>
+                    <button mat-menu-item [matMenuTriggerFor]="reports">Reports</button>
                 </mat-menu>
                 <mat-menu #admin="matMenu">
                     <button mat-menu-item [routerLink]="['/listUsers']">User Management</button>
+                </mat-menu>
+                <mat-menu #reports="matMenu">
                     <button mat-menu-item [routerLink]="['/searchReportMonthwise']">Search Report (Monthwise)</button>
                     <button mat-menu-item [routerLink]="['/searchReportInputwise']">Search Report (Inputwise)</button>
                     <button mat-menu-item [routerLink]="['/rcaReport']">RCA Report</button>

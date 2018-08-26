@@ -129,15 +129,16 @@ public class CauseController {
 
 	@PostMapping("/addfilestocause")
 	public ResponseEntity<Cause> handleFileUpload(@RequestParam("file") MultipartFile file,
-			@RequestParam("causeid") String causeid) {
+			@RequestParam("causeid") String causeid, @RequestParam("category") String category) {
 		ContextUser user = (ContextUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		int causeId = Integer.parseInt(causeid);
 		CauseDocument causeDocument = new CauseDocument();
-		causeDocument.setCauseid(causeId);
 		causeDocument.setFilename(file.getOriginalFilename());
 		causeDocument.setCreatedTimestamp(new Date());
 		causeDocument.setContentType(file.getContentType());
 		causeDocument.setSize(file.getSize());
+		causeDocument.setCauseid(causeId);
+		causeDocument.setCategory(category);
 		try {
 			causeDocument.setContent(file.getBytes());
 			// causeDocumentService.create(causeDocument);

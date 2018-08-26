@@ -20,12 +20,13 @@ export class CauseComponent implements OnInit {
     @Input() causes: Set<Cause>;
     @Output() causesChange = new EventEmitter<Set<Cause>>();
 
-    rootCauses: string[] = ['Operation', 'Data', 'Code'];
-
     userid: string;
+    editing: boolean = false;
     editDescription: string = '';
     editBankingScenerio: string = '';
-    editing: boolean = false;
+    editCodeRootCause: string = '';
+    editDataRootCause: string = '';
+    editOperationRootCause: string = '';
 
     myRating: CauseRating = new CauseRating();
     myRatingTooltip: string = "Rate this solution";
@@ -51,6 +52,9 @@ export class CauseComponent implements OnInit {
         this.calculateOverallRating();
         this.editBankingScenerio = this.cause.bankingScenerio;
         this.editDescription = this.cause.description;
+        this.editCodeRootCause = this.cause.codeRootCause;
+        this.editDataRootCause = this.cause.dataRootCause;
+        this.editOperationRootCause = this.cause.operationRootCause;
     }
 
     ngAfterViewInit() {
@@ -113,10 +117,17 @@ export class CauseComponent implements OnInit {
 
     saveCause() {
         this.editing = false;
-        if (this.cause.description != this.editDescription || this.cause.bankingScenerio != this.editBankingScenerio) {
+        if (this.cause.description != this.editDescription || 
+                this.cause.bankingScenerio != this.editBankingScenerio || 
+                this.cause.codeRootCause != this.editCodeRootCause ||
+                this.cause.dataRootCause != this.editDataRootCause || 
+                this.cause.operationRootCause != this.editOperationRootCause) {
             let causeToUpdate = this.cause;
             causeToUpdate.description = this.editDescription;
             causeToUpdate.bankingScenerio = this.editBankingScenerio;
+            causeToUpdate.codeRootCause = this.editCodeRootCause;
+            causeToUpdate.dataRootCause = this.editDataRootCause;
+            causeToUpdate.operationRootCause = this.editOperationRootCause;
             this.causeService.updateCause(causeToUpdate)
                 .subscribe(data => {
                     this.cause = data;
@@ -150,15 +161,15 @@ export class CauseComponent implements OnInit {
 
     selectFileForCause(event) {
         this.selectedFiles = event.target.files;
-        this.uploadFileForCause();
+        this.uploadFileForCause('Script');
         event = null;
         return false;
     }
     
-    uploadFileForCause() {
+    uploadFileForCause(category: string) {
         this.progress.percentage = 0;
         this.currentFileUpload = this.selectedFiles.item(0);
-        this.causeService.uploadFile(this.currentFileUpload, this.cause.causeid)
+        this.causeService.uploadFile(this.currentFileUpload, this.cause.causeid, category)
             .subscribe(event => {
                 if (event.type === HttpEventType.UploadProgress) {
                     this.progress.percentage = Math.round(100 * event.loaded / event.total);

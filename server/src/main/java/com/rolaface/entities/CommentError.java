@@ -24,7 +24,7 @@ public class CommentError {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int commentErrorId;
 
-	@Column
+	@Column(nullable = false)
 	private int errid;
 
 	@Lob

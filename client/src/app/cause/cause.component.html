@@ -48,15 +48,26 @@
             <div fxLayoutAlign="start" class="cause-detail">
                 <strong>Root Cause</strong>
             </div>
-            <div>
-                <div [hidden]="editing">{{rootCauses[cause.rootCause - 1]}}</div>
-                <div [hidden]="!editing">
-                    <mat-radio-group [(ngModel)]="cause.rootCause" name="root-cause-{{cause.causeid}}" id="root-cause-{{cause.causeid}}" fxLayoutGap="25px">
-                        <mat-radio-button color="primary" [value]="1">{{rootCauses[0]}}</mat-radio-button>
-                        <mat-radio-button color="primary" [value]="2">{{rootCauses[1]}}</mat-radio-button>
-                        <mat-radio-button color="primary" [value]="3">{{rootCauses[2]}}</mat-radio-button>
-                    </mat-radio-group>
-                </div>
+            <div class="root-cause-name" [hidden]="!(editing || cause.codeRootCause)">Code</div>
+            <div *ngIf="cause.codeRootCause">
+                <div [innerHTML]="cause.codeRootCause" [hidden]="editing"></div>
+            </div>
+            <div class="editor block" [hidden]="!editing">
+                <app-ngx-editor minHeight="50px" [(ngModel)]="editCodeRootCause"></app-ngx-editor>
+            </div>
+            <div class="root-cause-name" [hidden]="!(editing || cause.dataRootCause)">Data</div>
+            <div *ngIf="cause.dataRootCause">
+                <div [innerHTML]="cause.dataRootCause" [hidden]="editing"></div>
+            </div>
+            <div class="editor block" [hidden]="!editing">
+                <app-ngx-editor minHeight="50px" [(ngModel)]="editDataRootCause"></app-ngx-editor>
+            </div>
+            <div class="root-cause-name" [hidden]="!(editing || cause.operationRootCause)">Operation</div>
+            <div *ngIf="cause.operationRootCause">
+                <div [innerHTML]="cause.operationRootCause" [hidden]="editing"></div>
+            </div>
+            <div class="editor block" [hidden]="!editing">
+                <app-ngx-editor minHeight="50px" [(ngModel)]="editOperationRootCause"></app-ngx-editor>
             </div>
         </div>
         <div fxLayout="column" fxLayoutGap="10px">

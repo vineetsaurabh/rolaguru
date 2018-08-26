@@ -19,8 +19,11 @@ public class CauseDocument {
 	@Column(name = "cause_doc_id")
 	private Integer causeDocId;
 
-	@Column
+	@Column(nullable = false)
 	private Integer causeid;
+	
+	@Column(nullable = false)
+	private String category;
 
 	@Column
 	private long size;
@@ -28,7 +31,7 @@ public class CauseDocument {
 	@Column
 	private String description;
 
-	@Column
+	@Column(nullable = false)
 	private String filename;
 
 	@Column(length = 100000)
@@ -57,6 +60,14 @@ public class CauseDocument {
 		this.causeid = causeid;
 	}
 
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	
 	public long getSize() {
 		return size;
 	}
@@ -107,8 +118,9 @@ public class CauseDocument {
 
 	@Override
 	public String toString() {
-		return "CauseDocument [causeDocId=" + causeDocId + ", causeid=" + causeid + ", size=" + size + ", description="
-				+ description + ", filename=" + filename + "]";
+		return "CauseDocument [causeDocId=" + causeDocId + ", causeid=" + causeid + ", category=" + category + ", size="
+				+ size + ", description=" + description + ", filename=" + filename + ", contentType=" + contentType
+				+ ", createdTimestamp=" + createdTimestamp + "]";
 	}
 
 }
