@@ -1,14 +1,14 @@
 import { ReportService } from './report.service';
-import { ErrorSearchHistory } from './error-search-history.model';
 import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { Chart } from 'chart.js';
 import { RolaguruUtils } from '../util/rolaguru.util';
 import { MatRadioChange } from '@angular/material/radio';
+import { ChartExportComponent } from './chart-export.component';
 
 @Component({
     templateUrl: './search-report-monthwise.component.html'
 })
-export class SearchReportMonthwiseComponent implements AfterViewInit {
+export class SearchReportMonthwiseComponent extends ChartExportComponent implements AfterViewInit {
 
     rolaguruUtils: RolaguruUtils = RolaguruUtils.getInstance();
 
@@ -17,9 +17,11 @@ export class SearchReportMonthwiseComponent implements AfterViewInit {
     searchPerMonth: number[];
     noOfMonths: number[] = [12, 9, 6, 3];
     selectedNoOfMonth: number = 6;
+    title: string = "Search Report Chart";
 
     constructor(
-        private reportService: ReportService) {
+        protected reportService: ReportService) {
+            super();
     }
 
     ngAfterViewInit() {

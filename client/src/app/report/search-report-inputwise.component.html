@@ -2,8 +2,17 @@
 <div class="container col-lg-10">
     <div fxLayout="column" fxLayoutGap="25px">
         <div fxLayout="column" fxLayoutGap="5px">
-            <div class="chart-title" fxLayoutAlign="center">
-                <h2>Most Searched Input</h2>
+            <div class="chart-title" fxLayout="row" fxLayoutGap="25px">
+                <div class="fill-remaining-space"></div>
+                <div fxLayoutAlign="center">
+                    <h2>{{title}}</h2>
+                </div>
+                <div class="fill-remaining-space"></div>
+                <div fxLayoutAlign="end">
+                    <button class="btn report-download" matTooltip="Save as PDF" (click)="saveAsPdf()">
+                        <i class="fa fa-file-pdf-o"></i>
+                    </button>
+                </div>
             </div>
             <div fxLayout="row" fxLayoutAlign="center">
                 <mat-radio-group [(ngModel)]="selectedNoOfSearchString" fxLayoutGap="30px">
