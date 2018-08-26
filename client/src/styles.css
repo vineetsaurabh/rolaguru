@@ -348,6 +348,12 @@ canvas#searchReportChart{
 .rca-report-back:hover{
     background: transparent!important;
 }
+.report-download{
+    background: transparent;
+}
+.report-download:hover{
+    background: transparent!important;
+}
 
 /* User Info */
 .user-info-label{

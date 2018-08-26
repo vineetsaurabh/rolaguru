@@ -4,16 +4,20 @@ import { Component, AfterViewInit, ChangeDetectorRef } from "@angular/core";
 import { ReportService } from "./report.service";
 import { ErrorService } from "../error/error.service";
 import { RolaguruUtils } from '../util/rolaguru.util';
+import { ChartExportComponent } from './chart-export.component';
 
 @Component({
     templateUrl: './rca-report.component.html'
 })
-export class RcaReportComponent implements AfterViewInit {
+export class RcaReportComponent extends ChartExportComponent implements AfterViewInit {
+
+    title: string = "RCA Report";
 
     constructor(
         private reportService: ReportService,
         private errorService: ErrorService,
         private cdRef: ChangeDetectorRef) {
+            super();
     }
 
     ngAfterViewInit() {

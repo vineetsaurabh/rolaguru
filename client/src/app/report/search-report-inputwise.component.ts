@@ -1,20 +1,21 @@
 import { ReportService } from './report.service';
-import { ErrorSearchHistory } from './error-search-history.model';
-import { Component, OnInit, AfterViewInit } from "@angular/core";
+import { Component, AfterViewInit } from "@angular/core";
 import { Chart } from 'chart.js';
-import { RolaguruUtils } from '../util/rolaguru.util';
 import { MatRadioChange } from '@angular/material/radio';
+import { ChartExportComponent } from './chart-export.component';
 
 @Component({
     templateUrl: './search-report-inputwise.component.html'
 })
-export class SearchReportInputwiseComponent implements AfterViewInit {
+export class SearchReportInputwiseComponent extends ChartExportComponent implements AfterViewInit {
 
     noOfSearchStrings: number[] = [25, 15, 10, 5];
     selectedNoOfSearchString: number = 10;
+    title: string = "Most Searched Input";
 
     constructor(
-        private reportService: ReportService) {
+        protected reportService: ReportService) {
+            super();
     }
 
     ngAfterViewInit() {
