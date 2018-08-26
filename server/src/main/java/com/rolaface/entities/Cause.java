@@ -38,8 +38,17 @@ public class Cause {
 	@Column
 	private String bankingScenerio;
 
-	@Column(nullable = false)
-	private String rootCause;
+	@Lob
+	@Column
+	private String codeRootCause;
+	
+	@Lob
+	@Column
+	private String dataRootCause;
+	
+	@Lob
+	@Column
+	private String operationRootCause;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "created")
@@ -65,76 +74,92 @@ public class Cause {
 		return causeid;
 	}
 
-	public int getErrid() {
-		return errid;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public String getBankingScenerio() {
-		return bankingScenerio;
-	}
-
-	public String getRootCause() {
-		return rootCause;
-	}
-
-	public java.util.Date getCreatedTimestamp() {
-		return createdTimestamp;
-	}
-
-	public Date getModifiedTimestamp() {
-		return modifiedTimestamp;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public Set<CauseRating> getRatings() {
-		return ratings;
-	}
-
-	public Set<CauseDocument> getFiles() {
-		return files;
-	}
-
 	public void setCauseid(int causeid) {
 		this.causeid = causeid;
+	}
+
+	public int getErrid() {
+		return errid;
 	}
 
 	public void setErrid(int errid) {
 		this.errid = errid;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getBankingScenerio() {
+		return bankingScenerio;
 	}
 
 	public void setBankingScenerio(String bankingScenerio) {
 		this.bankingScenerio = bankingScenerio;
 	}
 
-	public void setRootCause(String rootCause) {
-		this.rootCause = rootCause;
+	public String getCodeRootCause() {
+		return codeRootCause;
+	}
+
+	public void setCodeRootCause(String codeRootCause) {
+		this.codeRootCause = codeRootCause;
+	}
+
+	public String getDataRootCause() {
+		return dataRootCause;
+	}
+
+	public void setDataRootCause(String dataRootCause) {
+		this.dataRootCause = dataRootCause;
+	}
+
+	public String getOperationRootCause() {
+		return operationRootCause;
+	}
+
+	public void setOperationRootCause(String operationRootCause) {
+		this.operationRootCause = operationRootCause;
+	}
+
+	public java.util.Date getCreatedTimestamp() {
+		return createdTimestamp;
 	}
 
 	public void setCreatedTimestamp(java.util.Date createdTimestamp) {
 		this.createdTimestamp = createdTimestamp;
 	}
 
+	public Date getModifiedTimestamp() {
+		return modifiedTimestamp;
+	}
+
 	public void setModifiedTimestamp(Date modifiedTimestamp) {
 		this.modifiedTimestamp = modifiedTimestamp;
+	}
+
+	public User getUser() {
+		return user;
 	}
 
 	public void setUser(User user) {
 		this.user = user;
 	}
 
+	public Set<CauseRating> getRatings() {
+		return ratings;
+	}
+
 	public void setRatings(Set<CauseRating> ratings) {
 		this.ratings = ratings;
+	}
+
+	public Set<CauseDocument> getFiles() {
+		return files;
 	}
 
 	public void setFiles(Set<CauseDocument> files) {
@@ -143,10 +168,10 @@ public class Cause {
 
 	@Override
 	public String toString() {
-		return "Cause [causeid=" + causeid + " errid=" + errid + ", description=" + description + ", bankingScenerio="
-				+ bankingScenerio + ", rootCause=" + rootCause + ", createdTimestamp=" + createdTimestamp
-				+ ", modifiedTimestamp=" + modifiedTimestamp + ", user=" + user.getFirstName() + ", ratings=" + ratings
-				+ ", files=" + files.size() + "]";
+		return "Cause [causeid=" + causeid + ", errid=" + errid + ", description=" + description + ", bankingScenerio="
+				+ bankingScenerio + ", codeRootCause=" + codeRootCause + ", dataRootCause=" + dataRootCause
+				+ ", operationRootCause=" + operationRootCause + ", createdTimestamp=" + createdTimestamp
+				+ ", modifiedTimestamp=" + modifiedTimestamp + ", user=" + user + "]";
 	}
 
 }

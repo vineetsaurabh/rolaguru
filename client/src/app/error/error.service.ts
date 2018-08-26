@@ -103,7 +103,7 @@ export class ErrorService {
     }
 
     public getSubscribedErrors() {
-        return this.http.get<Error[]>(this.errorSubscribeUrl + "/subscribederrors");
+        return this.http.get<Error[]>(this.errorSubscribeUrl + "/getsubscribederrors");
     }
 
     public uploadFile(file: File, errid: string): Observable<HttpEvent<Error>> {

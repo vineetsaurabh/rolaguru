@@ -57,7 +57,7 @@ export class UserService {
     }
 
     public getSubscribedErrorIds() {
-        return this.http.get<string[]>(this.errorSubscribeUrl + "/subscribederrorids", );
+        return this.http.get<string[]>(this.errorSubscribeUrl + "/getsubscribederrorids", );
     }
 
     public uploadFile(file: File): Observable<HttpEvent<User>> {

@@ -19,7 +19,13 @@ export class AddCauseComponent {
     cause: Cause = new Cause();
     htmlDescription: string = '';
     htmlBankingScenerio: string = '';
-    rootCause: string = "1";
+    htmlCodeRootCause: string = '';
+    htmlDataRootCause: string = '';
+    htmlOperationRootCause: string = '';
+    
+    displayCodeRootCause: boolean;
+    displayDataRootCause: boolean;
+    displayOperationRootCause: boolean;
 
     constructor(
         private toastService: ToastrService,
@@ -33,7 +39,9 @@ export class AddCauseComponent {
     createCause(): void {
         this.cause.description = this.htmlDescription;
         this.cause.bankingScenerio = this.htmlBankingScenerio;
-        this.cause.rootCause = this.rootCause;
+        this.cause.codeRootCause = this.htmlCodeRootCause;
+        this.cause.dataRootCause = this.htmlDataRootCause;
+        this.cause.operationRootCause = this.htmlOperationRootCause;
         this.causeService.createCause(this.cause, this.errid)
             .subscribe(data => {
                 this.toastService.success(`Solution for ${this.errcode} added`);

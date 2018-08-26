@@ -6,7 +6,9 @@ export class Cause {
     causeid: string;
     description: string;
     bankingScenerio: string;
-    rootCause: string;
+    codeRootCause: string;
+    dataRootCause: string;
+    operationRootCause: string;
     ratings: Set<CauseRating>;
     createdTimestamp: Date;
     modifiedTimeStamp: Date;

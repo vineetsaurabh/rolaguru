@@ -32,9 +32,9 @@ public class FlexErrorSubscribeController {
 
 	private final static String UN_SUBSCRIPTION_SUBJECT = "ROLAGURU Notification : Your are un-subscribed from Error";
 
-	private final static String SUBSCRIPTION_MESSAGE = "You are subscribed to Error(s) \n Error ID - %d";
+	private final static String SUBSCRIPTION_MESSAGE = "You are subscribed to Error(s) \n Error ID - %s";
 
-	private final static String UN_SUBSCRIPTION_MESSAGE = "You are un-subscribed to Error(s) \n Error ID - %d";
+	private final static String UN_SUBSCRIPTION_MESSAGE = "You are un-subscribed to Error(s) \n Error ID - %s";
 
 	@Autowired
 	private FlexErrorSubscribeService flexErrorSubscribeService;
@@ -79,7 +79,7 @@ public class FlexErrorSubscribeController {
 	}
 
 	@Transactional
-	@GetMapping(value = "/subscribederrors")
+	@GetMapping(value = "/getsubscribederrors")
 	public Set<FlexError> getSubscribedErrors() {
 		int userId = ((ContextUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
 		List<FlexErrorSubscribe> flexErrors = flexErrorSubscribeService.findByUserid(userId);
@@ -90,7 +90,7 @@ public class FlexErrorSubscribeController {
 		return subscribedErrors;
 	}
 
-	@GetMapping(value = "/subscribederrorids")
+	@GetMapping(value = "/getsubscribederrorids")
 	public Set<String> getSubscribedErrorIds() {
 		int userId = ((ContextUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
 		List<FlexErrorSubscribe> flexErrors = flexErrorSubscribeService.findByUserid(userId);

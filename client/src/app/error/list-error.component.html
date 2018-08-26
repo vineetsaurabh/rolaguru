@@ -62,6 +62,16 @@
     <div class="table-container mat-elevation-z8 printable">
         <mat-table #table [dataSource]="dataSource" matSort>
 
+            <ng-container matColumnDef="SolnAvail">
+                <mat-header-cell *matHeaderCellDef>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let error">
+                    <div *ngIf="error.causes.length<1" matTooltip="No Solution" matTooltipPosition="after">
+                        <mat-icon style="color:red">flag</mat-icon>
+                    </div>
+                </mat-cell>
+            </ng-container>
+
             <ng-container matColumnDef="Checkbox">
                 <mat-header-cell *matHeaderCellDef>
                     <mat-checkbox (change)="toggleSelection($event)" fxLayoutAlign="start">
