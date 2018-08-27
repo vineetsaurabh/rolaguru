@@ -1,9 +1,16 @@
-<div class="container col-md-3 my-4">
+<div class="container col-md-3 my-5">
     <mat-card class="text-center">
+        <div fxLayoutAlign="center" class="login-text">
+            Login
+        </div>
         <mat-card-header>
-            <mat-card-title>Login</mat-card-title>
+            <mat-card-title>
+            </mat-card-title>
         </mat-card-header>
         <mat-card-content>
+            <div fxLayoutAlign="center">
+                <img src="../assets/images/rolaguru_64.png" />
+            </div>
             <form>
                 <mat-form-field>
                     <input type="text" matInput placeholder="Username" [(ngModel)]="username" name="username" required>
@@ -29,4 +36,7 @@
             </button>
         </mat-card-actions>
     </mat-card>
+</div>
+<div class="rolaface-copyright">
+    &#169; Rolaface Softwares
 </div>
