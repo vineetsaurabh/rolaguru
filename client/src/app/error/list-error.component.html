@@ -91,7 +91,9 @@
 
             <ng-container matColumnDef="Description">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
-                <mat-cell *matCellDef="let error" [innerHTML]="error.description"></mat-cell>
+                <mat-cell *matCellDef="let error">
+                    <div [innerHTML]="truncateHTML(error.description)"></div>
+                </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="Module">

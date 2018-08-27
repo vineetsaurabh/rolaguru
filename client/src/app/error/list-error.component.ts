@@ -42,7 +42,7 @@ export class ListErrorComponent extends ListComponent implements OnInit {
         protected toastService: ToastrService,
         protected dialog: MatDialog,
         protected token: TokenStorage) {
-            super(dialog);
+        super(dialog);
     }
 
     ngOnInit() {
@@ -250,7 +250,7 @@ export class ListErrorComponent extends ListComponent implements OnInit {
     }
 
     toggleSelection($event) {
-        if($event.checked) {
+        if ($event.checked) {
             this.errors.forEach(error => error.checked = true);
         } else {
             this.errors.forEach(error => error.checked = false);
@@ -262,6 +262,16 @@ export class ListErrorComponent extends ListComponent implements OnInit {
             .subscribe(res => {
                 saveAs(res.body, file.filename);
             });
+    }
+
+    truncateHTML(text: string): string {
+        let charlimit = 60;
+        if (!text || text.length <= charlimit) {
+            return text;
+        }
+        let without_html = text.replace(/<(?:.|\n)*?>/gm, '');
+        let shortened = without_html.substring(0, charlimit) + "...";
+        return shortened;
     }
 
 }

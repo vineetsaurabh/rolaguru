@@ -1,0 +1,14 @@
+<div>
+    <div>
+        <div [hidden]='fullText' [innerHTML]='rmTextShort'></div>
+        <div style='white-space: pre-wrap' [hidden]='!fullText' [innerHTML]='rmTextFull'></div>
+    </div>
+    <div>
+        <small>
+            <strong>
+                <a href='javascript:;' (click)='readMore(true)' [hidden]='!showMore'>more</a>
+                <a href='javascript:;' (click)='readMore(false)' [hidden]='!showLess'>less</a>
+            </strong>
+        </small>
+    </div>
+</div>
