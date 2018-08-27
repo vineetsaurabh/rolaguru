@@ -6,6 +6,19 @@
 body{
     background-color: rgb(250,255,255);
 }
+.login-text{
+    color: purple;
+    font-size: 16px;
+    font-weight: 600;
+}
+.rolaface-copyright{
+    color: coral;
+    font-size: 12px;
+    font-weight: 700;
+    position: fixed;
+    bottom: 10px;
+    right: 15px;
+}
 
 .error-domain{
     cursor: pointer;

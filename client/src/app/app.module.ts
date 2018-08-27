@@ -98,6 +98,7 @@ import { SearchReportInputwiseComponent } from './report/search-report-inputwise
 import { RcaReportComponent } from './report/rca-report.component';
 import { ChatComponent } from './chat/chat.component';
 import { ReadMoreComponent } from './util/read-more.component';
+import 'hammerjs';
 
 @NgModule({
     declarations: [
