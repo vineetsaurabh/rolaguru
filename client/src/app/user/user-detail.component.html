@@ -57,5 +57,27 @@
                 {{user.expertise}}
             </div>
         </div>
+        <div *ngIf="user.userid == loggedUserId">
+            <div class="change-password" (click)="changePassword()">
+                <span fxLayoutAlign="center">
+                        Change Password
+                </span>
+            </div>
+            <div id="enter-password" style="display:none">
+                <div fxLayout="column" fxLayoutGap="5px">
+                    <div id="password-input" fxLayoutAlign="center">
+                        <input type="password" [(ngModel)]="password" name="password"/>
+                    </div>
+                    <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center">
+                        <button class="btn" (click)="savePassword()">
+                            <i class="fa fa-save"></i>
+                        </button>
+                        <button class="btn" (click)="cancel()">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

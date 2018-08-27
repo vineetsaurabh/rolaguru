@@ -29,6 +29,7 @@ export class UserDetailComponent implements OnInit {
         checked: false,
     };
     loggedUserId: string;
+    password: string;
 
     constructor(
         private http: HttpClient,
@@ -104,6 +105,31 @@ export class UserDetailComponent implements OnInit {
                 this.toastService.success(`${file.filename} is deleted`);
                 this.user = res;
             });
+    }
+
+    changePassword() {
+        const enterPasswordDiv = document.getElementById('enter-password');
+        enterPasswordDiv.style.display = "block";
+    }
+
+    cancel() {
+        this.password = '';
+        const enterPasswordDiv = document.getElementById('enter-password');
+        enterPasswordDiv.style.display = "none";
+    }
+
+    savePassword() {
+        if(this.password) {
+            this.user.password = this.password.trim();
+            this.userService.savePassword(this.user)
+                .subscribe(res => {
+                    this.toastService.success(`Password is successfully changed.`);
+                    const enterPasswordDiv = document.getElementById('enter-password');
+                    enterPasswordDiv.style.display = "none";
+                });
+        } else {
+            this.toastService.warning(`Please enter a password.`);
+        }
     }
 
 }

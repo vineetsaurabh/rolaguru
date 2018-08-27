@@ -18,10 +18,15 @@
                     </button>
                 </mat-form-field>
             </form>
+            <mat-error>
+                <div [innerHTML]="errMsg"></div>
+            </mat-error>
             <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-raised-button (click)="login()" color="primary">Login</button>
+            <button mat-raised-button (click)="login()" color="primary" [disabled]="username=='' || password==''">
+                Login
+            </button>
         </mat-card-actions>
     </mat-card>
 </div>

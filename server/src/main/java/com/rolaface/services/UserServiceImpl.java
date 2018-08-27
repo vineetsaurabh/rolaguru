@@ -93,6 +93,16 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		}
 		return user;
 	}
+	
+	@Override
+	public User changePassword(User user) {
+		User userToUpdate = findById(user.getUserid());
+		if (userToUpdate != null) {
+			userToUpdate.setPassword(bcryptEncoder.encode(user.getPassword()));
+			user = repository.save(userToUpdate);
+		}
+		return user;
+	}
 
 	@Override
 	public User findByEmail(String email) {

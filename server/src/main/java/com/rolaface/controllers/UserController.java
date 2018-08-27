@@ -26,12 +26,24 @@ import com.rolaface.entities.ProfilePicture;
 import com.rolaface.entities.User;
 import com.rolaface.model.ContextUser;
 import com.rolaface.repositories.ProfilePictureRepository;
+import com.rolaface.services.EmailService;
 import com.rolaface.services.FlexErrorSubscribeService;
 import com.rolaface.services.UserService;
+import com.rolaface.util.PasswordGenerator;
 
 @RestController
 @RequestMapping({ "/user" })
 public class UserController {
+
+	private static final String NEW_USER_WELCOME_SUBJECT = "Welcome to Rolaguru";
+
+	private static final String NEW_USER_WELCOME_MESSAGE = "Dear %s \n\nWelcome to Rolaguru. \nYour username is %s\nYour password is %s\nKidnly change this password after login.";
+
+	private final static int INITIAL_PASSWORD_LENGTH = 8;
+
+	private static final String PASSWORD_CHANGE_SUBJECT = "Your password has been changed";
+
+	private static final String PASSWORD_CHANGE_MESSAGE = "Dear %s \nYour password has been successfully changed. \nIf you have not changed your password, please contact admin immediately.";
 
 	@Autowired
 	private UserService userService;
@@ -43,9 +55,20 @@ public class UserController {
 	@Autowired
 	private FlexErrorSubscribeService flexErrorSubscribeService;
 
+	@Autowired
+	private EmailService emailService;
+
 	@PostMapping
 	public User create(@RequestBody User user) {
-		return userService.create(user);
+		PasswordGenerator passwordGenerator = new PasswordGenerator.PasswordGeneratorBuilder().useDigits(true)
+				.useLower(true).useUpper(true).build();
+		String password = passwordGenerator.generate(INITIAL_PASSWORD_LENGTH);
+		user.setPassword(password);
+		user = userService.create(user);
+		String message = String.format(NEW_USER_WELCOME_MESSAGE, user.getFirstName(), user.getUsername(), password);
+		emailService.sendMail(user.getEmail(), NEW_USER_WELCOME_SUBJECT, message);
+		return user;
+
 	}
 
 	@GetMapping(path = { "/{id}" })
@@ -145,4 +168,18 @@ public class UserController {
 		}
 		return user;
 	}
+
+	@PutMapping(path = { "/changepassword/{id}" })
+	public User changePassword(@RequestBody User user) {
+		int userId = ((ContextUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
+		if (userId == user.getUserid()) {
+			user = userService.changePassword(user);
+			if (user != null) {
+				String message = String.format(PASSWORD_CHANGE_MESSAGE, user.getFirstName());
+				emailService.sendMail(user.getEmail(), PASSWORD_CHANGE_SUBJECT, message);
+			}
+		}
+		return user;
+	}
+
 }

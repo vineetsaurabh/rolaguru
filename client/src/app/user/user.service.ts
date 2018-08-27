@@ -77,4 +77,8 @@ export class UserService {
         return this.http.delete<any>(this.userUrl + "/deleteprofilepicture/" + id);
     }
 
+    public savePassword(user: User) {
+        return this.http.put<User>(this.userUrl + "/changepassword/" + user.userid, user, httpOptions);
+    }
+
 }
