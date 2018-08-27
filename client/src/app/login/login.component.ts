@@ -11,6 +11,10 @@ import { UserService } from '../user/user.service';
 })
 export class LoginComponent {
 
+  username: string = '';
+  password: string = '';
+  errMsg: string = '';
+
   constructor(
     private router: Router,
     public dialog: MatDialog,
@@ -19,27 +23,28 @@ export class LoginComponent {
     private userService: UserService) {
   }
 
-  username: string;
-  password: string;
-
   login(): void {
     this.authService.attemptAuth(this.username, this.password).subscribe(
       data => {
         this.token.saveToken(data.token);
         this.userService.getUserByUsername(this.username)
-          .subscribe( user => {
+          .subscribe(user => {
             this.token.saveCurrentUser(user.firstName);
             this.token.saveCurrentUserId(user.userid);
             this.userService.getSubscribedErrorIds()
-                .subscribe( subscribedErrIds => {
-                    this.token.saveSubscribedError(subscribedErrIds.toString());
-                });
+              .subscribe(subscribedErrIds => {
+                this.token.saveSubscribedError(subscribedErrIds.toString());
+              });
             this.router.navigate(['homepage']);
-        }); 
-      }, (error) => {
-        console.log("Login Error", error);
-    }
-    )
+          });
+      }, (response) => {
+        if(response.status == 0) {
+          this.errMsg = "Server is down. <br/>Please try again after some time.";
+        }
+        if (response.status == 500 && response.error.message == "Bad credentials") {
+          this.errMsg = "Invalid credential.<br/>Please enter correct username and password.";
+        }
+      });
   }
 
 }

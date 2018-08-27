@@ -365,6 +365,15 @@ canvas#searchReportChart{
     color: darkblue;
     font-weight: 800;
 }
+.change-password{
+    color: powderblue;
+    cursor: pointer;
+}
+.change-password:hover{
+    color: purple;
+    text-decoration-line: underline;
+    cursor: pointer;
+}
 /* User Table */
 .mat-column-DateOfBirth{
     max-width: 120px;

@@ -20,6 +20,8 @@ public interface UserService {
 	User findById(int id);
 
 	User update(User user);
+	
+	User changePassword(User user);
 
 	User findByUsername(String username);
 
