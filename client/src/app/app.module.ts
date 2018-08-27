@@ -97,6 +97,7 @@ import { SearchReportMonthwiseComponent } from './report/search-report-monthwise
 import { SearchReportInputwiseComponent } from './report/search-report-inputwise.component';
 import { RcaReportComponent } from './report/rca-report.component';
 import { ChatComponent } from './chat/chat.component';
+import { ReadMoreComponent } from './util/read-more.component';
 
 @NgModule({
     declarations: [
@@ -125,7 +126,8 @@ import { ChatComponent } from './chat/chat.component';
         SearchReportMonthwiseComponent,
         SearchReportInputwiseComponent,
         RcaReportComponent,
-        ChatComponent
+        ReadMoreComponent,
+        ChatComponent,
     ],
     imports: [
         BrowserModule,
