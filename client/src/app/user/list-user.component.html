@@ -15,7 +15,7 @@
                 <button class="btn" matTooltip="De-activate User" (click)="deactivateSelectedUsers()">
                     <i class="fa fa-times"></i>
                 </button>
-                <button class="btn" matTooltip="Edit Role">
+                <button class="btn" matTooltip="Edit Role" (click)="assignRoles()">
                     <i class="fa fa-group"></i>
                 </button>
                 <button class="btn" matTooltip="Delete Users" (click)="onDeleteSelectedUsers()">
@@ -105,6 +105,15 @@
             <ng-container matColumnDef="Address">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Address </mat-header-cell>
                 <mat-cell *matCellDef="let user" [ngClass]="{'inactive-user': !user.active}"> {{user.address}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Roles">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Roles </mat-header-cell>
+                <mat-cell *matCellDef="let user" [ngClass]="{'inactive-user': !user.active}">
+                    <div  fxLayout="column">
+                        <div *ngFor="let role of user.roles">{{role.name}}</div>
+                    </div>
+                </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="Actions">

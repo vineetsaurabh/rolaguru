@@ -1,4 +1,4 @@
-import { Error } from '../error/error.model';
+import { Role } from '../role/role.model';
 
 export class User {
   userid: string;
@@ -13,4 +13,5 @@ export class User {
   address: string;
   active: boolean;
   checked: boolean;
+  roles: Role[];
 }

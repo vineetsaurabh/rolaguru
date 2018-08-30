@@ -1,12 +1,12 @@
-import { TokenStorage } from './../login/token.storage';
-import { saveAs } from 'file-saver/FileSaver';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { User } from './user.model';
 import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
-import { UserService } from './user.service';
 import { ToastrService } from 'ngx-toastr';
-import { Error } from '../error/error.model';
+
+import { TokenStorage } from './../login/token.storage';
+import { User } from './user.model';
+import { UserService } from './user.service';
+
 
 @Component({
     templateUrl: './user-detail.component.html'
@@ -27,6 +27,7 @@ export class UserDetailComponent implements OnInit {
         expertise: '',
         active: false,
         checked: false,
+        roles: [],
     };
     loggedUserId: string;
     password: string;
@@ -91,9 +92,13 @@ export class UserDetailComponent implements OnInit {
         const img: any = document.querySelector('img.profile-picture');
         this.userService.downloadFile(this.user.userid)
             .subscribe(res => {
-                const imageUrl = URL.createObjectURL(res.body);
-                img.addEventListener('load', () => URL.revokeObjectURL(imageUrl));
-                img.src = imageUrl;
+                if(res.status == 200) {
+                    const imageUrl = URL.createObjectURL(res.body);
+                    img.addEventListener('load', () => URL.revokeObjectURL(imageUrl));
+                    img.src = imageUrl;
+                } else {
+                    img.src = '../../assets/images/default-profile.jpg';
+                }
             }, error => {
                 img.src = '../../assets/images/default-profile.jpg';
             });

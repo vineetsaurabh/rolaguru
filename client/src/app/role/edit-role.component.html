@@ -1,0 +1,21 @@
+<div class="container">
+    <h2 class="text-center" class="edit-item">Edit Role</h2>
+    <form #editRoleForm="ngForm" (ngSubmit)="updateRole(editRoleForm)" ngNativeValidate>
+        <div class="form-group">
+            <mat-form-field>
+                <input matInput required [(ngModel)]="role.name" name="name" id="name" #firstName="ngModel" placeholder="Name">
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field>
+                <input matInput [(ngModel)]="role.description" name="description" id="description" placeholder="Description">
+            </mat-form-field>
+        </div>
+        <div class="text-center mb-4">
+            <button mat-raised-button [disabled]="!editRoleForm.valid">
+                <i class="fa fa-save"></i>
+                Save
+            </button>
+        </div>
+    </form>
+</div>

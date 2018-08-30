@@ -99,6 +99,11 @@ import { RcaReportComponent } from './report/rca-report.component';
 import { ChatComponent } from './chat/chat.component';
 import { ReadMoreComponent } from './util/read-more.component';
 import 'hammerjs';
+import { AssignRoleComponent } from './user/assign-role.component';
+import { RoleService } from './role/role.service';
+import { AddRoleComponent } from './role/add-role.component';
+import { ListRoleComponent } from './role/list-role.component';
+import { EditRoleComponent } from './role/edit-role.component';
 
 @NgModule({
     declarations: [
@@ -129,6 +134,10 @@ import 'hammerjs';
         RcaReportComponent,
         ReadMoreComponent,
         ChatComponent,
+        AssignRoleComponent,
+        AddRoleComponent,
+        EditRoleComponent,
+        ListRoleComponent,
     ],
     imports: [
         BrowserModule,
@@ -190,6 +199,7 @@ import 'hammerjs';
         AuthService,
         ReportService,
         TokenStorage,
+        RoleService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,

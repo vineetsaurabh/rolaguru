@@ -1,0 +1,44 @@
+<div class="container col-lg-10">
+    <div class="text-center">
+        <h3>Assign Roles</h3>
+    </div>
+    <div class="table-container mat-elevation-z2 my-4">
+        <mat-table #table [dataSource]="dataSource" matSort>
+
+            <ng-container matColumnDef="Checkbox">
+                <mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox (change)="toggleSelection($event)" fxLayoutAlign="start">
+                    </mat-checkbox>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let role">
+                    <mat-checkbox [(ngModel)]="role.checked" color="primary"></mat-checkbox>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Name">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+                <mat-cell *matCellDef="let role"> {{role.name}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Description">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
+                <mat-cell *matCellDef="let role"> {{role.description}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="UserCount">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> No of Users </mat-header-cell>
+                <mat-cell *matCellDef="let role"> {{role.users.length}} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight-row': row.checked}">
+            </mat-row>
+        </mat-table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]"></mat-paginator>
+    </div>
+    <div class="text-center">
+        <button mat-raised-button color="primary" (click)="assignRoles()">
+            Assign
+        </button>
+    </div>
+</div>
