@@ -33,7 +33,7 @@ public class CommentError {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "created")
-	private java.util.Date createdTimestamp;
+	private Date createdTimestamp;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "modified")

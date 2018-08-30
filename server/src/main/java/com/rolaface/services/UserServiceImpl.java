@@ -89,6 +89,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			userToUpdate.setExpertise(user.getExpertise());
 			userToUpdate.setAddress(user.getAddress());
 			userToUpdate.setActive(user.isActive());
+			userToUpdate.setRoles(user.getRoles());
 			user = repository.save(userToUpdate);
 		}
 		return user;

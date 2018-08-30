@@ -1,5 +1,6 @@
 package com.rolaface.controllers;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -148,12 +149,18 @@ public class UserController {
 
 	@GetMapping("/downloadprofilepic/{id}")
 	public ResponseEntity<byte[]> download(@PathVariable("id") int id) {
-		// CauseDocument causeDocument = profilePicturetService.findByUserid(id);
+		ResponseEntity<byte[]> response = null;
+		// ProfilePicture profilePicture = profilePictureService.findByUserid(id);
 		ProfilePicture profilePicture = profilePictureRepository.findByUserid(id);
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.IMAGE_JPEG);
-		headers.setContentDispositionFormData("inline", profilePicture.getFilename());
-		return new ResponseEntity<>(profilePicture.getContent(), headers, HttpStatus.OK);
+		if(profilePicture != null) {
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.IMAGE_JPEG);
+			headers.setContentDispositionFormData("inline", profilePicture.getFilename());
+			response = new ResponseEntity<>(profilePicture.getContent(), headers, HttpStatus.OK);
+		} else {
+			response = new ResponseEntity<>(null, null, HttpStatus.NO_CONTENT);
+		}
+		return response;
 	}
 
 	@DeleteMapping(path = { "/deleteprofilepicture/{id}" })
@@ -180,6 +187,14 @@ public class UserController {
 			}
 		}
 		return user;
+	}
+	
+	@Transactional
+	@PutMapping(value = "/assignroles")
+	public void assignRoles(@RequestBody Collection<User> users) {
+		for (User user : users) {
+			userService.update(user);
+		}
 	}
 
 }

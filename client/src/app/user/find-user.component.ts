@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+
 import { UserService } from './user.service';
 import { User } from './user.model';
-import { Router } from '@angular/router';
-import { Error } from '../error/error.model';
 
 @Component({
     selector: 'user-detail',
@@ -25,10 +24,12 @@ export class FindUserComponent {
         address: '',
         active: false,
         checked: false,
+        roles: [],
     };
 
     constructor(
         private router: Router,
+        private route: ActivatedRoute,
         private userService: UserService) {
     }
 

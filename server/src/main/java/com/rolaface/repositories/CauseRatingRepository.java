@@ -19,7 +19,7 @@ public interface CauseRatingRepository extends JpaRepository<CauseRating, Long> 
 	CauseRating findByRatingid(int ratingid);
 
 	@Override
-	CauseRating save(CauseRating user);
+	CauseRating save(CauseRating causeRating);
 
 	List<CauseRating> findByCauseid(int causeid);
 

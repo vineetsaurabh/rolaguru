@@ -1,17 +1,17 @@
 
-import { EditUserComponent } from './edit-user.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router } from '@angular/router';
+import { MatTableDataSource, MatPaginator, MatSort, MatDialogRef, MatDialog } from '@angular/material';
+import { Observable } from 'rxjs/Observable';
+import { ToastrService } from 'ngx-toastr';
 
 import { User } from './user.model';
 import { UserService } from './user.service';
-import { ToastrService } from 'ngx-toastr';
-import { MatTableDataSource, MatPaginator, MatSort, MatDialogRef, MatDialog, MatDialogConfig } from '@angular/material';
-import { Observable } from 'rxjs/Observable';
 import { AddUserComponent } from './add-user.component';
 import { ConfirmDeleteComponent } from '../util/confirm-delete.component';
-import { TableConfiguratorComponent } from '../util/table-configurator.component';
 import { ListComponent } from '../common/list.component';
+import { AssignRoleComponent } from './assign-role.component';
+import { EditUserComponent } from './edit-user.component';
 
 @Component({
     selector: 'app-comp',
@@ -20,8 +20,8 @@ import { ListComponent } from '../common/list.component';
 export class ListUserComponent extends ListComponent implements OnInit {
 
     users: User[];
-    allColumns = ['Checkbox', 'Name', 'DateOfBirth', 'Email', 'Phone', 'Expertise', 'Address', 'Actions'];
-    displayedColumns = ['Checkbox', 'Name', 'DateOfBirth', 'Email', 'Phone', 'Expertise', 'Actions'];
+    allColumns = ['Checkbox', 'Name', 'DateOfBirth', 'Email', 'Phone', 'Expertise', 'Roles', 'Address', 'Actions'];
+    displayedColumns = ['Checkbox', 'Name', 'DateOfBirth', 'Email', 'Phone', 'Expertise',  'Roles', 'Actions'];
     dataSource: MatTableDataSource<User>;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -36,7 +36,6 @@ export class ListUserComponent extends ListComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getUsers();
         this.dialog.afterAllClosed.subscribe(() => {
             this.getUsers();
         })
@@ -191,6 +190,16 @@ export class ListUserComponent extends ListComponent implements OnInit {
         } else {
             this.users.forEach(user => user.checked = false);
         }
+    }
+	
+	assignRoles(): Observable<boolean> {
+        let dialogRef: MatDialogRef<AssignRoleComponent>;
+        dialogRef = this.dialog.open(AssignRoleComponent, {
+            data: this.selectedUsers,
+            width: '800px',
+            height: '600px',
+        });
+        return dialogRef.afterClosed();
     }
 
 }

@@ -1,12 +1,10 @@
 import { Component, OnInit, Injectable, Inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { User } from './user.model';
-import { HttpClient } from '@angular/common/http';
-import { UserService } from './user.service';
 import { NgForm, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Error } from '../error/error.model';
+import { ToastrService } from 'ngx-toastr';
+
+import { User } from './user.model';
+import { UserService } from './user.service';
 
 @Injectable()
 @Component({
@@ -27,6 +25,7 @@ export class EditUserComponent implements OnInit {
         address: '',
         active: false,
         checked: false,
+        roles: [],
     };
     id: string;
     userForm: FormGroup;

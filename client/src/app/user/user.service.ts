@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams, HttpEvent, HttpRequest } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 import { User } from './user.model';
 import { environment } from '../../environments/environment';
-import { Observable } from 'rxjs/Observable';
-
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -79,6 +78,10 @@ export class UserService {
 
     public savePassword(user: User) {
         return this.http.put<User>(this.userUrl + "/changepassword/" + user.userid, user, httpOptions);
+    }
+
+    public assignRoles(users: User[]) {
+        return this.http.put<User[]>(this.userUrl + "/assignroles", users, httpOptions);
     }
 
 }

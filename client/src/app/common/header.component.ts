@@ -29,16 +29,20 @@ export class HeaderComponent implements OnInit {
                 input: this.input.trim(),
             }
         }
-        this.router.navigate(['findUsers'], params);
+        this.router.navigate(['find'], params);
     }
 
     showProfilePicture() {
         const img: any = document.querySelector('img.user-picture');
         this.userService.downloadFile(this.currentUserId)
             .subscribe(res => {
-                const imageUrl = URL.createObjectURL(res.body);
-                img.addEventListener('load', () => URL.revokeObjectURL(imageUrl));
-                img.src = imageUrl;
+                if(res.status == 200) {
+                    const imageUrl = URL.createObjectURL(res.body);
+                    img.addEventListener('load', () => URL.revokeObjectURL(imageUrl));
+                    img.src = imageUrl;
+                } else {
+                    img.src = '../../assets/images/default-profile.jpg';
+                }
             }, error => {
                 img.src = '../../assets/images/default-profile.jpg';
             });

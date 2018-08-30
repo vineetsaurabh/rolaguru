@@ -21,6 +21,10 @@ import { SubscribedErrorsComponent } from './error/subscribe-error.component';
 import { SearchReportMonthwiseComponent } from './report/search-report-monthwise.component';
 import { SearchReportInputwiseComponent } from './report/search-report-inputwise.component';
 import { RcaReportComponent } from './report/rca-report.component';
+import { AddRoleComponent } from './role/add-role.component';
+import { ListRoleComponent } from './role/list-role.component';
+import { EditRoleComponent } from './role/edit-role.component';
+import { AssignRoleComponent } from './user/assign-role.component';
 import { ChatComponent } from './chat/chat.component';
 
 const routes: Routes = [
@@ -37,7 +41,7 @@ const routes: Routes = [
         component: HomepageComponent
     },
     {
-        path: 'findUsers',
+        path: 'find',
         component: FindErrorResultComponent
     },
     {
@@ -47,6 +51,14 @@ const routes: Routes = [
             {
                 path: ':id',
                 component: EditUserComponent
+            },
+            {
+                path: '',
+                component: TableConfiguratorComponent
+            },
+            {
+                path: '',
+                component: AssignRoleComponent
             }
         ]
     },
@@ -99,6 +111,24 @@ const routes: Routes = [
                         component: ConfirmDeleteComponent
                     }
                 ]
+            }
+        ]
+    },
+    {
+        path: 'addRole',
+        component: AddRoleComponent
+    },
+    {
+        path: 'listRoles',
+        component: ListRoleComponent,
+        children: [
+            {
+                path: ':id',
+                component: EditRoleComponent
+            },
+            {
+                path: '',
+                component: TableConfiguratorComponent
             }
         ]
     },
