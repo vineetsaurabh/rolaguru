@@ -132,9 +132,6 @@ export class ListErrorComponent extends ListComponent implements OnInit {
     }
 
     onDeleteSelectedErrors() {
-        if (this.selectedErrors.length == 0) {
-            this.toastService.warning(`Please select an error to delete`);
-        } else {
             let dialogRef: MatDialogRef<ConfirmDeleteComponent>;
             if (this.selectedErrors.length == 1) {
                 dialogRef = this.dialog.open(ConfirmDeleteComponent, {
@@ -150,7 +147,6 @@ export class ListErrorComponent extends ListComponent implements OnInit {
                     this.deleteSelectedErrors();
                 }
             });
-        }
     }
 
     deleteSelectedErrors() {
@@ -208,10 +204,6 @@ export class ListErrorComponent extends ListComponent implements OnInit {
     }
 
     subscribeErrors() {
-        if (this.selectedErrors.length == 0) {
-            this.toastService.warning(`Please select an error to subscribe`);
-            return;
-        }
         let selectedErrorsLength = this.selectedErrors.length;
         let errids = this.selectedErrors.join(",");
         this.errorService.subscribeErrors(errids)
@@ -229,10 +221,6 @@ export class ListErrorComponent extends ListComponent implements OnInit {
     }
 
     unSubscribeErrors() {
-        if (this.selectedErrors.length == 0) {
-            this.toastService.warning(`Please select an error to un-subscribe`);
-            return;
-        }
         let selectedErrorsLength = this.selectedErrors.length;
         let errids = this.selectedErrors.join(",");
         this.errorService.unSubscribeErrors(errids)
@@ -272,6 +260,13 @@ export class ListErrorComponent extends ListComponent implements OnInit {
         let without_html = text.replace(/<(?:.|\n)*?>/gm, '');
         let shortened = without_html.substring(0, charlimit) + "...";
         return shortened;
+    }
+
+    disableAction() {
+        if(this.errors) {
+            return !this.errors.some(_ => _.checked);
+        }
+        return true;
     }
 
 }

@@ -89,7 +89,7 @@ body{
 .inactive-user {
     color: gray;
 }
-.btn:hover{
+.btn:not([disabled]):hover{
     background: linear-gradient(powderblue, azure, powderblue)!important;
     z-index: 2;
 }
