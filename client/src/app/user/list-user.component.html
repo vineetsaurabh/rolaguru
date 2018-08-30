@@ -9,16 +9,16 @@
                         User Actions
                     </span>
                 </h1>
-                <button class="btn" matTooltip="Activate User" (click)="activateSelectedUsers()">
+                <button class="btn" matTooltip="Activate User" (click)="activateSelectedUsers()" [disabled]="disableAction()">
                     <i class="fa fa-check"></i>
                 </button>
-                <button class="btn" matTooltip="De-activate User" (click)="deactivateSelectedUsers()">
+                <button class="btn" matTooltip="De-activate User" (click)="deactivateSelectedUsers()" [disabled]="disableAction()">
                     <i class="fa fa-times"></i>
                 </button>
-                <button class="btn" matTooltip="Edit Role" (click)="assignRoles()">
+                <button class="btn" matTooltip="Assign Role" (click)="assignRoles()" [disabled]="disableAction()">
                     <i class="fa fa-group"></i>
                 </button>
-                <button class="btn" matTooltip="Delete Users" (click)="onDeleteSelectedUsers()">
+                <button class="btn" matTooltip="Delete Users" (click)="onDeleteSelectedUsers()" [disabled]="disableAction()">
                     <i class="fa fa-trash"></i>
                 </button>
             </div>

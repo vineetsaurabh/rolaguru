@@ -9,13 +9,13 @@
                         Error Actions
                     </span>
                 </h1>
-                <button class="btn" matTooltip="Subscribe Errors" (click)="subscribeErrors()">
+                <button class="btn" matTooltip="Subscribe Errors" (click)="subscribeErrors()" [disabled]="disableAction()">
                     <i class="fa fa-rss"></i>
                 </button>
-                <button class="btn" matTooltip="Un-subscribe Errors" (click)="unSubscribeErrors()">
+                <button class="btn" matTooltip="Un-subscribe Errors" (click)="unSubscribeErrors()" [disabled]="disableAction()">
                     <i class="fa fa-rss-square"></i>
                 </button>
-                <button class="btn" matTooltip="Delete Errors" (click)="onDeleteSelectedErrors()">
+                <button class="btn" matTooltip="Delete Errors" (click)="onDeleteSelectedErrors()" [disabled]="disableAction()">
                     <i class="fa fa-trash"></i>
                 </button>
             </div>

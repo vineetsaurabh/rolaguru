@@ -202,4 +202,11 @@ export class ListUserComponent extends ListComponent implements OnInit {
         return dialogRef.afterClosed();
     }
 
+    disableAction() {
+        if(this.users) {
+            return !this.users.some(_ => _.checked);
+        }
+        return true;
+    }
+
 }
