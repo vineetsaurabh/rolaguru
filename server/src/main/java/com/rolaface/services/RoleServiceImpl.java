@@ -33,7 +33,7 @@ public class RoleServiceImpl implements RoleService {
 	public Role update(Role role) {
 		Role roleToUpdate = findById(role.getRoleid());
 		if(roleToUpdate != null) {
-			roleToUpdate.setName(role.getName());
+			roleToUpdate.setRoleName(role.getRoleName());
 			roleToUpdate.setDescription(role.getDescription());
 		}
 		return repository.save(roleToUpdate);

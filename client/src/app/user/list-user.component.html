@@ -16,6 +16,9 @@
                     <i class="fa fa-times"></i>
                 </button>
                 <button class="btn" matTooltip="Assign Role" (click)="assignRoles()" [disabled]="disableAction()">
+                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                </button>
+                <button class="btn" matTooltip="Assign Team" (click)="assignTeams()" [disabled]="disableAction()">
                     <i class="fa fa-group"></i>
                 </button>
                 <button class="btn" matTooltip="Delete Users" (click)="onDeleteSelectedUsers()" [disabled]="disableAction()">
@@ -110,8 +113,17 @@
             <ng-container matColumnDef="Roles">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Roles </mat-header-cell>
                 <mat-cell *matCellDef="let user" [ngClass]="{'inactive-user': !user.active}">
-                    <div  fxLayout="column">
-                        <div *ngFor="let role of user.roles">{{role.name}}</div>
+                    <div fxLayout="column">
+                        <div *ngFor="let role of user.roles">{{role.roleName}}</div>
+                    </div>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Teams">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Teams </mat-header-cell>
+                <mat-cell *matCellDef="let user" [ngClass]="{'inactive-user': !user.active}">
+                    <div fxLayout="column">
+                        <div *ngFor="let team of user.teams">{{team.teamName}}</div>
                     </div>
                 </mat-cell>
             </ng-container>

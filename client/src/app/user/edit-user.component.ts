@@ -26,6 +26,7 @@ export class EditUserComponent implements OnInit {
         active: false,
         checked: false,
         roles: [],
+        teams: [],
     };
     id: string;
     userForm: FormGroup;

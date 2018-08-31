@@ -1,4 +1,5 @@
 import { Role } from '../role/role.model';
+import { Team } from '../Team/Team.model';
 
 export class User {
   userid: string;
@@ -14,4 +15,5 @@ export class User {
   active: boolean;
   checked: boolean;
   roles: Role[];
+  teams: Team[];
 }

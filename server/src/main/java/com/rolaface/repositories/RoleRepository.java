@@ -13,7 +13,7 @@ public interface RoleRepository extends JpaRepository<Role, Long> {
 	@Override
 	Role save(Role role);
 
-    Role findByName(String name);
+    Role findByRoleName(String name);
     
     Role findByRoleid(int roleid);
     

@@ -192,6 +192,16 @@ public class UserController {
 	@Transactional
 	@PutMapping(value = "/assignroles")
 	public void assignRoles(@RequestBody Collection<User> users) {
+		assign(users);
+	}
+	
+	@Transactional
+	@PutMapping(value = "/assignteams")
+	public void assignTeams(@RequestBody Collection<User> users) {
+		assign(users);
+	}
+	
+	private void assign(Collection<User> users) {
 		for (User user : users) {
 			userService.update(user);
 		}

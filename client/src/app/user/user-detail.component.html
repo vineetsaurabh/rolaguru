@@ -63,7 +63,14 @@
         <div fxLayout="row">
             <div class="user-info-label">Roles</div>
             <div class="user-info-value" fxLayout="column">
-                <div *ngFor="let role of user.roles">{{role.name}}</div>
+                <div *ngFor="let role of user.roles">{{role.roleName}}</div>
+            </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div fxLayout="row">
+            <div class="user-info-label">Teams</div>
+            <div class="user-info-value" fxLayout="column">
+                <div *ngFor="let team of user.teams">{{team.teamName}}</div>
             </div>
         </div>
         <mat-divider></mat-divider>

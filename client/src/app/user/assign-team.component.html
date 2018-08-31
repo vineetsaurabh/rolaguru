@@ -1,6 +1,6 @@
 <div class="container col-lg-10">
     <div class="text-center">
-        <h3>Assign Roles</h3>
+        <h3>Assign Teams</h3>
     </div>
     <div class="table-container mat-elevation-z2 my-4">
         <mat-table #table [dataSource]="dataSource" matSort>
@@ -10,24 +10,24 @@
                     <mat-checkbox (change)="toggleSelection($event)" fxLayoutAlign="start">
                     </mat-checkbox>
                 </mat-header-cell>
-                <mat-cell *matCellDef="let role">
-                    <mat-checkbox [(ngModel)]="role.checked" color="primary"></mat-checkbox>
+                <mat-cell *matCellDef="let team">
+                    <mat-checkbox [(ngModel)]="team.checked" color="primary"></mat-checkbox>
                 </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="Name">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
-                <mat-cell *matCellDef="let role"> {{role.roleName}} </mat-cell>
+                <mat-cell *matCellDef="let team"> {{team.teamName}} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="Description">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
-                <mat-cell *matCellDef="let role"> {{role.description}} </mat-cell>
+                <mat-cell *matCellDef="let team"> {{team.description}} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="UserCount">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> No of Users </mat-header-cell>
-                <mat-cell *matCellDef="let role"> {{role.users.length}} </mat-cell>
+                <mat-cell *matCellDef="let team"> {{team.users.length}} </mat-cell>
             </ng-container>
 
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -37,7 +37,7 @@
         <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]"></mat-paginator>
     </div>
     <div class="text-center">
-        <button mat-raised-button color="primary" (click)="assignRoles()">
+        <button mat-raised-button color="primary" (click)="assignTeams()">
             Assign
         </button>
     </div>

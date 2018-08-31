@@ -25,6 +25,10 @@ import { AddRoleComponent } from './role/add-role.component';
 import { ListRoleComponent } from './role/list-role.component';
 import { EditRoleComponent } from './role/edit-role.component';
 import { AssignRoleComponent } from './user/assign-role.component';
+import { AddTeamComponent } from './team/add-team.component';
+import { ListTeamComponent } from './team/list-team.component';
+import { EditTeamComponent } from './team/edit-team.component';
+import { AssignTeamComponent } from './user/assign-team.component';
 import { ChatComponent } from './chat/chat.component';
 
 const routes: Routes = [
@@ -59,6 +63,10 @@ const routes: Routes = [
             {
                 path: '',
                 component: AssignRoleComponent
+            },
+            {
+                path: '',
+                component: AssignTeamComponent
             }
         ]
     },
@@ -125,6 +133,24 @@ const routes: Routes = [
             {
                 path: ':id',
                 component: EditRoleComponent
+            },
+            {
+                path: '',
+                component: TableConfiguratorComponent
+            }
+        ]
+    },
+    {
+        path: 'addTeam',
+        component: AddTeamComponent
+    },
+    {
+        path: 'listTeams',
+        component: ListTeamComponent,
+        children: [
+            {
+                path: ':id',
+                component: EditTeamComponent
             },
             {
                 path: '',

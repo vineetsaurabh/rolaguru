@@ -3,47 +3,47 @@ import { NgForm, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 
-import { Role } from './role.model';
-import { RoleService } from './role.service';
+import { Team } from './team.model';
+import { TeamService } from './team.service';
 import { User } from '../user/user.model';
 
 @Injectable()
 @Component({
-    templateUrl: './edit-role.component.html'
+    templateUrl: './edit-team.component.html'
 })
-export class EditRoleComponent implements OnInit {
+export class EditTeamComponent implements OnInit {
 
-    public role: Role = {
-        roleid: '',
-        roleName: '',
+    public team: Team = {
+        teamid: '',
+        teamName: '',
         description: '',
         users: new Set<User>(),
         checked: false,
     };
     id: string;
-    roleForm: FormGroup;
+    teamForm: FormGroup;
 
     constructor(
-        private roleService: RoleService,
+        private teamService: TeamService,
         private fb: FormBuilder,
         private toastService: ToastrService,
-        public dialogRef: MatDialogRef<EditRoleComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: Role) {
-        this.role = this.data;
+        public dialogRef: MatDialogRef<EditTeamComponent>,
+        @Inject(MAT_DIALOG_DATA) public data: Team) {
+        this.team = this.data;
     }
 
     ngOnInit() {
-        this.roleForm = this.fb.group({
-            roleid: 0,
+        this.teamForm = this.fb.group({
+            teamid: 0,
             name: ['', [Validators.required]],
             description: ['', [Validators.required]],
         })
     }
 
-    updateRole(userForm: NgForm) {
-        this.roleService.updateRole(this.role)
+    updateTeam(userForm: NgForm) {
+        this.teamService.updateTeam(this.team)
             .subscribe(res => {
-                this.toastService.success(`User ${this.role.roleName} updated`);
+                this.toastService.success(`User ${this.team.teamName} updated`);
                 this.dialogRef.close(false);
             });
     }

@@ -84,4 +84,8 @@ export class UserService {
         return this.http.put<User[]>(this.userUrl + "/assignroles", users, httpOptions);
     }
 
+    public assignTeams(users: User[]) {
+        return this.http.put<User[]>(this.userUrl + "/assignteams", users, httpOptions);
+    }
+
 }
