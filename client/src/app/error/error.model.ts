@@ -10,6 +10,7 @@ export class Error {
     description: string;
     operation: string;
     severity: number = 1;
+    priority: string;
     frequency: number;
     causes: Set<Cause>;
     checked: boolean;

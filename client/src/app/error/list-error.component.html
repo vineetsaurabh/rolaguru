@@ -103,6 +103,11 @@
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Operation </mat-header-cell>
                 <mat-cell *matCellDef="let error"> {{error.operation}} </mat-cell>
             </ng-container>
+			
+			<ng-container matColumnDef="Priority">
+				<mat-header-cell *matHeaderCellDef mat-sort-header> Priority </mat-header-cell>
+				<mat-cell *matCellDef="let error"> {{error.priority}} </mat-cell>
+			</ng-container>
 
             <ng-container matColumnDef="Severity">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Severity </mat-header-cell>

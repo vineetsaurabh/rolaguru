@@ -139,6 +139,11 @@ public class FlexErrorController {
 	public FlexError findByErrorCode(@RequestParam("code") String errCode) {
 		return flexErrorService.findByErrorCode(errCode);
 	}
+	
+	@GetMapping(value = "/findbypriority", params = "priority")
+	public List<FlexError> findByPriority(@RequestParam("priority") String priority) {
+		return flexErrorService.findByPriority(priority);
+	}
 
 	@Transactional
 	@GetMapping(value = "/deleteerrors", params = "errids")

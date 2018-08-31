@@ -129,6 +129,9 @@ div.border-text h1 span{
 .mat-column-Operation{
     max-width: 100px;
 }
+.mat-column-Priority{
+    max-width: 60px;
+}
 .mat-column-Severity{
     max-width: 60px;
 }

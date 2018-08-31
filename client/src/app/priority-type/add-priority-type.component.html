@@ -1,0 +1,21 @@
+<div class="col-md-10 container">
+    <h2 class="text-center" class="add-item">Add Ticket Type</h2>
+    <form #priorityTypeForm="ngForm" (ngSubmit)="createpriorityType(priorityTypeForm)" ngNativeValidate>
+		<div class="form-group">
+            <mat-form-field>
+                <input matInput required [(ngModel)]="priorityType.priorityTypeName" name="priorityTypeName" id="priorityTypeName" #priorityTypeName="ngModel"
+                    placeholder="Priority Type Name">
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field>
+                <input matInput required [(ngModel)]="priorityType.description" name="description" id="description" #firstName="ngModel" placeholder="Description">
+            </mat-form-field>
+        </div>
+        <div class="text-center">
+            <button mat-raised-button color="primary" [disabled]="!priorityTypeForm.valid">
+                Submit
+            </button>
+        </div>
+    </form>
+</div>

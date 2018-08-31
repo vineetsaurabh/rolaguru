@@ -29,13 +29,17 @@
                 <mat-menu #menu="matMenu" overlapTrigger="false">
                     <button mat-menu-item [routerLink]="['/findUser', currentUserId]">My Profile</button>
                     <button mat-menu-item [routerLink]="['/subscribedErrors']">My Subscribed Errors</button>
-                    <button mat-menu-item [matMenuTriggerFor]="admin">Admin Tasks</button>
+					<button mat-menu-item [matMenuTriggerFor]="useradmin">User Admin</button>
+                    <button mat-menu-item [matMenuTriggerFor]="erroradmin">Error Admin</button>
                     <button mat-menu-item [matMenuTriggerFor]="reports">Reports</button>
                 </mat-menu>
-                <mat-menu #admin="matMenu">
+                <mat-menu #useradmin="matMenu">
                     <button mat-menu-item [routerLink]="['/listUsers']">User Management</button>
                     <button mat-menu-item [routerLink]="['/listRoles']">Role Management</button>
 					<button mat-menu-item [routerLink]="['/listTeams']">Team Management</button>
+                </mat-menu>
+				<mat-menu #erroradmin="matMenu">
+                    <button mat-menu-item [routerLink]="['/listPriorityTypes']">Priority Type Management</button>
                 </mat-menu>
                 <mat-menu #reports="matMenu">
                     <button mat-menu-item [routerLink]="['/searchReportMonthwise']">Search Report (Monthwise)</button>

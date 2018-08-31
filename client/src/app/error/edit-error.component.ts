@@ -7,6 +7,8 @@ import { NgForm, FormBuilder, FormGroup, Validators, FormControl } from '@angula
 import { ToastrService } from 'ngx-toastr';
 import { MatDialogRef, MAT_DIALOG_DATA, MatRadioChange } from '@angular/material';
 import { Cause } from '../cause/cause.model';
+import { PriorityTypeService } from '../priority-type/priority-type.service';
+import { PriorityType } from '../priority-type/priority-type.model';
 
 @Injectable()
 @Component({
@@ -21,6 +23,7 @@ export class EditErrorComponent implements OnInit {
         description: '',
         module: '',
         operation: '',
+		priority: '',
         severity: 0,
         frequency: 0,
         causes: new Set<Cause>(),
@@ -32,11 +35,13 @@ export class EditErrorComponent implements OnInit {
     };
     errorForm: FormGroup;
     editDescription: string = '';
+    priorityTypes: PriorityType[];
 
     constructor(
         private errorService: ErrorService,
         private fb: FormBuilder,
         private toastService: ToastrService,
+        private priorityTypeService: PriorityTypeService,
         public dialogRef: MatDialogRef<EditErrorComponent>,
         @Inject(MAT_DIALOG_DATA) public data: Error) {
         this.error = this.data;
@@ -51,6 +56,10 @@ export class EditErrorComponent implements OnInit {
             module: ['', [Validators.required]],
             operation: ['', [Validators.required]]
         });
+		this.priorityTypeService.getPriorityTypes()
+            .subscribe(data => {
+                this.priorityTypes = data
+            });
     }
 
     updateError(errorForm: NgForm) {

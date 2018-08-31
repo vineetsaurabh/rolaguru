@@ -30,6 +30,9 @@ import { ListTeamComponent } from './team/list-team.component';
 import { EditTeamComponent } from './team/edit-team.component';
 import { AssignTeamComponent } from './user/assign-team.component';
 import { ChatComponent } from './chat/chat.component';
+import { AddPriorityTypeComponent } from './priority-type/add-priority-type.component';
+import { ListPriorityTypeComponent } from './priority-type/list-priority-type.component';
+import { EditPriorityTypeComponent } from './priority-type/edit-priority-type.component';
 
 const routes: Routes = [
     {
@@ -151,6 +154,24 @@ const routes: Routes = [
             {
                 path: ':id',
                 component: EditTeamComponent
+            },
+            {
+                path: '',
+                component: TableConfiguratorComponent
+            }
+        ]
+    },
+	{
+        path: 'addPriorityType',
+        component: AddPriorityTypeComponent
+    },
+    {
+        path: 'listPriorityTypes',
+        component: ListPriorityTypeComponent,
+        children: [
+            {
+                path: ':id',
+                component: EditPriorityTypeComponent
             },
             {
                 path: '',

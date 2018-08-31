@@ -51,6 +51,7 @@ public class FlexErrorServiceImpl implements FlexErrorService {
 			flexErrorToUpdate.setDescription(flexError.getDescription());
 			flexErrorToUpdate.setModule(flexError.getModule());
 			flexErrorToUpdate.setOperation(flexError.getOperation());
+			flexErrorToUpdate.setPriority(flexError.getPriority());
 			flexErrorToUpdate.setSeverity(flexError.getSeverity());
 			flexErrorToUpdate.setFrequency(flexError.getFrequency());
 			flexError = repository.save(flexErrorToUpdate);
@@ -61,6 +62,11 @@ public class FlexErrorServiceImpl implements FlexErrorService {
 	@Override
 	public FlexError findByErrorCode(String errCode) {
 		return repository.findByErrcode(errCode);
+	}
+	
+	@Override
+	public List<FlexError> findByPriority(String priority) {
+		return repository.findByPriority(priority);
 	}
 
 	@Override

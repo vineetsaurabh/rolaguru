@@ -18,6 +18,8 @@ public interface FlexErrorService {
 	List<FlexError> findAll(String category);
 
 	List<FlexError> findErrors(String input);
+	
+	List<FlexError> findByPriority(String priority);
 
 	FlexError findById(int id);
 
