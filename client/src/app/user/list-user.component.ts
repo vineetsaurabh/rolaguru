@@ -11,6 +11,7 @@ import { AddUserComponent } from './add-user.component';
 import { ConfirmDeleteComponent } from '../util/confirm-delete.component';
 import { ListComponent } from '../common/list.component';
 import { AssignRoleComponent } from './assign-role.component';
+import { AssignTeamComponent } from './assign-team.component';
 import { EditUserComponent } from './edit-user.component';
 
 @Component({
@@ -20,8 +21,8 @@ import { EditUserComponent } from './edit-user.component';
 export class ListUserComponent extends ListComponent implements OnInit {
 
     users: User[];
-    allColumns = ['Checkbox', 'Name', 'DateOfBirth', 'Email', 'Phone', 'Expertise', 'Roles', 'Address', 'Actions'];
-    displayedColumns = ['Checkbox', 'Name', 'DateOfBirth', 'Email', 'Phone', 'Expertise',  'Roles', 'Actions'];
+    allColumns = ['Checkbox', 'Name', 'DateOfBirth', 'Email', 'Phone', 'Expertise', 'Roles', 'Teams', 'Address', 'Actions'];
+    displayedColumns = ['Checkbox', 'Name', 'Email', 'Phone', 'Expertise',  'Roles', 'Teams', 'Actions'];
     dataSource: MatTableDataSource<User>;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -195,6 +196,16 @@ export class ListUserComponent extends ListComponent implements OnInit {
 	assignRoles(): Observable<boolean> {
         let dialogRef: MatDialogRef<AssignRoleComponent>;
         dialogRef = this.dialog.open(AssignRoleComponent, {
+            data: this.selectedUsers,
+            width: '800px',
+            height: '600px',
+        });
+        return dialogRef.afterClosed();
+    }
+
+    assignTeams(): Observable<boolean> {
+        let dialogRef: MatDialogRef<AssignTeamComponent>;
+        dialogRef = this.dialog.open(AssignTeamComponent, {
             data: this.selectedUsers,
             width: '800px',
             height: '600px',

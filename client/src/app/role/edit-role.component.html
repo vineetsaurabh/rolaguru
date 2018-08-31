@@ -3,7 +3,7 @@
     <form #editRoleForm="ngForm" (ngSubmit)="updateRole(editRoleForm)" ngNativeValidate>
         <div class="form-group">
             <mat-form-field>
-                <input matInput required [(ngModel)]="role.name" name="name" id="name" #firstName="ngModel" placeholder="Name">
+                <input matInput required [(ngModel)]="role.roleName" name="name" id="name" #firstName="ngModel" placeholder="Name">
             </mat-form-field>
         </div>
         <div class="form-group">

@@ -13,21 +13,21 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "roles")
-public class Role {
+@Table(name = "teams")
+public class Team {
 
 	@Id
 	@Column
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int roleid;
+	private int teamid;
 
-	@Column(name = "role_name", unique = true, nullable = false)
-	private String roleName;
+	@Column(name="team_name", unique = true, nullable = false)
+	private String teamName;
 
 	@Column
 	private String description;
 
-	@ManyToMany(mappedBy = "roles")
+	@ManyToMany(mappedBy = "teams")
 	@JsonIgnore
 	private Collection<User> users;
 
@@ -39,20 +39,20 @@ public class Role {
 		this.users = users;
 	}
 
-	public int getRoleid() {
-		return roleid;
+	public int getTeamid() {
+		return teamid;
 	}
 
-	public void setRoleid(int roleid) {
-		this.roleid = roleid;
+	public void setTeamid(int teamid) {
+		this.teamid = teamid;
 	}
 
-	public String getRoleName() {
-		return roleName;
+	public String getTeamName() {
+		return teamName;
 	}
 
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
+	public void setTeamName(String teamName) {
+		this.teamName = teamName;
 	}
 
 	public String getDescription() {

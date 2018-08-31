@@ -5,30 +5,30 @@ import { MatTableDataSource, MatPaginator, MatSort, MatDialogRef, MatDialog } fr
 import { Observable } from 'rxjs/Observable';
 import { ToastrService } from 'ngx-toastr';
 
-import { Role } from './role.model';
-import { RoleService } from './role.service';
-import { AddRoleComponent } from './add-role.component';
-import { EditRoleComponent } from './edit-role.component';
+import { Team } from './team.model';
+import { TeamService } from './team.service';
+import { AddTeamComponent } from './add-team.component';
+import { EditTeamComponent } from './edit-team.component';
 import { ConfirmDeleteComponent } from '../util/confirm-delete.component';
 import { ListComponent } from '../common/list.component';
 
 @Component({
     selector: 'app-comp',
-    templateUrl: './list-role.component.html'
+    templateUrl: './list-team.component.html'
 })
-export class ListRoleComponent extends ListComponent implements OnInit {
+export class ListTeamComponent extends ListComponent implements OnInit {
 
-    roles: Role[];
+    teams: Team[];
     allColumns = ['Checkbox', 'Name', 'Description', 'Actions'];
     displayedColumns = ['Checkbox', 'Name', 'Description', 'Actions'];
-    dataSource: MatTableDataSource<Role>;
+    dataSource: MatTableDataSource<Team>;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
     constructor(
         private router: Router,
-        private roleService: RoleService,
+        private teamService: TeamService,
         private toastService: ToastrService,
         protected dialog: MatDialog) {
             super(dialog);
@@ -36,7 +36,7 @@ export class ListRoleComponent extends ListComponent implements OnInit {
 
     ngOnInit() {
         this.dialog.afterAllClosed.subscribe(() => {
-            this.getRoles();
+            this.getTeams();
         });
     };
 
@@ -46,60 +46,60 @@ export class ListRoleComponent extends ListComponent implements OnInit {
         this.dataSource.filter = filterValue;
     }
 
-    getRoles() {
-        this.roleService.getRoles()
+    getTeams() {
+        this.teamService.getTeams()
             .subscribe(data => {
-                this.roles = data;
+                this.teams = data;
                 this.dataSource = new MatTableDataSource(data);
                 this.dataSource.paginator = this.paginator;
                 this.dataSource.sort = this.sort;
             });
     }
 
-    public addRole(): Observable<boolean> {
-        let dialogRef: MatDialogRef<AddRoleComponent>;
-        dialogRef = this.dialog.open(AddRoleComponent, {
+    public addTeam(): Observable<boolean> {
+        let dialogRef: MatDialogRef<AddTeamComponent>;
+        dialogRef = this.dialog.open(AddTeamComponent, {
             width: '600px',
             height: '320px',
         });
         return dialogRef.afterClosed();
     }
 
-    public editRole(id: string): Observable<boolean> {
-        let dialogRef: MatDialogRef<EditRoleComponent>;
-        dialogRef = this.dialog.open(EditRoleComponent, {
+    public editTeam(id: string): Observable<boolean> {
+        let dialogRef: MatDialogRef<EditTeamComponent>;
+        dialogRef = this.dialog.open(EditTeamComponent, {
             data: id,
             width: '400px',
         });
         return dialogRef.afterClosed();
     }
 
-    onDeleteRole(role: Role) {
+    onDeleteTeam(team: Team) {
         let dialogRef: MatDialogRef<ConfirmDeleteComponent>;
         dialogRef = this.dialog.open(ConfirmDeleteComponent, {
-            data: `Are you sure you want to delete user ${role.roleName}?`
+            data: `Are you sure you want to delete user ${team.teamName}?`
         });
         dialogRef.afterClosed().subscribe((ok: boolean) => {
             if (ok) {
-                this.deleteRole(role);
+                this.deleteTeam(team);
             }
         });
     }
 
-    deleteRole(role: Role): void {
-        this.roleService.deleteRole(role)
+    deleteTeam(team: Team): void {
+        this.teamService.deleteTeam(team)
             .subscribe(data => {
-                this.roles = this.roles.filter(u => u !== role);
-                this.toastService.success(`Role ${role.roleName} deleted`);
-                this.getRoles();
+                this.teams = this.teams.filter(u => u !== team);
+                this.toastService.success(`Team ${team.teamName} deleted`);
+                this.getTeams();
             });
     };
 
     toggleSelection($event) {
         if($event.checked) {
-            this.roles.forEach(role => role.checked = true);
+            this.teams.forEach(team => team.checked = true);
         } else {
-            this.roles.forEach(role => role.checked = false);
+            this.teams.forEach(team => team.checked = false);
         }
     }
 

@@ -90,6 +90,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			userToUpdate.setAddress(user.getAddress());
 			userToUpdate.setActive(user.isActive());
 			userToUpdate.setRoles(user.getRoles());
+			userToUpdate.setTeams(user.getTeams());
 			user = repository.save(userToUpdate);
 		}
 		return user;

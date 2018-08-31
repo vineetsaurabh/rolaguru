@@ -104,6 +104,12 @@ import { RoleService } from './role/role.service';
 import { AddRoleComponent } from './role/add-role.component';
 import { ListRoleComponent } from './role/list-role.component';
 import { EditRoleComponent } from './role/edit-role.component';
+import { AssignTeamComponent } from './user/assign-team.component';
+import { TeamService } from './team/team.service';
+import { AddTeamComponent } from './team/add-team.component';
+import { ListTeamComponent } from './team/list-team.component';
+import { EditTeamComponent } from './team/edit-team.component';
+
 
 @NgModule({
     declarations: [
@@ -138,6 +144,10 @@ import { EditRoleComponent } from './role/edit-role.component';
         AddRoleComponent,
         EditRoleComponent,
         ListRoleComponent,
+        AssignTeamComponent,
+        AddTeamComponent,
+        EditTeamComponent,
+        ListTeamComponent,
     ],
     imports: [
         BrowserModule,
@@ -200,6 +210,7 @@ import { EditRoleComponent } from './role/edit-role.component';
         ReportService,
         TokenStorage,
         RoleService,
+        TeamService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,

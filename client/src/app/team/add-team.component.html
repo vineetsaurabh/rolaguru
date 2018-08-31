@@ -1,0 +1,20 @@
+<div class="col-md-10 container">
+    <h2 class="text-center" class="add-item">Add Team</h2>
+    <form #teamForm="ngForm" (ngSubmit)="createTeam(teamForm)" ngNativeValidate>
+        <div class="form-group">
+            <mat-form-field>
+                <input matInput required [(ngModel)]="team.teamName" name="name" id="name" #name="ngModel" placeholder="Name">
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field>
+                <input matInput required [(ngModel)]="team.description" name="description" id="description" #firstName="ngModel" placeholder="Description">
+            </mat-form-field>
+        </div>
+        <div class="text-center">
+            <button mat-raised-button color="primary" [disabled]="!teamForm.valid">
+                Submit
+            </button>
+        </div>
+    </form>
+</div>

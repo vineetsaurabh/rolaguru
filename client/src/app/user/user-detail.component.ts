@@ -28,6 +28,7 @@ export class UserDetailComponent implements OnInit {
         active: false,
         checked: false,
         roles: [],
+        teams: [],
     };
     loggedUserId: string;
     password: string;

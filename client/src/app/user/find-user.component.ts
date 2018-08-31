@@ -25,6 +25,7 @@ export class FindUserComponent {
         active: false,
         checked: false,
         roles: [],
+        teams: [],
     };
 
     constructor(

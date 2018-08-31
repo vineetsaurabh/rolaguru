@@ -53,6 +53,10 @@ public class User {
 	@ManyToMany
 	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "userid", referencedColumnName = "userid"), inverseJoinColumns = @JoinColumn(name = "roleid", referencedColumnName = "roleid"))
 	private Collection<Role> roles;
+	
+	@ManyToMany
+	@JoinTable(name = "users_teams", joinColumns = @JoinColumn(name = "userid", referencedColumnName = "userid"), inverseJoinColumns = @JoinColumn(name = "teamid", referencedColumnName = "teamid"))
+	private Collection<Team> teams;
 
 	public int getUserid() {
 		return userid;
@@ -148,6 +152,14 @@ public class User {
 
 	public void setRoles(Collection<Role> roles) {
 		this.roles = roles;
+	}
+
+	public Collection<Team> getTeams() {
+		return teams;
+	}
+
+	public void setTeams(Collection<Team> teams) {
+		this.teams = teams;
 	}
 
 	@Override
