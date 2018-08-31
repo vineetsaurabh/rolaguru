@@ -49,6 +49,9 @@ public class FlexError {
 
 	@Column(nullable = false)
 	private String operation;
+	
+	@Column
+	private String priority;
 
 	@Column
 	private int severity = 1;
@@ -140,6 +143,14 @@ public class FlexError {
 
 	public void setOperation(String operation) {
 		this.operation = operation;
+	}
+
+	public String getPriority() {
+		return priority;
+	}
+
+	public void setPriority(String priority) {
+		this.priority = priority;
 	}
 
 	public void setSeverity(int severity) {

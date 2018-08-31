@@ -17,6 +17,8 @@ public interface FlexErrorRepository extends JpaRepository<FlexError, Long> {
 	List<FlexError> findAll();
 
 	FlexError findByErrid(int errid);
+	
+	List<FlexError> findByPriority(String priority);
 
 	@Override
 	FlexError save(FlexError flexError);

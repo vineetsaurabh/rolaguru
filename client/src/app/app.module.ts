@@ -109,6 +109,10 @@ import { TeamService } from './team/team.service';
 import { AddTeamComponent } from './team/add-team.component';
 import { ListTeamComponent } from './team/list-team.component';
 import { EditTeamComponent } from './team/edit-team.component';
+import { AddPriorityTypeComponent } from './priority-type/add-priority-type.component';
+import { ListPriorityTypeComponent} from './priority-type/list-priority-type.component';
+import { EditPriorityTypeComponent } from './priority-type/edit-priority-type.component';
+import { PriorityTypeService } from './priority-type/priority-type.service';
 
 
 @NgModule({
@@ -148,6 +152,7 @@ import { EditTeamComponent } from './team/edit-team.component';
         AddTeamComponent,
         EditTeamComponent,
         ListTeamComponent,
+		AddPriorityTypeComponent, ListPriorityTypeComponent, EditPriorityTypeComponent,
     ],
     imports: [
         BrowserModule,
@@ -211,6 +216,7 @@ import { EditTeamComponent } from './team/edit-team.component';
         TokenStorage,
         RoleService,
         TeamService,
+		PriorityTypeService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,

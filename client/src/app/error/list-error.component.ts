@@ -26,8 +26,8 @@ export class ListErrorComponent extends ListComponent implements OnInit {
 
     errors: Error[];
     subscribedErrorIds: string[];
-    allColumns = ['SolnAvail', 'Checkbox', 'Error Code', 'Description', 'Module', 'Operation', 'Severity', 'Frequency', 'Attachments', 'Actions'];
-    displayedColumns = ['SolnAvail', 'Checkbox', 'Error Code', 'Description', 'Module', 'Operation', 'Severity', 'Frequency', 'Actions'];
+    allColumns = ['SolnAvail', 'Checkbox', 'Error Code', 'Description', 'Module', 'Operation', 'Priority', 'Severity', 'Frequency', 'Attachments', 'Actions'];
+    displayedColumns = ['SolnAvail', 'Checkbox', 'Error Code', 'Description', 'Module', 'Operation', 'Priority', 'Severity', 'Frequency', 'Actions'];
     dataSource: MatTableDataSource<any>;
     errorDomainId: string;
     errorDomainName: string;

@@ -1,0 +1,26 @@
+<div class="container">
+    <h2 class="text-center" class="edit-item">Edit Priority Type</h2>
+    <form #editPriorityTypeForm="ngForm" (ngSubmit)="updatePriorityType(editPriorityTypeForm)" ngNativeValidate>
+        <div class="form-group">
+            <mat-form-field>
+                <input matInput required [(ngModel)]="priorityType.priorityTypeName" name="name" id="name" #firstName="ngModel" placeholder="Name">
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field>
+                <input matInput [(ngModel)]="priorityType.description" name="description" id="description" placeholder="Description">
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-checkbox matInput [(ngModel)]="priorityType.defaultPriorityType" color="primary" name="defaultPriorityType" id="defaultPriorityType">
+                <span>Mark it to make default</span>
+            </mat-checkbox>
+        </div>
+        <div class="text-center mb-4">
+            <button mat-raised-button [disabled]="!editPriorityTypeForm.valid">
+                <i class="fa fa-save"></i>
+                Save
+            </button>
+        </div>
+    </form>
+</div>
