@@ -1,6 +1,6 @@
 package com.rolaface.services;
 
-import java.util.List;
+import java.util.SortedSet;
 
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ public interface PriorityTypeService {
 
 	PriorityType findById(int id);
 
-	List<PriorityType> findAll();
+	SortedSet<PriorityType> findAll();
 
 	PriorityType update(PriorityType priorityType);
 

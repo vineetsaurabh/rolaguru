@@ -17,10 +17,14 @@ export class EditPriorityTypeComponent implements OnInit {
         priorityTypeName: '',
         description: '',
         defaultPriorityType: false,
+        sla: '',
+        escalateTo: '',
+        timeToResolve: 0,
         checked: false,
     };
     id: string;
     priorityTypeForm: FormGroup;
+    defaultPriority: boolean;
 
     constructor(
         private priorityTypeService: PriorityTypeService,
@@ -29,6 +33,7 @@ export class EditPriorityTypeComponent implements OnInit {
         public dialogRef: MatDialogRef<EditPriorityTypeComponent>,
         @Inject(MAT_DIALOG_DATA) public data: PriorityType) {
         this.priorityType = this.data;
+        this.defaultPriority = this.data.defaultPriorityType;
     }
 
     ngOnInit() {

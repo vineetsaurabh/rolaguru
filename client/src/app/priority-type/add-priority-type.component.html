@@ -1,7 +1,7 @@
 <div class="col-md-10 container">
     <h2 class="text-center" class="add-item">Add Ticket Type</h2>
     <form #priorityTypeForm="ngForm" (ngSubmit)="createpriorityType(priorityTypeForm)" ngNativeValidate>
-		<div class="form-group">
+        <div class="form-group">
             <mat-form-field>
                 <input matInput required [(ngModel)]="priorityType.priorityTypeName" name="priorityTypeName" id="priorityTypeName" #priorityTypeName="ngModel"
                     placeholder="Priority Type Name">
@@ -9,7 +9,25 @@
         </div>
         <div class="form-group">
             <mat-form-field>
-                <input matInput required [(ngModel)]="priorityType.description" name="description" id="description" #firstName="ngModel" placeholder="Description">
+                <input matInput required [(ngModel)]="priorityType.description" name="description" id="description" #firstName="ngModel"
+                    placeholder="Description">
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field>
+                <input matInput required [(ngModel)]="priorityType.sla" name="sla" id="priorityTypeName" #sla="ngModel" placeholder="SLA">
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field>
+                <input matInput email type="email" [(ngModel)]="priorityType.escalateTo" name="escalateTo" id="escalateTo" #escalateTo="ngModel"
+                    placeholder="Escalate To (email)">
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field>
+                <input matInput [(ngModel)]="priorityType.timeToResolve" name="timeToResolve" id="timeToResolve" #timeToResolve="ngModel"
+                    placeholder="Resolve Time (in days)">
             </mat-form-field>
         </div>
         <div class="text-center">

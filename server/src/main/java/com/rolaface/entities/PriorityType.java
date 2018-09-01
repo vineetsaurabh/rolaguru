@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "priority_types")
-public class PriorityType {
+public class PriorityType implements Comparable<PriorityType> {
 
 	@Id
 	@Column
@@ -24,6 +24,15 @@ public class PriorityType {
 
 	@Column(name = "default_priority_type", columnDefinition = "BOOLEAN DEFAULT false")
 	private boolean defaultPriorityType;
+	
+	@Column
+	private String sla;
+
+	@Column
+	private String escalateTo;
+
+	@Column
+	private int timeToResolve;
 
 	public int getPriorityTypeId() {
 		return priorityTypeId;
@@ -55,6 +64,35 @@ public class PriorityType {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public String getSla() {
+		return sla;
+	}
+
+	public void setSla(String sla) {
+		this.sla = sla;
+	}
+
+	public String getEscalateTo() {
+		return escalateTo;
+	}
+
+	public void setEscalateTo(String escalateTo) {
+		this.escalateTo = escalateTo;
+	}
+
+	public int getTimeToResolve() {
+		return timeToResolve;
+	}
+
+	public void setTimeToResolve(int timeToResolve) {
+		this.timeToResolve = timeToResolve;
+	}
+	
+	@Override
+	public int compareTo(PriorityType p) {
+		return this.timeToResolve - p.timeToResolve;
 	}
 
 }
