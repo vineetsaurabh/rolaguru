@@ -1,6 +1,7 @@
 package com.rolaface.controllers;
 
 import java.util.List;
+import java.util.SortedSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,7 +35,7 @@ public class PriorityTypeController {
 	}
 
 	@GetMapping
-	public List<PriorityType> findAll() {
+	public SortedSet<PriorityType> findAll() {
 		return priorityTypeService.findAll();
 	}
 

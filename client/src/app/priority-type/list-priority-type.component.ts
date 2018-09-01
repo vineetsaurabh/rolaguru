@@ -19,8 +19,8 @@ import { ListComponent } from '../common/list.component';
 export class ListPriorityTypeComponent extends ListComponent implements OnInit {
 
     priorityTypes: PriorityType[];
-    allColumns = ['Checkbox', 'Name', 'Description', 'Default', 'Actions'];
-    displayedColumns = ['Checkbox', 'Name', 'Description', 'Default', 'Actions'];
+    allColumns = ['Checkbox', 'Name', 'Description', 'Default',  'SLA', 'Escalate To', 'Resolve Time', 'Actions',];
+    displayedColumns = ['Checkbox', 'Name', 'Description', 'Default', 'SLA', 'Escalate To', 'Actions'];
     dataSource: MatTableDataSource<PriorityType>;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;

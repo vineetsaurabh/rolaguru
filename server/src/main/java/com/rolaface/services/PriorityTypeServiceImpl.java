@@ -1,6 +1,7 @@
 package com.rolaface.services;
 
-import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.transaction.Transactional;
 
@@ -27,8 +28,8 @@ public class PriorityTypeServiceImpl implements PriorityTypeService {
 	}
 
 	@Override
-	public List<PriorityType> findAll() {
-		return repository.findAll();
+	public SortedSet<PriorityType> findAll() {
+		return new TreeSet<PriorityType>(repository.findAll());
 	}
 
 	@Transactional
@@ -39,7 +40,10 @@ public class PriorityTypeServiceImpl implements PriorityTypeService {
 		if (priorityTypeToUpdate != null) {
 			priorityTypeToUpdate.setPriorityTypeName(priorityType.getPriorityTypeName());
 			priorityTypeToUpdate.setDescription(priorityType.getDescription());
-			if (!priorityTypeToUpdate.isDefaultPriorityType()) {
+			priorityTypeToUpdate.setSla(priorityType.getSla());
+			priorityTypeToUpdate.setEscalateTo(priorityType.getEscalateTo());
+			priorityTypeToUpdate.setTimeToResolve(priorityType.getTimeToResolve());
+			if (priorityType.isDefaultPriorityType() && !priorityTypeToUpdate.isDefaultPriorityType()) {
 				defaultPriorityType = repository.findDefaultPriorityType();
 				if (defaultPriorityType != null) {
 					defaultPriorityType.setDefaultPriorityType(Boolean.FALSE);
