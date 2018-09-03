@@ -31,6 +31,9 @@ export class ReadMoreComponent implements OnChanges {
     }
 
     ngOnChanges() {
+        if (this.text == null) {
+            return;
+        }
         this.rmTextShort = this.text;
         this.rmTextFull = this.text;
         this.inputWords = this.text.split(' ');
