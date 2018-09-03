@@ -29,6 +29,7 @@ export class ErrorDetailComponent implements OnInit {
         errcode: '',
         description: '',
         operation: '',
+        priority: '',
         severity: 0,
         frequency: 0,
         causes: new Set<Cause>(),
