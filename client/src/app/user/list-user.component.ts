@@ -63,6 +63,8 @@ export class ListUserComponent extends ListComponent implements OnInit {
         dialogRef = this.dialog.open(AddUserComponent, {
             width: '500px',
             height: '600px',
+            disableClose: true,
+            autoFocus: false,
         });
         return dialogRef.afterClosed();
     }
@@ -72,6 +74,8 @@ export class ListUserComponent extends ListComponent implements OnInit {
         dialogRef = this.dialog.open(EditUserComponent, {
             data: id,
             width: '400px',
+            disableClose: true,
+            autoFocus: false,
         });
         return dialogRef.afterClosed();
     }
@@ -199,6 +203,8 @@ export class ListUserComponent extends ListComponent implements OnInit {
             data: this.selectedUsers,
             width: '800px',
             height: '600px',
+            disableClose: true,
+            autoFocus: false,
         });
         return dialogRef.afterClosed();
     }
@@ -209,6 +215,8 @@ export class ListUserComponent extends ListComponent implements OnInit {
             data: this.selectedUsers,
             width: '800px',
             height: '600px',
+            disableClose: true,
+            autoFocus: false,
         });
         return dialogRef.afterClosed();
     }
