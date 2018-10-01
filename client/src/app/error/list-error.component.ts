@@ -90,6 +90,8 @@ export class ListErrorComponent extends ListComponent implements OnInit {
             },
             width: '800px',
             height: '620px',
+            disableClose: true,
+            autoFocus: false,
         });
         return dialogRef.afterClosed();
     }
@@ -100,6 +102,8 @@ export class ListErrorComponent extends ListComponent implements OnInit {
             data: id,
             width: '800px',
             height: '620px',
+            disableClose: true,
+            autoFocus: false,
         });
         return dialogRef.afterClosed();
     }

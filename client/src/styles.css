@@ -165,6 +165,20 @@ mat-form-field {
     background-color: azure;
     color: darkblue;
 }
+.close {
+    background: transparent;
+    border: none;
+    height: 24px;
+}
+.close:not([disabled]):hover {
+    background: linear-gradient(lightpink, plum, lightpink)!important;
+    cursor: pointer;
+    transform: scale(1.4);
+    z-index: 8;
+}
+.fa-remove {
+    color: red;
+}
 
 /* Print */
 @media print {

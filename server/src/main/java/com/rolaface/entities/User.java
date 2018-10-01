@@ -13,6 +13,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -26,6 +29,7 @@ public class User {
 	private String username;
 
 	@Column(nullable = false)
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private String password;
 
 	@Column(nullable = false)

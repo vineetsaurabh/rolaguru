@@ -61,6 +61,8 @@ export class ListPriorityTypeComponent extends ListComponent implements OnInit {
         dialogRef = this.dialog.open(AddPriorityTypeComponent, {
             width: '600px',
             height: '320px',
+            disableClose: true,
+            autoFocus: false,
         });
         return dialogRef.afterClosed();
     }
@@ -70,6 +72,8 @@ export class ListPriorityTypeComponent extends ListComponent implements OnInit {
         dialogRef = this.dialog.open(EditPriorityTypeComponent, {
             data: id,
             width: '400px',
+            disableClose: true,
+            autoFocus: false,
         });
         return dialogRef.afterClosed();
     }
