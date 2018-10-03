@@ -10,16 +10,10 @@
         </div>
     </div>
     <form #editErrorForm="ngForm" (ngSubmit)="updateError(editErrorForm)" ngNativeValidate>
-
-        <!--<div class="form-group">
-            <mat-form-field>
-                <input required matInput [(ngModel)]="error.module" name="module" id="module" placeholder="Module">
-            </mat-form-field>
-        </div> -->
         <div fxLayout="row">
             <div class="form-group">
                 <mat-form-field>
-                    <mat-select placeholder="Choose Module" [(ngModel)]="error.module" name="module" id="type">
+                    <mat-select placeholder="Choose Module" [(ngModel)]="error.module" name="module" id="module">
                         <mat-option></mat-option>
                         <mat-option *ngFor="let module of error.domain.modules" [value]="module">
                             {{module.moduleName}}
@@ -34,17 +28,14 @@
                 </mat-form-field>
             </div>
         </div>
-
         <div class="form-group">
             <mat-form-field>
                 <input matInput disabled [(ngModel)]="error.errcode" name="errcode" id="errCode" #errCode="ngModel" placeholder="Error Code">
             </mat-form-field>
         </div>
-
         <div class="form-group">
             <app-ngx-editor minHeight="50px" [(ngModel)]="error.description" name="description"></app-ngx-editor>
         </div>
-
         <div fxLayout="row">
             <div class="form-group">
                 <mat-form-field>
@@ -67,7 +58,6 @@
                 </mat-radio-group>
             </div>
         </div>
-
         <div class="text-center mb-4">
             <button mat-raised-button [disabled]="!editErrorForm.valid">
                 <i class="fa fa-save"></i>
