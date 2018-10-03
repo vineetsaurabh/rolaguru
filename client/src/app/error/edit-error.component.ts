@@ -46,6 +46,11 @@ export class EditErrorComponent implements OnInit {
         public dialogRef: MatDialogRef<EditErrorComponent>,
         @Inject(MAT_DIALOG_DATA) public data: Error) {
             this.error = this.data;
+            this.error.domain.modules.forEach(m => {
+                if(m.moduleId === this.error.module.moduleId) {
+                    this.error.module = m;
+                }
+            });
     }
 
     ngOnInit() {
