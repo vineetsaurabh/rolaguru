@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams, HttpEvent, HttpRequest } from '@an
 import { Observable } from 'rxjs/Observable';
 import { User } from './user.model';
 import { environment } from '../../environments/environment';
+import { UserNameGroup } from './user-name-group.model';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -86,6 +87,10 @@ export class UserService {
 
     public assignTeams(users: User[]) {
         return this.http.put<User[]>(this.userUrl + "/assignteams", users, httpOptions);
+    }
+
+    public getAssignee() {
+        return this.http.get<UserNameGroup[]>(this.userUrl + "/getassignees");
     }
 
 }

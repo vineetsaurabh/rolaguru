@@ -1,11 +1,13 @@
 import { Cause } from "../cause/cause.model";
 import { Observable } from "rxjs/Observable";
 import { User } from "../user/user.model";
+import { Module } from "../module/module.model";
+import { Domain } from "../domain/domain.model";
 
 export class Error {
     errid: string;
-    domain: string;
-    module: string;
+    domain: Domain;
+    module: Module;
     errcode: string;
     description: string;
     operation: string;

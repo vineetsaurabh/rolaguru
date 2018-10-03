@@ -15,6 +15,8 @@ import { AddCauseComponent } from '../cause/add-cause.component';
 import { Cause } from '../cause/cause.model';
 import { CauseRating } from '../cause/cause-rating.model';
 import { Subscription } from 'rxjs/Subscription';
+import { Domain } from '../domain/domain.model';
+import { Module } from '../module/module.model';
 
 
 @Component({
@@ -24,8 +26,8 @@ export class ErrorDetailComponent implements OnInit {
 
     public error: Error = {
         errid: '',
-        domain: '',
-        module: '',
+        domain: new Domain(),
+        module: new Module(),
         errcode: '',
         description: '',
         operation: '',

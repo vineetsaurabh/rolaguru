@@ -1,0 +1,51 @@
+<div class="col-md-10 container">
+    <div fxLayout="row">
+        <div class="fill-remaining-space"></div>
+        <h2 class="text-center" class="add-item" fxLayoutAlign="center">Add Module</h2>
+        <div class="fill-remaining-space"></div>
+        <div fxLayoutAlign="end center">
+            <button class="close" mat-dialog-close>
+                <i class="fa fa-remove" matTooltip="Close"></i>
+            </button>
+        </div>
+    </div>
+    <form #moduleForm="ngForm" (ngSubmit)="createModule(moduleForm)" ngNativeValidate>
+        <div class="form-group">
+            <mat-form-field>
+                <mat-select required placeholder="Choose Domain" [(ngModel)]="module.domain" name="domain" id="type">
+                    <mat-option *ngFor="let domain of domains" [value]="domain">
+                        {{domain.domainName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field>
+                <input matInput required [(ngModel)]="module.moduleName" name="name" id="name" #name="ngModel" placeholder="Name">
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field>
+                <textarea matTextareaAutosize matInput required [(ngModel)]="module.description" name="description" id="description" #firstName="ngModel" placeholder="Description">
+                </textarea>
+            </mat-form-field>
+        </div>
+        <div class="form-group" [formGroup]="userNameForm">
+            <mat-form-field>
+                <input matInput placeholder="Owner" formControlName="userNameGroup" [matAutocomplete]="autoGroup">
+                <mat-autocomplete #autoGroup="matAutocomplete" [displayWith]="displayFn" (optionSelected)='setOwner($event.option.value)'>
+                    <mat-optgroup *ngFor="let group of userNameGroupOptions | async" [label]="group.letter">
+                        <mat-option *ngFor="let user of group.assignees" [value]="user">
+                            {{user.firstName}} {{user.lastName}}
+                        </mat-option>
+                    </mat-optgroup>
+                </mat-autocomplete>
+            </mat-form-field>
+        </div>
+        <div class="text-center">
+            <button mat-raised-button color="primary" [disabled]="!moduleForm.valid">
+                Submit
+            </button>
+        </div>
+    </form>
+</div>

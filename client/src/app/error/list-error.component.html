@@ -96,7 +96,7 @@
 
             <ng-container matColumnDef="Module">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Module </mat-header-cell>
-                <mat-cell *matCellDef="let error"> {{error.module}} </mat-cell>
+                <mat-cell *matCellDef="let error"> {{error.module.moduleName}} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="Operation">

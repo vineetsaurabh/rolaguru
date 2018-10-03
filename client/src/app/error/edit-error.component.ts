@@ -9,6 +9,8 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatRadioChange } from '@angular/material
 import { Cause } from '../cause/cause.model';
 import { PriorityTypeService } from '../priority-type/priority-type.service';
 import { PriorityType } from '../priority-type/priority-type.model';
+import { Module } from '../module/module.model';
+import { Domain } from '../domain/domain.model';
 
 @Injectable()
 @Component({
@@ -18,10 +20,10 @@ export class EditErrorComponent implements OnInit {
 
     public error: Error = {
         errid: '',
-        domain: '',
+        domain: new Domain(),
         errcode: '',
         description: '',
-        module: '',
+        module: new Module(),
         operation: '',
 		priority: '',
         severity: 0,
@@ -34,7 +36,6 @@ export class EditErrorComponent implements OnInit {
         user: null
     };
     errorForm: FormGroup;
-    editDescription: string = '';
     priorityTypes: PriorityType[];
 
     constructor(
@@ -44,17 +45,13 @@ export class EditErrorComponent implements OnInit {
         private priorityTypeService: PriorityTypeService,
         public dialogRef: MatDialogRef<EditErrorComponent>,
         @Inject(MAT_DIALOG_DATA) public data: Error) {
-        this.error = this.data;
-        this.editDescription = this.error.description;
+            this.error = this.data;
     }
 
     ngOnInit() {
         this.errorForm = this.fb.group({
-            id: '',
             errCode: ['', [Validators.required]],
-            description: ['', [Validators.required]],
-            module: ['', [Validators.required]],
-            operation: ['', [Validators.required]]
+            description: ['', [Validators.required]]
         });
 		this.priorityTypeService.getPriorityTypes()
             .subscribe(data => {
@@ -63,7 +60,6 @@ export class EditErrorComponent implements OnInit {
     }
 
     updateError(errorForm: NgForm) {
-        this.error.description = this.editDescription;
         this.errorService.updateError(this.error)
             .subscribe(res => {
                 this.toastService.success(`Error ${this.error.errcode} updated`);

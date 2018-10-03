@@ -47,8 +47,8 @@ export class ListErrorComponent extends ListComponent implements OnInit {
 
     ngOnInit() {
         this.route.queryParams.subscribe(params => {
-            this.errorDomainId = params.domainId;
-            this.errorDomainName = params.domainName;
+            this.errorDomainId = params.domainId,
+            this.errorDomainName = params.domainName
         });
         this.dialog.afterAllClosed.subscribe(() => {
             this.getAllErrorsOfDomian();
@@ -89,7 +89,7 @@ export class ListErrorComponent extends ListComponent implements OnInit {
                 domainName: this.errorDomainName
             },
             width: '800px',
-            height: '620px',
+            height: '600px',
             disableClose: true,
             autoFocus: false,
         });

@@ -1,17 +1,38 @@
 <div class="container">
-    <h2 class="text-center" class="edit-item">Edit Error</h2>
+    <div fxLayout="row">
+        <div class="fill-remaining-space"></div>
+        <h2 class="text-center" class="edit-item" fxLayoutAlign="center">Edit {{error.domain?.domainName}} Error</h2>
+        <div class="fill-remaining-space"></div>
+        <div fxLayoutAlign="end center">
+            <button class="close" mat-dialog-close>
+                <i class="fa fa-remove" matTooltip="Close"></i>
+            </button>
+        </div>
+    </div>
     <form #editErrorForm="ngForm" (ngSubmit)="updateError(editErrorForm)" ngNativeValidate>
 
-        <div class="form-group">
+        <!--<div class="form-group">
             <mat-form-field>
                 <input required matInput [(ngModel)]="error.module" name="module" id="module" placeholder="Module">
             </mat-form-field>
-        </div>
-
-        <div class="form-group">
-            <mat-form-field>
-                <input matInput required [(ngModel)]="error.operation" name="operation" id="operation" placeholder="Operation">
-            </mat-form-field>
+        </div> -->
+        <div fxLayout="row">
+            <div class="form-group">
+                <mat-form-field>
+                    <mat-select placeholder="Choose Module" [(ngModel)]="error.module" name="module" id="type">
+                        <mat-option></mat-option>
+                        <mat-option *ngFor="let module of error.domain.modules" [value]="module">
+                            {{module.moduleName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="fill-remaining-space"></div>
+            <div class="form-group">
+                <mat-form-field>
+                    <input matInput required [(ngModel)]="error.operation" name="operation" id="operation" placeholder="Operation">
+                </mat-form-field>
+            </div>
         </div>
 
         <div class="form-group">
@@ -21,28 +42,30 @@
         </div>
 
         <div class="form-group">
-            <app-ngx-editor minHeight="50px" [(ngModel)]="editDescription" name="description"></app-ngx-editor>
-        </div>
-		
-		<div class="form-group">
-            <mat-form-field>
-                <mat-select placeholder="Choose Priority" [(ngModel)]="error.priority" name="priority" id="priority">
-                    <mat-option *ngFor="let priorityType of priorityTypes" [value]="priorityType.priorityTypeName">
-                        {{priorityType.priorityTypeName}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
+            <app-ngx-editor minHeight="50px" [(ngModel)]="error.description" name="description"></app-ngx-editor>
         </div>
 
-        <div class="form-group" fxLayoutGap="10px">
-            <label>Severity: </label>
-            <mat-radio-group [(ngModel)]="error.severity" name="severity" id="severity" fxLayoutGap="25px">
-                <mat-radio-button color="primary" [value]="1">1</mat-radio-button>
-                <mat-radio-button color="primary" [value]="2">2</mat-radio-button>
-                <mat-radio-button color="primary" [value]="3">3</mat-radio-button>
-                <mat-radio-button color="primary" [value]="4">4</mat-radio-button>
-                <mat-radio-button color="primary" [value]="5">5</mat-radio-button>
-            </mat-radio-group>
+        <div fxLayout="row">
+            <div class="form-group">
+                <mat-form-field>
+                    <mat-select placeholder="Choose Priority" [(ngModel)]="error.priority" name="priority" id="priority">
+                        <mat-option *ngFor="let priorityType of priorityTypes" [value]="priorityType.priorityTypeName">
+                            {{priorityType.priorityTypeName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="fill-remaining-space"></div>
+            <div class="form-group" fxLayoutGap="10px" fxLayoutAlign="end center">
+                <label>Severity: </label>
+                <mat-radio-group [(ngModel)]="error.severity" name="severity" id="severity" fxLayoutGap="25px">
+                    <mat-radio-button color="primary" [value]="1">1</mat-radio-button>
+                    <mat-radio-button color="primary" [value]="2">2</mat-radio-button>
+                    <mat-radio-button color="primary" [value]="3">3</mat-radio-button>
+                    <mat-radio-button color="primary" [value]="4">4</mat-radio-button>
+                    <mat-radio-button color="primary" [value]="5">5</mat-radio-button>
+                </mat-radio-group>
+            </div>
         </div>
 
         <div class="text-center mb-4">

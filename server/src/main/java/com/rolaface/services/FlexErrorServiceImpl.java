@@ -49,6 +49,7 @@ public class FlexErrorServiceImpl implements FlexErrorService {
 		if (flexErrorToUpdate != null) {
 			flexErrorToUpdate.setErrcode(flexError.getErrcode());
 			flexErrorToUpdate.setDescription(flexError.getDescription());
+			flexErrorToUpdate.setDomain(flexError.getDomain());
 			flexErrorToUpdate.setModule(flexError.getModule());
 			flexErrorToUpdate.setOperation(flexError.getOperation());
 			flexErrorToUpdate.setPriority(flexError.getPriority());

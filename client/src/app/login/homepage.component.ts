@@ -1,61 +1,58 @@
 import { Chart } from 'chart.js';
 import { Component, AfterViewInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
-import { ErrorDomain } from '../error/error-domain.model';
 import { ErrorService } from '../error/error.service';
-import { map } from 'rxjs/operator/map';
 import 'chart.piecelabel.js';
-import { RolaguruUtils } from '../util/rolaguru.util';
+import { Domain } from '../domain/domain.model';
+import { DomainService } from '../domain/domain.service';
 
 @Component({
     selector: 'dashboard',
     templateUrl: './homepage.component.html'
 })
-export class HomepageComponent implements AfterViewInit {
+export class HomepageComponent {
 
-    errorDomains: ErrorDomain[] = [
-        { name: 'Flexcube', id: 'fx', color: 'lightsteelblue' },
-        { name: 'Database', id: 'db', color: 'lavender' },
-        { name: 'Acumen', id: 'am', color: 'lightsteelblue' },
-        { name: 'Mobile App', id: 'ma', color: 'lavender' },
-        { name: 'ERP', id: 'er', color: 'lightsteelblue' },
-        { name: 'FCDB', id: 'fc', color: 'lavender' },
-    ];
+    domains: Domain[];
 
     constructor(private router: Router,
+        private domainService: DomainService,
         private errorService: ErrorService) { }
 
-    ngAfterViewInit() {
-        this.errorDomains.forEach(domain => {
-            this.getErrorsCountDomainWise(domain);
-        });
+    ngOnInit() {
+        this.domainService.getDomains()
+            .subscribe(data => {
+                this.domains = data;
+                this.domains.forEach(domain => {
+                    this.getErrorsCountDomainWise(domain);
+                });
+            });
     }
 
     navigate(domain) {
         let params: NavigationExtras = {
             queryParams: {
-                domainId: domain.id,
-                domainName: domain.name
+                domainId: domain.domainId,
+                domainName: domain.domainName
             }
         }
         this.router.navigate(['listErrors'], params);
     }
 
-    getErrorsCountDomainWise(errorDomain: ErrorDomain) {
+    getErrorsCountDomainWise(domain: Domain) {
 
-        this.errorService.getAllErrorsOfDomian(errorDomain.id)
+        this.errorService.getAllErrorsOfDomian(domain.domainId)
             .subscribe(data => {
 
                 const chartData = {};
                 data.map(e => {
-                    if (e.module in chartData) {
-                        chartData[e.module] = chartData[e.module] + 1;
+                    if (e.module.moduleName in chartData) {
+                        chartData[e.module.moduleName] = chartData[e.module.moduleName] + 1;
                     } else {
-                        chartData[e.module] = 1;
+                        chartData[e.module.moduleName] = 1;
                     }
                 });
 
-                const canvasDiv = document.getElementById(`error-count-${errorDomain.id}`);
+                const canvasDiv = document.getElementById(`error-count-${domain.domainId}`);
                 canvasDiv.innerHTML = "";
                 const canvas: any = document.createElement('canvas');
                 canvas.width = 200;
@@ -89,7 +86,7 @@ export class HomepageComponent implements AfterViewInit {
                             fontSize: 12,
                             fontStyle: 'bold',
                             fontColor: '#000000'
-                         }
+                        }
                     }
                 });
             });
