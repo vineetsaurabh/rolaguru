@@ -1,8 +1,11 @@
 package com.rolaface.controllers;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -26,6 +29,7 @@ import com.rolaface.entities.FlexErrorSubscribe;
 import com.rolaface.entities.ProfilePicture;
 import com.rolaface.entities.User;
 import com.rolaface.model.ContextUser;
+import com.rolaface.model.UserNameGroup;
 import com.rolaface.repositories.ProfilePictureRepository;
 import com.rolaface.services.EmailService;
 import com.rolaface.services.FlexErrorSubscribeService;
@@ -205,6 +209,33 @@ public class UserController {
 		for (User user : users) {
 			userService.update(user);
 		}
+	}
+	
+	@GetMapping(value = "/getassignees")
+	public List<UserNameGroup> getAssignees() {
+		List<User> users = userService.findAll();
+		Map<String, UserNameGroup> userNameGroups = new HashMap<>();
+		for (User user : users) {
+			String firstName = user.getFirstName();
+			String letter = String.valueOf(firstName.charAt(0));
+
+			UserNameGroup userNameGroup = userNameGroups.get(letter);
+			List<User> assignees = null;
+			if (userNameGroup == null) {
+				userNameGroup = new UserNameGroup();
+				userNameGroup.setLetter(letter);
+				assignees = new ArrayList<>();
+			} else {
+				assignees = userNameGroup.getAssignees();
+				if (assignees == null) {
+					assignees = new ArrayList<>();
+				}
+			}
+			assignees.add(user);
+			userNameGroup.setAssignees(assignees);
+			userNameGroups.put(letter, userNameGroup);
+		}
+		return new ArrayList<UserNameGroup>(userNameGroups.values());
 	}
 
 }

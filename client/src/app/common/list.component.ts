@@ -17,6 +17,7 @@ export class ListComponent {
         dialogRef = this.dialog.open(TableConfiguratorComponent, {
             data: { 'allColumns': this.allColumns, 'displayedColumns': this.displayedColumns },
             width: '200px',
+            maxHeight: '600px',
         });
         return dialogRef.afterClosed().subscribe(result => {
             if (result) {

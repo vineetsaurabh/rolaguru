@@ -2,11 +2,11 @@
     <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
         <div style="width:80%">
             <mat-grid-list cols="3" rowHeight="4:3" gutterSize="25">
-                <mat-grid-tile *ngFor="let domain of errorDomains" [style.background]="domain.color" (click)="navigate(domain)" class="error-domain">
+                <mat-grid-tile *ngFor="let domain of domains" (click)="navigate(domain)" class="error-domain">
                     <div style="text-align: center">
-                        <h3>{{ domain.name }}</h3>
+                        <h3>{{ domain.domainName }}</h3>
                         <div class="d-none d-sm-block">
-                            <div fxLayoutAlign="center" id="error-count-{{domain.id}}"></div>
+                            <div fxLayoutAlign="center" id="error-count-{{domain.domainId}}"></div>
                         </div>
                     </div>
                 </mat-grid-tile>

@@ -1,10 +1,10 @@
-import { ErrorDomain } from './../error/error-domain.model';
 import { Chart } from 'chart.js';
 import { Component, AfterViewInit, ChangeDetectorRef } from "@angular/core";
 import { ReportService } from "./report.service";
 import { ErrorService } from "../error/error.service";
-import { RolaguruUtils } from '../util/rolaguru.util';
 import { ChartExportComponent } from './chart-export.component';
+import { Domain } from '../domain/domain.model';
+import { DomainService } from "../domain/domain.service";
 
 @Component({
     templateUrl: './rca-report.component.html'
@@ -12,12 +12,21 @@ import { ChartExportComponent } from './chart-export.component';
 export class RcaReportComponent extends ChartExportComponent implements AfterViewInit {
 
     title: string = "RCA Report";
+    domains: Domain[] = [];
 
     constructor(
         private reportService: ReportService,
         private errorService: ErrorService,
+        private domainService: DomainService,
         private cdRef: ChangeDetectorRef) {
             super();
+    }
+
+    ngOnInit() {
+        this.domainService.getDomains()
+            .subscribe( data => {
+                this.domains = data;
+            });
     }
 
     ngAfterViewInit() {
@@ -32,10 +41,10 @@ export class RcaReportComponent extends ChartExportComponent implements AfterVie
             .subscribe(data => {
                 const chartData = {};
                 data.map(e => {
-                    if (e.domain in chartData) {
-                        chartData[e.domain] = chartData[e.domain] + 1;
+                    if (e.domain.domainName in chartData) {
+                        chartData[e.domain.domainName] = chartData[e.domain.domainName] + 1;
                     } else {
-                        chartData[e.domain] = 1;
+                        chartData[e.domain.domainName] = 1;
                     }
                 });
 
@@ -46,6 +55,7 @@ export class RcaReportComponent extends ChartExportComponent implements AfterVie
                 canvas.height = 400;
                 canvasDiv.appendChild(canvas);
                 const ctx = canvas.getContext('2d');
+                const self = this;
                 let rcaChart = new Chart(ctx, {
                     type: 'pie',
                     data: {
@@ -83,17 +93,15 @@ export class RcaReportComponent extends ChartExportComponent implements AfterVie
                                 const selectedData = activePoints[0]['_chart'].config.data;
                                 const idx = activePoints[0]['_index'];
                                 const label = selectedData.labels[idx];
-
-                                const domain = RolaguruUtils.getInstance().errorDomains.filter(e => e.id == label)[0];
-                                const domainName = domain.name;
-
+                                const domain = self.domains.filter(domain => domain.domainName == label)[0];
+                                const domainName = domain.domainName;
                                 const drilledChartData = {};
                                 data.map(e => {
-                                    if (e.domain == label) {
-                                        if (e.module in drilledChartData) {
-                                            drilledChartData[e.module] = drilledChartData[e.module] + 1;
+                                    if (e.domain.domainName == label) {
+                                        if (e.module.moduleName in drilledChartData) {
+                                            drilledChartData[e.module.moduleName] = drilledChartData[e.module.moduleName] + 1;
                                         } else {
-                                            drilledChartData[e.module] = 1;
+                                            drilledChartData[e.module.moduleName] = 1;
                                         }
                                     }
                                 });

@@ -33,6 +33,12 @@ import { ChatComponent } from './chat/chat.component';
 import { AddPriorityTypeComponent } from './priority-type/add-priority-type.component';
 import { ListPriorityTypeComponent } from './priority-type/list-priority-type.component';
 import { EditPriorityTypeComponent } from './priority-type/edit-priority-type.component';
+import { AddDomainComponent } from './domain/add-domain.component';
+import { ListDomainComponent } from './domain/list-domain.component';
+import { EditDomainComponent } from './domain/edit-domain.component';
+import { AddModuleComponent } from './module/add-module.component';
+import { ListModuleComponent } from './module/list-module.component';
+import { EditModuleComponent } from './module/edit-module.component';
 
 const routes: Routes = [
     {
@@ -194,6 +200,42 @@ const routes: Routes = [
     {
         path: 'rcaReport',
         component: RcaReportComponent
+    },
+    {
+        path: 'addDomain',
+        component: AddDomainComponent
+    },
+    {
+        path: 'listDomains',
+        component: ListDomainComponent,
+        children: [
+            {
+                path: ':id',
+                component: EditDomainComponent
+            },
+            {
+                path: '',
+                component: TableConfiguratorComponent
+            }
+        ]
+    },
+    {
+        path: 'addModule',
+        component: AddModuleComponent
+    },
+    {
+        path: 'listModules',
+        component: ListModuleComponent,
+        children: [
+            {
+                path: ':id',
+                component: EditModuleComponent
+            },
+            {
+                path: '',
+                component: TableConfiguratorComponent
+            }
+        ]
     },
     {
         path: 'chat',

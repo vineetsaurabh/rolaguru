@@ -113,7 +113,14 @@ import { AddPriorityTypeComponent } from './priority-type/add-priority-type.comp
 import { ListPriorityTypeComponent} from './priority-type/list-priority-type.component';
 import { EditPriorityTypeComponent } from './priority-type/edit-priority-type.component';
 import { PriorityTypeService } from './priority-type/priority-type.service';
-
+import { DomainService } from './domain/domain.service';
+import { AddDomainComponent } from './domain/add-domain.component';
+import { ListDomainComponent } from './domain/list-domain.component';
+import { EditDomainComponent } from './domain/edit-domain.component';
+import { ModuleService } from './module/module.service';
+import { AddModuleComponent } from './module/add-module.component';
+import { ListModuleComponent } from './module/list-module.component';
+import { EditModuleComponent } from './module/edit-module.component';
 
 @NgModule({
     declarations: [
@@ -152,7 +159,9 @@ import { PriorityTypeService } from './priority-type/priority-type.service';
         AddTeamComponent,
         EditTeamComponent,
         ListTeamComponent,
-		AddPriorityTypeComponent, ListPriorityTypeComponent, EditPriorityTypeComponent,
+        AddPriorityTypeComponent, ListPriorityTypeComponent, EditPriorityTypeComponent,
+        AddDomainComponent, ListDomainComponent, EditDomainComponent,
+        AddModuleComponent, ListModuleComponent, EditModuleComponent,
     ],
     imports: [
         BrowserModule,
@@ -216,7 +225,8 @@ import { PriorityTypeService } from './priority-type/priority-type.service';
         TokenStorage,
         RoleService,
         TeamService,
-		PriorityTypeService,
+        PriorityTypeService,
+        DomainService, ModuleService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,

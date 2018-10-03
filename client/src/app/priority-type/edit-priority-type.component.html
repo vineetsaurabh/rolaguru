@@ -1,5 +1,14 @@
 <div class="container">
-    <h2 class="text-center" class="edit-item">Edit Priority Type</h2>
+    <div fxLayout="row">
+        <div class="fill-remaining-space"></div>
+        <h2 class="text-center" class="add-item" fxLayoutAlign="center">Edit Priority Type</h2>
+        <div class="fill-remaining-space"></div>
+        <div fxLayoutAlign="end center">
+            <button class="close" mat-dialog-close>
+                <i class="fa fa-remove" matTooltip="Close"></i>
+            </button>
+        </div>
+    </div>
     <form #editPriorityTypeForm="ngForm" (ngSubmit)="updatePriorityType(editPriorityTypeForm)" ngNativeValidate>
         <div class="form-group">
             <mat-form-field>

@@ -60,7 +60,7 @@ export class ListPriorityTypeComponent extends ListComponent implements OnInit {
         let dialogRef: MatDialogRef<AddPriorityTypeComponent>;
         dialogRef = this.dialog.open(AddPriorityTypeComponent, {
             width: '600px',
-            height: '320px',
+            height: '560px',
             disableClose: true,
             autoFocus: false,
         });
@@ -72,6 +72,7 @@ export class ListPriorityTypeComponent extends ListComponent implements OnInit {
         dialogRef = this.dialog.open(EditPriorityTypeComponent, {
             data: id,
             width: '400px',
+            height: '560px',
             disableClose: true,
             autoFocus: false,
         });

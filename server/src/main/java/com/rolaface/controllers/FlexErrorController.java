@@ -161,7 +161,7 @@ public class FlexErrorController {
 
 	@Transactional
 	@PostMapping("/importerrors")
-	public int importFlexErrors(@RequestParam("file") MultipartFile file, @RequestParam("domain") String domain) {
+	public int importFlexErrors(@RequestParam("file") MultipartFile file) {
 		int noOfRowInserted = 0;
 		try (InputStream stream = file.getInputStream(); HSSFWorkbook workbook = new HSSFWorkbook(stream)) {
 			HSSFSheet sheet = workbook.getSheetAt(0);
@@ -170,10 +170,7 @@ public class FlexErrorController {
 					FlexError flexError = new FlexError();
 					flexError.setErrcode(row.getCell(1).toString());
 					flexError.setDescription(row.getCell(2).toString());
-					flexError.setModule(row.getCell(3).toString());
-					flexError.setOperation(row.getCell(4).toString());
 					flexError.setSeverity(Integer.valueOf(row.getCell(5).toString()));
-					flexError.setDomain(domain);
 					create(flexError);
 				}
 			});

@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -34,8 +35,14 @@ public class FlexError {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int errid;
 
-	@Column(nullable = false)
-	private String domain;
+	@ManyToOne
+	private Domain domain;
+
+	@ManyToOne
+	private Module module;
+	
+	@Column
+	private String operation;
 
 	@Column(unique = true, nullable = false)
 	private String errcode;
@@ -43,12 +50,6 @@ public class FlexError {
 	@Lob
 	@Column(nullable = false)
 	private String description;
-
-	@Column(nullable = false)
-	private String module;
-
-	@Column(nullable = false)
-	private String operation;
 	
 	@Column
 	private String priority;
@@ -81,16 +82,24 @@ public class FlexError {
 	@JoinColumn(name = "errid")
 	private Set<ErrorDocument> files;
 
-	public int getErrid() {
-		return errid;
-	}
-
-	public String getDomain() {
+	public Domain getDomain() {
 		return domain;
 	}
 
-	public String getModule() {
+	public void setDomain(Domain domain) {
+		this.domain = domain;
+	}
+
+	public Module getModule() {
 		return module;
+	}
+
+	public void setModule(Module module) {
+		this.module = module;
+	}
+
+	public int getErrid() {
+		return errid;
 	}
 
 	public String getErrcode() {
@@ -123,14 +132,6 @@ public class FlexError {
 
 	public void setErrid(int errid) {
 		this.errid = errid;
-	}
-
-	public void setDomain(String domain) {
-		this.domain = domain;
-	}
-
-	public void setModule(String module) {
-		this.module = module;
 	}
 
 	public void setErrcode(String errcode) {

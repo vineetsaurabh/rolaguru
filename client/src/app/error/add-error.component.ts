@@ -1,4 +1,3 @@
-import { HttpHeaders } from '@angular/common/http';
 import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
@@ -8,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { PriorityTypeService } from '../priority-type/priority-type.service';
 import { PriorityType } from '../priority-type/priority-type.model';
+import { DomainService } from '../domain/domain.service';
 
 @Component({
     templateUrl: './add-error.component.html'
@@ -15,9 +15,7 @@ import { PriorityType } from '../priority-type/priority-type.model';
 export class AddErrorComponent {
 
     error: Error = new Error();
-    errorDomainId: string;
-    errorDomainName: string;
-    htmlDescription: string = '';
+    domainId: number;
 	priorityTypes: PriorityType[];
     defaultPriorityType: PriorityType;
 
@@ -26,13 +24,17 @@ export class AddErrorComponent {
         private errorService: ErrorService,
         private toastService: ToastrService,
         private priorityTypeService: PriorityTypeService,
+        private domainService: DomainService,
         public dialogRef: MatDialogRef<AddErrorComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any) {
-            this.errorDomainId = data.domainId;
-            this.errorDomainName = data.domainName;
+            this.domainId = data.domainId;
     }
 	
 	ngOnInit() {
+        this.domainService.getDomain(this.domainId)
+                .subscribe(data => {
+                    this.error.domain = data;
+                });
         this.priorityTypeService.getPriorityTypes()
             .subscribe(data => {
                 this.priorityTypes = data,
@@ -41,8 +43,6 @@ export class AddErrorComponent {
     }
 
     createError(errorForm: NgForm): void {
-        this.error.description = this.htmlDescription;
-        this.error.domain = this.errorDomainId;
         this.errorService.createError(this.error)
             .subscribe(data => {
                 this.toastService.success(`Error ${this.error.errcode} added`);

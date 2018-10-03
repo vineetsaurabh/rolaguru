@@ -148,8 +148,8 @@ public final class PDFGeneratorUtil {
 		String[] flexErrorValues = new String[NO_OF_COLUMNS];
 		flexErrorValues[0] = String.valueOf(count);
 		flexErrorValues[1] = flexError.getErrcode();
-		flexErrorValues[2] = flexError.getDomain();
-		flexErrorValues[3] = flexError.getModule();
+		flexErrorValues[2] = flexError.getDomain().getDomainName();
+		flexErrorValues[3] = flexError.getModule().getModuleName();
 		flexErrorValues[4] = flexError.getOperation();
 		flexErrorValues[5] = String.valueOf(flexError.getSeverity());
 		flexErrorValues[6] = String.valueOf(flexError.getFrequency());

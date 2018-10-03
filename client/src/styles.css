@@ -24,6 +24,12 @@ body{
     cursor: pointer;
     color: purple;
 }
+.error-domain:nth-of-type(odd) {
+    background-color:lightsteelblue;
+}
+.error-domain:nth-of-type(even) {
+    background-color:lavender;
+}
 .error-domain:hover{
     outline: none !important;
     box-shadow: 0 0 10px blue;
