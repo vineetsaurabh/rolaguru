@@ -22,7 +22,10 @@
                         </div>
                         <div style="text-align: center" class="homepage-info-text-1">
                             <div *ngFor="let error of latestCreatedErrors">
-                                <p>{{error.errcode}} is added on {{error.createdTimestamp | amTimeAgo}}</p>
+                                <p>
+                                    <a [routerLink]="['../findError', error.errid]">{{error.errcode}}</a>
+                                     is added on {{error.createdTimestamp | amTimeAgo}}
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -34,7 +37,10 @@
                         </div>
                         <div style="text-align: center" class="homepage-info-text-2">
                             <div *ngFor="let error of latestModifiedErrors">
-                                <p>{{error.errcode}} is modified on {{error.modifiedTimestamp | amTimeAgo}}</p>
+                                <p>
+                                    <a [routerLink]="['../findError', error.errid]">{{error.errcode}}</a>
+                                     is modified on {{error.modifiedTimestamp | amTimeAgo}}
+                                </p>
                             </div>
                         </div>
                     </div>

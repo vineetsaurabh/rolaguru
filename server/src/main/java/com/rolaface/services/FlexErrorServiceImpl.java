@@ -66,7 +66,7 @@ public class FlexErrorServiceImpl implements FlexErrorService {
 			flexErrorToUpdate.setPriority(flexError.getPriority());
 			flexErrorToUpdate.setSeverity(flexError.getSeverity());
 			flexErrorToUpdate.setFrequency(flexError.getFrequency());
-			flexErrorToUpdate.setModifiedTimestamp(new Date());
+			flexErrorToUpdate.setModifiedTimestamp(flexError.getModifiedTimestamp());
 			flexError = repository.save(flexErrorToUpdate);
 		}
 		return flexError;
