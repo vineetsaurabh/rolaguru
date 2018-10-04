@@ -35,6 +35,14 @@ export class ErrorService {
         return this.http.get<Error[]>(this.errorUrl + "/findallerrors");
     }
 
+    public getLatestCreatedErrors() {
+        return this.http.get<Error[]>(this.errorUrl + "/findlatestcreatederrors");
+    }
+
+    public getLatestModifiedErrors() {
+        return this.http.get<Error[]>(this.errorUrl + "/findlatestmodifiederrors");
+    }
+
     public getAllErrorsOfDomian(domain: string) {
         let params = new HttpParams();
         params = params.append('domain', domain);

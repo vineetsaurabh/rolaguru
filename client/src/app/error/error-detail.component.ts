@@ -38,7 +38,7 @@ export class ErrorDetailComponent implements OnInit {
         checked: false,
         files: null,
         createdTimestamp: null,
-        modifiedTimeStamp: null,
+        modifiedTimestamp: null,
         user: null,
     };
     errid: number;

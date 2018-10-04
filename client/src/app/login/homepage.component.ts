@@ -5,6 +5,7 @@ import { ErrorService } from '../error/error.service';
 import 'chart.piecelabel.js';
 import { Domain } from '../domain/domain.model';
 import { DomainService } from '../domain/domain.service';
+import { Error } from '../error/error.model';
 
 @Component({
     selector: 'dashboard',
@@ -13,6 +14,8 @@ import { DomainService } from '../domain/domain.service';
 export class HomepageComponent {
 
     domains: Domain[];
+    latestCreatedErrors: Error[];
+    latestModifiedErrors: Error[];
 
     constructor(private router: Router,
         private domainService: DomainService,
@@ -25,6 +28,14 @@ export class HomepageComponent {
                 this.domains.forEach(domain => {
                     this.getErrorsCountDomainWise(domain);
                 });
+            });
+        this.errorService.getLatestCreatedErrors()
+            .subscribe(data => {
+                this.latestCreatedErrors = data;
+            });
+        this.errorService.getLatestModifiedErrors()
+            .subscribe(data => {
+                this.latestModifiedErrors = data;
             });
     }
 

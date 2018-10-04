@@ -14,6 +14,10 @@ public interface FlexErrorService {
 	FlexError delete(int id);
 
 	List<FlexError> findAll();
+	
+	List<FlexError> findLatestCreatedErrors();
+	
+	List<FlexError> findLatestModifiedErrors();
 
 	List<FlexError> findAll(String category);
 
