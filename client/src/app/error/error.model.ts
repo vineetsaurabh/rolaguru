@@ -18,6 +18,6 @@ export class Error {
     checked: boolean;
     files: Observable<string[]>;
     createdTimestamp: Date;
-    modifiedTimeStamp: Date;
+    modifiedTimestamp: Date;
     user: User;
 }

@@ -32,7 +32,7 @@ export class EditErrorComponent implements OnInit {
         checked: false,
         files: null,
         createdTimestamp: null,
-        modifiedTimeStamp: null,
+        modifiedTimestamp: null,
         user: null
     };
     errorForm: FormGroup;

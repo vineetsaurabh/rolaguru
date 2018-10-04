@@ -11,7 +11,7 @@ export class Cause {
     operationRootCause: string;
     ratings: Set<CauseRating>;
     createdTimestamp: Date;
-    modifiedTimeStamp: Date;
+    modifiedTimestamp: Date;
     user: User;
     files: Observable<string[]>;
 }

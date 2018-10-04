@@ -18,20 +18,24 @@
                 <mat-grid-tile class="homepage-info-1">
                     <div fxLayout="column">
                         <div style="text-align: center" class="homepage-info-title-1">
-                            <h3>Updates</h3>
+                            <h4>Latest Created Errors</h4>
                         </div>
                         <div style="text-align: center" class="homepage-info-text-1">
-                            This is a test.
+                            <div *ngFor="let error of latestCreatedErrors">
+                                <p>{{error.errcode}} is added on {{error.createdTimestamp | amTimeAgo}}</p>
+                            </div>
                         </div>
                     </div>
                 </mat-grid-tile>
                 <mat-grid-tile class="homepage-info-2">
                     <div fxLayout="column">
                         <div style="text-align: center" class="homepage-info-title-2">
-                            <h3>AAAA</h3>
+                            <h4>Latest Modified Errors</h4>
                         </div>
                         <div style="text-align: center" class="homepage-info-text-2">
-                            This is a test.
+                            <div *ngFor="let error of latestModifiedErrors">
+                                <p>{{error.errcode}} is modified on {{error.modifiedTimestamp | amTimeAgo}}</p>
+                            </div>
                         </div>
                     </div>
                 </mat-grid-tile>

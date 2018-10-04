@@ -15,6 +15,12 @@ public interface FlexErrorRepository extends JpaRepository<FlexError, Long> {
 
 	@Override
 	List<FlexError> findAll();
+	
+	@Query(value = "SELECT * FROM errors ORDER BY created DESC LIMIT 5", nativeQuery = true)
+	List<FlexError> findLatestCreatedErrors();
+	
+	@Query(value = "SELECT * FROM errors WHERE modified != '' ORDER BY modified DESC LIMIT 5", nativeQuery = true)
+	List<FlexError> findLatestModifiedErrors();
 
 	FlexError findByErrid(int errid);
 	

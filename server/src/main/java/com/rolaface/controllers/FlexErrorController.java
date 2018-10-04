@@ -128,6 +128,16 @@ public class FlexErrorController {
 	public List<FlexError> findAllErrorsOfDomain(@RequestParam("domain") String domain) {
 		return flexErrorService.findAll(domain);
 	}
+	
+	@GetMapping(value = "/findlatestcreatederrors")
+	public List<FlexError> findLatestCreatedErrors() {
+		return flexErrorService.findLatestCreatedErrors();
+	}
+	
+	@GetMapping(value = "/findlatestmodifiederrors")
+	public List<FlexError> findLatestModifiedErrors() {
+		return flexErrorService.findLatestModifiedErrors();
+	}
 
 	@GetMapping(value = "/finderrors", params = "input")
 	public List<FlexError> findErrors(@RequestParam("input") String searchString) {

@@ -1,5 +1,6 @@
 package com.rolaface.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,16 @@ public class FlexErrorServiceImpl implements FlexErrorService {
 	}
 
 	@Override
+	public List<FlexError> findLatestCreatedErrors() {
+		return repository.findLatestCreatedErrors();
+	}
+	
+	@Override
+	public List<FlexError> findLatestModifiedErrors() {
+		return repository.findLatestModifiedErrors();
+	}
+	
+	@Override
 	public List<FlexError> findAll() {
 		return repository.findAll();
 	}
@@ -55,6 +66,7 @@ public class FlexErrorServiceImpl implements FlexErrorService {
 			flexErrorToUpdate.setPriority(flexError.getPriority());
 			flexErrorToUpdate.setSeverity(flexError.getSeverity());
 			flexErrorToUpdate.setFrequency(flexError.getFrequency());
+			flexErrorToUpdate.setModifiedTimestamp(new Date());
 			flexError = repository.save(flexErrorToUpdate);
 		}
 		return flexError;
