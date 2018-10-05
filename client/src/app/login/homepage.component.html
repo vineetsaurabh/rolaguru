@@ -1,6 +1,6 @@
 <div class="container col-lg-12">
     <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
-        <div style="width:80%">
+        <div style="width:78%">
             <mat-grid-list cols="3" rowHeight="4:3" gutterSize="25">
                 <mat-grid-tile *ngFor="let domain of domains" (click)="navigate(domain)" class="error-domain">
                     <div style="text-align: center">
@@ -24,7 +24,7 @@
                             <div *ngFor="let error of latestCreatedErrors">
                                 <p>
                                     <a [routerLink]="['../findError', error.errid]">{{error.errcode}}</a>
-                                     is added on {{error.createdTimestamp | amTimeAgo}}
+                                     is added {{error.createdTimestamp | amTimeAgo}}
                                 </p>
                             </div>
                         </div>
@@ -39,7 +39,7 @@
                             <div *ngFor="let error of latestModifiedErrors">
                                 <p>
                                     <a [routerLink]="['../findError', error.errid]">{{error.errcode}}</a>
-                                     is modified on {{error.modifiedTimestamp | amTimeAgo}}
+                                     is modified {{error.modifiedTimestamp | amTimeAgo}}
                                 </p>
                             </div>
                         </div>

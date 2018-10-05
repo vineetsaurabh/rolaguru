@@ -297,10 +297,13 @@ mat-form-field {
 .error-property{
     color: royalblue;
     font-weight: 400;
-    width: 90px;
+    width: 120px;
+    font-size: 16px;
 }
 .error-property-value{
     color: blue;
+    font-weight: 600;
+    font-size: 16px;
 }
 .error-attachment{
     color: royalblue;
