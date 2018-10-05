@@ -37,10 +37,10 @@ export class ReadMoreComponent implements OnChanges {
         this.rmTextShort = this.text;
         this.rmTextFull = this.text;
         this.inputWords = this.text.split(' ');
-        if (this.inputWords.length > 30) {
+        if (this.inputWords.length > 80) {
             this.fullText = false;
             this.showMore = true;
-            this.rmTextShort = this.inputWords.slice(0, 30).join(' ') + '...';
+            this.rmTextShort = this.inputWords.slice(0, 80).join(' ') + '...';
         } else {
             if (this.rmTextShort.length > 300) {
                 this.fullText = false;

@@ -1,72 +1,52 @@
 <router-outlet></router-outlet>
 
 <div class="container col-md-10 my-2" fxLayout="column" fxLayoutGap="10px">
-    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" class="error-detail">
-        <div fxLayoutAlign="start">
-            <mat-form-field>
-                <input matInput class="search-input" type="text" [(ngModel)]="error.errcode" />
-                <button mat-button matSuffix mat-icon-button aria-label="Clear" matTooltip="Search Error" matTooltipPosition="before" (click)="findErrorByCode()">
-                    <mat-icon>search</mat-icon>
-                </button>
-            </mat-form-field>
-        </div>
-        <div class="fill-remaining-space" fxLayoutAlign="center center">
-            <div class="border-text" fxLayoutGap="15px" style="width: 100%">
-                <h1>
-                    <span data-toggle="tooltip" matTooltip="Detail" matTooltipPosition="above">
-                        Detail
-                    </span>
-                </h1>
-                <div fxLayout="row" fxLayout.xs="column">
-                    <div fxLayout="row">
-                        <div class="error-property">Domain :</div>
-                        <div class="error-property-value">{{error.domain.domainName}}</div>
-                    </div>
-                    <div class="fill-remaining-space"></div>
-                    <div fxLayout="row">
-                        <div class="error-property">Module :</div>
-                        <div class="error-property-value">{{error.module.moduleName}}</div>
-                    </div>
-                    <div class="fill-remaining-space"></div>
-                    <div fxLayout="row">
-                        <div class="error-property">Operation :</div>
-                        <div class="error-property-value">{{error.operation}}</div>
-                    </div>
-                    <div class="fill-remaining-space"></div>
 
-                    <div fxLayout="row">
-                        <div class="error-property">Severity :</div>
-                        <div class="error-property-value">{{error.severity}}</div>
-                    </div>
-                    <div class="fill-remaining-space"></div>
-                    <div fxLayout="row">
-                        <div class="error-property">Frequency :</div>
-                        <div class="error-property-value">{{ error.frequency }}</div>
-                    </div>
+
+    <div fxLayout="row" fxLayoutGap="20px">
+        <div style="width:75%" fxLayout="column">
+            <div fxLayout="row" fxLayoutGap="10px" class="error-detail">
+                <div fxLayoutAlign="start">
+                    <mat-form-field>
+                        <input matInput class="search-input" type="text" [(ngModel)]="error.errcode" />
+                        <button mat-button matSuffix mat-icon-button aria-label="Clear" matTooltip="Search Error" matTooltipPosition="before" (click)="findErrorByCode()">
+                            <mat-icon>search</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="error-description">
+                <app-read-more [text]="htmlDescription"></app-read-more>
+            </div>
+        </div>
+        <mat-divider [vertical]="true"></mat-divider>
+        <div style="width:25%">
+            <div fxLayout="column" class="my-3">
+                <div fxLayout="row">
+                    <div class="error-property">Domain</div>
+                    <div class="error-property-value">{{error.domain.domainName}}</div>
+                </div>
+                <div fxLayout="row">
+                    <div class="error-property">Module</div>
+                    <div class="error-property-value">{{error.module.moduleName}}</div>
+                </div>
+                <div fxLayout="row">
+                    <div class="error-property">Operation</div>
+                    <div class="error-property-value">{{error.operation}}</div>
+                </div>
+                <div fxLayout="row">
+                    <div class="error-property">Severity</div>
+                    <div class="error-property-value">{{error.severity}}</div>
+                </div>
+                <div fxLayout="row">
+                    <div class="error-property">Frequency</div>
+                    <div class="error-property-value">{{ error.frequency }}</div>
                 </div>
             </div>
         </div>
-        <div fxLayout="column" fxLayout.xs="row">
-            <div fxLayoutAlign="start">
-                <h5>{{ noOfSolutions }}</h5>
-                <div *ngIf="error.causes.length<2">
-                    <small>&nbsp;Solution</small>
-                </div>
-                <div *ngIf="error.causes.length>1">
-                    <small>&nbsp;Solutions</small>
-                </div>
-            </div>
-            <span class="fill-remaining-space"></span>
-            <div fxLayoutAlign="end">
-                <button class="btn add-element" (click)="addCause(error, dialog)" matTooltip="Add Solution" matTooltipPosition="above">
-                    <i class="fa fa-plus fa-fw"></i>
-                </button>
-            </div>
-        </div>
     </div>
-    <div class="error-description" fxLayoutAlign="center center">
-        <app-read-more [text]="htmlDescription"></app-read-more>
-    </div>
+
+    <mat-divider></mat-divider>
     <div fxLayout="row">
         <div fxLayout="column" fxLayoutAlign="end" fxLayoutGap="10px">
             <div fxLayoutAlign="start" class="error-attachment" fxLayoutGap="5px">
@@ -99,8 +79,24 @@
             </div>
         </div>
     </div>
+    <mat-divider></mat-divider>
 </div>
-
+<div class="container col-md-10 my-2" fxLayout="row" fxLayoutGap="10px">
+    <div>
+        <button class="btn add-element" (click)="addCause(error, dialog)" matTooltip="Add Solution" matTooltipPosition="above">
+            <i class="fa fa-plus fa-fw"></i>
+        </button>
+    </div>
+    <div fxLayout="row">
+        <h5>{{ noOfSolutions }}</h5>
+        <div *ngIf="error.causes.length<2">
+            <small>&nbsp;Solution</small>
+        </div>
+        <div *ngIf="error.causes.length>1">
+            <small>&nbsp;Solutions</small>
+        </div>
+    </div>
+</div>
 <list-causes [(causes)]="error.causes"></list-causes>
 
 <list-comment-error [errid]="errid"></list-comment-error>
