@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
@@ -11,7 +11,7 @@ import { UserService } from './user.service';
 @Component({
     templateUrl: './user-detail.component.html'
 })
-export class UserDetailComponent implements OnInit {
+export class UserDetailComponent {
 
     id: number;
     public user: User = {

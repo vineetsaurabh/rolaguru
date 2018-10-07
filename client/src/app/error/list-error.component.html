@@ -103,11 +103,11 @@
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Operation </mat-header-cell>
                 <mat-cell *matCellDef="let error"> {{error.operation}} </mat-cell>
             </ng-container>
-			
-			<ng-container matColumnDef="Priority">
-				<mat-header-cell *matHeaderCellDef mat-sort-header> Priority </mat-header-cell>
-				<mat-cell *matCellDef="let error"> {{error.priority}} </mat-cell>
-			</ng-container>
+
+            <ng-container matColumnDef="Priority">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Priority </mat-header-cell>
+                <mat-cell *matCellDef="let error"> {{error.priority}} </mat-cell>
+            </ng-container>
 
             <ng-container matColumnDef="Severity">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Severity </mat-header-cell>
@@ -150,11 +150,6 @@
                     <button class="btn" matTooltip="Subscribe" (click)="subscribeError(error)" *ngIf="subscribedErrorIds == null || subscribedErrorIds.indexOf(''+error.errid) == -1">
                         <i class="fa fa-rss"></i>
                     </button>
-                    <!--
-                    <button class="btn" matTooltip="Add Cause" (click)="errorService.addCause(error, dialog)">
-                        <i class="fa fa-plus fa-fw"></i>
-                    </button> 
-                    -->
                 </mat-cell>
             </ng-container>
 
@@ -163,6 +158,6 @@
             </mat-row>
         </mat-table>
 
-        <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]"></mat-paginator>
+        <mat-paginator [pageSizeOptions]="pageSizeOptions"></mat-paginator>
     </div>
 </div>

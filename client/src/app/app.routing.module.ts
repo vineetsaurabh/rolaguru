@@ -39,6 +39,7 @@ import { EditDomainComponent } from './domain/edit-domain.component';
 import { AddModuleComponent } from './module/add-module.component';
 import { ListModuleComponent } from './module/list-module.component';
 import { EditModuleComponent } from './module/edit-module.component';
+import { UserPreferenceComponent } from './user-preference/user-preference.component';
 
 const routes: Routes = [
     {
@@ -236,6 +237,10 @@ const routes: Routes = [
                 component: TableConfiguratorComponent
             }
         ]
+    },
+    {
+        path: 'myPreferences',
+        component: UserPreferenceComponent
     },
     {
         path: 'chat',

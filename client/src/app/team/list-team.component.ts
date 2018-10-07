@@ -1,6 +1,5 @@
 
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Component, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialogRef, MatDialog } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { ToastrService } from 'ngx-toastr';
@@ -11,12 +10,13 @@ import { AddTeamComponent } from './add-team.component';
 import { EditTeamComponent } from './edit-team.component';
 import { ConfirmDeleteComponent } from '../util/confirm-delete.component';
 import { ListComponent } from '../common/list.component';
+import { TokenStorage } from '../login/token.storage';
 
 @Component({
     selector: 'app-comp',
     templateUrl: './list-team.component.html'
 })
-export class ListTeamComponent extends ListComponent implements OnInit {
+export class ListTeamComponent extends ListComponent {
 
     teams: Team[];
     allColumns = ['Checkbox', 'Name', 'Description', 'Actions'];
@@ -27,11 +27,11 @@ export class ListTeamComponent extends ListComponent implements OnInit {
     @ViewChild(MatSort) sort: MatSort;
 
     constructor(
-        private router: Router,
         private teamService: TeamService,
         private toastService: ToastrService,
+        protected token: TokenStorage,
         protected dialog: MatDialog) {
-            super(dialog);
+        super(token, dialog);
     }
 
     ngOnInit() {
@@ -100,7 +100,7 @@ export class ListTeamComponent extends ListComponent implements OnInit {
     };
 
     toggleSelection($event) {
-        if($event.checked) {
+        if ($event.checked) {
             this.teams.forEach(team => team.checked = true);
         } else {
             this.teams.forEach(team => team.checked = false);

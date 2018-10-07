@@ -1,5 +1,5 @@
 
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialogRef, MatDialog } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
@@ -13,27 +13,28 @@ import { ListComponent } from '../common/list.component';
 import { AssignRoleComponent } from './assign-role.component';
 import { AssignTeamComponent } from './assign-team.component';
 import { EditUserComponent } from './edit-user.component';
+import { TokenStorage } from '../login/token.storage';
 
 @Component({
     selector: 'app-comp',
     templateUrl: './list-user.component.html'
 })
-export class ListUserComponent extends ListComponent implements OnInit {
+export class ListUserComponent extends ListComponent {
 
     users: User[];
     allColumns = ['Checkbox', 'Name', 'DateOfBirth', 'Email', 'Phone', 'Expertise', 'Roles', 'Teams', 'Address', 'Actions'];
-    displayedColumns = ['Checkbox', 'Name', 'Email', 'Phone', 'Expertise',  'Roles', 'Teams', 'Actions'];
+    displayedColumns = ['Checkbox', 'Name', 'Email', 'Phone', 'Expertise', 'Roles', 'Teams', 'Actions'];
     dataSource: MatTableDataSource<User>;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
     constructor(
-        private router: Router,
         private userService: UserService,
         private toastService: ToastrService,
+        protected token: TokenStorage,
         protected dialog: MatDialog) {
-            super(dialog);
+        super(token, dialog);
     }
 
     ngOnInit() {
@@ -168,7 +169,7 @@ export class ListUserComponent extends ListComponent implements OnInit {
             this.toastService.warning(`Please select a user to activate`);
         } else {
             this.selectedUsers.forEach(user => {
-                if(user.active == false) {
+                if (user.active == false) {
                     user.active = true;
                     this.userService.updateUser(user);
                 }
@@ -181,7 +182,7 @@ export class ListUserComponent extends ListComponent implements OnInit {
             this.toastService.warning(`Please select a user to deactivate`);
         } else {
             this.selectedUsers.forEach(user => {
-                if(user.active == true) {
+                if (user.active == true) {
                     user.active = false;
                     this.userService.updateUser(user);
                 }
@@ -190,14 +191,14 @@ export class ListUserComponent extends ListComponent implements OnInit {
     }
 
     toggleSelection($event) {
-        if($event.checked) {
+        if ($event.checked) {
             this.users.forEach(user => user.checked = true);
         } else {
             this.users.forEach(user => user.checked = false);
         }
     }
-	
-	assignRoles(): Observable<boolean> {
+
+    assignRoles(): Observable<boolean> {
         let dialogRef: MatDialogRef<AssignRoleComponent>;
         dialogRef = this.dialog.open(AssignRoleComponent, {
             data: this.selectedUsers,
@@ -222,7 +223,7 @@ export class ListUserComponent extends ListComponent implements OnInit {
     }
 
     disableAction() {
-        if(this.users) {
+        if (this.users) {
             return !this.users.some(_ => _.checked);
         }
         return true;

@@ -36,7 +36,6 @@ public class DomainServiceImpl implements DomainService {
 		if (domainToUpdate != null) {
 			domainToUpdate.setDomainName(domain.getDomainName());
 			domainToUpdate.setDescription(domain.getDescription());
-			domainToUpdate.setModules(domain.getModules());
 			domainToUpdate.setDomainOwner(domain.getDomainOwner());
 			if (domain.isDefaultDomain() && !domainToUpdate.isDefaultDomain()) {
 				defaultDomain = repository.findDefaultDomain();

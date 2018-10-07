@@ -1,14 +1,11 @@
-import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams, HttpEvent, HttpRequest } from '@angular/common/http';
-
-import { Cause } from './cause.model';
-import { ErrorCause } from './error-cause.model';
-import { CauseRating } from './cause-rating.model';
-import { environment } from '../../environments/environment';
-import { RequestOptions, ResponseContentType } from '@angular/http';
+import { HttpClient, HttpHeaders, HttpEvent, HttpRequest } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
+import { Cause } from './cause.model';
+import { CauseRating } from './cause-rating.model';
+import { environment } from '../../environments/environment';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

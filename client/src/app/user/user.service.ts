@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+
 import { User } from './user.model';
 import { environment } from '../../environments/environment';
 import { UserNameGroup } from './user-name-group.model';
@@ -73,7 +74,7 @@ export class UserService {
         return this.http.get(this.userUrl + "/downloadprofilepic/" + id, { observe: 'response', responseType: 'blob' });
     }
 
-    public deleteFile(id): Observable<any>  {
+    public deleteFile(id): Observable<any> {
         return this.http.delete<any>(this.userUrl + "/deleteprofilepicture/" + id);
     }
 

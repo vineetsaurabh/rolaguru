@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams, HttpRequest, HttpEvent } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 
 import { Error } from './error.model';
-import { MatDialogRef } from '@angular/material';
-import { Observable } from 'rxjs/Observable';
-import { AddCauseComponent } from '../cause/add-cause.component';
 import { environment } from '../../environments/environment';
 
 
@@ -128,7 +126,7 @@ export class ErrorService {
         return this.http.get(this.errorUrl + "/downloadfilefromerror/" + id, { observe: 'response', responseType: 'blob' });
     }
 
-    public deleteFile(id): Observable<any>  {
+    public deleteFile(id): Observable<any> {
         return this.http.delete<any>(this.errorUrl + "/deletefilefromerror/" + id);
     }
 

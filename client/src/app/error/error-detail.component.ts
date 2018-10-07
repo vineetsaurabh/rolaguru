@@ -1,28 +1,26 @@
-import { RolaguruUtils } from './../util/rolaguru.util';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { HttpClient, HttpResponse, HttpEventType } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 import { saveAs } from 'file-saver/FileSaver';
-import { User } from './../user/user.model';
+
 import { TokenStorage } from './../login/token.storage';
 import { CauseService } from './../cause/cause.service';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Error } from './error.model';
-import { HttpClient, HttpResponse, HttpEventType } from '@angular/common/http';
 import { ErrorService } from './error.service';
 import { ToastrService } from 'ngx-toastr';
-import { MatDialog, MatDialogRef } from '@angular/material';
-import { Observable } from 'rxjs/Observable';
 import { AddCauseComponent } from '../cause/add-cause.component';
 import { Cause } from '../cause/cause.model';
-import { CauseRating } from '../cause/cause-rating.model';
-import { Subscription } from 'rxjs/Subscription';
 import { Domain } from '../domain/domain.model';
 import { Module } from '../module/module.model';
-
+import { RolaguruUtils } from './../util/rolaguru.util';
 
 @Component({
     templateUrl: './error-detail.component.html'
 })
-export class ErrorDetailComponent implements OnInit {
+export class ErrorDetailComponent {
 
     public error: Error = {
         errid: '',

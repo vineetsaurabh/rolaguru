@@ -1,5 +1,5 @@
-import { Component, OnInit, Injectable, Inject } from '@angular/core';
-import { NgForm, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, Injectable, Inject } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 
@@ -59,7 +59,7 @@ export class EditDomainComponent extends SelectUserComponent {
     updateDomain() {
         this.domainService.updateDomain(this.domain)
             .subscribe(res => {
-                this.toastService.success(`User ${this.domain.domainName} updated`);
+                this.toastService.success(`Domain ${this.domain.domainName} updated`);
                 this.dialogRef.close(false);
             });
     }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Injectable, Inject } from '@angular/core';
+import { Component, Injectable, Inject } from '@angular/core';
 import { NgForm, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
@@ -11,7 +11,7 @@ import { User } from '../user/user.model';
 @Component({
     templateUrl: './edit-role.component.html'
 })
-export class EditRoleComponent implements OnInit {
+export class EditRoleComponent {
 
     public role: Role = {
         roleid: '',
@@ -43,7 +43,7 @@ export class EditRoleComponent implements OnInit {
     updateRole(userForm: NgForm) {
         this.roleService.updateRole(this.role)
             .subscribe(res => {
-                this.toastService.success(`User ${this.role.roleName} updated`);
+                this.toastService.success(`Role ${this.role.roleName} updated`);
                 this.dialogRef.close(false);
             });
     }

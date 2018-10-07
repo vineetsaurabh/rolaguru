@@ -28,6 +28,7 @@
                 </button>
                 <mat-menu #menu="matMenu" overlapTrigger="false">
                     <button mat-menu-item [routerLink]="['/findUser', currentUserId]">My Profile</button>
+                    <button mat-menu-item [routerLink]="['/myPreferences']">My Preferences</button>
                     <button mat-menu-item [routerLink]="['/subscribedErrors']">My Subscribed Errors</button>
                     <button mat-menu-item [matMenuTriggerFor]="useradmin">User Admin</button>
                     <button mat-menu-item [matMenuTriggerFor]="erroradmin">Error Admin</button>

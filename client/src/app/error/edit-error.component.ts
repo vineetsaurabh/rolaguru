@@ -1,11 +1,10 @@
-import { Component, OnInit, Injectable, Inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Error } from './error.model';
-import { HttpClient } from '@angular/common/http';
-import { ErrorService } from './error.service';
-import { NgForm, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Component, Injectable, Inject } from '@angular/core';
+import { NgForm, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
-import { MatDialogRef, MAT_DIALOG_DATA, MatRadioChange } from '@angular/material';
+
+import { Error } from './error.model';
+import { ErrorService } from './error.service';
 import { Cause } from '../cause/cause.model';
 import { PriorityTypeService } from '../priority-type/priority-type.service';
 import { PriorityType } from '../priority-type/priority-type.model';
@@ -16,7 +15,7 @@ import { Domain } from '../domain/domain.model';
 @Component({
     templateUrl: './edit-error.component.html'
 })
-export class EditErrorComponent implements OnInit {
+export class EditErrorComponent {
 
     public error: Error = {
         errid: '',
@@ -25,7 +24,7 @@ export class EditErrorComponent implements OnInit {
         description: '',
         module: new Module(),
         operation: '',
-		priority: '',
+        priority: '',
         severity: 0,
         frequency: 0,
         causes: new Set<Cause>(),
@@ -45,12 +44,12 @@ export class EditErrorComponent implements OnInit {
         private priorityTypeService: PriorityTypeService,
         public dialogRef: MatDialogRef<EditErrorComponent>,
         @Inject(MAT_DIALOG_DATA) public data: Error) {
-            this.error = this.data;
-            this.error.domain.modules.forEach(m => {
-                if(m.moduleId === this.error.module.moduleId) {
-                    this.error.module = m;
-                }
-            });
+        this.error = this.data;
+        this.error.domain.modules.forEach(m => {
+            if (m.moduleId === this.error.module.moduleId) {
+                this.error.module = m;
+            }
+        });
     }
 
     ngOnInit() {
@@ -58,7 +57,7 @@ export class EditErrorComponent implements OnInit {
             errCode: ['', [Validators.required]],
             description: ['', [Validators.required]]
         });
-		this.priorityTypeService.getPriorityTypes()
+        this.priorityTypeService.getPriorityTypes()
             .subscribe(data => {
                 this.priorityTypes = data
             });

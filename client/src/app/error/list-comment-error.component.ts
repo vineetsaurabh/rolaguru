@@ -1,7 +1,7 @@
-import { CommentError } from './comment-error.model';
 import { Input, Component } from "@angular/core";
-import { Error } from './error.model';
 import { ToastrService } from 'ngx-toastr';
+
+import { CommentError } from './comment-error.model';
 import { CommentErrorService } from './comment-error.service';
 import { TokenStorage } from '../login/token.storage';
 

@@ -1,6 +1,5 @@
 
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Component, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialogRef, MatDialog } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { ToastrService } from 'ngx-toastr';
@@ -11,6 +10,7 @@ import { AddDomainComponent } from './add-domain.component';
 import { EditDomainComponent } from './edit-domain.component';
 import { ConfirmDeleteComponent } from '../util/confirm-delete.component';
 import { ListComponent } from '../common/list.component';
+import { TokenStorage } from '../login/token.storage';
 
 @Component({
     selector: 'app-comp',
@@ -27,11 +27,11 @@ export class ListDomainComponent extends ListComponent {
     @ViewChild(MatSort) sort: MatSort;
 
     constructor(
-        private router: Router,
         private domainService: DomainService,
         private toastService: ToastrService,
+        protected token: TokenStorage,
         protected dialog: MatDialog) {
-            super(dialog);
+        super(token, dialog);
     }
 
     ngOnInit() {
@@ -101,7 +101,7 @@ export class ListDomainComponent extends ListComponent {
     };
 
     toggleSelection($event) {
-        if($event.checked) {
+        if ($event.checked) {
             this.domains.forEach(domain => domain.checked = true);
         } else {
             this.domains.forEach(domain => domain.checked = false);

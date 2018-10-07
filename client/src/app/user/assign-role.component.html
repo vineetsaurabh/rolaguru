@@ -34,7 +34,7 @@
             <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight-row': row.checked}">
             </mat-row>
         </mat-table>
-        <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]"></mat-paginator>
+        <mat-paginator [pageSizeOptions]="pageSizeOptions"></mat-paginator>
     </div>
     <div class="text-center">
         <button mat-raised-button color="primary" (click)="assignRoles()">

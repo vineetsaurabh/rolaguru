@@ -1,5 +1,5 @@
-import { Component, OnInit, Injectable, Inject } from '@angular/core';
-import { NgForm, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Component, Injectable, Inject } from '@angular/core';
+import { NgForm, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 
@@ -10,7 +10,7 @@ import { UserService } from './user.service';
 @Component({
     templateUrl: './edit-user.component.html'
 })
-export class EditUserComponent implements OnInit {
+export class EditUserComponent {
 
     public user: User = {
         userid: '',

@@ -153,6 +153,6 @@
             <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight-row': row.checked}">
             </mat-row>
         </mat-table>
-        <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]"></mat-paginator>
+        <mat-paginator [pageSizeOptions]="pageSizeOptions"></mat-paginator>
     </div>
 </div>

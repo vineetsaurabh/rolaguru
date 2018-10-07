@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
+
 import { TokenStorage } from './token.storage';
 import { AuthService } from './auth.service';
 import { UserService } from '../user/user.service';
+import { UserPreferenceService } from '../user-preference/user-preference.service';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +22,8 @@ export class LoginComponent {
     public dialog: MatDialog,
     private authService: AuthService,
     private token: TokenStorage,
-    private userService: UserService) {
+    private userService: UserService,
+    private userPreferenceService: UserPreferenceService) {
   }
 
   login(): void {
@@ -35,10 +38,17 @@ export class LoginComponent {
               .subscribe(subscribedErrIds => {
                 this.token.saveSubscribedError(subscribedErrIds.toString());
               });
+            this.userPreferenceService.getCurrentUserPreference()
+              .subscribe(data => {
+                if (data) {
+                  this.token.savePagination(data.pagination);
+                  this.token.saveErrorTableColumns(data.errorTableColumns);
+                }
+              })
             this.router.navigate(['homepage']);
           });
       }, (response) => {
-        if(response.status == 0) {
+        if (response.status == 0) {
           this.errMsg = "Server is down. <br/>Please try again after some time.";
         }
         if (response.status == 500 && response.error.message == "Bad credentials") {

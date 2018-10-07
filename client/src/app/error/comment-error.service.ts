@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { CommentError } from './comment-error.model';
 import { environment } from '../../environments/environment';
 
-
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };

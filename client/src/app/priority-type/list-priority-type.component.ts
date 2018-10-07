@@ -1,6 +1,5 @@
 
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Component, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialogRef, MatDialog } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { ToastrService } from 'ngx-toastr';
@@ -11,15 +10,16 @@ import { AddPriorityTypeComponent } from './add-priority-type.component';
 import { EditPriorityTypeComponent } from './edit-priority-type.component';
 import { ConfirmDeleteComponent } from '../util/confirm-delete.component';
 import { ListComponent } from '../common/list.component';
+import { TokenStorage } from '../login/token.storage';
 
 @Component({
     selector: 'app-comp',
     templateUrl: './list-priority-type.component.html'
 })
-export class ListPriorityTypeComponent extends ListComponent implements OnInit {
+export class ListPriorityTypeComponent extends ListComponent {
 
     priorityTypes: PriorityType[];
-    allColumns = ['Checkbox', 'Name', 'Description', 'Default',  'SLA', 'Escalate To', 'Resolve Time', 'Actions',];
+    allColumns = ['Checkbox', 'Name', 'Description', 'Default', 'SLA', 'Escalate To', 'Resolve Time', 'Actions',];
     displayedColumns = ['Checkbox', 'Name', 'Description', 'Default', 'SLA', 'Escalate To', 'Actions'];
     dataSource: MatTableDataSource<PriorityType>;
 
@@ -27,11 +27,11 @@ export class ListPriorityTypeComponent extends ListComponent implements OnInit {
     @ViewChild(MatSort) sort: MatSort;
 
     constructor(
-        private router: Router,
         private priorityTypeService: PriorityTypeService,
         private toastService: ToastrService,
+        protected token: TokenStorage,
         protected dialog: MatDialog) {
-            super(dialog);
+        super(token, dialog);
     }
 
     ngOnInit() {
@@ -101,7 +101,7 @@ export class ListPriorityTypeComponent extends ListComponent implements OnInit {
     };
 
     toggleSelection($event) {
-        if($event.checked) {
+        if ($event.checked) {
             this.priorityTypes.forEach(priorityType => priorityType.checked = true);
         } else {
             this.priorityTypes.forEach(priorityType => priorityType.checked = false);
