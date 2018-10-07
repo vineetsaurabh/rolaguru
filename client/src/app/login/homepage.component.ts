@@ -1,8 +1,9 @@
-import { Chart } from 'chart.js';
-import { Component, AfterViewInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
-import { ErrorService } from '../error/error.service';
+import { Chart } from 'chart.js';
 import 'chart.piecelabel.js';
+
+import { ErrorService } from '../error/error.service';
 import { Domain } from '../domain/domain.model';
 import { DomainService } from '../domain/domain.service';
 import { Error } from '../error/error.model';

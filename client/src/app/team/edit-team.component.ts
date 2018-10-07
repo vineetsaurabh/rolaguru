@@ -1,4 +1,4 @@
-import { Component, OnInit, Injectable, Inject } from '@angular/core';
+import { Component, Injectable, Inject } from '@angular/core';
 import { NgForm, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
@@ -11,7 +11,7 @@ import { User } from '../user/user.model';
 @Component({
     templateUrl: './edit-team.component.html'
 })
-export class EditTeamComponent implements OnInit {
+export class EditTeamComponent {
 
     public team: Team = {
         teamid: '',
@@ -43,7 +43,7 @@ export class EditTeamComponent implements OnInit {
     updateTeam(userForm: NgForm) {
         this.teamService.updateTeam(this.team)
             .subscribe(res => {
-                this.toastService.success(`User ${this.team.teamName} updated`);
+                this.toastService.success(`Team ${this.team.teamName} updated`);
                 this.dialogRef.close(false);
             });
     }

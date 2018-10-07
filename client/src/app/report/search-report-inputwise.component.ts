@@ -1,7 +1,8 @@
-import { ReportService } from './report.service';
 import { Component, AfterViewInit } from "@angular/core";
 import { Chart } from 'chart.js';
 import { MatRadioChange } from '@angular/material/radio';
+
+import { ReportService } from './report.service';
 import { ChartExportComponent } from './chart-export.component';
 
 @Component({
@@ -15,7 +16,7 @@ export class SearchReportInputwiseComponent extends ChartExportComponent impleme
 
     constructor(
         protected reportService: ReportService) {
-            super();
+        super();
     }
 
     ngAfterViewInit() {

@@ -1,19 +1,20 @@
+import { Component, Input, EventEmitter, Output } from "@angular/core";
 import { Router } from '@angular/router';
-import { Component, Input, OnInit, EventEmitter, Output } from "@angular/core";
-import { HttpClient, HttpResponse, HttpEventType } from '@angular/common/http';
+import { HttpResponse, HttpEventType } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
+import { saveAs } from 'file-saver/FileSaver';
+
 import { CauseRating } from "./cause-rating.model";
 import { CauseService } from "./cause.service";
 import { Cause } from "./cause.model";
 import { TokenStorage } from "../login/token.storage";
-import { ToastrService } from 'ngx-toastr';
-import { saveAs } from 'file-saver/FileSaver';
 import { RolaguruUtils } from '../util/rolaguru.util'
 
 @Component({
     selector: 'cause-solution',
     templateUrl: './cause.component.html'
 })
-export class CauseComponent implements OnInit {
+export class CauseComponent {
 
     @Input() cause: Cause;
     @Input() j: number;
@@ -117,11 +118,11 @@ export class CauseComponent implements OnInit {
 
     saveCause() {
         this.editing = false;
-        if (this.cause.description != this.editDescription || 
-                this.cause.bankingScenerio != this.editBankingScenerio || 
-                this.cause.codeRootCause != this.editCodeRootCause ||
-                this.cause.dataRootCause != this.editDataRootCause || 
-                this.cause.operationRootCause != this.editOperationRootCause) {
+        if (this.cause.description != this.editDescription ||
+            this.cause.bankingScenerio != this.editBankingScenerio ||
+            this.cause.codeRootCause != this.editCodeRootCause ||
+            this.cause.dataRootCause != this.editDataRootCause ||
+            this.cause.operationRootCause != this.editOperationRootCause) {
             let causeToUpdate = this.cause;
             causeToUpdate.description = this.editDescription;
             causeToUpdate.bankingScenerio = this.editBankingScenerio;
@@ -186,7 +187,7 @@ export class CauseComponent implements OnInit {
         event = null;
         return false;
     }
-    
+
     uploadFileForCause(category: string) {
         this.progress.percentage = 0;
         this.currentFileUpload = this.selectedFiles.item(0);

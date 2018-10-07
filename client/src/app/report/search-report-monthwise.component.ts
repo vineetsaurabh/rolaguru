@@ -1,14 +1,15 @@
-import { ReportService } from './report.service';
-import { Component, OnInit, AfterViewInit } from "@angular/core";
-import { Chart } from 'chart.js';
-import { RolaguruUtils } from '../util/rolaguru.util';
+import { Component } from "@angular/core";
 import { MatRadioChange } from '@angular/material/radio';
+import { Chart } from 'chart.js';
+
+import { ReportService } from './report.service';
+import { RolaguruUtils } from '../util/rolaguru.util';
 import { ChartExportComponent } from './chart-export.component';
 
 @Component({
     templateUrl: './search-report-monthwise.component.html'
 })
-export class SearchReportMonthwiseComponent extends ChartExportComponent implements AfterViewInit {
+export class SearchReportMonthwiseComponent extends ChartExportComponent {
 
     rolaguruUtils: RolaguruUtils = RolaguruUtils.getInstance();
 
@@ -21,7 +22,7 @@ export class SearchReportMonthwiseComponent extends ChartExportComponent impleme
 
     constructor(
         protected reportService: ReportService) {
-            super();
+        super();
     }
 
     ngAfterViewInit() {

@@ -1,9 +1,10 @@
-import { ListErrorComponent } from "./list-error.component";
 import { Component } from "@angular/core";
 import { MatTableDataSource, MatDialog } from "@angular/material";
 import { Router, ActivatedRoute } from "@angular/router";
-import { ErrorService } from "./error.service";
 import { ToastrService } from "ngx-toastr";
+
+import { ListErrorComponent } from "./list-error.component";
+import { ErrorService } from "./error.service";
 import { TokenStorage } from "../login/token.storage";
 
 @Component({
@@ -12,7 +13,7 @@ import { TokenStorage } from "../login/token.storage";
 })
 export class FindErrorResultComponent extends ListErrorComponent {
 
-    allColumns = ['Checkbox', 'Error Code', 'Description', 'Domain', 'Module',  'Operation', 'Severity', 'Frequency', 'Actions'];
+    allColumns = ['Checkbox', 'Error Code', 'Description', 'Domain', 'Module', 'Operation', 'Severity', 'Frequency', 'Actions'];
     displayedColumns = this.allColumns;
 
     constructor(

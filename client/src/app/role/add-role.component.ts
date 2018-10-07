@@ -25,7 +25,7 @@ export class AddRoleComponent {
     createRole(userForm: NgForm): void {
         this.roleService.createRole(this.role)
             .subscribe(data => {
-                this.toastService.success(`User ${this.role.roleName} added`);
+                this.toastService.success(`Role ${this.role.roleName} added`);
                 this.dialogRef.close(false);
             });
     };

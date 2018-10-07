@@ -1,4 +1,3 @@
-import { ReportService } from "./report.service";
 import * as jsPDF from 'jspdf';
 
 export class ChartExportComponent {

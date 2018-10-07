@@ -1,28 +1,23 @@
-import { HomepageComponent } from './../login/homepage.component';
-
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { Component, ViewChild } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { MatTableDataSource, MatPaginator, MatSort, MatDialogRef, MatDialog } from '@angular/material';
+import { Observable } from 'rxjs/Observable';
+import { saveAs } from 'file-saver/FileSaver';
+import { ToastrService } from 'ngx-toastr';
 
 import { Error } from './error.model';
 import { ErrorService } from './error.service';
 import { EditErrorComponent } from './edit-error.component';
-import { ToastrService } from 'ngx-toastr';
-import { MatTableDataSource, MatPaginator, MatSort, MatDialogRef, MatDialog, MatDialogConfig } from '@angular/material';
-import { Observable } from 'rxjs/Observable';
-import { ErrorDetailComponent } from './error-detail.component';
-import { AddCauseComponent } from '../cause/add-cause.component';
 import { AddErrorComponent } from './add-error.component';
 import { ConfirmDeleteComponent } from '../util/confirm-delete.component';
-import { saveAs } from 'file-saver/FileSaver';
 import { TokenStorage } from '../login/token.storage';
-import { TableConfiguratorComponent } from '../util/table-configurator.component';
 import { ListComponent } from '../common/list.component';
 
 @Component({
     selector: 'app-comp',
     templateUrl: './list-error.component.html'
 })
-export class ListErrorComponent extends ListComponent implements OnInit {
+export class ListErrorComponent extends ListComponent {
 
     errors: Error[];
     subscribedErrorIds: string[];
@@ -42,18 +37,24 @@ export class ListErrorComponent extends ListComponent implements OnInit {
         protected toastService: ToastrService,
         protected dialog: MatDialog,
         protected token: TokenStorage) {
-        super(dialog);
+        super(token, dialog);
     }
 
     ngOnInit() {
         this.route.queryParams.subscribe(params => {
             this.errorDomainId = params.domainId,
-            this.errorDomainName = params.domainName
+                this.errorDomainName = params.domainName
         });
         this.dialog.afterAllClosed.subscribe(() => {
             this.getAllErrorsOfDomian();
             this.getSubscribedErrorIds();
         });
+        if (this.token.getErrorTableColumns()) {
+            this.displayedColumns = [];
+            this.token.getErrorTableColumns().split(",").forEach(element => {
+                this.displayedColumns.push(element);
+            });
+        }
     };
 
     applyFilter(filterValue: string) {
@@ -136,21 +137,21 @@ export class ListErrorComponent extends ListComponent implements OnInit {
     }
 
     onDeleteSelectedErrors() {
-            let dialogRef: MatDialogRef<ConfirmDeleteComponent>;
-            if (this.selectedErrors.length == 1) {
-                dialogRef = this.dialog.open(ConfirmDeleteComponent, {
-                    data: `Are you sure want to delete the selected error?`
-                });
-            } else {
-                dialogRef = this.dialog.open(ConfirmDeleteComponent, {
-                    data: `Are you sure want to delete ${this.selectedErrors.length} errors?`
-                });
-            }
-            dialogRef.afterClosed().subscribe((ok: boolean) => {
-                if (ok) {
-                    this.deleteSelectedErrors();
-                }
+        let dialogRef: MatDialogRef<ConfirmDeleteComponent>;
+        if (this.selectedErrors.length == 1) {
+            dialogRef = this.dialog.open(ConfirmDeleteComponent, {
+                data: `Are you sure want to delete the selected error?`
             });
+        } else {
+            dialogRef = this.dialog.open(ConfirmDeleteComponent, {
+                data: `Are you sure want to delete ${this.selectedErrors.length} errors?`
+            });
+        }
+        dialogRef.afterClosed().subscribe((ok: boolean) => {
+            if (ok) {
+                this.deleteSelectedErrors();
+            }
+        });
     }
 
     deleteSelectedErrors() {
@@ -267,7 +268,7 @@ export class ListErrorComponent extends ListComponent implements OnInit {
     }
 
     disableAction() {
-        if(this.errors) {
+        if (this.errors) {
             return !this.errors.some(_ => _.checked);
         }
         return true;

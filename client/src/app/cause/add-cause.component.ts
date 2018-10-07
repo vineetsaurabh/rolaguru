@@ -1,12 +1,8 @@
 import { CauseService } from './cause.service';
-import { Component, OnInit, Injectable, Inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { NgForm, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Component, Injectable, Inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Cause } from './cause.model';
-import { Error } from '../error/error.model';
 
 @Injectable()
 @Component({
@@ -22,7 +18,7 @@ export class AddCauseComponent {
     htmlCodeRootCause: string = '';
     htmlDataRootCause: string = '';
     htmlOperationRootCause: string = '';
-    
+
     displayCodeRootCause: boolean;
     displayDataRootCause: boolean;
     displayOperationRootCause: boolean;

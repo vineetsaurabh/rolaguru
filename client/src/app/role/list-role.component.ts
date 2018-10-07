@@ -1,6 +1,6 @@
 
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Component, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialogRef, MatDialog } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { ToastrService } from 'ngx-toastr';
@@ -11,12 +11,13 @@ import { AddRoleComponent } from './add-role.component';
 import { EditRoleComponent } from './edit-role.component';
 import { ConfirmDeleteComponent } from '../util/confirm-delete.component';
 import { ListComponent } from '../common/list.component';
+import { TokenStorage } from '../login/token.storage';
 
 @Component({
     selector: 'app-comp',
     templateUrl: './list-role.component.html'
 })
-export class ListRoleComponent extends ListComponent implements OnInit {
+export class ListRoleComponent extends ListComponent {
 
     roles: Role[];
     allColumns = ['Checkbox', 'Name', 'Description', 'Actions'];
@@ -27,11 +28,11 @@ export class ListRoleComponent extends ListComponent implements OnInit {
     @ViewChild(MatSort) sort: MatSort;
 
     constructor(
-        private router: Router,
         private roleService: RoleService,
         private toastService: ToastrService,
+        protected token: TokenStorage,
         protected dialog: MatDialog) {
-            super(dialog);
+        super(token, dialog);
     }
 
     ngOnInit() {
@@ -100,7 +101,7 @@ export class ListRoleComponent extends ListComponent implements OnInit {
     };
 
     toggleSelection($event) {
-        if($event.checked) {
+        if ($event.checked) {
             this.roles.forEach(role => role.checked = true);
         } else {
             this.roles.forEach(role => role.checked = false);

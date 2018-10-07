@@ -2,10 +2,7 @@ import { CauseComponent } from './cause/cause.component';
 import { HomepageComponent } from './login/homepage.component';
 
 import {
-    NgModule,
-    Component,
-    Pipe,
-    OnInit
+    NgModule
 } from '@angular/core';
 import {
     ReactiveFormsModule,
@@ -17,7 +14,6 @@ import {
 } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
@@ -121,6 +117,8 @@ import { ModuleService } from './module/module.service';
 import { AddModuleComponent } from './module/add-module.component';
 import { ListModuleComponent } from './module/list-module.component';
 import { EditModuleComponent } from './module/edit-module.component';
+import { UserPreferenceComponent } from './user-preference/user-preference.component';
+import { UserPreferenceService } from './user-preference/user-preference.service';
 
 @NgModule({
     declarations: [
@@ -162,6 +160,7 @@ import { EditModuleComponent } from './module/edit-module.component';
         AddPriorityTypeComponent, ListPriorityTypeComponent, EditPriorityTypeComponent,
         AddDomainComponent, ListDomainComponent, EditDomainComponent,
         AddModuleComponent, ListModuleComponent, EditModuleComponent,
+        UserPreferenceComponent,
     ],
     imports: [
         BrowserModule,
@@ -227,6 +226,7 @@ import { EditModuleComponent } from './module/edit-module.component';
         TeamService,
         PriorityTypeService,
         DomainService, ModuleService,
+        UserPreferenceService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,

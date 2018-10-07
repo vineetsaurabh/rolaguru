@@ -25,7 +25,7 @@ export class AddTeamComponent {
     createTeam(userForm: NgForm): void {
         this.teamService.createTeam(this.team)
             .subscribe(data => {
-                this.toastService.success(`User ${this.team.teamName} added`);
+                this.toastService.success(`Team ${this.team.teamName} added`);
                 this.dialogRef.close(false);
             });
     };

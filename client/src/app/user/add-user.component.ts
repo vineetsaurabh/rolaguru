@@ -1,11 +1,11 @@
-import { HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { MatDialogRef } from '@angular/material';
+import { ToastrService } from 'ngx-toastr';
+
 import { User } from './user.model';
 import { UserService } from './user.service';
-import { ToastrService } from 'ngx-toastr';
-import { MatDialogRef } from '@angular/material';
 
 @Component({
     templateUrl: './add-user.component.html'

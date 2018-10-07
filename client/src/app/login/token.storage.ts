@@ -4,6 +4,8 @@ const TOKEN_KEY = 'AuthToken';
 const CUREENT_USER = 'currentUser';
 const CUREENT_USER_ID = 'currentUserId';
 const SUBSCRIBED_ERROR = 'subscribedError';
+const PAGINATION = 'pagination';
+const ERROR_TABLE_COLUMNS = 'errorTableColumns';
 
 @Injectable()
 export class TokenStorage {
@@ -67,7 +69,7 @@ export class TokenStorage {
         let subscribedErrorIdsArr = subscribedErrorIds.split(",");
         let unSubscribedErrorIdsArr = unSubscribedErrorId.split(",");
         unSubscribedErrorIdsArr.forEach(unSubscribedErrorId => {
-            let index = subscribedErrorIdsArr.indexOf(""+unSubscribedErrorId);
+            let index = subscribedErrorIdsArr.indexOf("" + unSubscribedErrorId);
             if (index > -1) {
                 subscribedErrorIdsArr.splice(index, 1);
             }
@@ -75,4 +77,23 @@ export class TokenStorage {
         this.saveSubscribedError(subscribedErrorIdsArr.join(","));
         return this.getSubscribedErrorIds();
     }
+
+    public savePagination(pagination: string) {
+        window.sessionStorage.removeItem(PAGINATION);
+        window.sessionStorage.setItem(PAGINATION, pagination);
+    }
+
+    public getPagination(): string {
+        return sessionStorage.getItem(PAGINATION);
+    }
+
+    public saveErrorTableColumns(errorTableColumns: string) {
+        window.sessionStorage.removeItem(ERROR_TABLE_COLUMNS);
+        window.sessionStorage.setItem(ERROR_TABLE_COLUMNS, errorTableColumns);
+    }
+
+    public getErrorTableColumns(): string {
+        return sessionStorage.getItem(ERROR_TABLE_COLUMNS);
+    }
+
 }

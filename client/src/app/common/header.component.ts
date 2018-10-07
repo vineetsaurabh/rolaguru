@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
+
 import { TokenStorage } from '../login/token.storage';
 import { AuthService } from '../login/auth.service';
 import { UserService } from '../user/user.service';
@@ -8,7 +9,7 @@ import { UserService } from '../user/user.service';
     selector: 'global-toolbar',
     templateUrl: './header.component.html'
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
     currentUser: string = this.token.getCurrentUser();
     currentUserId: string = this.token.getCurrentUserId();
@@ -17,7 +18,6 @@ export class HeaderComponent implements OnInit {
 
     constructor(
         private router: Router,
-        private route: ActivatedRoute,
         private token: TokenStorage,
         private authService: AuthService,
         private userService: UserService) {
@@ -36,7 +36,7 @@ export class HeaderComponent implements OnInit {
         const img: any = document.querySelector('img.user-picture');
         this.userService.downloadFile(this.currentUserId)
             .subscribe(res => {
-                if(res.status == 200) {
+                if (res.status == 200) {
                     const imageUrl = URL.createObjectURL(res.body);
                     img.addEventListener('load', () => URL.revokeObjectURL(imageUrl));
                     img.src = imageUrl;

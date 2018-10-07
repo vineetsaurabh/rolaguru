@@ -24,7 +24,7 @@ export class RolaguruUtils {
     getLastMonths(noOfMonths: number) {
         const today = new Date();
         let d;
-        let months : string[] = [];
+        let months: string[] = [];
         for (var i = noOfMonths; i > 0; i--) {
             d = new Date(today.getFullYear(), today.getMonth() - i + 1, 1);
             months.push(this.monthNames[d.getMonth()] + " " + d.getFullYear().toString().substring(2));

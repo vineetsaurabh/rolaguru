@@ -1,12 +1,11 @@
-import { ListErrorComponent } from './list-error.component';
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ErrorService } from './error.service';
-import { ToastrService } from 'ngx-toastr';
 import { MatDialog, MatTableDataSource } from '@angular/material';
+import { ToastrService } from 'ngx-toastr';
+
+import { ErrorService } from './error.service';
+import { ListErrorComponent } from './list-error.component';
 import { TokenStorage } from '../login/token.storage';
-import { User } from '../user/user.model';
-import { UserService } from '../user/user.service';
 
 @Component({
     selector: 'app-comp',

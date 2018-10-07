@@ -1,0 +1,28 @@
+<div class="container col-md-6 my-4" fxLayout="column">
+    <div fxLayoutAlign="center">
+        <div>My Preference</div>
+    </div>
+    <div fxLayout="row">
+        <div fxLayoutAlign="start">Pagination</div>
+        <div class="fill-remaining-space"></div>
+        <div fxLayoutAlign="end">
+            <div fxLayout="row" fxLayoutGap="10px" [hidden]="editing">
+                <div>
+                    {{ userPreference.pagination }}
+                </div>
+                <div>
+                    <i class="fa fa-pencil" matTooltip="Edit" (click)="this.editing = true" style="color:blue" matTooltipPosition="after"></i>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutGap="10px" [hidden]="!editing">
+                <div>
+                    <input required [(ngModel)]="userPreference.pagination" name="pagination" id="pagination" #pagination="ngModel"
+                        placeholder="Pagination">
+                </div>
+                <div>
+                    <i class="fa fa-save" matTooltip="Save" (click)="save()" style="color:darkgreen" matTooltipPosition="after"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

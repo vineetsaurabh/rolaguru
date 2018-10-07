@@ -52,7 +52,7 @@ export class AssignTeamComponent {
     }
 
     assignTeams() {
-        this.users.forEach(user => 
+        this.users.forEach(user =>
             (user.teams = [], this.selectedTeams.forEach(team => user.teams.push(team))));
         this.userService.assignTeams(this.users)
             .subscribe(res => {

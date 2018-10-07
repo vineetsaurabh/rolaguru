@@ -1,4 +1,4 @@
-import { Component, OnInit, Injectable, Inject } from '@angular/core';
+import { Component, Injectable, Inject } from '@angular/core';
 import { NgForm, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
@@ -10,7 +10,7 @@ import { PriorityTypeService } from './priority-type.service';
 @Component({
     templateUrl: './edit-priority-type.component.html'
 })
-export class EditPriorityTypeComponent implements OnInit {
+export class EditPriorityTypeComponent {
 
     public priorityType: PriorityType = {
         priorityTypeid: '',

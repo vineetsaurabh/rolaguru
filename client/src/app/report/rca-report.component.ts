@@ -1,5 +1,6 @@
+import { Component, ChangeDetectorRef } from "@angular/core";
 import { Chart } from 'chart.js';
-import { Component, AfterViewInit, ChangeDetectorRef } from "@angular/core";
+
 import { ReportService } from "./report.service";
 import { ErrorService } from "../error/error.service";
 import { ChartExportComponent } from './chart-export.component';
@@ -9,7 +10,7 @@ import { DomainService } from "../domain/domain.service";
 @Component({
     templateUrl: './rca-report.component.html'
 })
-export class RcaReportComponent extends ChartExportComponent implements AfterViewInit {
+export class RcaReportComponent extends ChartExportComponent {
 
     title: string = "RCA Report";
     domains: Domain[] = [];
@@ -19,12 +20,12 @@ export class RcaReportComponent extends ChartExportComponent implements AfterVie
         private errorService: ErrorService,
         private domainService: DomainService,
         private cdRef: ChangeDetectorRef) {
-            super();
+        super();
     }
 
     ngOnInit() {
         this.domainService.getDomains()
-            .subscribe( data => {
+            .subscribe(data => {
                 this.domains = data;
             });
     }

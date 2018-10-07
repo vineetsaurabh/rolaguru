@@ -52,7 +52,7 @@ export class AssignRoleComponent {
     }
 
     assignRoles() {
-        this.users.forEach(user => 
+        this.users.forEach(user =>
             (user.roles = [], this.selectedRoles.forEach(role => user.roles.push(role))));
         this.userService.assignRoles(this.users)
             .subscribe(res => {

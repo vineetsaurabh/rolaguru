@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
-import {HttpInterceptor, HttpRequest, HttpHandler, HttpSentEvent, HttpHeaderResponse, HttpProgressEvent,
-  HttpResponse, HttpUserEvent, HttpErrorResponse} from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
-import {TokenStorage} from './token.storage';
+import {
+  HttpInterceptor, HttpRequest, HttpHandler, HttpSentEvent, HttpHeaderResponse, HttpProgressEvent,
+  HttpResponse, HttpUserEvent, HttpErrorResponse
+} from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
+
+import { TokenStorage } from './token.storage';
 
 const TOKEN_HEADER_KEY = 'Authorization';
 
@@ -19,18 +22,18 @@ export class AuthInterceptor implements HttpInterceptor {
     Observable<HttpSentEvent | HttpHeaderResponse | HttpProgressEvent | HttpResponse<any> | HttpUserEvent<any>> {
     let authReq = req;
     if (this.token.getToken() != null) {
-      authReq = req.clone({ headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + this.token.getToken())});
+      authReq = req.clone({ headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + this.token.getToken()) });
     }
     return next.handle(authReq).do(
-        (err: any) => {
-          if (err instanceof HttpErrorResponse) {
-            console.log("Error in response", err);
-            if (err.status === 401) {
-              this.router.navigate(['login']);
-            }
+      (err: any) => {
+        if (err instanceof HttpErrorResponse) {
+          console.log("Error in response", err);
+          if (err.status === 401) {
+            this.router.navigate(['login']);
           }
         }
-      );
+      }
+    );
   }
 
 }

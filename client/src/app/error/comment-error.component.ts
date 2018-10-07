@@ -1,16 +1,16 @@
-import { TokenStorage } from './../login/token.storage';
-import { Component, Input, OnInit } from "@angular/core";
-import { CommentErrorService } from './comment-error.service';
+import { Component, Input } from "@angular/core";
 import { ToastrService } from 'ngx-toastr';
+
+import { TokenStorage } from './../login/token.storage';
+import { CommentErrorService } from './comment-error.service';
 import { CommentError } from './comment-error.model';
-import { Error } from './error.model';
 
 
 @Component({
     selector: 'comment-error',
     templateUrl: './comment-error.component.html'
 })
-export class CommentErrorComponent implements OnInit {
+export class CommentErrorComponent {
 
     @Input() comment: CommentError;
 
@@ -31,12 +31,12 @@ export class CommentErrorComponent implements OnInit {
     }
 
     openInEdit() {
-        this.editing = true; 
+        this.editing = true;
         this.edithtmlContent = this.comment.comment;
     }
 
     updateCommentError(): void {
-        if(this.comment.comment != this.edithtmlContent) {
+        if (this.comment.comment != this.edithtmlContent) {
             this.comment.comment = this.edithtmlContent;
             this.commentErrorService.updateComment(this.comment)
                 .subscribe(data => {
